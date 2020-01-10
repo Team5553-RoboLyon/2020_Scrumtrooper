@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/Drive.h"
+
+#include "lib/Utils.h"
 #include <iostream>
 
 Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain)
@@ -16,9 +18,8 @@ Drive::Drive(std::function<double()> forward, std::function<double()> turn, Driv
 void Drive::Initialize() {}
 
 void Drive::Execute() {
-  double forward = m_forward();
-  double turn = m_turn();
-  std::cout << forward << std::endl;
+  double forward = utils::Deadband(m_forward());
+  double turn = utils::Deadband(m_turn());
   m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 
