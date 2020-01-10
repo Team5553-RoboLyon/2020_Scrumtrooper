@@ -7,18 +7,25 @@
 
 #pragma once
 
-#include <frc/XboxController.h>
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Drivetrain.h"
 
-class RobotContainer {
+class Drive : public frc2::CommandHelper<frc2::CommandBase, Drive> {
  public:
-  RobotContainer();
+  Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain);
+
+  void Initialize() override;
+
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
 
  private:
-  frc::XboxController m_driverController{0};
-
-  Drivetrain m_drivetrain;
-
-  void ConfigureButtonBindings();
+  Drivetrain* m_drivetrain;
+  std::function<double()> m_forward;
+  std::function<double()> m_turn;
 };
