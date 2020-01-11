@@ -22,7 +22,8 @@ class Drivetrain : public frc2::SubsystemBase {
   Drivetrain();
 
   void Periodic();
-  void ChangerVitesse(GearRatio gearRatio);
+  void SetVitesse(GearRatio gearRatio);
+  void ChangerVitesse();
   void Drive(double droite, double gauche);
 
   void ResetEncodeurs();
@@ -54,4 +55,6 @@ class Drivetrain : public frc2::SubsystemBase {
       kWheelCircumference.to<double>() * kLowGearRatio / 42;
   const double kHighGearPositionConversionFactor =
       kWheelCircumference.to<double>() * kHighGearRatio / 42;
+
+  GearRatio m_gearRatio;
 };

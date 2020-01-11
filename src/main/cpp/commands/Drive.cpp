@@ -7,8 +7,19 @@
 
 #include "commands/Drive.h"
 
-#include "lib/Utils.h"
 #include <iostream>
+
+double Deadband(double value, double deadband = 0.1) {
+  if (std::abs(value) < deadband) {
+    return 0;
+  }
+
+  if (value >= 0) {
+    return (value - deadband) / (1.0 - deadband);
+  } else {
+    return (value + deadband) / (1.0 - deadband);
+  }
+}
 
 Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain)
     : m_forward(forward), m_turn(turn), m_drivetrain(drivetrain) {
@@ -18,8 +29,8 @@ Drive::Drive(std::function<double()> forward, std::function<double()> turn, Driv
 void Drive::Initialize() {}
 
 void Drive::Execute() {
-  double forward = utils::Deadband(m_forward());
-  double turn = utils::Deadband(m_turn());
+  double forward = Deadband(m_forward());
+  double turn = Deadband(m_turn());
   m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 

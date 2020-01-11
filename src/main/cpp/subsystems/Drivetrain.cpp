@@ -21,13 +21,22 @@ Drivetrain::Drivetrain() {
 
 void Drivetrain::Periodic() {}
 
-void Drivetrain::ChangerVitesse(GearRatio gearRatio) {
+void Drivetrain::SetVitesse(GearRatio gearRatio) {
   if (gearRatio == GearRatio::kLow) {
     m_ballshifter.Set(frc::DoubleSolenoid::Value::kForward);
   } else {
     m_ballshifter.Set(frc::DoubleSolenoid::Value::kReverse);
   }
+  m_gearRatio = gearRatio;
   SetPositionConversionFactor(gearRatio);
+}
+
+void Drivetrain::ChangerVitesse() {
+  if (m_gearRatio == GearRatio::kLow) {
+    SetVitesse(GearRatio::kHigh);
+  } else {
+    SetVitesse(GearRatio::kLow);
+  }
 }
 
 void Drivetrain::Drive(double droite, double gauche) {

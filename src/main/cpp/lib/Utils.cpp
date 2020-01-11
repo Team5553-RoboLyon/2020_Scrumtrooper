@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+// using namespace utils;
+/*
 double Deadband(double value, double deadband) {
   if (std::abs(value) < deadband) {
     return 0;
@@ -13,3 +15,4 @@ double Deadband(double value, double deadband) {
     return (value + deadband) / (1.0 - deadband);
   }
 }
+*/

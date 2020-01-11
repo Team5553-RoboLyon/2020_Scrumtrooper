@@ -25,7 +25,7 @@ class Drive : public frc2::CommandHelper<frc2::CommandBase, Drive> {
   bool IsFinished() override;
 
  private:
-  Drivetrain* m_drivetrain;
   std::function<double()> m_forward;
   std::function<double()> m_turn;
+  Drivetrain* m_drivetrain;
 };
