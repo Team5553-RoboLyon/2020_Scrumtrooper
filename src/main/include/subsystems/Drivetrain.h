@@ -12,6 +12,7 @@
 #include <rev/CANSparkMax.h>
 #include <units/units.h>
 #include <wpi/math>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 
@@ -30,6 +31,10 @@ class Drivetrain : public frc2::SubsystemBase {
   void SetPositionConversionFactor(GearRatio gearRatio);
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
+
+  double Rampe(double precValue, double value);
+
+  void ToggleRampe();
 
  private:
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
@@ -57,4 +62,7 @@ class Drivetrain : public frc2::SubsystemBase {
       kWheelCircumference.to<double>() * kHighGearRatio / 42;
 
   GearRatio m_gearRatio;
+
+  double m_precGauche, m_precDroite = 0.0;
+  bool m_rampe = true;
 };

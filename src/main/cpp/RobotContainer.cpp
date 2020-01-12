@@ -22,6 +22,7 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureButtonBindings() {
   frc2::InstantCommand changerVitesse{[this] { m_drivetrain.ChangerVitesse(); }, {&m_drivetrain}};
+  frc2::InstantCommand rampe{[this] { m_drivetrain.ToggleRampe(); }, {&m_drivetrain}};
   frc2::JoystickButton2(&m_driverController, (int)frc::XboxController::Button::kA)
-      .WhenPressed(&changerVitesse);
+      .WhenPressed(rampe);
 }

@@ -29,8 +29,9 @@ Drive::Drive(std::function<double()> forward, std::function<double()> turn, Driv
 void Drive::Initialize() {}
 
 void Drive::Execute() {
-  double forward = Deadband(m_forward());
-  double turn = Deadband(m_turn());
+  double forward = Deadband(m_forward()* 0.4);
+  double turn = Deadband(m_turn() *0.4);
+  
   m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 
