@@ -11,14 +11,20 @@ Drivetrain::Drivetrain() {
   m_moteurDroiteFollower.Follow(m_moteurDroite);
   m_moteurGaucheFollower.Follow(m_moteurGauche);
 
-  m_moteurDroite.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  /*m_moteurDroite.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
   m_moteurDroiteFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
   m_moteurGauche.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-  m_moteurGaucheFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_moteurGaucheFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);*/
 
-  m_moteurDroite.SetOpenLoopRampRate(2);
+  m_moteurDroite.SetOpenLoopRampRate(3);
+  m_moteurGauche.SetOpenLoopRampRate(3);
+  m_moteurDroiteFollower.SetOpenLoopRampRate(3);
+  m_moteurGaucheFollower.SetOpenLoopRampRate(3);
 
-  m_moteurGauche.SetInverted(true);
+  m_moteurDroite.SetClosedLoopRampRate(3);
+  m_moteurGauche.SetClosedLoopRampRate(3);
+  m_moteurDroiteFollower.SetClosedLoopRampRate(3);
+  m_moteurGaucheFollower.SetClosedLoopRampRate(3);
 }
 
 void Drivetrain::Periodic() {}
@@ -42,15 +48,8 @@ void Drivetrain::ChangerVitesse() {
 }
 
 void Drivetrain::Drive(double droite, double gauche) {
-  double s_droite = Rampe(m_precDroite, droite);
-  double s_gauche = Rampe(m_precGauche, gauche);
-  m_moteurDroite.Set(s_droite);
-  m_moteurGauche.Set(s_gauche);
-
-  frc::SmartDashboard::PutNumber("Speed Droite", m_moteurDroite.Get());
-
-  m_precDroite = droite;
-  m_precGauche = gauche;
+  m_moteurDroite.Set(droite);
+  m_moteurGauche.Set(gauche);
 }
 
 void Drivetrain::ResetEncodeurs() {
@@ -72,21 +71,6 @@ void Drivetrain::SetPositionConversionFactor(GearRatio gearRatio) {
     m_encodeurGauche1.SetPositionConversionFactor(kHighGearPositionConversionFactor);
     m_encodeurGauche2.SetPositionConversionFactor(kHighGearPositionConversionFactor);
   }
-}
-
-double Drivetrain::Rampe(double precSpeed, double value) {
-  double speed = value;
-  if(!m_rampe) return speed;
-
-  if(speed > 0 && speed > precSpeed - 0.02){
-    speed = precSpeed - 0.02;
-    std::cout << "Rampe activated" << std::endl;
-  }
-  return speed;
-}
-
-void Drivetrain::ToggleRampe() {
-  m_rampe = !m_rampe;
 }
 
 units::meter_t Drivetrain::GetEncodeurDroit() {

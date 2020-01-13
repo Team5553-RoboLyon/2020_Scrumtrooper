@@ -32,10 +32,6 @@ class Drivetrain : public frc2::SubsystemBase {
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
 
-  double Rampe(double precValue, double value);
-
-  void ToggleRampe();
-
  private:
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
                                   rev::CANSparkMax::MotorType::kBrushless};
@@ -62,7 +58,4 @@ class Drivetrain : public frc2::SubsystemBase {
       kWheelCircumference.to<double>() * kHighGearRatio / 42;
 
   GearRatio m_gearRatio;
-
-  double m_precGauche, m_precDroite = 0.0;
-  bool m_rampe = true;
 };
