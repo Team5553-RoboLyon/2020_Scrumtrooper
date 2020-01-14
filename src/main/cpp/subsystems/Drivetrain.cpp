@@ -8,23 +8,23 @@
 #include "subsystems/Drivetrain.h"
 
 Drivetrain::Drivetrain() {
+  m_moteurDroite.RestoreFactoryDefaults();
+  m_moteurGauche.RestoreFactoryDefaults();
+  m_moteurDroiteFollower.RestoreFactoryDefaults();
+  m_moteurGaucheFollower.RestoreFactoryDefaults();
+
+  m_moteurDroite.SetIdleMode(kIdleMode);
+  m_moteurDroiteFollower.SetIdleMode(kIdleMode);
+  m_moteurGauche.SetIdleMode(kIdleMode);
+  m_moteurGaucheFollower.SetIdleMode(kIdleMode);
+
+  m_moteurDroite.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurGauche.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurDroiteFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurGaucheFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
+
   m_moteurDroiteFollower.Follow(m_moteurDroite);
   m_moteurGaucheFollower.Follow(m_moteurGauche);
-
-  /*m_moteurDroite.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-  m_moteurDroiteFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-  m_moteurGauche.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-  m_moteurGaucheFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);*/
-
-  m_moteurDroite.SetOpenLoopRampRate(3);
-  m_moteurGauche.SetOpenLoopRampRate(3);
-  m_moteurDroiteFollower.SetOpenLoopRampRate(3);
-  m_moteurGaucheFollower.SetOpenLoopRampRate(3);
-
-  m_moteurDroite.SetClosedLoopRampRate(3);
-  m_moteurGauche.SetClosedLoopRampRate(3);
-  m_moteurDroiteFollower.SetClosedLoopRampRate(3);
-  m_moteurGaucheFollower.SetClosedLoopRampRate(3);
 }
 
 void Drivetrain::Periodic() {}

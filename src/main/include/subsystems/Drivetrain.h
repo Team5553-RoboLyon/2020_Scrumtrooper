@@ -49,6 +49,11 @@ class Drivetrain : public frc2::SubsystemBase {
 
   frc::DoubleSolenoid m_ballshifter{kDrivetrainBallshifterA, kDrivetrainBallshifterB};
 
+  GearRatio m_gearRatio;
+
+  const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kCoast;
+  const double kOpenLoopRampeRate = 3.0;
+
   const units::meter_t kWheelCircumference{wpi::math::pi * 0.1};
   const double kLowGearRatio = 1;
   const double kHighGearRatio = 1;
@@ -56,6 +61,4 @@ class Drivetrain : public frc2::SubsystemBase {
       kWheelCircumference.to<double>() * kLowGearRatio / 42;
   const double kHighGearPositionConversionFactor =
       kWheelCircumference.to<double>() * kHighGearRatio / 42;
-
-  GearRatio m_gearRatio;
 };
