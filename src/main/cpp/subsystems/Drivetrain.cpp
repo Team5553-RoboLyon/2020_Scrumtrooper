@@ -11,12 +11,20 @@ Drivetrain::Drivetrain() {
   m_moteurDroiteFollower.Follow(m_moteurDroite);
   m_moteurGaucheFollower.Follow(m_moteurGauche);
 
-  m_moteurDroite.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_moteurDroiteFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_moteurGauche.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_moteurGaucheFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  /*m_moteurDroite.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_moteurDroiteFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_moteurGauche.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_moteurGaucheFollower.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);*/
 
-  m_moteurGauche.SetInverted(true);
+  m_moteurDroite.SetOpenLoopRampRate(3);
+  m_moteurGauche.SetOpenLoopRampRate(3);
+  m_moteurDroiteFollower.SetOpenLoopRampRate(3);
+  m_moteurGaucheFollower.SetOpenLoopRampRate(3);
+
+  m_moteurDroite.SetClosedLoopRampRate(3);
+  m_moteurGauche.SetClosedLoopRampRate(3);
+  m_moteurDroiteFollower.SetClosedLoopRampRate(3);
+  m_moteurGaucheFollower.SetClosedLoopRampRate(3);
 }
 
 void Drivetrain::Periodic() {}

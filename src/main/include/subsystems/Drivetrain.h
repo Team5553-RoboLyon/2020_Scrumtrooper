@@ -12,6 +12,7 @@
 #include <rev/CANSparkMax.h>
 #include <units/units.h>
 #include <wpi/math>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 

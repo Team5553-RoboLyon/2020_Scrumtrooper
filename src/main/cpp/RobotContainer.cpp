@@ -8,7 +8,7 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/InstantCommand.h>
-#include <frc2/command/button/JoystickButton.h>
+#include "lib/JoystickButton2.h"
 
 #include "commands/Drive.h"
 
@@ -22,6 +22,6 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureButtonBindings() {
   frc2::InstantCommand changerVitesse{[this] { m_drivetrain.ChangerVitesse(); }, {&m_drivetrain}};
-  frc2::JoystickButton(&m_driverController, (int)frc::XboxController::Button::kA)
-      .WhenPressed(&changerVitesse);
+  /*frc2::JoystickButton2(&m_driverController, (int)frc::XboxController::Button::kA)
+      .WhenPressed(rampe);*/
 }
