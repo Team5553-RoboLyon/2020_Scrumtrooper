@@ -7,6 +7,8 @@
 
 #include "subsystems/Drivetrain.h"
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 Drivetrain::Drivetrain() {
   m_moteurDroite.RestoreFactoryDefaults();
   m_moteurGauche.RestoreFactoryDefaults();
@@ -25,9 +27,23 @@ Drivetrain::Drivetrain() {
 
   m_moteurDroiteFollower.Follow(m_moteurDroite);
   m_moteurGaucheFollower.Follow(m_moteurGauche);
+
+  m_moteurGauche.SetInverted(true);
+
+  ResetEncodeurs();
+  SetVitesse(GearRatio::kHigh);
+
+  //m_logFile = new CSVLogFile("/home/lvuser/log", "Droite", "Gauche");
 }
 
-void Drivetrain::Periodic() {}
+void Drivetrain::Periodic() {
+  //m_logFile->Log(GetEncodeurDroit(), GetEncodeurGauche());
+  frc::SmartDashboard::PutNumber("Droite1", m_encodeurDroite1.GetPosition());
+  frc::SmartDashboard::PutNumber("Droite2", m_encodeurDroite2.GetPosition());
+  frc::SmartDashboard::PutNumber("Gauche1", m_encodeurGauche1.GetPosition());
+  frc::SmartDashboard::PutNumber("Gauche2", m_encodeurGauche2.GetPosition());
+  frc::SmartDashboard::PutNumber("fhh", m_encodeurGauche2.GetCountsPerRevolution());
+}
 
 void Drivetrain::SetVitesse(GearRatio gearRatio) {
   if (gearRatio == GearRatio::kLow) {
