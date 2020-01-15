@@ -24,6 +24,7 @@ class Drivetrain : public frc2::SubsystemBase {
   Drivetrain();
 
   void Periodic();
+  void EnableLogFile(bool enable);
   void SetVitesse(GearRatio gearRatio);
   void ChangerVitesse();
   void Drive(double droite, double gauche);
@@ -57,11 +58,11 @@ class Drivetrain : public frc2::SubsystemBase {
 
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kLowGearRatio = 1;
-  const double kHighGearRatio = 1/10.6;
-  const double kLowGearPositionConversionFactor =
-      kWheelCircumference.to<double>() * kLowGearRatio;
+  const double kHighGearRatio = 1 / 10.6;
+  const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() * kLowGearRatio;
   const double kHighGearPositionConversionFactor =
       kWheelCircumference.to<double>() * kHighGearRatio;
 
-  CSVLogFile *m_logFile;
+  CSVLogFile* m_logFile;
+  bool m_isLogFileEnabled;
 };

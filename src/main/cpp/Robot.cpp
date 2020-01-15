@@ -13,7 +13,7 @@ void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() { m_container.m_drivetrain.EnableLogFile(false); }
 
 void Robot::DisabledPeriodic() {}
 
@@ -21,7 +21,7 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() { /*m_container.m_drivetrain.EnableLogFile(true);*/ }
 
 void Robot::TeleopPeriodic() {}
 
