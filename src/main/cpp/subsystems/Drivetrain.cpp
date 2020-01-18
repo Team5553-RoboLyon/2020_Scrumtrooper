@@ -33,16 +33,27 @@ Drivetrain::Drivetrain() {
   ResetEncodeurs();
   SetVitesse(GearRatio::kHigh);
 
-  //m_logFile = new CSVLogFile("/home/lvuser/log", "Droite", "Gauche");
+  EnableLogFile(false);
 }
 
 void Drivetrain::Periodic() {
-  //m_logFile->Log(GetEncodeurDroit(), GetEncodeurGauche());
   frc::SmartDashboard::PutNumber("Droite1", m_encodeurDroite1.GetPosition());
   frc::SmartDashboard::PutNumber("Droite2", m_encodeurDroite2.GetPosition());
   frc::SmartDashboard::PutNumber("Gauche1", m_encodeurGauche1.GetPosition());
   frc::SmartDashboard::PutNumber("Gauche2", m_encodeurGauche2.GetPosition());
-  frc::SmartDashboard::PutNumber("fhh", m_encodeurGauche2.GetCountsPerRevolution());
+
+  if (m_isLogFileEnabled) {
+    m_logFile->Log(GetEncodeurDroit(), GetEncodeurGauche());
+  }
+}
+
+void Drivetrain::EnableLogFile(bool enable) {
+  if (!m_isLogFileEnabled && enable) {
+    m_logFile = new CSVLogFile("log", "Droite", "Gauche");
+  } else if (m_isLogFileEnabled && !enable) {
+    delete m_logFile;
+  }
+  m_isLogFileEnabled = enable;
 }
 
 void Drivetrain::SetVitesse(GearRatio gearRatio) {

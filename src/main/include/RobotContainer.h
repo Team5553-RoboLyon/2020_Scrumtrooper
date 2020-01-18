@@ -14,11 +14,10 @@
 class RobotContainer {
  public:
   RobotContainer();
+  Drivetrain m_drivetrain;
 
  private:
   frc::XboxController m_driverController{0};
-
-  Drivetrain m_drivetrain;
 
   void ConfigureButtonBindings();
 };
