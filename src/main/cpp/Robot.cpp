@@ -21,7 +21,7 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() { /*m_container.m_drivetrain.EnableLogFile(true);*/ }
+void Robot::TeleopInit() { m_container.m_drivetrain.EnableLogFile(true); }
 
 void Robot::TeleopPeriodic() {}
 
