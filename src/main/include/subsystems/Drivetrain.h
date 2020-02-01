@@ -12,6 +12,7 @@
 #include <rev/CANSparkMax.h>
 #include <units/units.h>
 #include <wpi/math>
+#include <frc/DutyCycleEncoder.h>
 
 #include "lib/CSVLogFile.h"
 
@@ -66,4 +67,5 @@ class Drivetrain : public frc2::SubsystemBase {
 
   CSVLogFile* m_logFile;
   bool m_isLogFileEnabled;
+  frc::DutyCycleEncoder m_encodeurExterne {0};
 };
