@@ -30,6 +30,8 @@ class Drivetrain : public frc2::SubsystemBase {
   void ChangerVitesse();
   void Drive(double droite, double gauche);
 
+
+  void SetIdleMode(rev::CANSparkMax::IdleMode mode);
   void ResetEncodeurs();
   void SetPositionConversionFactor(GearRatio gearRatio);
   units::meter_t GetEncodeurDroit();
@@ -54,8 +56,9 @@ class Drivetrain : public frc2::SubsystemBase {
 
   GearRatio m_gearRatio;
 
-  const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kCoast;
-  const double kOpenLoopRampeRate = 2.0;
+  const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kBrake;
+  const rev::CANSparkMax::IdleMode kDisbabledMode = rev::CANSparkMax::IdleMode::kCoast;
+  const double kOpenLoopRampeRate = 1.5;
 
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kLowGearRatio = 1;

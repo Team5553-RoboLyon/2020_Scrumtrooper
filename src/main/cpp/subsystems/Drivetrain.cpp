@@ -15,10 +15,7 @@ Drivetrain::Drivetrain() {
   m_moteurDroiteFollower.RestoreFactoryDefaults();
   m_moteurGaucheFollower.RestoreFactoryDefaults();
 
-  m_moteurDroite.SetIdleMode(kIdleMode);
-  m_moteurDroiteFollower.SetIdleMode(kIdleMode);
-  m_moteurGauche.SetIdleMode(kIdleMode);
-  m_moteurGaucheFollower.SetIdleMode(kIdleMode);
+  Drivetrain::SetIdleMode(kIdleMode);
 
   m_moteurDroite.SetOpenLoopRampRate(kOpenLoopRampeRate);
   m_moteurGauche.SetOpenLoopRampRate(kOpenLoopRampeRate);
@@ -101,6 +98,13 @@ void Drivetrain::SetPositionConversionFactor(GearRatio gearRatio) {
     m_encodeurGauche1.SetPositionConversionFactor(kHighGearPositionConversionFactor);
     m_encodeurGauche2.SetPositionConversionFactor(kHighGearPositionConversionFactor);
   }
+}
+
+void Drivetrain::SetIdleMode(rev::CANSparkMax::IdleMode mode) {
+  m_moteurDroite.SetIdleMode(mode);
+  m_moteurDroiteFollower.SetIdleMode(mode);
+  m_moteurGauche.SetIdleMode(mode);
+  m_moteurGaucheFollower.SetIdleMode(mode);
 }
 
 units::meter_t Drivetrain::GetEncodeurDroit() {

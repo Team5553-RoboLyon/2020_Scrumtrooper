@@ -8,10 +8,10 @@
 #pragma once
 
 // CAN IDs
-constexpr int kDrivetrainMoteurDroite1 = 1;
-constexpr int kDrivetrainMoteurDroite2 = 2;
-constexpr int kDrivetrainMoteurGauche1 = 3;
-constexpr int kDrivetrainMoteurGauche2 = 4;
+constexpr int kDrivetrainMoteurDroite1 = 2;
+constexpr int kDrivetrainMoteurDroite2 = 4;
+constexpr int kDrivetrainMoteurGauche1 = 1;
+constexpr int kDrivetrainMoteurGauche2 = 3;
 
 // PCM IDs
 constexpr int kDrivetrainBallshifterA = 0;

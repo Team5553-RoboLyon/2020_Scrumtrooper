@@ -18,8 +18,8 @@ Drive::Drive(std::function<double()> forward, std::function<double()> turn, Driv
 void Drive::Initialize() {}
 
 void Drive::Execute() {
-  double forward = utils::Deadband(m_forward() * 0.4);
-  double turn = utils::Deadband(m_turn() * 0.4);
+  double forward = utils::Deadband(m_forward()*0.3);
+  double turn = utils::Deadband(m_turn()*0.3);
 
   m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
