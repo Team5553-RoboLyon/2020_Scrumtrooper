@@ -10,7 +10,7 @@
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/button/JoystickButton.h>
 
-#include "commands/Drive.h"
+#include "commands/drivetrain/Drive.h"
 
 RobotContainer::RobotContainer() {
   ConfigureButtonBindings();

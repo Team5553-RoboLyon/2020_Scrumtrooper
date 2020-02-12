@@ -5,16 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#pragma once
+
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
+
 #include "subsystems/Shooter.h"
 
-    Shooter::Shooter() {
+class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+ public:
+  Shoot(double puissance, Shooter* shooter);
 
-    }
-    
-    void Shooter::Shoot(double puissance) {
+  void Initialize() override;
 
-    }
+  void Execute() override;
 
-    void Shooter::Periodic() {
-        
-    }
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  Shooter* m_shooter;
+  double m_puissance;
+};

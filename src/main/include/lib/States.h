@@ -4,10 +4,17 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-#include "subsystems/Drivetrain.h"
+/*#include "subsystems/Drivetrain.h"
 
 class States {
  public:
+    enum ShooterStates{
+        active,
+        fixed,
+        opened,
+        closed
+    };
+
     enum DrivetrainStates{
         active,
         fixed
@@ -32,6 +39,6 @@ class States {
         opened,
         closed
     };
-// private:
-//    bool s_shooter, s_intake, s_controlpanel, s_drivetrain, s_convoyer, s_feeder, s_climber = false;
-};
+private:
+    bool s_shooter, s_intake, s_controlpanel, s_drivetrain, s_convoyer, s_feeder, s_climber = false;
+};*/

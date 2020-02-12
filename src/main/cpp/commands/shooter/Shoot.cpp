@@ -5,16 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "commands/shooter/Shoot.h"
 
-    Shooter::Shooter() {
+#include <iostream>
 
-    }
-    
-    void Shooter::Shoot(double puissance) {
+Shoot::Shoot(double puissance, Shooter* Shooter)
+    : m_puissance(puissance),m_shooter(Shooter) {
+  AddRequirements(m_shooter);
+}
 
-    }
+void Shoot::Initialize() {}
 
-    void Shooter::Periodic() {
-        
-    }
+void Shoot::Execute() {
+  m_shooter->Shoot(m_puissance);
+}
+
+void Shoot::End(bool interrupted) {}
+
+bool Shoot::IsFinished() { return false; }

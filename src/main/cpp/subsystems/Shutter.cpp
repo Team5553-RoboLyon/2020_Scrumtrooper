@@ -5,16 +5,4 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
-
-    Shooter::Shooter() {
-
-    }
-    
-    void Shooter::Shoot(double puissance) {
-
-    }
-
-    void Shooter::Periodic() {
-        
-    }
+#include "subsystems/Shutter.h"
