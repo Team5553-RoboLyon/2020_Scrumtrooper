@@ -5,16 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "subsystems/Convoyer.h"
 
-    Shooter::Shooter() {
-        m_moteur2.Follow(m_moteur1);
+    Convoyer::Convoyer() {
+
     }
     
-    void Shooter::Shoot(double puissance) {
-        m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
-    }
+    void Convoyer::Activate() {
 
-    void Shooter::Periodic() {
-        
     }

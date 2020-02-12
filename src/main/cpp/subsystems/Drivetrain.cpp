@@ -63,6 +63,11 @@ void Drivetrain::SetVitesse(GearRatio gearRatio) {
   SetPositionConversionFactor(gearRatio);
 }
 
+void Drivetrain::Stop() {
+  m_moteurDroite.StopMotor();
+  m_moteurGauche.StopMotor();
+}
+
 void Drivetrain::ChangerVitesse() {
   if (m_gearRatio == GearRatio::kLow) {
     SetVitesse(GearRatio::kHigh);

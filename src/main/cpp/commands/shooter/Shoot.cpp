@@ -9,15 +9,19 @@
 
 #include <iostream>
 
-Shoot::Shoot(double puissance, Shooter* Shooter)
-    : m_puissance(puissance),m_shooter(Shooter) {
+Shoot::Shoot(double puissance, Shooter* Shooter, Convoyer* Convoyer, Feeder* Feeder)
+    : m_puissance(puissance), m_feeder(Feeder), m_convoyer(Convoyer), m_shooter(Shooter) {
   AddRequirements(m_shooter);
+  AddRequirements(m_convoyer);
+  AddRequirements(m_feeder);
 }
 
 void Shoot::Initialize() {}
 
 void Shoot::Execute() {
   m_shooter->Shoot(m_puissance);
+  m_convoyer->Activate();
+  m_feeder->Activate();
 }
 
 void Shoot::End(bool interrupted) {}

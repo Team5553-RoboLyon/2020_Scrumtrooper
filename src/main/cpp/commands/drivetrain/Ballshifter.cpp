@@ -5,16 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "commands/drivetrain/Ballshifter.h"
 
-    Shooter::Shooter() {
-        m_moteur2.Follow(m_moteur1);
-    }
-    
-    void Shooter::Shoot(double puissance) {
-        m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
-    }
+#include <iostream>
 
-    void Shooter::Periodic() {
-        
-    }
+Ballshifter::Ballshifter(Drivetrain* drivetrain)
+    : m_drivetrain(drivetrain) {
+  AddRequirements(m_drivetrain);
+}
+
+void Ballshifter::Initialize() {}
+
+void Ballshifter::Execute() {
+    m_drivetrain->ChangerVitesse();
+}
+
+void Ballshifter::End(bool interrupted) {}
+
+bool Ballshifter::IsFinished() { return false; }

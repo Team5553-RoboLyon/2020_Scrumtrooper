@@ -29,7 +29,7 @@ class Drivetrain : public frc2::SubsystemBase {
   void SetVitesse(GearRatio gearRatio);
   void ChangerVitesse();
   void Drive(double droite, double gauche);
-
+  void Stop();
 
   void SetIdleMode(rev::CANSparkMax::IdleMode mode);
   void ResetEncodeurs();
