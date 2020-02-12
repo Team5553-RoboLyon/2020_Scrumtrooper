@@ -6,3 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Feeder.h"
+
+Feeder::Feeder() {
+
+}
+
+void Feeder::Activate() {
+    m_moteur.Set(kFeederMoteurSpeed);
+}
+
+void Feeder::Stop() {
+    m_moteur.StopMotor();
+}

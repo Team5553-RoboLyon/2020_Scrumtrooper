@@ -8,6 +8,6 @@ class Convoyer : public frc2::SubsystemBase {
  public:
     Convoyer();
 
-    void Convoyer::Activate();
+    void Activate();
  private:
 };

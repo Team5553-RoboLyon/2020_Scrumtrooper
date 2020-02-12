@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "subsystems/Turret.h"
 
-Shooter::Shooter() {
-    m_moteur2.Follow(m_moteur1);
-}
-    
-void Shooter::Shoot(double puissance) {
-    m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
+Turret::Turret() {
+
 }
 
-void Shooter::Periodic() {
-        
+void Turret::Periodic() {
+    if(!turretActivated) return;
+}
+
+void Turret::Activate() {
+    turretActivated = true;
+}
+
+void Turret::Stop() {
+    turretActivated = false;
 }

@@ -13,10 +13,15 @@
 #include "subsystems/Shooter.h"
 #include "subsystems/Convoyer.h"
 #include "subsystems/Feeder.h"
+#include "subsystems/Drivetrain.h"
+#include "subsystems/Intake.h"
+#include "subsystems/Controlpanel.h"
+#include "subsystems/Turret.h"
+#include "subsystems/Hood.h"
 
 class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  public:
-  Shoot(double puissance, Shooter* shooter, Convoyer* Convoyer, Feeder* Feeder);
+  Shoot(double puissance, Shooter* shooter, Convoyer* Convoyer, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood);
 
   void Initialize() override;
 
@@ -30,5 +35,10 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   Shooter* m_shooter;
   Feeder* m_feeder;
   Convoyer* m_convoyer;
+  Drivetrain* m_drivetrain;
+  Intake* m_intake;
+  Controlpanel* m_controlpanel;
+  Turret* m_turret;
+  Hood* m_hood;
   double m_puissance = 0.0;
 };

@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "commands/controlpanel/Control.h"
 
-Shooter::Shooter() {
-    m_moteur2.Follow(m_moteur1);
-}
-    
-void Shooter::Shoot(double puissance) {
-    m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
+#include <iostream>
+
+Control::Control(Controlpanel* Controlpanel)
+    : m_controlpanel(Controlpanel) {
+  AddRequirements(m_controlpanel);
 }
 
-void Shooter::Periodic() {
-        
+void Control::Initialize() {}
+
+void Control::Execute() {
 }
+
+void Control::End(bool interrupted) {}
+
+bool Control::IsFinished() { return false; }

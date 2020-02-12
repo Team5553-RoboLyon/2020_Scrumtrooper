@@ -5,16 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#pragma once
 
-Shooter::Shooter() {
-    m_moteur2.Follow(m_moteur1);
-}
-    
-void Shooter::Shoot(double puissance) {
-    m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
-}
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
-void Shooter::Periodic() {
-        
-}
+#include "subsystems/Controlpanel.h"
+
+class Control : public frc2::CommandHelper<frc2::CommandBase, Control> {
+ public:
+  Control(Controlpanel* Controlpanel);
+
+  void Initialize() override;
+
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  Controlpanel* m_controlpanel;
+};

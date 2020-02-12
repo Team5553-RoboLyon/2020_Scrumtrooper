@@ -69,11 +69,8 @@ void Drivetrain::Stop() {
 }
 
 void Drivetrain::ChangerVitesse() {
-  if (m_gearRatio == GearRatio::kLow) {
-    SetVitesse(GearRatio::kHigh);
-  } else {
-    SetVitesse(GearRatio::kLow);
-  }
+  if (m_gearRatio == GearRatio::kLow) SetVitesse(GearRatio::kHigh);
+  if (m_gearRatio == GearRatio::kHigh) SetVitesse(GearRatio::kLow);
 }
 
 void Drivetrain::Drive(double droite, double gauche) {

@@ -5,4 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shutter.h"
+#include "subsystems/Hood.h"
+
+Hood::Hood() {
+    if(!isActivated) return;
+}
+
+void Hood::CloseHood() {
+    Stop();
+    isOpened = false;
+}
+
+void Hood::SetAngle() {
+    if(!isActivated) return;
+    isOpened = true;
+}
+
+void Hood::Activate() {
+    isActivated = true;
+}
+
+void Hood::Stop() {
+    isActivated = false;
+}

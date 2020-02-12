@@ -13,6 +13,6 @@ class Shooter : public frc2::SubsystemBase {
     void Shoot(double puissance);
     void Periodic();
  private:
-   VictorSPX m_moteur1 {kShooteurMoteurDroite};
-   VictorSPX m_moteur2 {kShooteurMoteurGauche};
+   VictorSPX m_moteur1 {kShooterMoteurDroite};
+   VictorSPX m_moteur2 {kShooterMoteurGauche};
 };

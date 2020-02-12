@@ -1,10 +1,23 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <frc/DoubleSolenoid.h>
+#include <frc/VictorSP.h>
 
 #include "Constants.h"
 
 class Intake : public frc2::SubsystemBase {
  public:
+    enum class IntakePosition {kOpened, kClosed};
+    Intake();
+
+    void CloseIntake();
+    void OpenIntake();
+    void ChangeIntakePosition();
+    void Activate();
+    void Stop();
  private:
+    IntakePosition m_position;
+    frc::DoubleSolenoid m_solenoid {kIntakeA, kIntakeB};
+    frc::VictorSP m_moteur {kIntakeMoteur};
 };
