@@ -5,20 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/controlpanel/Control.h"
+#include "commands/controlPanelManipulator/PositionControl.h"
 
-#include <iostream>
-
-Control::Control(Controlpanel* Controlpanel)
-    : m_controlpanel(Controlpanel) {
-  AddRequirements(m_controlpanel);
+PositionControl::PositionControl(ControlPanelManipulator* controlPanelManipulator)
+    : m_controlPanelManipulator(controlPanelManipulator) {
+  AddRequirements(m_controlPanelManipulator);
 }
 
-void Control::Initialize() {}
+void PositionControl::Initialize() {}
 
-void Control::Execute() {
+void PositionControl::Execute() {
 }
 
-void Control::End(bool interrupted) {}
+void PositionControl::End(bool interrupted) {}
 
-bool Control::IsFinished() { return false; }
+bool PositionControl::IsFinished() { return false; }

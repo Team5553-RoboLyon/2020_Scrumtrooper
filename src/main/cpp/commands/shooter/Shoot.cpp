@@ -9,36 +9,33 @@
 
 #include <iostream>
 
-Shoot::Shoot(double puissance, Shooter* Shooter, Convoyer* Convoyer, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood)
-    : m_puissance(puissance), 
-      m_feeder(Feeder), 
-      m_convoyer(Convoyer), 
-      m_shooter(Shooter), 
-      m_drivetrain(Drivetrain), 
-      m_intake(Intake), 
-      m_controlpanel(Controlpanel), 
-      m_turret(Turret),
-      m_hood(Hood) {
+Shoot::Shoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain, Intake* intake, ControlPanelManipulator* controlPanelManipulator, Turret* turret, AdjustableHood* adjustableHood)
+    : m_puissance(puissance),
+      m_shooter(shooter), 
+      m_feeder(feeder),
+      m_drivetrain(drivetrain), 
+      m_intake(intake), 
+      m_controlPanelManipulator(controlPanelManipulator), 
+      m_turret(turret),
+      m_adjustableHood(adjustableHood) {
   AddRequirements(m_shooter);
-  AddRequirements(m_convoyer);
   AddRequirements(m_feeder);
   AddRequirements(m_drivetrain);
   AddRequirements(m_intake);
-  AddRequirements(m_controlpanel);
+  AddRequirements(m_controlPanelManipulator);
   AddRequirements(m_turret);
-  AddRequirements(Hood);
+  AddRequirements(m_adjustableHood);
 }
 
 void Shoot::Initialize() {}
 
 void Shoot::Execute() {
-  m_convoyer->Activate();
   m_feeder->Activate();
   m_drivetrain->Stop();
-  m_intake->CloseIntake();
-  m_controlpanel->CloseControlpanel();
+  m_intake->Close();
+  m_controlPanelManipulator->Close();
   m_turret->Activate();
-  m_hood->Activate();
+  m_adjustableHood->Activate();
   m_shooter->Shoot(m_puissance);
 }
 

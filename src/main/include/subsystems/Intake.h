@@ -11,9 +11,9 @@ class Intake : public frc2::SubsystemBase {
     enum class IntakePosition {kOpened, kClosed};
     Intake();
 
-    void CloseIntake();
-    void OpenIntake();
-    void ChangeIntakePosition();
+    void Close();
+    void Open();
+    void ChangePosition();
     void Activate();
     void Stop();
  private:

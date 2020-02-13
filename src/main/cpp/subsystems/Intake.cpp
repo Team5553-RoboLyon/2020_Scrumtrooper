@@ -8,20 +8,20 @@
 #include "subsystems/Intake.h"
 
 Intake::Intake() {
-    CloseIntake();
+    Close();
 }
 
-void Intake::OpenIntake() {
+void Intake::Open() {
     m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
 }
-void Intake::CloseIntake() {
+void Intake::Close() {
     Stop();
     m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
-void Intake::ChangeIntakePosition() {
-    if(m_position == IntakePosition::kOpened) CloseIntake();
-    if(m_position == IntakePosition::kClosed) OpenIntake();
+void Intake::ChangePosition() {
+    if(m_position == IntakePosition::kOpened) Close();
+    if(m_position == IntakePosition::kClosed) Open();
 }
 
 void Intake::Activate() {

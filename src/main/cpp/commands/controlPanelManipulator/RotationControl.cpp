@@ -5,12 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Convoyer.h"
+#include "commands/controlPanelManipulator/RotationControl.h"
 
-    Convoyer::Convoyer() {
+RotationControl::RotationControl(ControlPanelManipulator* controlPanelManipulator)
+    : m_controlPanelManipulator(controlPanelManipulator) {
+  AddRequirements(m_controlPanelManipulator);
+}
 
-    }
-    
-    void Convoyer::Activate() {
+void RotationControl::Initialize() {}
 
-    }
+void RotationControl::Execute() {
+}
+
+void RotationControl::End(bool interrupted) {}
+
+bool RotationControl::IsFinished() { return false; }

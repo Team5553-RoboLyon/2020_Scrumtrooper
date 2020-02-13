@@ -10,11 +10,11 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/Controlpanel.h"
+#include "subsystems/ControlPanelManipulator.h"
 
-class Control : public frc2::CommandHelper<frc2::CommandBase, Control> {
+class RotationControl : public frc2::CommandHelper<frc2::CommandBase, RotationControl> {
  public:
-  Control(Controlpanel* Controlpanel);
+  RotationControl(ControlPanelManipulator* controlPanelManipulator);
 
   void Initialize() override;
 
@@ -25,5 +25,5 @@ class Control : public frc2::CommandHelper<frc2::CommandBase, Control> {
   bool IsFinished() override;
 
  private:
-  Controlpanel* m_controlpanel;
+  ControlPanelManipulator* m_controlPanelManipulator;
 };

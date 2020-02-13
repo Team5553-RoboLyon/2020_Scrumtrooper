@@ -12,9 +12,11 @@ Feeder::Feeder() {
 }
 
 void Feeder::Activate() {
-    m_moteur.Set(kFeederMoteurSpeed);
+    m_moteurFeeder.Set(kFeederMoteurSpeed);
+    m_moteurConveyor.Set(kConveyorMoteurSpeed);
 }
 
 void Feeder::Stop() {
-    m_moteur.StopMotor();
+    m_moteurFeeder.StopMotor();
+    m_moteurConveyor.StopMotor();
 }

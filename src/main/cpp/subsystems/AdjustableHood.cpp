@@ -5,26 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Hood.h"
+#include "subsystems/AdjustableHood.h"
 
-Hood::Hood() {
+AdjustableHood::AdjustableHood() {
     if(!isActivated) return;
 }
 
-void Hood::CloseHood() {
+void AdjustableHood::Close() {
     Stop();
     isOpened = false;
 }
 
-void Hood::SetAngle() {
+void AdjustableHood::SetAngle() {
     if(!isActivated) return;
     isOpened = true;
 }
 
-void Hood::Activate() {
+void AdjustableHood::Activate() {
     isActivated = true;
 }
 
-void Hood::Stop() {
+void AdjustableHood::Stop() {
     isActivated = false;
 }

@@ -4,10 +4,7 @@
 
 #include "Constants.h"
 
-class Convoyer : public frc2::SubsystemBase {
+class Winch : public frc2::SubsystemBase {
  public:
-    Convoyer();
-
-    void Activate();
  private:
 };
