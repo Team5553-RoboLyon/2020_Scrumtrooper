@@ -5,31 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Controlpanel.h"
+#include "subsystems/ControlPanelManipulator.h"
 
-Controlpanel::Controlpanel() {
-    CloseControlpanel();
+ControlPanelManipulator::ControlPanelManipulator() {
+    Close();
 }
 
-void Controlpanel::OpenControlpanel() {
+void ControlPanelManipulator::Open() {
     m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
 }
 
-void Controlpanel::CloseControlpanel() {
+void ControlPanelManipulator::Close() {
     Stop();
     m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
-void Controlpanel::ChangeControlpanelPosition() {
-    if(m_position == ControlpanelPosition::kOpened) CloseControlpanel();
-    if(m_position == ControlpanelPosition::kClosed) OpenControlpanel();
+void ControlPanelManipulator::ChangePosition() {
+    if(m_position == ControlPanelManipulatorPosition::kOpened) Close();
+    if(m_position == ControlPanelManipulatorPosition::kClosed) Open();
 }
 
-void Controlpanel::Activate() {
-    if(m_position == ControlpanelPosition::kClosed) return;
+void ControlPanelManipulator::Activate() {
+    if(m_position == ControlPanelManipulatorPosition::kClosed) return;
     m_moteur.Set(kIntakeMoteurSpeed);
 }
 
-void Controlpanel::Stop() {
+void ControlPanelManipulator::Stop() {
     m_moteur.StopMotor();
 }

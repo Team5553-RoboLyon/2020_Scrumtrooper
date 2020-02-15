@@ -10,11 +10,11 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/Shooter.h"
+#include "subsystems/ControlPanelManipulator.h"
 
-class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+class PositionControl : public frc2::CommandHelper<frc2::CommandBase, PositionControl> {
  public:
-  Shoot(double puissance, Shooter* shooter);
+  PositionControl(ControlPanelManipulator* controlPanelManipulator);
 
   void Initialize() override;
 
@@ -25,6 +25,5 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   bool IsFinished() override;
 
  private:
-  Shooter* m_shooter;
-  double m_puissance = 0.0;
+  ControlPanelManipulator* m_controlPanelManipulator;
 };

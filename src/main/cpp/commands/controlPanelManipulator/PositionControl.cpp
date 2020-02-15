@@ -5,15 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Conveyor.h"
+#include "commands/controlPanelManipulator/PositionControl.h"
 
-Conveyor::Conveyor() {
+PositionControl::PositionControl(ControlPanelManipulator* controlPanelManipulator)
+    : m_controlPanelManipulator(controlPanelManipulator) {
+  AddRequirements(m_controlPanelManipulator);
+}
 
+void PositionControl::Initialize() {}
+
+void PositionControl::Execute() {
 }
-    
-void Conveyor::Activate() {
-    m_moteur.Set(kConveyorSpeed);
-}
-void Conveyor::Stop() {
-    m_moteur.StopMotor();
-}
+
+void PositionControl::End(bool interrupted) {}
+
+bool PositionControl::IsFinished() { return false; }

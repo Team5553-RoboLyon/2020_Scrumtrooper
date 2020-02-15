@@ -24,15 +24,22 @@
 
     //Feeder IDs
     constexpr int kFeederMoteur = 0;
+    constexpr int kConveyorMoteur = 0;
 
     //Turret IDs
     constexpr int kTurretMoteur = 0;
 
-    //Controlpanel IDs
-    constexpr int kControlpanelMoteur = 0;
+    //ControlPanelManipulator IDs
+    constexpr int kControlPanelManipulatorMoteur = 0;
 
-    //Hood IDs
-    constexpr int kHoodMoteur = 0;
+    //AdjustableHood IDs
+    constexpr int kAdjustableHoodMoteur = 0;
+
+    //TelescopicArm IDs
+    constexpr int kTelescopicArmMoteur = 0;
+
+    //Winch IDs
+    constexpr int kWinchMoteur = 0;
 
     //Conveyor IDs
     constexpr int kConveyorMoteur = 0;
@@ -46,9 +53,9 @@
     constexpr int kIntakeA = 2;
     constexpr int kIntakeB = 3;
 
-    //Controlpanel IDs
-    constexpr int kControlpanelA = 4;
-    constexpr int kControlpanelB = 5;
+    //ControlPanelManipulator IDs
+    constexpr int kControlPanelManipulatorA = 4;
+    constexpr int kControlPanelManipulatorB = 5;
 
 //Speed Constants
     //Intake Speeds
@@ -56,12 +63,10 @@
 
     //Feeder Speeds
     constexpr double kFeederMoteurSpeed = 0.0;
+    constexpr double kConveyorMoteurSpeed = 0.0;
 
     //Turret Speeds
     constexpr double kTurretMoteurSpeed = 0.0;
 
-    //Controlpanel Speeds
-    constexpr double kControlpanelSpeed = 0.0;
-
-    //Conveyor Speeds
-    constexpr double kConveyorSpeed = 0.0;
+    //ControlPanelManipulator Speeds
+    constexpr double kControlPanelManipulatorSpeed = 0.0;

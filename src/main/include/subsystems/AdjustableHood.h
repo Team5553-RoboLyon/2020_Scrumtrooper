@@ -5,16 +5,17 @@
 
 #include "Constants.h"
 
-class Hood : public frc2::SubsystemBase {
+class AdjustableHood : public frc2::SubsystemBase {
  public:
-    Hood();
+    AdjustableHood();
 
-    void CloseHood();
+    void Close();
     void SetAngle();
     void Activate();
     void Stop();
+
  private:
     bool isOpened;
     bool isActivated;
-    frc::VictorSP m_moteur {kHoodMoteur};
+    frc::VictorSP m_moteur {kAdjustableHoodMoteur};
 };

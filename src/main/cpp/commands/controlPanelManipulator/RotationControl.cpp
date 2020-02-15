@@ -5,20 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/controlpanel/Control.h"
+#include "commands/controlPanelManipulator/RotationControl.h"
 
-#include <iostream>
-
-Control::Control(Controlpanel* Controlpanel)
-    : m_controlpanel(Controlpanel) {
-  AddRequirements(m_controlpanel);
+RotationControl::RotationControl(ControlPanelManipulator* controlPanelManipulator)
+    : m_controlPanelManipulator(controlPanelManipulator) {
+  AddRequirements(m_controlPanelManipulator);
 }
 
-void Control::Initialize() {}
+void RotationControl::Initialize() {}
 
-void Control::Execute() {
+void RotationControl::Execute() {
 }
 
-void Control::End(bool interrupted) {}
+void RotationControl::End(bool interrupted) {}
 
-bool Control::IsFinished() { return false; }
+bool RotationControl::IsFinished() { return false; }

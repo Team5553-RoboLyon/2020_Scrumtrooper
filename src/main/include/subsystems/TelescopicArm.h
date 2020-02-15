@@ -4,7 +4,7 @@
 
 #include "Constants.h"
 
-class Climber : public frc2::SubsystemBase {
+class TelescopicArm : public frc2::SubsystemBase {
  public:
  private:
 };
