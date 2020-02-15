@@ -2,9 +2,9 @@
 
 double speed = 0.0;
 
-ShootGroup::ShootGroup(Shooter* Shooter, Conveyor* Conveyor, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood) {
+ShootGroup::ShootGroup(Shooter* Shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood) {
   AddCommands(
-    PrepShoot(speed, Shooter, Conveyor, Feeder, Drivetrain, Intake, Controlpanel, Turret, Hood),
+    PrepShoot(speed, Shooter, Feeder, Drivetrain, Intake, ControlPanelManipulator, Turret, AdjustableHood),
     Shoot(speed, Shooter)
   );
 }

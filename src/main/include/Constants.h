@@ -41,9 +41,6 @@
     //Winch IDs
     constexpr int kWinchMoteur = 0;
 
-    //Conveyor IDs
-    constexpr int kConveyorMoteur = 0;
-
 // PCM IDs
     //Ballshifter IDs
     constexpr int kDrivetrainBallshifterA = 0;

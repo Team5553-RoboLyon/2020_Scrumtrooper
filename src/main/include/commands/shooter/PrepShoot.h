@@ -11,17 +11,16 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Shooter.h"
-#include "subsystems/Conveyor.h"
 #include "subsystems/Feeder.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Intake.h"
-#include "subsystems/Controlpanel.h"
+#include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Turret.h"
-#include "subsystems/Hood.h"
+#include "subsystems/AdjustableHood.h"
 
 class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
-  PrepShoot(double puissance, Shooter* shooter, Conveyor* Conveyor, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood);
+  PrepShoot(double puissance, Shooter* shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood);
 
   void Initialize() override;
 
@@ -34,11 +33,10 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  private:
   Shooter* m_shooter;
   Feeder* m_feeder;
-  Conveyor* m_conveyor;
   Drivetrain* m_drivetrain;
   Intake* m_intake;
-  Controlpanel* m_controlpanel;
+  ControlPanelManipulator* m_controlpanelmanipulator;
   Turret* m_turret;
-  Hood* m_hood;
+  AdjustableHood* m_adjustablehood;
   double m_puissance = 0.0;
 };

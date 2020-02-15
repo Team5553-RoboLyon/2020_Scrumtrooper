@@ -9,35 +9,33 @@
 
 #include <iostream>
 
-PrepShoot::PrepShoot(double puissance, Shooter* Shooter, Conveyor* Conveyor, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood)
+PrepShoot::PrepShoot(double puissance, Shooter* Shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood)
     : m_feeder(Feeder), 
-      m_conveyor(Conveyor), 
       m_shooter(Shooter), 
       m_drivetrain(Drivetrain), 
       m_intake(Intake), 
-      m_controlpanel(Controlpanel), 
+      m_controlpanelmanipulator(ControlPanelManipulator), 
       m_turret(Turret),
-      m_hood(Hood),
+      m_adjustablehood(AdjustableHood),
       m_puissance(puissance) {
   AddRequirements(m_shooter);
-  AddRequirements(m_conveyor);
   AddRequirements(m_feeder);
   AddRequirements(m_drivetrain);
   AddRequirements(m_intake);
-  AddRequirements(m_controlpanel);
+  AddRequirements(m_controlpanelmanipulator);
   AddRequirements(m_turret);
-  AddRequirements(Hood);
+  AddRequirements(m_adjustablehood);
 }
 
 void PrepShoot::Initialize() {}
 
 void PrepShoot::Execute() {
   m_drivetrain->Stop();
-  m_intake->CloseIntake();
-  m_controlpanel->CloseControlpanel();
+  m_intake->Close();
+  m_controlpanelmanipulator->Close();
   m_turret->Activate();
-  m_hood->Activate();
-  m_shooter->Shoot();
+  m_adjustablehood->Activate();
+  m_shooter->Shoot(m_puissance);
 }
 
 void PrepShoot::End(bool interrupted) {}
