@@ -19,9 +19,9 @@
 #include "subsystems/Turret.h"
 #include "subsystems/Hood.h"
 
-class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
-  Shoot(double puissance, Shooter* shooter);
+  PrepShoot(double puissance, Shooter* shooter, Conveyor* Conveyor, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, Controlpanel* Controlpanel, Turret* Turret, Hood* Hood);
 
   void Initialize() override;
 
@@ -33,5 +33,12 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
 
  private:
   Shooter* m_shooter;
+  Feeder* m_feeder;
+  Conveyor* m_conveyor;
+  Drivetrain* m_drivetrain;
+  Intake* m_intake;
+  Controlpanel* m_controlpanel;
+  Turret* m_turret;
+  Hood* m_hood;
   double m_puissance = 0.0;
 };

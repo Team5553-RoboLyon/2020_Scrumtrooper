@@ -34,6 +34,9 @@
     //Hood IDs
     constexpr int kHoodMoteur = 0;
 
+    //Conveyor IDs
+    constexpr int kConveyorMoteur = 0;
+
 // PCM IDs
     //Ballshifter IDs
     constexpr int kDrivetrainBallshifterA = 0;
@@ -59,3 +62,6 @@
 
     //Controlpanel Speeds
     constexpr double kControlpanelSpeed = 0.0;
+
+    //Conveyor Speeds
+    constexpr double kConveyorSpeed = 0.0;

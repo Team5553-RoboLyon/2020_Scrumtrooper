@@ -5,12 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Convoyer.h"
+#include "subsystems/Conveyor.h"
 
-    Convoyer::Convoyer() {
+Conveyor::Conveyor() {
 
-    }
+}
     
-    void Convoyer::Activate() {
-
-    }
+void Conveyor::Activate() {
+    m_moteur.Set(kConveyorSpeed);
+}
+void Conveyor::Stop() {
+    m_moteur.StopMotor();
+}
