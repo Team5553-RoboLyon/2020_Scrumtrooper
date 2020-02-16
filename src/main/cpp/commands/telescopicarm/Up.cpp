@@ -5,23 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "commands/telescopicarm/Up.h"
 
-Feeder::Feeder() {
+#include <iostream>
 
+Up::Up(TelescopicArm* TelescopicArm)
+    : m_telescopicarm(m_telescopicarm) {
+  AddRequirements(m_telescopicarm);
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void Up::Initialize() {}
+
+void Up::Execute() {
+  m_telescopicarm->Up();
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
-}
+void Up::End(bool interrupted) {}
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
-}
+bool Up::IsFinished() { return false; }

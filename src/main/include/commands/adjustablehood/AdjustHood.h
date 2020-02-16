@@ -5,23 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#pragma once
 
-Feeder::Feeder() {
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
-}
+#include "subsystems/AdjustableHood.h"
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
-}
+class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
+ public:
+  AdjustHood(AdjustableHood* AdjustableHood);
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
-}
+  void Initialize() override;
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
-}
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  AdjustableHood* m_adjustablehood;
+};

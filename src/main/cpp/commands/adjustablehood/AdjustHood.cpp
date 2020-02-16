@@ -5,23 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "commands/adjustablehood/AdjustHood.h"
 
-Feeder::Feeder() {
+#include <iostream>
 
+AdjustHood::AdjustHood(AdjustableHood* AdjustableHood)
+    : m_adjustablehood(AdjustableHood) {
+  AddRequirements(m_adjustablehood);
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void AdjustHood::Initialize() {}
+
+void AdjustHood::Execute() {
+  m_adjustablehood->SetAngle(415.0);
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
-}
+void AdjustHood::End(bool interrupted) {}
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
-}
+bool AdjustHood::IsFinished() { return false; }

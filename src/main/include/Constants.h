@@ -39,7 +39,8 @@
     constexpr int kTelescopicArmMoteur = 0;
 
     //Winch IDs
-    constexpr int kWinchMoteur = 0;
+    constexpr int kWinchMoteur1 = 0;
+    constexpr int kWinchMoteur2 = 0;
 
 // PCM IDs
     //Ballshifter IDs
@@ -67,3 +68,14 @@
 
     //ControlPanelManipulator Speeds
     constexpr double kControlPanelManipulatorSpeed = 0.0;
+
+    //Winch Speeds
+    constexpr double kWinchSpeed = 0.0;
+
+    //TelescopicArm Speeds
+    constexpr double kTelescopicArmSpeed = 0.0;
+
+//Encodeurs IDs
+    //AdjustableHood IDs
+    constexpr int kAdjustableHoodEncodeurA = 0;
+    constexpr int kAdjustableHoodEncodeurB = 1;

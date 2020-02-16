@@ -17,7 +17,7 @@ class ControlPanelManipulator : public frc2::SubsystemBase {
     void ChangePosition();
     void Activate();
     void Stop();
- private:
+ private:      
     frc::VictorSP m_moteur {kControlPanelManipulatorMoteur};
     frc::DoubleSolenoid m_solenoid {kControlPanelManipulatorA, kControlPanelManipulatorB};
     ControlPanelManipulatorPosition m_position;

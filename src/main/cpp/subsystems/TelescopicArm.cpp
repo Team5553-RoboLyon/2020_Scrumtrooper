@@ -5,23 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "subsystems/TelescopicArm.h"
 
-Feeder::Feeder() {
+TelescopicArm::TelescopicArm() {
 
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void TelescopicArm::Up() {
+    moteur.Set(kTelescopicArmSpeed);
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
+void TelescopicArm::Down() {
+    moteur.Set(-kTelescopicArmSpeed);
 }
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
+void TelescopicArm::Stop() {
+    moteur.StopMotor();
 }

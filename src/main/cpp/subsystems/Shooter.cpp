@@ -9,6 +9,7 @@
 
 Shooter::Shooter() {
     m_moteur2.Follow(m_moteur1);
+    m_moteur2.SetInverted(true);
 }
     
 void Shooter::Shoot(double puissance) {

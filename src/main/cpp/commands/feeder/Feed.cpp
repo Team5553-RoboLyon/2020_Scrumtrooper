@@ -5,23 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "commands/feeder/Feed.h"
 
-Feeder::Feeder() {
+#include <iostream>
 
+Feed::Feed(Feeder* Feeder)
+    : m_feeder(Feeder) {
+  AddRequirements(m_feeder);
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void Feed::Initialize() {}
+
+void Feed::Execute() {
+  m_feeder->Activate();
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
-}
+void Feed::End(bool interrupted) {}
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
-}
+bool Feed::IsFinished() { return false; }

@@ -5,23 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "subsystems/Winch.h"
 
-Feeder::Feeder() {
-
+Winch::Winch() {
+    
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void Winch::Up() {
+    moteurGroup.Set(kWinchSpeed);
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
+void Winch::Down() {
+    moteurGroup.Set(-kWinchSpeed);
 }
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
+void Winch::Stop() {
+    moteurGroup.StopMotor();
 }

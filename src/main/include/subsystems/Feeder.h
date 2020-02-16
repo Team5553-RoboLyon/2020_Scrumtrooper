@@ -10,6 +10,7 @@ class Feeder : public frc2::SubsystemBase {
    Feeder();
 
    void Activate();
+   void UnBlock();
    void Stop();
 
  private:

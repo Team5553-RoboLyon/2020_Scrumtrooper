@@ -34,7 +34,7 @@ void PrepShoot::Execute() {
   m_intake->Close();
   m_controlpanelmanipulator->Close();
   m_turret->Activate();
-  m_adjustablehood->Activate();
+  m_adjustablehood->SetAngle(415.0);
   m_shooter->Shoot(m_puissance);
 }
 

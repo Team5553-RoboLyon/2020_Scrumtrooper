@@ -5,23 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Feeder.h"
+#include "commands/intake/ChangePosition.h"
 
-Feeder::Feeder() {
+#include <iostream>
 
+ChangePosition::ChangePosition(Intake* Intake)
+    : m_intake(Intake) {
+  AddRequirements(m_intake);
 }
 
-void Feeder::Activate() {
-    m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+void ChangePosition::Initialize() {}
+
+void ChangePosition::Execute() {
+  m_intake->ChangePosition();
 }
 
-void Feeder::UnBlock() {
-    m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
-}
+void ChangePosition::End(bool interrupted) {}
 
-void Feeder::Stop() {
-    m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
-}
+bool ChangePosition::IsFinished() { return false; }
