@@ -20,6 +20,8 @@ void Feed::Execute() {
   m_feeder->Activate();
 }
 
-void Feed::End(bool interrupted) {}
+void Feed::End(bool interrupted) {
+  m_feeder->Stop();
+}
 
 bool Feed::IsFinished() { return false; }

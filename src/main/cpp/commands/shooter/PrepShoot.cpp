@@ -40,4 +40,4 @@ void PrepShoot::Execute() {
 
 void PrepShoot::End(bool interrupted) {}
 
-bool PrepShoot::IsFinished() { return false; }
+bool PrepShoot::IsFinished() { return true; }

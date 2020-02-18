@@ -24,6 +24,8 @@ void AdjustableHood::SetAngle(double angle) {
     double rcw = 0.0025*error + 0.00023*integral + 0.0003*derivative;
     //Precédement I = 0.00021
 
+    actualAngle = 0.0;
+
     prev_error = error;
     isOpened = true;
 }

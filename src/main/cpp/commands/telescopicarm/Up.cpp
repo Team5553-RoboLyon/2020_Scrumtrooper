@@ -10,7 +10,7 @@
 #include <iostream>
 
 Up::Up(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(m_telescopicarm) {
+    : m_telescopicarm(TelescopicArm) {
   AddRequirements(m_telescopicarm);
 }
 

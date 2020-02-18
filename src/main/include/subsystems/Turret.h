@@ -12,6 +12,10 @@ class Turret : public frc2::SubsystemBase {
     void Periodic() override;
     void Activate();
     void Stop();
+
+    //TEST COMMANDS !!
+    void Left();
+    void Right();
  private:
     bool turretActivated = false;
     frc::VictorSP m_moteur {kTurretMoteur}; 

@@ -9,6 +9,7 @@
 
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/InstantCommand.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -31,10 +32,15 @@
 #include "commands/intake/Activate.h"
 #include "commands/telescopicarm/Down.h"
 #include "commands/telescopicarm/Up.h"
+#include "commands/turret/TESTLeft.h"
+#include "commands/turret/TESTRight.h"
+#include "commands/winch/Stretch.h"
+#include "commands/winch/Unstretch.h"
 
 class RobotContainer {
  public:
   RobotContainer();
+  void ChangeConfiguration();
 
   ControlPanelManipulator m_controlPanelManipulator;
   Drivetrain m_drivetrain;
@@ -45,6 +51,7 @@ class RobotContainer {
   TelescopicArm m_telescopicArm;
   Turret m_turret;
   Winch m_winch;
+  bool manualMode = false;
 
  private:
   frc::XboxController m_driverController{0};
@@ -62,6 +69,13 @@ class RobotContainer {
   frc2::Trigger TriggerAxisLeftTrigger {[this] { return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2; }};
   frc2::Trigger TriggerAxisRightTrigger {[this] { return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2; }};
 
+  frc2::Trigger POV0Deg {[this] { return m_driverController.GetPOV() == 0; }};
+  frc2::Trigger POV180Deg {[this] { return m_driverController.GetPOV() == 180; }};
+  frc2::Trigger POV90Deg {[this] { return m_driverController.GetPOV() == 90; }};
+  frc2::Trigger POV270Deg {[this] { return m_driverController.GetPOV() == 270; }};
 
-  void ConfigureButtonBindings();
+  frc2::InstantCommand ChangeConfigurationCommand {[this] { return ChangeConfiguration();}, {}};
+
+  void ConfigureNormalMode();
+  void ConfigureManualMode();
 };

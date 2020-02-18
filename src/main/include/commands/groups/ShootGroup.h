@@ -18,5 +18,7 @@
 class ShootGroup
     : public frc2::CommandHelper<frc2::SequentialCommandGroup, ShootGroup> {
  public:
-  ShootGroup(Shooter* Shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood);
+  ShootGroup(Shooter* Shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood, double m_puissance = 0.0);
+ private:
+  double speed = 0.0;
 };

@@ -22,7 +22,9 @@ void Robot::RobotPeriodic() {
 
     source.convertTo(source, -1, 3, 0.3);
 
-    outputStream.PutFrame(source);}
+    outputStream.PutFrame(source);
+    frc::SmartDashboard::PutBoolean("Mode Manuel", m_container.manualMode);
+    }
 
 void Robot::DisabledInit() { 
     m_container.m_drivetrain.EnableLogFile(false);

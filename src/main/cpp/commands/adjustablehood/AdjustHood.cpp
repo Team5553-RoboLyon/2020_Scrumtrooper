@@ -9,8 +9,9 @@
 
 #include <iostream>
 
-AdjustHood::AdjustHood(AdjustableHood* AdjustableHood)
-    : m_adjustablehood(AdjustableHood) {
+AdjustHood::AdjustHood(AdjustableHood* AdjustableHood, double angle)
+    : m_adjustablehood(AdjustableHood),
+      m_angle(angle) {
   AddRequirements(m_adjustablehood);
 }
 

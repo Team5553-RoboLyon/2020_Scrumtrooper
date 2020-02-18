@@ -5,21 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/telescopicarm/Down.h"
+#pragma once
 
-#include <iostream>
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
-Down::Down(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(TelescopicArm) {
-  AddRequirements(m_telescopicarm);
-}
+#include "subsystems/Winch.h"
 
-void Down::Initialize() {}
+class Stretch : public frc2::CommandHelper<frc2::CommandBase, Stretch> {
+ public:
+  Stretch(Winch* Winch);
 
-void Down::Execute() {
-  m_telescopicarm->Down();
-}
+  void Initialize() override;
 
-void Down::End(bool interrupted) {}
+  void Execute() override;
 
-bool Down::IsFinished() { return false; }
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  Winch* m_winch;
+};

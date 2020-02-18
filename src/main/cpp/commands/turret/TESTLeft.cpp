@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/telescopicarm/Down.h"
+#include "commands/turret/TESTLeft.h"
 
 #include <iostream>
 
-Down::Down(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(TelescopicArm) {
-  AddRequirements(m_telescopicarm);
+Left::Left(Turret* Turret)
+    : m_turret(Turret) {
+  AddRequirements(m_turret);
 }
 
-void Down::Initialize() {}
+void Left::Initialize() {}
 
-void Down::Execute() {
-  m_telescopicarm->Down();
+void Left::Execute() {
+  m_turret->Left();
 }
 
-void Down::End(bool interrupted) {}
+void Left::End(bool interrLeftted) {}
 
-bool Down::IsFinished() { return false; }
+bool Left::IsFinished() { return false; }

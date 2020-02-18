@@ -14,42 +14,44 @@
     constexpr int kDrivetrainMoteurGauche1 = 1;
     constexpr int kDrivetrainMoteurGauche2 = 3;
 
-    //Shooteur IDs
+    //Shooter IDs
     constexpr int kShooterMoteurDroite = 8;
     constexpr int kShooterMoteurGauche = 7;
 
-//PWM IDs
     //Intake IDs
     constexpr int kIntakeMoteur = 0;
 
-    //Feeder IDs
-    constexpr int kFeederMoteur = 0;
+    //Conveyor IDs
     constexpr int kConveyorMoteur = 0;
-
-    //Turret IDs
-    constexpr int kTurretMoteur = 0;
-
-    //ControlPanelManipulator IDs
-    constexpr int kControlPanelManipulatorMoteur = 0;
 
     //AdjustableHood IDs
     constexpr int kAdjustableHoodMoteur = 0;
+
+//PWM IDs
+    //Feeder IDs
+    constexpr int kFeederMoteur = 3;
+
+    //Turret IDs
+    constexpr int kTurretMoteur = 5;
+
+    //ControlPanelManipulator IDs
+    constexpr int kControlPanelManipulatorMoteur = 0;
 
     //TelescopicArm IDs
     constexpr int kTelescopicArmMoteur = 0;
 
     //Winch IDs
     constexpr int kWinchMoteur1 = 0;
-    constexpr int kWinchMoteur2 = 0;
+    constexpr int kWinchMoteur2 = 1;
 
 // PCM IDs
     //Ballshifter IDs
-    constexpr int kDrivetrainBallshifterA = 0;
-    constexpr int kDrivetrainBallshifterB = 1;
+    constexpr int kDrivetrainBallshifterA = 2;
+    constexpr int kDrivetrainBallshifterB = 3;
 
     //Intake IDs
-    constexpr int kIntakeA = 2;
-    constexpr int kIntakeB = 3;
+    constexpr int kIntakeA = 0;
+    constexpr int kIntakeB = 1;
 
     //ControlPanelManipulator IDs
     constexpr int kControlPanelManipulatorA = 4;
@@ -57,14 +59,14 @@
 
 //Speed Constants
     //Intake Speeds
-    constexpr double kIntakeMoteurSpeed = 0.0;
+    constexpr double kIntakeMoteurSpeed = 0.5;
 
     //Feeder Speeds
-    constexpr double kFeederMoteurSpeed = 0.0;
-    constexpr double kConveyorMoteurSpeed = 0.0;
+    constexpr double kFeederMoteurSpeed = 0.40;
+    constexpr double kConveyorMoteurSpeed = 0.35;
 
     //Turret Speeds
-    constexpr double kTurretMoteurSpeed = 0.0;
+    constexpr double kTurretMoteurSpeed = 0.2;
 
     //ControlPanelManipulator Speeds
     constexpr double kControlPanelManipulatorSpeed = 0.0;

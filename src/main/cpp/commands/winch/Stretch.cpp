@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/telescopicarm/Down.h"
+#include "commands/Winch/Stretch.h"
 
 #include <iostream>
 
-Down::Down(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(TelescopicArm) {
-  AddRequirements(m_telescopicarm);
+Stretch::Stretch(Winch* Winch)
+    : m_winch(Winch) {
+  AddRequirements(m_winch);
 }
 
-void Down::Initialize() {}
+void Stretch::Initialize() {}
 
-void Down::Execute() {
-  m_telescopicarm->Down();
+void Stretch::Execute() {
+  m_winch->Up();
 }
 
-void Down::End(bool interrupted) {}
+void Stretch::End(bool interrStretchted) {}
 
-bool Down::IsFinished() { return false; }
+bool Stretch::IsFinished() { return false; }

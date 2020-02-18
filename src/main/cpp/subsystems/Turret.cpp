@@ -8,7 +8,7 @@
 #include "subsystems/Turret.h"
 
 Turret::Turret() {
-
+    //m_moteur.SetInverted(true);
 }
 
 void Turret::Periodic() {
@@ -21,4 +21,14 @@ void Turret::Activate() {
 
 void Turret::Stop() {
     turretActivated = false;
+}
+
+//TEST COMMANDS !!!
+
+void Turret::Left() {
+    m_moteur.Set(kTurretMoteurSpeed);
+}
+
+void Turret::Right() {
+    m_moteur.Set(-kTurretMoteurSpeed);
 }
