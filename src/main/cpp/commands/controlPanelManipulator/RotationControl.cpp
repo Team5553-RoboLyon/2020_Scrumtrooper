@@ -15,8 +15,11 @@ RotationControl::RotationControl(ControlPanelManipulator* controlPanelManipulato
 void RotationControl::Initialize() {}
 
 void RotationControl::Execute() {
+  m_controlPanelManipulator->Activate();
 }
 
-void RotationControl::End(bool interrupted) {}
+void RotationControl::End(bool interrupted) {
+  m_controlPanelManipulator->Activate();
+}
 
 bool RotationControl::IsFinished() { return false; }

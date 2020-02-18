@@ -5,19 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/controlPanelManipulator/PositionControl.h"
+#include "commands/intake/Activate.h"
 
-PositionControl::PositionControl(ControlPanelManipulator* controlPanelManipulator)
-    : m_controlPanelManipulator(controlPanelManipulator) {
-  AddRequirements(m_controlPanelManipulator);
+#include <iostream>
+Activate::Activate(Intake* Intake)
+    : m_intake(Intake) {
+  AddRequirements(m_intake);
 }
 
-void PositionControl::Initialize() {}
+void Activate::Initialize() {}
 
-void PositionControl::Execute() {
-  m_controlPanelManipulator->ChangePosition();
+void Activate::Execute() {
+  m_intake->Activate();
 }
 
-void PositionControl::End(bool interrupted) {}
+void Activate::End(bool interrupted) {
+    m_intake->Stop();
+}
 
-bool PositionControl::IsFinished() { return false; }
+bool Activate::IsFinished() { return false; }

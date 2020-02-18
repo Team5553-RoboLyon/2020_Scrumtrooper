@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/XboxController.h>
+#include <frc2/command/button/JoystickButton.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -18,6 +19,18 @@
 #include "subsystems/TelescopicArm.h"
 #include "subsystems/Turret.h"
 #include "subsystems/Winch.h"
+
+#include "commands/adjustablehood/AdjustHood.h"
+#include "commands/controlPanelManipulator/PositionControl.h"
+#include "commands/controlPanelManipulator/RotationControl.h"
+#include "commands/drivetrain/Ballshifter.h"
+#include "commands/drivetrain/Drive.h"
+#include "commands/feeder/Feed.h"
+#include "commands/groups/ShootGroup.h"
+#include "commands/intake/ChangePosition.h"
+#include "commands/intake/Activate.h"
+#include "commands/telescopicarm/Down.h"
+#include "commands/telescopicarm/Up.h"
 
 class RobotContainer {
  public:
@@ -35,6 +48,20 @@ class RobotContainer {
 
  private:
   frc::XboxController m_driverController{0};
+  frc2::JoystickButton j_aButton {&m_driverController, 1};
+  frc2::JoystickButton j_bButton {&m_driverController, 2};
+  frc2::JoystickButton j_xButton {&m_driverController, 3};
+  frc2::JoystickButton j_yButton {&m_driverController, 4};
+  frc2::JoystickButton j_bumperLeftButton {&m_driverController, 5};
+  frc2::JoystickButton j_bumperRightButton {&m_driverController, 6};
+  frc2::JoystickButton j_BackButton {&m_driverController, 7};
+  frc2::JoystickButton j_StartButton {&m_driverController, 8};
+  frc2::JoystickButton j_StickLeftButton {&m_driverController, 9};
+  frc2::JoystickButton j_StickRightButton {&m_driverController, 10};
+
+  frc2::Trigger TriggerAxisLeftTrigger {[this] { return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2; }};
+  frc2::Trigger TriggerAxisRightTrigger {[this] { return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2; }};
+
 
   void ConfigureButtonBindings();
 };

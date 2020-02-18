@@ -8,9 +8,6 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/InstantCommand.h>
-#include <frc2/command/button/JoystickButton.h>
-
-#include "commands/drivetrain/Drive.h"
 
 RobotContainer::RobotContainer() {
   ConfigureButtonBindings();
@@ -21,7 +18,18 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureButtonBindings() {
-  frc2::InstantCommand changerVitesse{[this] { m_drivetrain.ChangerVitesse(); }, {&m_drivetrain}};
-  frc2::JoystickButton(&m_driverController, (int)frc::XboxController::Button::kA)
-      .WhenPressed(changerVitesse);
+    //Intake buttons
+    j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
+    TriggerAxisLeftTrigger.WhenActive(Activate(&m_intake));
+
+    //Shooter button
+    j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
+    
+    //Ballshifter button
+    (j_StickLeftButton && j_StickRightButton).WhileActiveOnce(Ballshifter(&m_drivetrain));
+
+    //ControlPanelManipulator buttons
+    j_bumperRightButton.WhenPressed(PositionControl(&m_controlPanelManipulator));
+    TriggerAxisRightTrigger.WhenActive(RotationControl(&m_controlPanelManipulator));
+    
 }
