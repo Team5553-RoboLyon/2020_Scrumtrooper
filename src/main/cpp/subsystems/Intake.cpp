@@ -13,10 +13,12 @@ Intake::Intake() {
 
 void Intake::Open() {
     m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
+    m_position = IntakePosition::kOpened;
 }
 void Intake::Close() {
     Stop();
     m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
+    m_position = IntakePosition::kClosed;
 }
 
 void Intake::ChangePosition() {
@@ -26,9 +28,9 @@ void Intake::ChangePosition() {
 
 void Intake::Activate() {
     if(m_position == IntakePosition::kClosed) return;
-    m_moteur.Set(kIntakeMoteurSpeed);
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeed);
 }
 
 void Intake::Stop() {
-    m_moteur.StopMotor();
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

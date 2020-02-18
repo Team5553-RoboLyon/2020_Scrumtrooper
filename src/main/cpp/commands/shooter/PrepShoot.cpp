@@ -19,7 +19,6 @@ PrepShoot::PrepShoot(double puissance, Shooter* Shooter, Feeder* Feeder, Drivetr
       m_adjustablehood(AdjustableHood),
       m_puissance(puissance) {
   AddRequirements(m_shooter);
-  AddRequirements(m_feeder);
   AddRequirements(m_drivetrain);
   AddRequirements(m_intake);
   AddRequirements(m_controlpanelmanipulator);
@@ -38,6 +37,8 @@ void PrepShoot::Execute() {
   m_shooter->Shoot(m_puissance);
 }
 
-void PrepShoot::End(bool interrupted) {}
+void PrepShoot::End(bool interrupted) {
+  m_shooter->Shoot(0.0);
+}
 
-bool PrepShoot::IsFinished() { return true; }
+bool PrepShoot::IsFinished() { return false; }

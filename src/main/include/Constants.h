@@ -10,9 +10,9 @@
 // CAN IDs
     //Drivetrain IDs
     constexpr int kDrivetrainMoteurDroite1 = 2;
-    constexpr int kDrivetrainMoteurDroite2 = 4;
+    constexpr int kDrivetrainMoteurDroite2 = 3;
     constexpr int kDrivetrainMoteurGauche1 = 1;
-    constexpr int kDrivetrainMoteurGauche2 = 3;
+    constexpr int kDrivetrainMoteurGauche2 = 4;
 
     //Shooter IDs
     constexpr int kShooterMoteurDroite = 5;
@@ -59,11 +59,11 @@
 
 //Speed Constants
     //Intake Speeds
-    constexpr double kIntakeMoteurSpeed = 0.5;
+    constexpr double kIntakeMoteurSpeed = 0.6;
 
     //Feeder Speeds
-    constexpr double kFeederMoteurSpeed = 0.40;
-    constexpr double kConveyorMoteurSpeed = 0.35;
+    constexpr double kFeederMoteurSpeed = 0.50;
+    constexpr double kConveyorMoteurSpeed = 0.25;
 
     //Turret Speeds
     constexpr double kTurretMoteurSpeed = 0.2;

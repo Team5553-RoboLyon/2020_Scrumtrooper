@@ -16,8 +16,16 @@ void AdjustableHood::Close() {
     isOpened = false;
 }
 
+void AdjustableHood::Monter() {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
+}
+
+void AdjustableHood::Descendre() {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
+}
+
 void AdjustableHood::SetAngle(double angle) {
-    if(!isActivated) return;
+    /*if(!isActivated) return;
     double error = angle - encodeur.Get();
     integral += (error*.02);
     double derivative = (error - prev_error) / .02;
@@ -27,5 +35,5 @@ void AdjustableHood::SetAngle(double angle) {
     actualAngle = 0.0;
 
     prev_error = error;
-    isOpened = true;
+    isOpened = true;*/
 }

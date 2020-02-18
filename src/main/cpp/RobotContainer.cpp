@@ -28,7 +28,10 @@ void RobotContainer::ConfigureNormalMode() {
 
     //Intake buttons
     j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
-    TriggerAxisLeftTrigger.WhenActive(Activate(&m_intake));
+    TriggerAxisLeftTrigger.WhileActiveContinous
+    
+    
+    (Activate(&m_intake));
 
     //Shooter button
     j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
@@ -49,13 +52,13 @@ void RobotContainer::ConfigureManualMode() {
     
     //Intake buttons
     j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
-    TriggerAxisLeftTrigger.WhenActive(Activate(&m_intake));
+    TriggerAxisLeftTrigger.WhileActiveOnce(Activate(&m_intake));
 
     //Feeder button
     j_bumperRightButton.WhileHeld(Feed(&m_feeder));
 
     //Shooter buttons
-    TriggerAxisRightTrigger.WhenActive(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood, m_driverController.GetTriggerAxis(frc::XboxController::JoystickHand::kRightHand)));
+    TriggerAxisRightTrigger.WhileActiveContinous(PrepShoot(0.8, &m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
 
     //AdjustableHood buttons
     POV0Deg.WhenActive(AdjustHood(&m_adjustableHood, m_adjustableHood.actualAngle + 5));

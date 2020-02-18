@@ -20,6 +20,8 @@ void Right::Execute() {
   m_turret->Right();
 }
 
-void Right::End(bool interrRightted) {}
+void Right::End(bool interrRightted) {
+  m_turret->Stop();
+}
 
-bool Right::IsFinished() { return false; }
+bool Right::IsFinished() { return true; }

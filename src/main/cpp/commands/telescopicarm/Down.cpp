@@ -20,6 +20,8 @@ void Down::Execute() {
   m_telescopicarm->Down();
 }
 
-void Down::End(bool interrupted) {}
+void Down::End(bool interrupted) {
+  m_telescopicarm->Stop();
+}
 
-bool Down::IsFinished() { return false; }
+bool Down::IsFinished() { return true; }

@@ -20,6 +20,8 @@ void Up::Execute() {
   m_telescopicarm->Up();
 }
 
-void Up::End(bool interrupted) {}
+void Up::End(bool interrupted) {
+  m_telescopicarm->Stop();
+}
 
-bool Up::IsFinished() { return false; }
+bool Up::IsFinished() { return true; }

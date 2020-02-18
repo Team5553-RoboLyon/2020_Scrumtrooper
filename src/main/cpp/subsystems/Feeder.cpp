@@ -13,15 +13,15 @@ Feeder::Feeder() {
 
 void Feeder::Activate() {
     m_moteurFeeder.Set(kFeederMoteurSpeed);
-    m_moteurConveyor.Set(kConveyorMoteurSpeed);
+    m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kConveyorMoteurSpeed);
 }
 
 void Feeder::UnBlock() {
     m_moteurFeeder.Set(-kFeederMoteurSpeed);
-    m_moteurConveyor.Set(-kConveyorMoteurSpeed);
+    m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -kConveyorMoteurSpeed);
 }
 
 void Feeder::Stop() {
     m_moteurFeeder.StopMotor();
-    m_moteurConveyor.StopMotor();
+    m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

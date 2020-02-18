@@ -18,7 +18,10 @@ AdjustHood::AdjustHood(AdjustableHood* AdjustableHood, double angle)
 void AdjustHood::Initialize() {}
 
 void AdjustHood::Execute() {
-  m_adjustablehood->SetAngle(415.0);
+  if(m_angle = 1) m_adjustablehood->Monter();
+  if(m_angle = -1) m_adjustablehood->Descendre();
+  //m_adjustablehood->SetAngle(m_angle);
+  //m_adjustablehood->
 }
 
 void AdjustHood::End(bool interrupted) {}

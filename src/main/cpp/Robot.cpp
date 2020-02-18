@@ -8,12 +8,12 @@
 #include "Robot.h"
 
 void Robot::RobotInit() {
-	camera.set(cv::CAP_PROP_BRIGHTNESS, 0);
+	/*camera.set(cv::CAP_PROP_BRIGHTNESS, 0);
     camera.set(cv::CAP_PROP_FRAME_WIDTH, 320);
 	camera.set(cv::CAP_PROP_FRAME_HEIGHT, 240);
 	camera.set(cv::CAP_PROP_FPS, 30);
 
-    outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 240);
+    outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 240);*/
 }
 
 void Robot::RobotPeriodic() { 

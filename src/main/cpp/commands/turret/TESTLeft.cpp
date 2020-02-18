@@ -20,6 +20,8 @@ void Left::Execute() {
   m_turret->Left();
 }
 
-void Left::End(bool interrLeftted) {}
+void Left::End(bool interrLeftted) {
+  m_turret->Stop();
+}
 
-bool Left::IsFinished() { return false; }
+bool Left::IsFinished() { return true; }

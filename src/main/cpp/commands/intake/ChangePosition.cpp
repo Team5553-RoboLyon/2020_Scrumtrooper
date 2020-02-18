@@ -19,6 +19,8 @@ void ChangePosition::Execute() {
   m_intake->ChangePosition();
 }
 
-void ChangePosition::End(bool interrupted) {}
+void ChangePosition::End(bool interrupted) {
+  std::cout << "Intake fini" << std::endl;
+}
 
-bool ChangePosition::IsFinished() { return false; }
+bool ChangePosition::IsFinished() { return true; }

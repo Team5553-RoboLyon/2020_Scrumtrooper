@@ -4,6 +4,7 @@
 #include <frc/VictorSP.h>
 #include <frc/Encoder.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <ctre/Phoenix.h>
 
 #include "Constants.h"
 
@@ -12,6 +13,8 @@ class AdjustableHood : public frc2::SubsystemBase {
     AdjustableHood();
 
     void Close();
+    void Monter();
+    void Descendre();
     void SetAngle(double angle);
 
    double actualAngle = 0.0;
