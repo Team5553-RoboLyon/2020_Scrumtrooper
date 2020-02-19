@@ -18,11 +18,11 @@ outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 
 
 void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
-  camera.read(source);
 
+  /*camera.read(source);
   source.convertTo(source, -1, 3, 0.3);
+  outputStream.PutFrame(source);*/
 
-  outputStream.PutFrame(source);
   frc::SmartDashboard::PutBoolean("Mode Manuel", m_container.manualMode);
 }
 
