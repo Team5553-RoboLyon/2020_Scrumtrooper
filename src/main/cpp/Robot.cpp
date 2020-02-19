@@ -8,27 +8,27 @@
 #include "Robot.h"
 
 void Robot::RobotInit() {
-	/*camera.set(cv::CAP_PROP_BRIGHTNESS, 0);
-    camera.set(cv::CAP_PROP_FRAME_WIDTH, 320);
-	camera.set(cv::CAP_PROP_FRAME_HEIGHT, 240);
-	camera.set(cv::CAP_PROP_FPS, 30);
+  /*camera.set(cv::CAP_PROP_BRIGHTNESS, 0);
+camera.set(cv::CAP_PROP_FRAME_WIDTH, 320);
+  camera.set(cv::CAP_PROP_FRAME_HEIGHT, 240);
+  camera.set(cv::CAP_PROP_FPS, 30);
 
-    outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 240);*/
+outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 240);*/
 }
 
-void Robot::RobotPeriodic() { 
-    frc2::CommandScheduler::GetInstance().Run(); 
-    camera.read(source);
+void Robot::RobotPeriodic() {
+  frc2::CommandScheduler::GetInstance().Run();
+  /*camera.read(source);
 
-    source.convertTo(source, -1, 3, 0.3);
+  source.convertTo(source, -1, 3, 0.3);
 
-    outputStream.PutFrame(source);
-    frc::SmartDashboard::PutBoolean("Mode Manuel", m_container.manualMode);
-    }
+  outputStream.PutFrame(source);*/
+  frc::SmartDashboard::PutBoolean("Mode Manuel", m_container.manualMode);
+}
 
-void Robot::DisabledInit() { 
-    m_container.m_drivetrain.EnableLogFile(false);
-    m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+void Robot::DisabledInit() {
+  m_container.m_drivetrain.EnableLogFile(false);
+  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 }
 
 void Robot::DisabledPeriodic() {}
