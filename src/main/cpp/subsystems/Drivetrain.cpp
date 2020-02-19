@@ -40,13 +40,16 @@ void Drivetrain::Periodic() {
   frc::SmartDashboard::PutNumber("Gauche2", m_encodeurGauche2.GetPosition());
 
   if (m_isLogFileEnabled) {
-    m_logFile->Log(m_encodeurDroite1.GetPosition(), m_encodeurDroite2.GetPosition(), m_encodeurGauche1.GetPosition(), m_encodeurGauche2.GetPosition(), m_encodeurExterne.Get());
+    m_logFile->Log(m_encodeurDroite1.GetPosition(), m_encodeurDroite2.GetPosition(),
+                   m_encodeurGauche1.GetPosition(), m_encodeurGauche2.GetPosition(),
+                   m_encoderExterneDroite.Get(), m_encoderExterneGauche.Get());
   }
 }
 
 void Drivetrain::EnableLogFile(bool enable) {
   if (!m_isLogFileEnabled && enable) {
-    m_logFile = new CSVLogFile("/media/logs/log", "Droite 1", "Droite 2", "Gauche 1", "Gauche 2", "Encodeur externe");
+    m_logFile = new CSVLogFile("/media/logs/log", "Droite 1", "Droite 2", "Gauche 1", "Gauche 2",
+                               "Encodeur externe");
   } else if (m_isLogFileEnabled && !enable) {
     delete m_logFile;
   }
@@ -74,7 +77,7 @@ void Drivetrain::ChangerVitesse() {
 }
 
 void Drivetrain::Drive(double droite, double gauche) {
-//droite *= 0.96389891696750902527075812274368;
+  // droite *= 0.96389891696750902527075812274368;
 
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
@@ -85,7 +88,8 @@ void Drivetrain::ResetEncodeurs() {
   m_encodeurDroite2.SetPosition(0.0);
   m_encodeurGauche1.SetPosition(0.0);
   m_encodeurGauche2.SetPosition(0.0);
-  m_encodeurExterne.Reset();
+  m_encoderExterneDroite.Reset();
+  m_encoderExterneGauche.Reset();
 }
 
 void Drivetrain::SetPositionConversionFactor(GearRatio gearRatio) {

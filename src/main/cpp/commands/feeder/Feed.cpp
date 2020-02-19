@@ -9,19 +9,12 @@
 
 #include <iostream>
 
-Feed::Feed(Feeder* Feeder)
-    : m_feeder(Feeder) {
-  AddRequirements(m_feeder);
-}
+Feed::Feed(Feeder* Feeder) : m_feeder(Feeder) { AddRequirements(m_feeder); }
 
 void Feed::Initialize() {}
 
-void Feed::Execute() {
-  m_feeder->Activate();
-}
+void Feed::Execute() { m_feeder->Activate(); }
 
-void Feed::End(bool interrupted) {
-  m_feeder->Stop();
-}
+void Feed::End(bool interrupted) { m_feeder->Stop(); }
 
 bool Feed::IsFinished() { return false; }

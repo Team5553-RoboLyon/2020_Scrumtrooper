@@ -78,6 +78,20 @@
     constexpr double kTelescopicArmSpeed = 0.0;
 
 //Encodeurs IDs
+    //Drivetrain IDs
+    constexpr int kDrivetrainRightEncodeurA = 0;
+    constexpr int kDrivetrainRightEncodeurB = 1;
+    constexpr int kDrivetrainLeftEncodeurA = 2;
+    constexpr int kDrivetrainLeftEncodeurB = 3;
+
+    //Climber IDs
+    constexpr int kClimberEncodeurA = 4;
+    constexpr int kClimberEncodeurB = 5;
+
+    //TelescopicArm IDs
+    constexpr int kTelescopicArmEncodeurA = 4;
+    constexpr int kTelescopicArmEncodeurB = 5;
+
     //AdjustableHood IDs
-    constexpr int kAdjustableHoodEncodeurA = 0;
-    constexpr int kAdjustableHoodEncodeurB = 1;
+    constexpr int kAdjustableHoodEncodeurA = 8;
+    constexpr int kAdjustableHoodEncodeurB = 9;

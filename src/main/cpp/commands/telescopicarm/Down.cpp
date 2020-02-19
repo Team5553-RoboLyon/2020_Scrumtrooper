@@ -9,19 +9,14 @@
 
 #include <iostream>
 
-Down::Down(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(TelescopicArm) {
+Down::Down(TelescopicArm* TelescopicArm) : m_telescopicarm(TelescopicArm) {
   AddRequirements(m_telescopicarm);
 }
 
 void Down::Initialize() {}
 
-void Down::Execute() {
-  m_telescopicarm->Down();
-}
+void Down::Execute() { m_telescopicarm->Down(); }
 
-void Down::End(bool interrupted) {
-  m_telescopicarm->Stop();
-}
+void Down::End(bool interrupted) { m_telescopicarm->Stop(); }
 
 bool Down::IsFinished() { return true; }

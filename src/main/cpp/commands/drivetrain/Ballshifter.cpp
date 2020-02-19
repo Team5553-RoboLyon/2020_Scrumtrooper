@@ -9,17 +9,8 @@
 
 #include <iostream>
 
-Ballshifter::Ballshifter(Drivetrain* drivetrain)
-    : m_drivetrain(drivetrain) {
+Ballshifter::Ballshifter(Drivetrain* drivetrain) : m_drivetrain(drivetrain) {
   AddRequirements(m_drivetrain);
 }
 
-void Ballshifter::Initialize() {}
-
-void Ballshifter::Execute() {
-    m_drivetrain->ChangerVitesse();
-}
-
-void Ballshifter::End(bool interrupted) {}
-
-bool Ballshifter::IsFinished() { return false; }
+void Ballshifter::Initialize() { m_drivetrain->ChangerVitesse(); }

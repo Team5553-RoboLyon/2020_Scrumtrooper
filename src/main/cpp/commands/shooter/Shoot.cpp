@@ -10,9 +10,7 @@
 #include <iostream>
 
 Shoot::Shoot(double puissance, Shooter* Shooter, Feeder* Feeder)
-    : m_puissance(puissance), 
-      m_shooter(Shooter),
-      m_feeder(Feeder) {
+    : m_puissance(puissance), m_shooter(Shooter), m_feeder(Feeder) {
   AddRequirements(m_shooter);
   AddRequirements(m_feeder);
 }

@@ -3,6 +3,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/VictorSP.h>
 #include <frc/SpeedControllerGroup.h>
+#include <frc/Encoder.h>
 
 #include "Constants.h"
 
@@ -17,4 +18,6 @@ class Winch : public frc2::SubsystemBase {
   frc::VictorSP moteur1 {kWinchMoteur1};
   frc::VictorSP moteur2 {kWinchMoteur2};
   frc::SpeedControllerGroup moteurGroup {moteur1, moteur2};
+
+  frc::Encoder m_encoder{kClimberEncodeurA, kClimberEncodeurB};
 };

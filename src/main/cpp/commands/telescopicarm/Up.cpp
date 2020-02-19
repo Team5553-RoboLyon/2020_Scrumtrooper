@@ -9,19 +9,14 @@
 
 #include <iostream>
 
-Up::Up(TelescopicArm* TelescopicArm)
-    : m_telescopicarm(TelescopicArm) {
+Up::Up(TelescopicArm* TelescopicArm) : m_telescopicarm(TelescopicArm) {
   AddRequirements(m_telescopicarm);
 }
 
 void Up::Initialize() {}
 
-void Up::Execute() {
-  m_telescopicarm->Up();
-}
+void Up::Execute() { m_telescopicarm->Up(); }
 
-void Up::End(bool interrupted) {
-  m_telescopicarm->Stop();
-}
+void Up::End(bool interrupted) { m_telescopicarm->Stop(); }
 
 bool Up::IsFinished() { return true; }

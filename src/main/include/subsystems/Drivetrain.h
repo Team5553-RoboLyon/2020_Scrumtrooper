@@ -12,7 +12,7 @@
 #include <rev/CANSparkMax.h>
 #include <units/units.h>
 #include <wpi/math>
-#include <frc/DutyCycleEncoder.h>
+#include <frc/Encoder.h>
 
 #include "lib/CSVLogFile.h"
 
@@ -63,12 +63,16 @@ class Drivetrain : public frc2::SubsystemBase {
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kLowGearRatio = 1;
   const double kHighGearRatio = 1 / 10.6;
-  //const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() * kLowGearRatio;
-  //const double kHighGearPositionConversionFactor = kWheelCircumference.to<double>() * kHighGearRatio;
+  // const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() *
+  // kLowGearRatio; const double kHighGearPositionConversionFactor =
+  // kWheelCircumference.to<double>()
+  // * kHighGearRatio;
   const double kLowGearPositionConversionFactor = 42;
   const double kHighGearPositionConversionFactor = 42;
 
+  frc::Encoder m_encoderExterneDroite{kDrivetrainRightEncodeurA, kDrivetrainRightEncodeurB};
+  frc::Encoder m_encoderExterneGauche{kDrivetrainLeftEncodeurA, kDrivetrainLeftEncodeurB};
+
   CSVLogFile* m_logFile;
   bool m_isLogFileEnabled;
-  frc::DutyCycleEncoder m_encodeurExterne {0};
 };

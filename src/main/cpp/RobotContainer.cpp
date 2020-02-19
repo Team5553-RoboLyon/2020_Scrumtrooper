@@ -16,66 +16,63 @@ RobotContainer::RobotContainer() {
             [this] { return -m_driverController.GetX(frc::GenericHID::JoystickHand::kRightHand); },
             &m_drivetrain));
 
-
+  j_StartButton.WhenPressed(&ChangeConfigurationCommand);
 }
 
 void RobotContainer::ChangeConfiguration() {
-    if(manualMode) ConfigureNormalMode();
-    if(!manualMode) ConfigureManualMode();
+  if (manualMode) ConfigureNormalMode();
+  if (!manualMode) ConfigureManualMode();
 }
 
 void RobotContainer::ConfigureNormalMode() {
+  // Intake buttons
+  j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
+  TriggerAxisLeftTrigger.WhileActiveContinous(Activate(&m_intake));
 
-    //Intake buttons
-    j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
-    TriggerAxisLeftTrigger.WhileActiveContinous(Activate(&m_intake));
-    
-    
-    (Activate(&m_intake));
+  // Shooter button
+  j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake,
+                                 &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
 
-    //Shooter button
-    j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
-    
-    //Ballshifter button
-    (j_StickLeftButton && j_StickRightButton).WhileActiveOnce(Ballshifter(&m_drivetrain));
+  // Ballshifter button
+  (j_StickLeftButton && j_StickRightButton).WhenActive(Ballshifter(&m_drivetrain));
 
-    //ControlPanelManipulator buttons
-    //j_bumperRightButton.WhenPressed(PositionControl(&m_controlPanelManipulator));
-    //TriggerAxisRightTrigger.WhenActive(RotationControl(&m_controlPanelManipulator));
+  // ControlPanelManipulator buttons
+  // j_bumperRightButton.WhenPressed(PositionControl(&m_controlPanelManipulator));
+  // TriggerAxisRightTrigger.WhenActive(RotationControl(&m_controlPanelManipulator));
 
-    j_StartButton.WhenPressed(&ChangeConfigurationCommand);
-    manualMode = false;
+  manualMode = false;
 }
 
 void RobotContainer::ConfigureManualMode() {
-    //Mode manuel !
-    
-    //Intake buttons
-    j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
-    TriggerAxisLeftTrigger.WhileActiveOnce(Activate(&m_intake));
+  // Mode manuel !
 
-    //Feeder button
-    j_bumperRightButton.WhileHeld(Feed(&m_feeder));
+  // Intake buttons
+  j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
+  TriggerAxisLeftTrigger.WhileActiveOnce(Activate(&m_intake));
 
-    //Shooter buttons
-    TriggerAxisRightTrigger.WhileActiveContinous(PrepShoot(0.8, &m_shooter, &m_feeder, &m_drivetrain, &m_intake, &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
+  // Feeder button
+  j_bumperRightButton.WhileHeld(Feed(&m_feeder));
 
-    //AdjustableHood buttons
-    POV0Deg.WhenActive(AdjustHood(&m_adjustableHood, m_adjustableHood.actualAngle + 5));
-    POV180Deg.WhenActive(AdjustHood(&m_adjustableHood, m_adjustableHood.actualAngle - 5));
+  // Shooter buttons
+  TriggerAxisRightTrigger.WhileActiveContinous(PrepShoot(0.8, &m_shooter, &m_feeder, &m_drivetrain,
+                                                         &m_intake, &m_controlPanelManipulator,
+                                                         &m_turret, &m_adjustableHood));
 
-    //Turret Buttons
-    POV90Deg.WhenActive(Right(&m_turret));
-    POV270Deg.WhenActive(Left(&m_turret));
+  // AdjustableHood buttons
+  POV0Deg.WhenActive(AdjustHood(&m_adjustableHood, 1));
+  POV180Deg.WhenActive(AdjustHood(&m_adjustableHood, -1));
 
-    //Telescopicarm Buttons
-    j_bButton.WhileHeld(Up(&m_telescopicArm));
-    j_aButton.WhileHeld(Down(&m_telescopicArm));
+  // Turret Buttons
+  POV90Deg.WhenActive(Right(&m_turret));
+  POV270Deg.WhenActive(Left(&m_turret));
 
-    //Winch Buttons
-    j_yButton.WhileHeld(Stretch(&m_winch));
-    j_xButton.WhileHeld(Unstretch(&m_winch));
+  // Telescopicarm Buttons
+  j_bButton.WhileHeld(Up(&m_telescopicArm));
+  j_aButton.WhileHeld(Down(&m_telescopicArm));
 
-    j_StartButton.WhenPressed(&ChangeConfigurationCommand);
-    manualMode = true;
+  // Winch Buttons
+  j_yButton.WhileHeld(Stretch(&m_winch));
+  j_xButton.WhileHeld(Unstretch(&m_winch));
+
+  manualMode = true;
 }

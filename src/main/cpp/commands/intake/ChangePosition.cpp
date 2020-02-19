@@ -8,9 +8,6 @@
 #include "commands/intake/ChangePosition.h"
 
 #include <iostream>
-ChangePosition::ChangePosition(Intake* Intake)
-    : m_intake(Intake) {
-  AddRequirements(m_intake);
-}
+ChangePosition::ChangePosition(Intake* Intake) : m_intake(Intake) { AddRequirements(m_intake); }
 
-void ChangePosition::Initialize() {m_intake->ChangePosition();}
+void ChangePosition::Initialize() { m_intake->ChangePosition(); }
