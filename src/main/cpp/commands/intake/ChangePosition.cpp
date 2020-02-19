@@ -13,14 +13,4 @@ ChangePosition::ChangePosition(Intake* Intake)
   AddRequirements(m_intake);
 }
 
-void ChangePosition::Initialize() {}
-
-void ChangePosition::Execute() {
-  m_intake->ChangePosition();
-}
-
-void ChangePosition::End(bool interrupted) {
-  std::cout << "Intake fini" << std::endl;
-}
-
-bool ChangePosition::IsFinished() { return true; }
+void ChangePosition::Initialize() {m_intake->ChangePosition();}

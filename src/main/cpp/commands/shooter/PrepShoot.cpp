@@ -10,14 +10,14 @@
 #include <iostream>
 
 PrepShoot::PrepShoot(double puissance, Shooter* Shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood)
-    : m_feeder(Feeder), 
-      m_shooter(Shooter), 
+    : m_puissance(puissance),
+      m_shooter(Shooter),
+      m_feeder(Feeder),  
       m_drivetrain(Drivetrain), 
       m_intake(Intake), 
       m_controlpanelmanipulator(ControlPanelManipulator), 
       m_turret(Turret),
-      m_adjustablehood(AdjustableHood),
-      m_puissance(puissance) {
+      m_adjustablehood(AdjustableHood) {
   AddRequirements(m_shooter);
   AddRequirements(m_drivetrain);
   AddRequirements(m_intake);

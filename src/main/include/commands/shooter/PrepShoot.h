@@ -31,6 +31,7 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   bool IsFinished() override;
 
  private:
+  double m_puissance = 0.0;
   Shooter* m_shooter;
   Feeder* m_feeder;
   Drivetrain* m_drivetrain;
@@ -38,5 +39,4 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   ControlPanelManipulator* m_controlpanelmanipulator;
   Turret* m_turret;
   AdjustableHood* m_adjustablehood;
-  double m_puissance = 0.0;
 };

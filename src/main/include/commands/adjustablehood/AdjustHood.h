@@ -25,6 +25,6 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
   bool IsFinished() override;
 
  private:
-  double m_angle;
   AdjustableHood* m_adjustablehood;
+  double m_angle;
 };

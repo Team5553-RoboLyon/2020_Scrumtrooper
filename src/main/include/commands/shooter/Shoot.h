@@ -26,7 +26,7 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   bool IsFinished() override;
 
  private:
+  double m_puissance = 0.0;
   Shooter* m_shooter;
   Feeder* m_feeder;
-  double m_puissance = 0.0;
 };

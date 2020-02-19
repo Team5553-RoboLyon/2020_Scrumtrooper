@@ -28,7 +28,7 @@ void RobotContainer::ConfigureNormalMode() {
 
     //Intake buttons
     j_bumperLeftButton.WhenPressed(ChangePosition(&m_intake));
-    TriggerAxisLeftTrigger.WhileActiveContinous
+    TriggerAxisLeftTrigger.WhileActiveContinous(Activate(&m_intake));
     
     
     (Activate(&m_intake));

@@ -15,8 +15,8 @@
     constexpr int kDrivetrainMoteurGauche2 = 4;
 
     //Shooter IDs
-    constexpr int kShooterMoteurDroite = 5;
-    constexpr int kShooterMoteurGauche = 6;
+    constexpr int kShooterMoteurGauche = 5;
+    constexpr int kShooterMoteurDroite = 6;
 
     //Intake IDs
     constexpr int kIntakeMoteur = 7;
@@ -29,10 +29,10 @@
 
 //PWM IDs
     //Feeder IDs
-    constexpr int kFeederMoteur = 3;
+    constexpr int kFeederMoteur = 5;
 
     //Turret IDs
-    constexpr int kTurretMoteur = 5;
+    constexpr int kTurretMoteur = 2;
 
     //ControlPanelManipulator IDs
     constexpr int kControlPanelManipulatorMoteur = -1;

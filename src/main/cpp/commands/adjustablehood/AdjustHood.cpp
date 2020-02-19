@@ -11,15 +11,17 @@
 
 AdjustHood::AdjustHood(AdjustableHood* AdjustableHood, double angle)
     : m_adjustablehood(AdjustableHood),
-      m_angle(angle) {
+      m_angle(angle)
+    
+{
   AddRequirements(m_adjustablehood);
 }
 
 void AdjustHood::Initialize() {}
 
 void AdjustHood::Execute() {
-  if(m_angle = 1) m_adjustablehood->Monter();
-  if(m_angle = -1) m_adjustablehood->Descendre();
+  if(m_angle == 1) m_adjustablehood->Monter();
+  else if(m_angle == -1) m_adjustablehood->Descendre();
   //m_adjustablehood->SetAngle(m_angle);
   //m_adjustablehood->
 }
