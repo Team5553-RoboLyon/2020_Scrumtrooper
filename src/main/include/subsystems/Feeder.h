@@ -8,13 +8,13 @@
 
 class Feeder : public frc2::SubsystemBase {
  public:
-   Feeder();
+  Feeder();
 
-   void Activate();
-   void UnBlock();
-   void Stop();
+  void Activate();
+  void UnBlock();
+  void Stop();
 
  private:
-   frc::VictorSP m_moteurFeeder{kFeederMoteur};
-   VictorSPX m_moteurConveyor{kConveyorMoteur};
+  frc::VictorSP m_moteurFeeder{kFeederMoteur};
+  VictorSPX m_moteurConveyor{kConveyorMoteur};
 };

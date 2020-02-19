@@ -7,14 +7,10 @@
 
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter() {
-    m_moteur2.Follow(m_moteur1);
-}
-    
+Shooter::Shooter() { m_moteur2.Follow(m_moteur1); }
+
 void Shooter::Shoot(double puissance) {
-    m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
+  m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
 }
 
-void Shooter::Periodic() {
-        
-}
+void Shooter::Periodic() {}

@@ -7,18 +7,10 @@
 
 #include "subsystems/Winch.h"
 
-Winch::Winch() {
-    
-}
+Winch::Winch() {}
 
-void Winch::Up() {
-    moteurGroup.Set(kWinchSpeed);
-}
+void Winch::Up() { moteurGroup.Set(kWinchSpeed); }
 
-void Winch::Down() {
-    moteurGroup.Set(-kWinchSpeed);
-}
+void Winch::Down() { moteurGroup.Set(-kWinchSpeed); }
 
-void Winch::Stop() {
-    moteurGroup.StopMotor();
-}
+void Winch::Stop() { moteurGroup.StopMotor(); }

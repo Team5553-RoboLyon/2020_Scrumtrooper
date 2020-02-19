@@ -7,12 +7,12 @@
 
 class Shooter : public frc2::SubsystemBase {
  public:
+  Shooter();
 
-    Shooter();
+  void Shoot(double puissance);
+  void Periodic();
 
-    void Shoot(double puissance);
-    void Periodic();
  private:
-   VictorSPX m_moteur1 {kShooterMoteurDroite};
-   VictorSPX m_moteur2 {kShooterMoteurGauche};
+  VictorSPX m_moteur1{kShooterMoteurDroite};
+  VictorSPX m_moteur2{kShooterMoteurGauche};
 };

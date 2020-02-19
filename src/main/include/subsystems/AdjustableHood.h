@@ -10,20 +10,20 @@
 
 class AdjustableHood : public frc2::SubsystemBase {
  public:
-    AdjustableHood();
+  AdjustableHood();
 
-    void Close();
-    void Monter();
-    void Descendre();
-    void SetAngle(double angle);
+  void Close();
+  void Monter();
+  void Descendre();
+  void SetAngle(double angle);
 
-   double actualAngle = 0.0;
+  double actualAngle = 0.0;
 
  private:
-    bool isOpened;
-    bool isActivated;
-    double integral = 0.0;
-    double prev_error = 0.0;
-    VictorSPX m_moteur {kAdjustableHoodMoteur};
-    frc::Encoder encodeur {kAdjustableHoodEncodeurA, kAdjustableHoodEncodeurB};
+  bool isOpened;
+  bool isActivated;
+  double integral = 0.0;
+  double prev_error = 0.0;
+  VictorSPX m_moteur{kAdjustableHoodMoteur};
+  frc::Encoder encodeur{kAdjustableHoodEncodeurA, kAdjustableHoodEncodeurB};
 };

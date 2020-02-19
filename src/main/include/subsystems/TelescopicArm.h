@@ -12,6 +12,7 @@ class TelescopicArm : public frc2::SubsystemBase {
   void Up();
   void Down();
   void Stop();
+
  private:
-  frc::VictorSP moteur {kTelescopicArmMoteur};
+  frc::VictorSP moteur{kTelescopicArmMoteur};
 };

@@ -8,27 +8,19 @@
 #include "subsystems/Turret.h"
 
 Turret::Turret() {
-    //m_moteur.SetInverted(true);
+  // m_moteur.SetInverted(true);
 }
 
 void Turret::Periodic() {
-    if(!turretActivated) return;
+  if (!turretActivated) return;
 }
 
-void Turret::Activate() {
-    turretActivated = true;
-}
+void Turret::Activate() { turretActivated = true; }
 
-void Turret::Stop() {
-    turretActivated = false;
-}
+void Turret::Stop() { turretActivated = false; }
 
-//TEST COMMANDS !!!
+// TEST COMMANDS !!!
 
-void Turret::Left() {
-    m_moteur.Set(kTurretMoteurSpeed);
-}
+void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
 
-void Turret::Right() {
-    m_moteur.Set(-kTurretMoteurSpeed);
-}
+void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }

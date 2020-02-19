@@ -7,29 +7,23 @@
 
 #include "subsystems/ControlPanelManipulator.h"
 
-ControlPanelManipulator::ControlPanelManipulator() {
-    Close();
-}
+ControlPanelManipulator::ControlPanelManipulator() { Close(); }
 
-void ControlPanelManipulator::Open() {
-    m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
-}
+void ControlPanelManipulator::Open() { m_solenoid.Set(frc::DoubleSolenoid::Value::kForward); }
 
 void ControlPanelManipulator::Close() {
-    Stop();
-    m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
+  Stop();
+  m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
 void ControlPanelManipulator::ChangePosition() {
-    if(m_position == ControlPanelManipulatorPosition::kOpened) Close();
-    if(m_position == ControlPanelManipulatorPosition::kClosed) Open();
+  if (m_position == ControlPanelManipulatorPosition::kOpened) Close();
+  if (m_position == ControlPanelManipulatorPosition::kClosed) Open();
 }
 
 void ControlPanelManipulator::Activate() {
-    if(m_position == ControlPanelManipulatorPosition::kClosed) return;
-    m_moteur.Set(kIntakeMoteurSpeed);
+  if (m_position == ControlPanelManipulatorPosition::kClosed) return;
+  m_moteur.Set(kIntakeMoteurSpeed);
 }
 
-void ControlPanelManipulator::Stop() {
-    m_moteur.StopMotor();
-}
+void ControlPanelManipulator::Stop() { m_moteur.StopMotor(); }

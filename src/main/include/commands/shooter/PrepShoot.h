@@ -20,7 +20,9 @@
 
 class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
-  PrepShoot(double puissance, Shooter* shooter, Feeder* Feeder, Drivetrain* Drivetrain, Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret, AdjustableHood* AdjustableHood);
+  PrepShoot(double puissance, Shooter* shooter, Feeder* Feeder, Drivetrain* Drivetrain,
+            Intake* Intake, ControlPanelManipulator* ControlPanelManipulator, Turret* Turret,
+            AdjustableHood* AdjustableHood);
 
   void Initialize() override;
 
