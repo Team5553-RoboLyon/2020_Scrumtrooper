@@ -5,19 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#pragma once
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
-void Turret::Periodic() {}
+#include "subsystems/Shooter.h"
 
-void Turret::Activate() { m_turretActivated = true; }
+class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
+ public:
+  Shoot(double puissance, Shooter* shooter);
 
-void Turret::Stop() { m_turretActivated = false; }
+  void Initialize() override;
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
+  void Execute() override;
 
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  double m_puissance;
+  Shooter* m_shooter;
+};

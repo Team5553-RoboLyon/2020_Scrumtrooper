@@ -5,19 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/driving/Ballshifter.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+Ballshifter::Ballshifter(Drivetrain* drivetrain) : m_drivetrain(drivetrain) {
+  AddRequirements(m_drivetrain);
 }
 
-void Turret::Periodic() {}
-
-void Turret::Activate() { m_turretActivated = true; }
-
-void Turret::Stop() { m_turretActivated = false; }
-
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+void Ballshifter::Initialize() { m_drivetrain->ChangerVitesse(); }

@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/scoring/Feed.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+Feed::Feed(Feeder* feeder) : m_feeder(feeder) { AddRequirements(m_feeder); }
 
-void Turret::Periodic() {}
+void Feed::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void Feed::Execute() { m_feeder->Activate(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void Feed::End(bool interrupted) { m_feeder->Stop(); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool Feed::IsFinished() { return false; }

@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/endgame/LiftRobot.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+LiftRobot::LiftRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
 
-void Turret::Periodic() {}
+void LiftRobot::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void LiftRobot::Execute() { m_winch->Up(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void LiftRobot::End(bool interrStretchted) {}
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool LiftRobot::IsFinished() { return false; }

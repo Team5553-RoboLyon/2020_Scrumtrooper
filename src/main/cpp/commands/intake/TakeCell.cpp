@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/intake/TakeCell.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+TakeCell::TakeCell(Intake* intake) : m_intake(intake) { AddRequirements(m_intake); }
 
-void Turret::Periodic() {}
+void TakeCell::Initialize() { m_intake->Activate(); }
 
-void Turret::Activate() { m_turretActivated = true; }
+void TakeCell::Execute() {}
 
-void Turret::Stop() { m_turretActivated = false; }
+void TakeCell::End(bool interrupted) { m_intake->Stop(); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool TakeCell::IsFinished() { return false; }

@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/scoring/Shoot.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+Shoot::Shoot(double puissance, Shooter* Shooter) : m_puissance(puissance), m_shooter(Shooter) {
+  AddRequirements(m_shooter);
 }
 
-void Turret::Periodic() {}
+void Shoot::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void Shoot::Execute() { m_shooter->Shoot(m_puissance); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void Shoot::End(bool interrupted) { m_shooter->Shoot(0.0); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool Shoot::IsFinished() { return false; }

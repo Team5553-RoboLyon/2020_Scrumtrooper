@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/endgame/DropRobot.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+DropRobot::DropRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
 
-void Turret::Periodic() {}
+void DropRobot::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void DropRobot::Execute() { m_winch->Down(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void DropRobot::End(bool interrupted) {}
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool DropRobot::IsFinished() { return false; }

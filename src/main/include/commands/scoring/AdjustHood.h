@@ -5,19 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#pragma once
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
 
-void Turret::Periodic() {}
+#include "subsystems/AdjustableHood.h"
 
-void Turret::Activate() { m_turretActivated = true; }
+class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
+ public:
+  AdjustHood(AdjustableHood* adjustableHood, double angle = 0.0);
 
-void Turret::Stop() { m_turretActivated = false; }
+  void Initialize() override;
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
+  void Execute() override;
 
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+ private:
+  AdjustableHood* m_adjustablehood;
+  double m_angle;
+};

@@ -7,11 +7,15 @@
 
 #include "subsystems/AdjustableHood.h"
 
-AdjustableHood::AdjustableHood() {}
+AdjustableHood::AdjustableHood() {
+  m_actualAngle = 0.0;
+  m_integral = 0.0;
+  m_prev_error = 0.0;
+}
 
 void AdjustableHood::Close() {
   SetAngle(0.0);
-  isOpened = false;
+  m_isOpened = false;
 }
 
 void AdjustableHood::Monter() {
@@ -23,15 +27,15 @@ void AdjustableHood::Descendre() {
 }
 
 void AdjustableHood::SetAngle(double angle) {
-  /*if(!isActivated) return;
-  double error = angle - encodeur.Get();
-  integral += (error*.02);
-  double derivative = (error - prev_error) / .02;
-  double rcw = 0.0025*error + 0.00023*integral + 0.0003*derivative;
+  /*if(!m_isActivated) return;
+  double error = angle - m_encodeur.Get();
+  m_integral += (error*.02);
+  double derivative = (error - m_prev_error) / .02;
+  double rcw = 0.0025*error + 0.00023*m_integral + 0.0003*derivative;
   //Precédement I = 0.00021
 
-  actualAngle = 0.0;
+  m_actualAngle = 0.0;
 
-  prev_error = error;
-  isOpened = true;*/
+  m_prev_error = error;
+  m_isOpened = true;*/
 }

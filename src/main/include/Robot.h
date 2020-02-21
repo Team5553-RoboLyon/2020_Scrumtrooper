@@ -29,8 +29,5 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
 
  private:
-  cv::VideoCapture camera{0};
-  cs::CvSource outputStream;
-  cv::Mat source;
   RobotContainer m_container;
 };

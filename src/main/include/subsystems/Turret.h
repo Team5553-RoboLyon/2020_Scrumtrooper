@@ -18,6 +18,6 @@ class Turret : public frc2::SubsystemBase {
   void Right();
 
  private:
-  bool turretActivated = false;
+  bool m_turretActivated;
   frc::VictorSP m_moteur{kTurretMoteur};
 };

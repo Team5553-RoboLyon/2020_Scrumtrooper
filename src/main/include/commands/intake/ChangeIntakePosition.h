@@ -5,19 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#pragma once
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/CommandHelper.h>
 
-void Turret::Periodic() {}
+#include "subsystems/Intake.h"
 
-void Turret::Activate() { m_turretActivated = true; }
+class ChangeIntakePosition
+    : public frc2::CommandHelper<frc2::InstantCommand, ChangeIntakePosition> {
+ public:
+  ChangeIntakePosition(Intake* intake);
 
-void Turret::Stop() { m_turretActivated = false; }
+  void Initialize() override;
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+ private:
+  Intake* m_intake;
+};

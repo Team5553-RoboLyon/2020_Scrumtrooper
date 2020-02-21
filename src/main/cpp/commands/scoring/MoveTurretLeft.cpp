@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/scoring/MoveTurretLeft.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+MoveTurretLeft::MoveTurretLeft(Turret* turret) : m_turret(turret) { AddRequirements(m_turret); }
 
-void Turret::Periodic() {}
+void MoveTurretLeft::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void MoveTurretLeft::Execute() { m_turret->Left(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void MoveTurretLeft::End(bool interrLeftted) { m_turret->Stop(); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool MoveTurretLeft::IsFinished() { return true; }

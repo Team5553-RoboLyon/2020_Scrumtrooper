@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/endgame/RaiseHook.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+RaiseHook::RaiseHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicArm) {
+  AddRequirements(m_telescopicarm);
 }
 
-void Turret::Periodic() {}
+void RaiseHook::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void RaiseHook::Execute() { m_telescopicarm->Up(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void RaiseHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool RaiseHook::IsFinished() { return true; }

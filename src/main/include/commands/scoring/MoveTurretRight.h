@@ -5,19 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#pragma once
+
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
+
 #include "subsystems/Turret.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
-}
+class MoveTurretRight : public frc2::CommandHelper<frc2::CommandBase, MoveTurretRight> {
+ public:
+  MoveTurretRight(Turret* turret);
 
-void Turret::Periodic() {}
+  void Initialize() override;
 
-void Turret::Activate() { m_turretActivated = true; }
+  void Execute() override;
 
-void Turret::Stop() { m_turretActivated = false; }
+  void End(bool interrupted) override;
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
+  bool IsFinished() override;
 
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+ private:
+  Turret* m_turret;
+};

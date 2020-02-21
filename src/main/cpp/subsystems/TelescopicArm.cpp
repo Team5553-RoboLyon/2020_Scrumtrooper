@@ -7,18 +7,10 @@
 
 #include "subsystems/TelescopicArm.h"
 
-TelescopicArm::TelescopicArm() {
+TelescopicArm::TelescopicArm() {}
 
-}
+void TelescopicArm::Up() { m_moteur.Set(kTelescopicArmSpeed); }
 
-void TelescopicArm::Up() {
-    moteur.Set(kTelescopicArmSpeed);
-}
+void TelescopicArm::Down() { m_moteur.Set(-kTelescopicArmSpeed); }
 
-void TelescopicArm::Down() {
-    moteur.Set(-kTelescopicArmSpeed);
-}
-
-void TelescopicArm::Stop() {
-    moteur.StopMotor();
-}
+void TelescopicArm::Stop() { m_moteur.StopMotor(); }

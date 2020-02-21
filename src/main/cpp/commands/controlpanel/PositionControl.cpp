@@ -5,19 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/controlpanel/PositionControl.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+PositionControl::PositionControl(ControlPanelManipulator* controlPanelManipulator)
+    : m_controlPanelManipulator(controlPanelManipulator) {
+  AddRequirements(m_controlPanelManipulator);
 }
 
-void Turret::Periodic() {}
+void PositionControl::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void PositionControl::Execute() { m_controlPanelManipulator->ChangePosition(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void PositionControl::End(bool interrupted) {}
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool PositionControl::IsFinished() { return false; }

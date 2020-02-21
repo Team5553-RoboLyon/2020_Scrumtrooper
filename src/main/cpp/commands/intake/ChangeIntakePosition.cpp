@@ -5,19 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/intake/ChangeIntakePosition.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+ChangeIntakePosition::ChangeIntakePosition(Intake* intake) : m_intake(intake) {
+  AddRequirements(m_intake);
 }
 
-void Turret::Periodic() {}
-
-void Turret::Activate() { m_turretActivated = true; }
-
-void Turret::Stop() { m_turretActivated = false; }
-
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+void ChangeIntakePosition::Initialize() { m_intake->ChangePosition(); }

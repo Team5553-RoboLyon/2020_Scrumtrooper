@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Turret.h"
+#include "commands/endgame/DropHook.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+DropHook::DropHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicArm) {
+  AddRequirements(m_telescopicarm);
 }
 
-void Turret::Periodic() {}
+void DropHook::Initialize() {}
 
-void Turret::Activate() { m_turretActivated = true; }
+void DropHook::Execute() { m_telescopicarm->Down(); }
 
-void Turret::Stop() { m_turretActivated = false; }
+void DropHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
-
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+bool DropHook::IsFinished() { return true; }

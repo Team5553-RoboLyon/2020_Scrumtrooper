@@ -21,26 +21,9 @@
 #include "subsystems/Turret.h"
 #include "subsystems/Winch.h"
 
-#include "commands/adjustablehood/AdjustHood.h"
-#include "commands/controlPanelManipulator/PositionControl.h"
-#include "commands/controlPanelManipulator/RotationControl.h"
-#include "commands/drivetrain/Ballshifter.h"
-#include "commands/drivetrain/Drive.h"
-#include "commands/feeder/Feed.h"
-#include "commands/groups/ShootGroup.h"
-#include "commands/intake/ChangePosition.h"
-#include "commands/intake/Activate.h"
-#include "commands/telescopicarm/Down.h"
-#include "commands/telescopicarm/Up.h"
-#include "commands/turret/TESTLeft.h"
-#include "commands/turret/TESTRight.h"
-#include "commands/winch/Stretch.h"
-#include "commands/winch/Unstretch.h"
-
 class RobotContainer {
  public:
   RobotContainer();
-  void ChangeConfiguration();
 
   ControlPanelManipulator m_controlPanelManipulator;
   Drivetrain m_drivetrain;
@@ -51,7 +34,7 @@ class RobotContainer {
   TelescopicArm m_telescopicArm;
   Turret m_turret;
   Winch m_winch;
-  bool manualMode = false;
+  bool manualMode;
 
  private:
   frc::XboxController m_driverController{0};
@@ -78,8 +61,8 @@ class RobotContainer {
   frc2::Trigger POV90Deg{[this] { return m_driverController.GetPOV() == 90; }};
   frc2::Trigger POV270Deg{[this] { return m_driverController.GetPOV() == 270; }};
 
-  frc2::InstantCommand ChangeConfigurationCommand{[this] { return ChangeConfiguration(); }, {}};
-
   void ConfigureNormalMode();
   void ConfigureManualMode();
+  void ChangeConfiguration();
+  frc2::InstantCommand ChangeConfigurationCommand{[this] { return ChangeConfiguration(); }, {}};
 };
