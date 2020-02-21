@@ -20,20 +20,15 @@
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
-  enum class GearRatio { kLow, kHigh };
-
   Drivetrain();
 
   void Periodic();
   void EnableLogFile(bool enable);
-  void SetVitesse(GearRatio gearRatio);
-  void ChangerVitesse();
   void Drive(double droite, double gauche);
   void Stop();
 
   void SetIdleMode(rev::CANSparkMax::IdleMode mode);
   void ResetEncodeurs();
-  void SetPositionConversionFactor(GearRatio gearRatio);
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
 
@@ -52,23 +47,17 @@ class Drivetrain : public frc2::SubsystemBase {
   rev::CANEncoder m_encodeurGauche1{m_moteurGauche};
   rev::CANEncoder m_encodeurGauche2{m_moteurGaucheFollower};
 
-  frc::DoubleSolenoid m_ballshifter{kDrivetrainBallshifterA, kDrivetrainBallshifterB};
-
-  GearRatio m_gearRatio;
-
   const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kBrake;
-  const rev::CANSparkMax::IdleMode kDisbabledMode = rev::CANSparkMax::IdleMode::kCoast;
+  const rev::CANSparkMax::IdleMode kDisabledMode = rev::CANSparkMax::IdleMode::kCoast;
   const double kOpenLoopRampeRate = 1.5;
 
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
-  const double kLowGearRatio = 1;
-  const double kHighGearRatio = 1 / 10.6;
+  const double kGearRatio = 1 / 10.6;
   // const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() *
   // kLowGearRatio; const double kHighGearPositionConversionFactor =
   // kWheelCircumference.to<double>()
   // * kHighGearRatio;
-  const double kLowGearPositionConversionFactor = 42;
-  const double kHighGearPositionConversionFactor = 42;
+  const double kPositionConversionFactor = 42;
 
   frc::Encoder m_encoderExterneDroite{kDrivetrainRightEncodeurA, kDrivetrainRightEncodeurB};
   frc::Encoder m_encoderExterneGauche{kDrivetrainLeftEncodeurA, kDrivetrainLeftEncodeurB};

@@ -15,8 +15,6 @@ Drivetrain::Drivetrain() {
   m_moteurDroiteFollower.RestoreFactoryDefaults();
   m_moteurGaucheFollower.RestoreFactoryDefaults();
 
-  Drivetrain::SetIdleMode(kIdleMode);
-
   m_moteurDroite.SetOpenLoopRampRate(kOpenLoopRampeRate);
   m_moteurGauche.SetOpenLoopRampRate(kOpenLoopRampeRate);
   m_moteurDroiteFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
@@ -27,8 +25,13 @@ Drivetrain::Drivetrain() {
 
   m_moteurGauche.SetInverted(true);
 
+  m_encodeurDroite1.SetPositionConversionFactor(kPositionConversionFactor);
+  m_encodeurDroite2.SetPositionConversionFactor(kPositionConversionFactor);
+  m_encodeurGauche1.SetPositionConversionFactor(kPositionConversionFactor);
+  m_encodeurGauche2.SetPositionConversionFactor(kPositionConversionFactor);
+
   ResetEncodeurs();
-  SetVitesse(GearRatio::kHigh);
+  SetIdleMode(kIdleMode);
 
   EnableLogFile(false);
 }
@@ -56,29 +59,12 @@ void Drivetrain::EnableLogFile(bool enable) {
   m_isLogFileEnabled = enable;
 }
 
-void Drivetrain::SetVitesse(GearRatio gearRatio) {
-  if (gearRatio == GearRatio::kLow) {
-    m_ballshifter.Set(frc::DoubleSolenoid::Value::kForward);
-  } else {
-    m_ballshifter.Set(frc::DoubleSolenoid::Value::kReverse);
-  }
-  m_gearRatio = gearRatio;
-  SetPositionConversionFactor(gearRatio);
-}
-
 void Drivetrain::Stop() {
   m_moteurDroite.StopMotor();
   m_moteurGauche.StopMotor();
 }
 
-void Drivetrain::ChangerVitesse() {
-  if (m_gearRatio == GearRatio::kLow) SetVitesse(GearRatio::kHigh);
-  if (m_gearRatio == GearRatio::kHigh) SetVitesse(GearRatio::kLow);
-}
-
 void Drivetrain::Drive(double droite, double gauche) {
-  // droite *= 0.96389891696750902527075812274368;
-
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 }
@@ -90,20 +76,6 @@ void Drivetrain::ResetEncodeurs() {
   m_encodeurGauche2.SetPosition(0.0);
   m_encoderExterneDroite.Reset();
   m_encoderExterneGauche.Reset();
-}
-
-void Drivetrain::SetPositionConversionFactor(GearRatio gearRatio) {
-  if (gearRatio == GearRatio::kLow) {
-    m_encodeurDroite1.SetPositionConversionFactor(kLowGearPositionConversionFactor);
-    m_encodeurDroite2.SetPositionConversionFactor(kLowGearPositionConversionFactor);
-    m_encodeurGauche1.SetPositionConversionFactor(kLowGearPositionConversionFactor);
-    m_encodeurGauche2.SetPositionConversionFactor(kLowGearPositionConversionFactor);
-  } else {
-    m_encodeurDroite1.SetPositionConversionFactor(kHighGearPositionConversionFactor);
-    m_encodeurDroite2.SetPositionConversionFactor(kHighGearPositionConversionFactor);
-    m_encodeurGauche1.SetPositionConversionFactor(kHighGearPositionConversionFactor);
-    m_encodeurGauche2.SetPositionConversionFactor(kHighGearPositionConversionFactor);
-  }
 }
 
 void Drivetrain::SetIdleMode(rev::CANSparkMax::IdleMode mode) {

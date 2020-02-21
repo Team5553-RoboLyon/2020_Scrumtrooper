@@ -9,7 +9,6 @@
 
 #include "commands/controlpanel/PositionControl.h"
 #include "commands/controlpanel/RotationControl.h"
-#include "commands/driving/Ballshifter.h"
 #include "commands/driving/Drive.h"
 #include "commands/endgame/DropHook.h"
 #include "commands/endgame/DropRobot.h"
@@ -46,9 +45,6 @@ void RobotContainer::ConfigureNormalMode() {
   // Shooter button
   j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake,
                                  &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
-
-  // Ballshifter button
-  (j_StickLeftButton && j_StickRightButton).WhenActive(Ballshifter(&m_drivetrain));
 
   // ControlPanelManipulator buttons
   // j_bumperRightButton.WhenPressed(PositionControl(&m_controlPanelManipulator));
