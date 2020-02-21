@@ -6,6 +6,7 @@
 #include "Constants.h"
 #include "commands/shooter/PrepShoot.h"
 #include "commands/shooter/Shoot.h"
+#include "commands/feeder/Feed.h"
 
 #include "subsystems/Shooter.h"
 #include "subsystems/Feeder.h"

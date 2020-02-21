@@ -11,11 +11,10 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Shooter.h"
-#include "subsystems/Feeder.h"
 
 class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  public:
-  Shoot(double puissance, Shooter* shooter, Feeder* Feeder);
+  Shoot(double puissance, Shooter* shooter);
 
   void Initialize() override;
 
@@ -28,5 +27,4 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  private:
   double m_puissance = 0.0;
   Shooter* m_shooter;
-  Feeder* m_feeder;
 };
