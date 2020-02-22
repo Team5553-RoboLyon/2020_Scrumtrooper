@@ -10,7 +10,6 @@
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/POVButton.h>
-#include <frc2/command/InstantCommand.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -35,7 +34,6 @@ class RobotContainer {
   TelescopicArm m_telescopicArm;
   Turret m_turret;
   Winch m_winch;
-  bool manualMode;
 
  private:
   frc::XboxController m_driverController{0};
@@ -62,8 +60,5 @@ class RobotContainer {
   frc2::POVButton j_POV180Deg{&m_driverController, 180};
   frc2::POVButton j_POV270Deg{&m_driverController, 270};
 
-  void ConfigureNormalMode();
-  void ConfigureManualMode();
-  void ChangeConfiguration();
-  frc2::InstantCommand ChangeConfigurationCommand{[this] { return ChangeConfiguration(); }, {}};
+  void ConfigureControls();
 };

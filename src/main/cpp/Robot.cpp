@@ -22,8 +22,6 @@ void Robot::RobotPeriodic() {
   /*camera.read(source);
   source.convertTo(source, -1, 3, 0.3);
   outputStream.PutFrame(source);*/
-
-  frc::SmartDashboard::PutBoolean("Mode Manuel", m_container.manualMode);
 }
 
 void Robot::DisabledInit() {
