@@ -7,6 +7,8 @@
 
 #include "RobotContainer.h"
 
+#include <frc2/command/CommandScheduler.h>
+
 #include "commands/controlpanel/PositionControl.h"
 #include "commands/controlpanel/RotationControl.h"
 #include "commands/driving/Drive.h"
@@ -28,11 +30,13 @@ RobotContainer::RobotContainer() {
       Drive([this] { return -m_driverController.GetY(frc::GenericHID::JoystickHand::kLeftHand); },
             [this] { return -m_driverController.GetX(frc::GenericHID::JoystickHand::kRightHand); },
             &m_drivetrain));
-
-  j_StartButton.WhenPressed(&ChangeConfigurationCommand);
+  j_startButton.WhenPressed(&ChangeConfigurationCommand);
 }
 
 void RobotContainer::ChangeConfiguration() {
+  frc2::CommandScheduler::GetInstance().ClearButtons();
+  j_startButton.WhenPressed(&ChangeConfigurationCommand);
+
   if (manualMode) ConfigureNormalMode();
   if (!manualMode) ConfigureManualMode();
 }
@@ -40,7 +44,7 @@ void RobotContainer::ChangeConfiguration() {
 void RobotContainer::ConfigureNormalMode() {
   // Intake buttons
   j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
-  TriggerAxisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
+  j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Shooter button
   j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake,
@@ -58,23 +62,23 @@ void RobotContainer::ConfigureManualMode() {
 
   // Intake buttons
   j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
-  TriggerAxisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
+  j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Feeder button
   j_bumperRightButton.WhileHeld(Feed(&m_feeder));
 
   // Shooter buttons
-  TriggerAxisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
-                                                          &m_intake, &m_controlPanelManipulator,
-                                                          &m_turret, &m_adjustableHood));
+  j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
+                                                     &m_intake, &m_controlPanelManipulator,
+                                                     &m_turret, &m_adjustableHood));
 
   // AdjustableHood buttons
-  POV0Deg.WhenActive(AdjustHood(&m_adjustableHood, 1));
-  POV180Deg.WhenActive(AdjustHood(&m_adjustableHood, -1));
+  j_POV0Deg.WhenActive(AdjustHood(&m_adjustableHood, 1));
+  j_POV180Deg.WhenActive(AdjustHood(&m_adjustableHood, -1));
 
   // Turret Buttons
-  POV90Deg.WhenActive(MoveTurretRight(&m_turret));
-  POV270Deg.WhenActive(MoveTurretLeft(&m_turret));
+  j_POV90Deg.WhenActive(MoveTurretRight(&m_turret));
+  j_POV270Deg.WhenActive(MoveTurretLeft(&m_turret));
 
   // Telescopicarm Buttons
   j_bButton.WhileHeld(RaiseHook(&m_telescopicArm));

@@ -20,8 +20,11 @@ void Intake::Close() {
 }
 
 void Intake::ChangePosition() {
-  if (m_position == IntakePosition::kOpened) Close();
-  if (m_position == IntakePosition::kClosed) Open();
+  if (m_position == IntakePosition::kOpened) {
+    Close();
+  } else {
+    Open();
+  };
 }
 
 void Intake::Activate() {

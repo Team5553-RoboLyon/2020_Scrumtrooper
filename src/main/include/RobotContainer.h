@@ -9,6 +9,7 @@
 
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/button/POVButton.h>
 #include <frc2/command/InstantCommand.h>
 
 #include "subsystems/ControlPanelManipulator.h"
@@ -44,22 +45,22 @@ class RobotContainer {
   frc2::JoystickButton j_yButton{&m_driverController, 4};
   frc2::JoystickButton j_bumperLeftButton{&m_driverController, 5};
   frc2::JoystickButton j_bumperRightButton{&m_driverController, 6};
-  frc2::JoystickButton j_BackButton{&m_driverController, 7};
-  frc2::JoystickButton j_StartButton{&m_driverController, 8};
-  frc2::JoystickButton j_StickLeftButton{&m_driverController, 9};
-  frc2::JoystickButton j_StickRightButton{&m_driverController, 10};
+  frc2::JoystickButton j_backButton{&m_driverController, 7};
+  frc2::JoystickButton j_startButton{&m_driverController, 8};
+  frc2::JoystickButton j_stickLeftButton{&m_driverController, 9};
+  frc2::JoystickButton j_stickRightButton{&m_driverController, 10};
 
-  frc2::Trigger TriggerAxisLeftTrigger{[this] {
+  frc2::Trigger j_axisLeftTrigger{[this] {
     return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2;
   }};
-  frc2::Trigger TriggerAxisRightTrigger{[this] {
+  frc2::Trigger j_axisRightTrigger{[this] {
     return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2;
   }};
 
-  frc2::Trigger POV0Deg{[this] { return m_driverController.GetPOV() == 0; }};
-  frc2::Trigger POV180Deg{[this] { return m_driverController.GetPOV() == 180; }};
-  frc2::Trigger POV90Deg{[this] { return m_driverController.GetPOV() == 90; }};
-  frc2::Trigger POV270Deg{[this] { return m_driverController.GetPOV() == 270; }};
+  frc2::POVButton j_POV0Deg{&m_driverController, 0};
+  frc2::POVButton j_POV90Deg{&m_driverController, 90};
+  frc2::POVButton j_POV180Deg{&m_driverController, 180};
+  frc2::POVButton j_POV270Deg{&m_driverController, 270};
 
   void ConfigureNormalMode();
   void ConfigureManualMode();
