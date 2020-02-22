@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <frc2/Timer.h>
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
@@ -42,5 +41,4 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   ControlPanelManipulator* m_controlpanelmanipulator;
   Turret* m_turret;
   AdjustableHood* m_adjustablehood;
-  frc2::Timer m_timer;
 };

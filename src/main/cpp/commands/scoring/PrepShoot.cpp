@@ -27,9 +27,6 @@ PrepShoot::PrepShoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetr
 }
 
 void PrepShoot::Initialize() {
-  m_timer.Reset();
-  m_timer.Start();
-
   m_drivetrain->Stop();
   m_intake->Close();
   m_controlpanelmanipulator->Close();
@@ -42,4 +39,4 @@ void PrepShoot::Execute() {}
 
 void PrepShoot::End(bool interrupted) { m_shooter->Shoot(0.0); }
 
-bool PrepShoot::IsFinished() { return m_timer.Get() > 1_s; }
+bool PrepShoot::IsFinished() { return false; }
