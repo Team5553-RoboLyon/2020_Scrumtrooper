@@ -8,9 +8,7 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
-#include <rev/CANSparkMax.h>
 #include <opencv2/opencv.hpp>
-#include <frc2/command/CommandScheduler.h>
 #include <cscore.h>
 #include <cameraserver/CameraServer.h>
 
