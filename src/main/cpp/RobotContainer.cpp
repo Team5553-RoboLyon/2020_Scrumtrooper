@@ -36,20 +36,9 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureControls() {
-  /*// Intake buttons
-  j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
-  j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
-
-  // Shooter button
-  j_xButton.WhileHeld(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain, &m_intake,
-                                 &m_controlPanelManipulator, &m_turret, &m_adjustableHood));
-                                 */
   // Intake buttons
   j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
   j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
-
-  // Feeder button
-  j_bumperRightButton.WhileHeld(Feed(&m_feeder));
 
   // Shooter buttons
   j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
@@ -64,11 +53,7 @@ void RobotContainer::ConfigureControls() {
   j_POV90Deg.WhileActiveContinous(MoveTurretRight(&m_turret));
   j_POV270Deg.WhileActiveContinous(MoveTurretLeft(&m_turret));
 
-  // Telescopicarm Buttons
-  j_bButton.WhileHeld(RaiseHook(&m_telescopicArm));
-  j_aButton.WhileHeld(DropHook(&m_telescopicArm));
-
   // Winch Buttons
-  j_yButton.WhileHeld(LiftRobot(&m_winch));
+  j_yButton.WhenPressed(LiftRobot(&m_winch));
   j_xButton.WhileHeld(DropRobot(&m_winch));
 }

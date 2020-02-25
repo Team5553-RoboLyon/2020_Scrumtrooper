@@ -80,7 +80,7 @@ constexpr double kTurretMoteurSpeed = 0.2;
 constexpr double kControlPanelManipulatorSpeed = 0.0;
 
 // Winch
-constexpr double kWinchPositionConversionFactor = 1.0;
+constexpr double kWinchPositionConversionFactor = 1 / 311;
 constexpr double kWinchSpeed = 0.2;
 constexpr double kWinchPGain = 0.1;
 constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
