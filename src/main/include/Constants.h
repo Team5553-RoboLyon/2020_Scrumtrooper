@@ -12,9 +12,9 @@
 // ############### CAN IDs ###############
 // Drivetrain
 constexpr int kDrivetrainMoteurDroite1 = 1;
-constexpr int kDrivetrainMoteurDroite2 = 2;
-constexpr int kDrivetrainMoteurGauche1 = 3;
-constexpr int kDrivetrainMoteurGauche2 = 4;
+constexpr int kDrivetrainMoteurDroite2 = 4;
+constexpr int kDrivetrainMoteurGauche1 = 2;
+constexpr int kDrivetrainMoteurGauche2 = 3;
 
 // Winch
 constexpr int kWinchMoteur = 5;
