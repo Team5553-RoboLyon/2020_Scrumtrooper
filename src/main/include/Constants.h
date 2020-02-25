@@ -7,12 +7,11 @@
 
 #pragma once
 
-== == == =
 #include <units/units.h>
 
-             // ############### CAN IDs ###############
-             // Drivetrain
-    constexpr int kDrivetrainMoteurDroite1 = 1;
+// ############### CAN IDs ###############
+// Drivetrain
+constexpr int kDrivetrainMoteurDroite1 = 1;
 constexpr int kDrivetrainMoteurDroite2 = 2;
 constexpr int kDrivetrainMoteurGauche1 = 3;
 constexpr int kDrivetrainMoteurGauche2 = 4;
@@ -23,7 +22,6 @@ constexpr int kWinchMoteur = 5;
 // Shooter
 constexpr int kShooterMoteurGauche = 10;
 constexpr int kShooterMoteurDroite = 9;
->>>>>>> 27a3a7dd85db3566b2935a8b189c88283c9d4306
 
 // Intake
 constexpr int kIntakeMoteur = 7;
@@ -33,9 +31,6 @@ constexpr int kConveyorMoteur = 8;
 
 // AdjustableHood IDs
 constexpr int kAdjustableHoodMoteur = 6;
-
-// Winch IDs
-constexpr int kWinchMoteur = 5;
 
 // ############### PWM IDs ###############
 // Feeder
