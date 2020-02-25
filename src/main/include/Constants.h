@@ -67,7 +67,7 @@ constexpr int kIntakeB = 1;
 
 // ############### Motion Constants ###############
 // Intake
-constexpr double kIntakeMoteurSpeed = 0.7;
+constexpr double kIntakeMoteurSpeed = 0.6;
 
 // Feeder
 constexpr double kFeederMoteurSpeed = 0.60;

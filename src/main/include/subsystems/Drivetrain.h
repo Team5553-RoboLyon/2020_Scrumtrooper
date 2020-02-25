@@ -48,7 +48,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kBrake;
   const rev::CANSparkMax::IdleMode kDisabledMode = rev::CANSparkMax::IdleMode::kCoast;
-  const double kOpenLoopRampeRate = 0.8;
+  const double kOpenLoopRampeRate = 0.72;
 
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kGearRatio = 1 / 10.6;

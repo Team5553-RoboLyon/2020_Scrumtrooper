@@ -8,12 +8,6 @@
 #include "commands/driving/Drive.h"
 #include "lib/Utils.h"
 
-Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain)
-    : m_forward(forward), m_turn(turn), m_drivetrain(drivetrain) {
-  AddRequirements(m_drivetrain);
-}
-
-void Drive::Initialize() {}
 #define TRACKWIDTH 0.61f
 #define HALF_TRACKWIDTH (TRACKWIDTH / 2.0f)
 
@@ -21,11 +15,18 @@ void Drive::Initialize() {}
 #define VMAX 3.4  // vitesse Max  théorique (3,395472 sur JVN-DT) .. à vérifier aux encodeurs
 #define WMAX                     \
   (((2.0 * VMAX) / TRACKWIDTH) / \
-   2.0)  // vitesse angulaire Max theorique	.. à modifier avec Garice
+   1.7)  // vitesse angulaire Max theorique	.. à modifier avec Garice
 
 #define NABS(a) (((a) < 0) ? -(a) : (a))      // VALEUR ABSOLUE
 #define NMAX(a, b) (((a) > (b)) ? (a) : (b))  // Max
 #define NMIN(a, b) (((a) < (b)) ? (a) : (b))  // Min
+
+Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain)
+    : m_forward(forward), m_turn(turn), m_drivetrain(drivetrain) {
+  AddRequirements(m_drivetrain);
+}
+
+void Drive::Initialize() {}
 
 void Drive::Execute() {
   double forward = utils::Deadband(m_forward());
