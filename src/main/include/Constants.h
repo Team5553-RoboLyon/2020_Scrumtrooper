@@ -52,13 +52,15 @@ constexpr int kDrivetrainRightEncodeurB = 1;
 constexpr int kDrivetrainLeftEncodeurA = 2;
 constexpr int kDrivetrainLeftEncodeurB = 3;
 
-// TelescopicArm
-constexpr int kTelescopicArmEncodeurA = 4;
-constexpr int kTelescopicArmEncodeurB = 5;
+// Turret
+constexpr int kTurretEncodeurA = 4;
+constexpr int kTurretEncodeurB = 5;
 
 // AdjustableHood
-constexpr int kAdjustableHoodEncodeurA = 8;
-constexpr int kAdjustableHoodEncodeurB = 9;
+constexpr int kAdjustableHoodEncodeur = 7;
+
+// TelescopicArm
+constexpr int kTelescopicArmEncodeur = 8;
 
 // ############### PCM IDs ###############
 // Intake
@@ -83,7 +85,7 @@ constexpr double kControlPanelManipulatorSpeed = 0.0;
 // Winch
 constexpr double kWinchPositionConversionFactor = 1.0 / 311.0;
 constexpr double kWinchSpeed = 0.2;
-constexpr double kWinchPGain = 30.0;
+constexpr double kWinchPGain = 40.0;
 constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
 constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
 constexpr units::meter_t kWinchLiftHeight = 1.0_m;

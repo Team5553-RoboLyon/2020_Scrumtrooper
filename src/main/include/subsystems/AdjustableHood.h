@@ -2,7 +2,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc/VictorSP.h>
-#include <frc/Encoder.h>
+#include <frc/DutyCycleEncoder.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <ctre/Phoenix.h>
 
@@ -27,5 +27,5 @@ class AdjustableHood : public frc2::SubsystemBase {
   double m_prev_error = 0.0;
   bool m_antigrav = true;
   VictorSPX m_moteur{kAdjustableHoodMoteur};
-  frc::Encoder m_encodeur{kAdjustableHoodEncodeurA, kAdjustableHoodEncodeurB};
+  frc::DutyCycleEncoder m_encodeur{kAdjustableHoodEncodeur};
 };

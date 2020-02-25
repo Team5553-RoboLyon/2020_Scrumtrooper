@@ -12,6 +12,7 @@ using State = frc::TrapezoidProfile<units::meters>::State;
 Winch::Winch()
     : frc2::ProfiledPIDSubsystem<units::meters>(frc::ProfiledPIDController<units::meters>(
           kWinchPGain, 0.0, 0.0, {kWinchMaxVelocity, kWinchMaxAcceleration})) {
+  m_moteur.SetInverted(true);
   m_encodeur.SetPosition(0.0);
   m_encodeur.SetPositionConversionFactor(kWinchPositionConversionFactor);
   SetGoal(0_m);
