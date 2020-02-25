@@ -20,7 +20,7 @@ void ControlPanelManipulator::ChangePosition() {
 
 void ControlPanelManipulator::Activate() {
   if (m_position == ControlPanelManipulatorPosition::kClosed) return;
-  m_moteur.Set(kIntakeMoteurSpeed);
+  m_moteur.Set(kControlPanelManipulatorSpeed);
 }
 
 void ControlPanelManipulator::Stop() { m_moteur.StopMotor(); }

@@ -28,8 +28,11 @@ void Intake::ChangePosition() {
 }
 
 void Intake::Activate() {
-  if (m_position == IntakePosition::kClosed) return;
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeed);
+  if (m_position == IntakePosition::kOpened) {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeedOpened);
+  } else {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeedClosed);
+  }
 }
 
 void Intake::Stop() { m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0); }

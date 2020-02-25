@@ -13,6 +13,6 @@ void DropRobot::Initialize() { m_winch->Disable(); }
 
 void DropRobot::Execute() { m_winch->Down(); }
 
-void DropRobot::End(bool interrupted) {}
+void DropRobot::End(bool interrupted) { m_winch->Stop(); }
 
 bool DropRobot::IsFinished() { return false; }

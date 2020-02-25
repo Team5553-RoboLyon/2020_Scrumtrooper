@@ -14,7 +14,7 @@ Winch::Winch()
           kWinchPGain, 0.0, 0.0, {kWinchMaxVelocity, kWinchMaxAcceleration})) {
   m_encodeur.SetPosition(0.0);
   m_encodeur.SetPositionConversionFactor(kWinchPositionConversionFactor);
-  SetGoal(State{0_m, 0_mps});
+  SetGoal(0_m);
 }
 
 void Winch::UseOutput(double output, State setpoint) { m_moteur.SetVoltage(units::volt_t(output)); }
