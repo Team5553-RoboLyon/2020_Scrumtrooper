@@ -14,18 +14,44 @@ Drive::Drive(std::function<double()> forward, std::function<double()> turn, Driv
 }
 
 void Drive::Initialize() {}
+#define TRACKWIDTH 0.61f
+#define HALF_TRACKWIDTH (TRACKWIDTH / 2.0f)
+
+#define AMAX 5.1  // Acceleration Max  au PIF .. à définir aux encodeurs
+#define VMAX 3.4  // vitesse Max  théorique (3,395472 sur JVN-DT) .. à vérifier aux encodeurs
+#define WMAX                     \
+  (((2.0 * VMAX) / TRACKWIDTH) / \
+   2.0)  // vitesse angulaire Max theorique	.. à modifier avec Garice
+
+#define NABS(a) (((a) < 0) ? -(a) : (a))      // VALEUR ABSOLUE
+#define NMAX(a, b) (((a) > (b)) ? (a) : (b))  // Max
+#define NMIN(a, b) (((a) < (b)) ? (a) : (b))  // Min
 
 void Drive::Execute() {
   double forward = utils::Deadband(m_forward());
   double turn = utils::Deadband(m_turn());
-  double c = 0.35 * (turn * 3.0 * (abs(turn) + 1) / (abs(forward) + 1));
+
+  /*
+  double c = 0.35 * (turn * 5.0 * (abs(turn) + 1) / (abs(forward) + 1));
   if (turn < 0.0) {
     m_drivetrain->Drive(forward * ((c + 1) / (1 - c)), forward);
 
   } else {
     m_drivetrain->Drive(forward, forward * ((1 - c) / (c + 1)));
-  }
+  }*/
 
+  double v = forward * VMAX;
+  double w = turn * WMAX;
+
+  double lwheel = v + (w * HALF_TRACKWIDTH);
+  double rwheel = v - (w * HALF_TRACKWIDTH);
+
+  double k;
+  k = 1.0 / (NMAX(VMAX, NMAX(NABS(lwheel), NABS(rwheel))));
+  lwheel *= k;
+  rwheel *= k;
+
+  m_drivetrain->Drive(lwheel, rwheel);
   // m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 
