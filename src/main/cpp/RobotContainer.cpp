@@ -50,8 +50,8 @@ void RobotContainer::ConfigureControls() {
   j_POV180Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, -1));
 
   // Turret Buttons
-  j_POV90Deg.WhileActiveContinous(MoveTurretRight(&m_turret));
-  j_POV270Deg.WhileActiveContinous(MoveTurretLeft(&m_turret));
+  j_POV90Deg.WhenPressed(MoveTurretRight(&m_turret));
+  j_POV270Deg.WhenPressed(MoveTurretLeft(&m_turret));
 
   // Winch Buttons
   j_yButton.WhenPressed(LiftRobot(&m_winch));

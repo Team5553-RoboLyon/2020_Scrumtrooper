@@ -11,14 +11,18 @@ MoveTurretRight::MoveTurretRight(Turret* turret) : m_turret(turret) { AddRequire
 
 void MoveTurretRight::Initialize() {
   m_turret->Enable();
-  m_turret->SetGoal(m_turret->GetController().GetGoal().position + 5.0_deg);
+  m_turret->SetSetpoint(m_turret->GetController().GetSetpoint() + 10);
 }
 
 void MoveTurretRight::Execute() {}
 
 void MoveTurretRight::End(bool interrupted) {
-  m_turret->Disable();
-  m_turret->Stop();
+  if (!interrupted) {
+    /*m_turret->Disable();
+    m_turret->Stop();*/
+  }
 }
 
-bool MoveTurretRight::IsFinished() { return m_turret->GetController().AtGoal(); }
+bool MoveTurretRight::IsFinished() {
+  return std::abs(m_turret->GetMeasurement() - m_turret->GetController().GetSetpoint()) < 1;
+}

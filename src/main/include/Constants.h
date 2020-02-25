@@ -53,7 +53,8 @@ constexpr int kDrivetrainLeftEncodeurA = 2;
 constexpr int kDrivetrainLeftEncodeurB = 3;
 
 // Turret
-constexpr int kTurretEncodeur = 4;
+constexpr int kTurretEncodeurA = 4;
+constexpr int kTurretEncodeurB = 5;
 
 // AdjustableHood
 constexpr int kAdjustableHoodEncodeur = 7;
@@ -77,17 +78,18 @@ constexpr double kConveyorMoteurSpeed = 0.25;
 
 // Turret
 constexpr double kTurretPositionConversionFactor = -360.0 * ((16.0 / 132.0) / 2048.0);
-constexpr double kTurretSpeed = 0.02;
-constexpr double kTurretPGain = 0.01;
-constexpr auto kTurretMaxVelocity = 2.0_deg / 1_s;
-constexpr auto kTurretMaxAcceleration = (1.0_deg / 1.0_s) / 1.0_s;
+constexpr double kTurretSpeed = 0.2;
+constexpr double kTurretMaxSpeed = 0.4;
+constexpr double kTurretPGain = 0.02;
+constexpr double kTurretDGain = 0.01;
+constexpr double kTurretIGain = 0.005;
 
 // ControlPanelManipulator
 constexpr double kControlPanelManipulatorSpeed = 0.0;
 
 // Winch
 constexpr double kWinchPositionConversionFactor = 1.0 / 311.0;
-constexpr double kWinchSpeed = 0.2;
+constexpr double kWinchSpeed = 0.25;
 constexpr double kWinchPGain = 40.0;
 constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
 constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;

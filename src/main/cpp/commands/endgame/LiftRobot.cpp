@@ -21,4 +21,6 @@ void LiftRobot::End(bool interrStretchted) {
   m_winch->Stop();
 }
 
-bool LiftRobot::IsFinished() { return m_winch->GetController().AtGoal(); }
+bool LiftRobot::IsFinished() {
+  return units::math::abs(m_winch->GetMeasurement() - kWinchLiftHeight) < 0.1_m;
+}

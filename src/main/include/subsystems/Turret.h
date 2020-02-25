@@ -1,20 +1,17 @@
 #pragma once
 
-#include <frc2/command/ProfiledPIDSubsystem.h>
+#include <frc2/command/PIDSubsystem.h>
 #include <frc/VictorSP.h>
 #include <frc/Encoder.h>
-#include <units/units.h>
 
 #include "Constants.h"
 
-class Turret : public frc2::ProfiledPIDSubsystem<units::degrees> {
-  using State = frc::TrapezoidProfile<units::degrees>::State;
-
+class Turret : public frc2::PIDSubsystem {
  public:
   Turret();
 
-  void UseOutput(double output, State setpoint) override;
-  units::degree_t GetMeasurement() override;
+  void UseOutput(double output, double setpoint) override;
+  double GetMeasurement() override;
 
   void Stop();
   void Left();
@@ -22,5 +19,5 @@ class Turret : public frc2::ProfiledPIDSubsystem<units::degrees> {
 
  private:
   frc::VictorSP m_moteur{kTurretMoteur};
-  frc::Encoder m_encodeur{4, 5};
+  frc::Encoder m_encodeur{kTurretEncodeurA, kTurretEncodeurB};
 };
