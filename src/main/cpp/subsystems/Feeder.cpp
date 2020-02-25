@@ -7,7 +7,10 @@
 
 #include "subsystems/Feeder.h"
 
-Feeder::Feeder() {}
+Feeder::Feeder() {
+  m_moteurConveyor.SetInverted(true);
+  m_moteurFeeder.SetInverted(true);
+}
 
 void Feeder::Activate() {
   m_moteurFeeder.Set(kFeederMoteurSpeed);

@@ -14,6 +14,7 @@ camera.set(cv::CAP_PROP_FRAME_WIDTH, 320);
   camera.set(cv::CAP_PROP_FPS, 30);
 
 outputStream = frc::CameraServer::GetInstance()->PutVideo("Pince Arriere", 320, 240);*/
+  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
 }
 
 void Robot::RobotPeriodic() {
@@ -35,7 +36,11 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() { m_container.m_drivetrain.EnableLogFile(false); }
+void Robot::TeleopInit() {
+  m_container.m_drivetrain.EnableLogFile(false);
+  m_container.m_intake.Close();
+  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+}
 
 void Robot::TeleopPeriodic() {}
 

@@ -16,9 +16,7 @@ class Winch : public frc2::SubsystemBase {
   void Stop();
 
  private:
-  frc::VictorSP m_moteur1{kWinchMoteur1};
-  frc::VictorSP m_moteur2{kWinchMoteur2};
-  frc::SpeedControllerGroup m_moteurGroup{m_moteur1, m_moteur2};
+  frc::VictorSP m_moteur{kWinchMoteur};
 
   frc::Encoder m_encoder{kClimberEncodeurA, kClimberEncodeurB};
 };

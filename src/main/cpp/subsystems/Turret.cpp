@@ -16,7 +16,10 @@ void Turret::Periodic() {}
 
 void Turret::Activate() { m_turretActivated = true; }
 
-void Turret::Stop() { m_turretActivated = false; }
+void Turret::Stop() {
+  m_moteur.StopMotor();
+  m_turretActivated = false;
+}
 
 void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
 

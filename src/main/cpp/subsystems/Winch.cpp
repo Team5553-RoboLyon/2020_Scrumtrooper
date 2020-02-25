@@ -9,8 +9,8 @@
 
 Winch::Winch() {}
 
-void Winch::Up() { m_moteurGroup.Set(kWinchSpeed); }
+void Winch::Up() { m_moteur.Set(kWinchSpeed); }
 
-void Winch::Down() { m_moteurGroup.Set(-kWinchSpeed); }
+void Winch::Down() { m_moteur.Set(-kWinchSpeed); }
 
-void Winch::Stop() { m_moteurGroup.StopMotor(); }
+void Winch::Stop() { m_moteur.StopMotor(); }

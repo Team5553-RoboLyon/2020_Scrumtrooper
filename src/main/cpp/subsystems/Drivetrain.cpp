@@ -64,7 +64,7 @@ void Drivetrain::Stop() {
   m_moteurGauche.StopMotor();
 }
 
-void Drivetrain::Drive(double droite, double gauche) {
+void Drivetrain::Drive(double gauche, double droite) {
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 }

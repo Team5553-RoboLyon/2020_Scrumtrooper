@@ -18,8 +18,15 @@ void Drive::Initialize() {}
 void Drive::Execute() {
   double forward = utils::Deadband(m_forward());
   double turn = utils::Deadband(m_turn());
+  double c = 0.35 * (turn * 3.0 * (abs(turn) + 1) / (abs(forward) + 1));
+  if (turn < 0.0) {
+    m_drivetrain->Drive(forward * ((c + 1) / (1 - c)), forward);
 
-  m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
+  } else {
+    m_drivetrain->Drive(forward, forward * ((1 - c) / (c + 1)));
+  }
+
+  // m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 
 void Drive::End(bool interrupted) {}

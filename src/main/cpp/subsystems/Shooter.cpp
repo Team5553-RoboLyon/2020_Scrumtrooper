@@ -7,7 +7,11 @@
 
 #include "subsystems/Shooter.h"
 
-Shooter::Shooter() { m_moteur2.Follow(m_moteur1); }
+Shooter::Shooter() {
+  m_moteur2.Follow(m_moteur1);
+  m_moteur1.SetInverted(true);
+  m_moteur2.SetInverted(true);
+}
 
 void Shooter::Shoot(double puissance) {
   m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);

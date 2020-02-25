@@ -9,14 +9,14 @@
 
 // CAN IDs
 // Drivetrain IDs
-constexpr int kDrivetrainMoteurDroite1 = 2;
-constexpr int kDrivetrainMoteurDroite2 = 3;
-constexpr int kDrivetrainMoteurGauche1 = 1;
-constexpr int kDrivetrainMoteurGauche2 = 4;
+constexpr int kDrivetrainMoteurDroite1 = 1;
+constexpr int kDrivetrainMoteurDroite2 = 4;
+constexpr int kDrivetrainMoteurGauche1 = 2;
+constexpr int kDrivetrainMoteurGauche2 = 3;
 
 // Shooter IDs
-constexpr int kShooterMoteurGauche = 5;
-constexpr int kShooterMoteurDroite = 6;
+constexpr int kShooterMoteurGauche = 10;
+constexpr int kShooterMoteurDroite = 9;
 
 // Intake IDs
 constexpr int kIntakeMoteur = 7;
@@ -25,14 +25,17 @@ constexpr int kIntakeMoteur = 7;
 constexpr int kConveyorMoteur = 8;
 
 // AdjustableHood IDs
-constexpr int kAdjustableHoodMoteur = 9;
+constexpr int kAdjustableHoodMoteur = 6;
+
+// Winch IDs
+constexpr int kWinchMoteur = 5;
 
 // PWM IDs
 // Feeder IDs
-constexpr int kFeederMoteur = 5;
+constexpr int kFeederMoteur = 1;
 
 // Turret IDs
-constexpr int kTurretMoteur = 2;
+constexpr int kTurretMoteur = 3;
 
 // ControlPanelManipulator IDs
 constexpr int kControlPanelManipulatorMoteur = -1;
@@ -40,33 +43,29 @@ constexpr int kControlPanelManipulatorMoteur = -1;
 // TelescopicArm IDs
 constexpr int kTelescopicArmMoteur = -1;
 
-// Winch IDs
-constexpr int kWinchMoteur1 = 0;
-constexpr int kWinchMoteur2 = 1;
-
 // PCM IDs
 // Ballshifter IDs
-constexpr int kDrivetrainBallshifterA = 2;
-constexpr int kDrivetrainBallshifterB = 3;
+// constexpr int kDrivetrainBallshifterA = 2;
+// constexpr int kDrivetrainBallshifterB = 3;
 
 // Intake IDs
-constexpr int kIntakeA = 0;
+constexpr int kIntakeA = 2;
 constexpr int kIntakeB = 1;
 
 // ControlPanelManipulator IDs
-constexpr int kControlPanelManipulatorA = 4;
-constexpr int kControlPanelManipulatorB = 5;
+// constexpr int kControlPanelManipulatorA = 4;
+// constexpr int kControlPanelManipulatorB = 5;
 
 // Speed Constants
 // Intake Speeds
-constexpr double kIntakeMoteurSpeed = 0.6;
+constexpr double kIntakeMoteurSpeed = 0.7;
 
 // Feeder Speeds
-constexpr double kFeederMoteurSpeed = 0.50;
+constexpr double kFeederMoteurSpeed = 0.60;
 constexpr double kConveyorMoteurSpeed = 0.25;
 
 // Turret Speeds
-constexpr double kTurretMoteurSpeed = 0.2;
+constexpr double kTurretMoteurSpeed = 0.1;
 
 // ControlPanelManipulator Speeds
 constexpr double kControlPanelManipulatorSpeed = 0.0;

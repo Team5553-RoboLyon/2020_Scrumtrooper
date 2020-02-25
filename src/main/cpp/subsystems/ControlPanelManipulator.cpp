@@ -9,11 +9,13 @@
 
 ControlPanelManipulator::ControlPanelManipulator() { Close(); }
 
-void ControlPanelManipulator::Open() { m_solenoid.Set(frc::DoubleSolenoid::Value::kForward); }
+void ControlPanelManipulator::Open() {
+  // m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
+}
 
 void ControlPanelManipulator::Close() {
   Stop();
-  m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
+  // m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
 void ControlPanelManipulator::ChangePosition() {
