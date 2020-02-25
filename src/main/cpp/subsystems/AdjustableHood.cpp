@@ -28,12 +28,12 @@ void AdjustableHood::Descendre() {
 }
 
 void AdjustableHood::SetAngle(double angle) {
-  /*if(!m_isActivated) return;
+  /*if (!m_isActivated) return;
   double error = angle - m_encodeur.Get();
-  m_integral += (error*.02);
+  m_integral += (error * .02);
   double derivative = (error - m_prev_error) / .02;
-  double rcw = 0.0025*error + 0.00023*m_integral + 0.0003*derivative;
-  //Precédement I = 0.00021
+  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
+  // Precédement I = 0.00021
 
   m_actualAngle = 0.0;
 

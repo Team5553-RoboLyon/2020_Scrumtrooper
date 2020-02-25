@@ -10,6 +10,7 @@
 #include <frc/XboxController.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/POVButton.h>
+#include <frc/Joystick.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -47,6 +48,11 @@ class RobotContainer {
   frc2::JoystickButton j_startButton{&m_driverController, 8};
   frc2::JoystickButton j_stickLeftButton{&m_driverController, 9};
   frc2::JoystickButton j_stickRightButton{&m_driverController, 10};
+
+  frc::Joystick m_driverPanel{1};
+  frc2::JoystickButton p_yellowButton{&m_driverPanel, 1};
+  frc2::JoystickButton p_redButton{&m_driverPanel, 2};
+  frc2::JoystickButton p_whiteButton{&m_driverPanel, 3};
 
   frc2::Trigger j_axisLeftTrigger{[this] {
     return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2;

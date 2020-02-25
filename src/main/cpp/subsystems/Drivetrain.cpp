@@ -67,6 +67,20 @@ void Drivetrain::Stop() {
 void Drivetrain::Drive(double gauche, double droite) {
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
+
+  actualSpeed = (droite + gauche) / 2;
+}
+
+void Drivetrain::AutomatedShoot() {
+  encoderValue = (m_encoderExterneDroite.GetDistance() + m_encoderExterneGauche.GetDistance()) / 2;
+
+  double error = nbrTickAutomatedShoot - encoderValue;
+  m_integral += (error * .02);
+  double derivative = (error - m_prev_error) / .02;
+  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
+  // Precédement I = 0.00021
+
+  m_prev_error = error;
 }
 
 void Drivetrain::ResetEncodeurs() {
@@ -83,6 +97,20 @@ void Drivetrain::SetIdleMode(rev::CANSparkMax::IdleMode mode) {
   m_moteurDroiteFollower.SetIdleMode(mode);
   m_moteurGauche.SetIdleMode(mode);
   m_moteurGaucheFollower.SetIdleMode(mode);
+}
+
+void Drivetrain::DisableRamp() {
+  m_moteurDroite.SetOpenLoopRampRate(0.0);
+  m_moteurGauche.SetOpenLoopRampRate(0.0);
+  m_moteurDroiteFollower.SetOpenLoopRampRate(0.0);
+  m_moteurGaucheFollower.SetOpenLoopRampRate(0.0);
+}
+
+void Drivetrain::EnableRamp() {
+  m_moteurDroite.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurGauche.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurDroiteFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
+  m_moteurGaucheFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
 }
 
 units::meter_t Drivetrain::GetEncodeurDroit() {

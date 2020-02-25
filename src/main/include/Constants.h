@@ -77,7 +77,7 @@ constexpr double kFeederMoteurSpeed = 0.60;
 constexpr double kConveyorMoteurSpeed = 0.25;
 
 // Turret
-constexpr double kTurretMoteurSpeed = 0.2;
+constexpr double kTurretMoteurSpeed = 0.15;
 
 // ControlPanelManipulator
 constexpr double kControlPanelManipulatorSpeed = 0.0;

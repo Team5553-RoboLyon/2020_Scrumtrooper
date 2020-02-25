@@ -24,7 +24,9 @@
 #include "commands/scoring/Feed.h"
 #include "commands/intake/ChangeIntakePosition.h"
 #include "commands/intake/TakeCell.h"
+#include "commands/intake/EmergencyIntake.h"
 #include "commands/scoring/ShootGroup.h"
+#include "commands/scoring/AutomatedShoot.h"
 
 RobotContainer::RobotContainer() {
   m_drivetrain.SetDefaultCommand(
@@ -36,6 +38,7 @@ RobotContainer::RobotContainer() {
 }
 
 void RobotContainer::ConfigureControls() {
+  //########## Xbox Controller ##########
   // Intake buttons
   j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
   j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
@@ -56,4 +59,10 @@ void RobotContainer::ConfigureControls() {
   // Winch Buttons
   j_yButton.WhenPressed(LiftRobot(&m_winch));
   j_xButton.WhileHeld(DropRobot(&m_winch));
+
+  // AutomatedShoot Buttons
+  j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
+
+  //########## Panel ##########
+  p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
 }
