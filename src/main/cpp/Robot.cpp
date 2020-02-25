@@ -7,6 +7,8 @@
 
 #include "Robot.h"
 
+#include <frc2/command/CommandScheduler.h>
+
 void Robot::RobotInit() {
   /*camera.set(cv::CAP_PROP_BRIGHTNESS, 0);
 camera.set(cv::CAP_PROP_FRAME_WIDTH, 320);

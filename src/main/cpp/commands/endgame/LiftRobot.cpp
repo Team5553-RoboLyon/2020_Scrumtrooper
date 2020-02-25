@@ -9,10 +9,18 @@
 
 LiftRobot::LiftRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
 
-void LiftRobot::Initialize() {}
+void LiftRobot::Initialize() {
+  m_winch->Enable();
+  m_winch->SetGoal(kWinchLiftHeight);
+}
 
-void LiftRobot::Execute() { m_winch->Up(); }
+void LiftRobot::Execute() {}
 
-void LiftRobot::End(bool interrStretchted) {}
+void LiftRobot::End(bool interrStretchted) {
+  m_winch->Disable();
+  m_winch->Stop();
+}
 
-bool LiftRobot::IsFinished() { return false; }
+bool LiftRobot::IsFinished() {
+  return units::math::abs(m_winch->GetMeasurement() - kWinchLiftHeight) < 0.1_m;
+}

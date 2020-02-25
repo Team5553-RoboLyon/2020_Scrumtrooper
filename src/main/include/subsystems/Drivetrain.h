@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <frc/DoubleSolenoid.h>
 #include <frc2/command/SubsystemBase.h>
 #include <rev/CANSparkMax.h>
 #include <units/units.h>

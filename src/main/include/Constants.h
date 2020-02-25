@@ -7,21 +7,28 @@
 
 #pragma once
 
-// CAN IDs
-// Drivetrain IDs
-constexpr int kDrivetrainMoteurDroite1 = 1;
-constexpr int kDrivetrainMoteurDroite2 = 4;
-constexpr int kDrivetrainMoteurGauche1 = 2;
-constexpr int kDrivetrainMoteurGauche2 = 3;
+== == == =
+#include <units/units.h>
 
-// Shooter IDs
+             // ############### CAN IDs ###############
+             // Drivetrain
+    constexpr int kDrivetrainMoteurDroite1 = 1;
+constexpr int kDrivetrainMoteurDroite2 = 2;
+constexpr int kDrivetrainMoteurGauche1 = 3;
+constexpr int kDrivetrainMoteurGauche2 = 4;
+
+// Winch
+constexpr int kWinchMoteur = 5;
+
+// Shooter
 constexpr int kShooterMoteurGauche = 10;
 constexpr int kShooterMoteurDroite = 9;
+>>>>>>> 27a3a7dd85db3566b2935a8b189c88283c9d4306
 
-// Intake IDs
+// Intake
 constexpr int kIntakeMoteur = 7;
 
-// Conveyor IDs
+// Conveyor
 constexpr int kConveyorMoteur = 8;
 
 // AdjustableHood IDs
@@ -30,67 +37,60 @@ constexpr int kAdjustableHoodMoteur = 6;
 // Winch IDs
 constexpr int kWinchMoteur = 5;
 
-// PWM IDs
-// Feeder IDs
+// ############### PWM IDs ###############
+// Feeder
 constexpr int kFeederMoteur = 1;
 
-// Turret IDs
+// Turret
 constexpr int kTurretMoteur = 3;
 
-// ControlPanelManipulator IDs
+// ControlPanelManipulator
 constexpr int kControlPanelManipulatorMoteur = -1;
 
-// TelescopicArm IDs
+// TelescopicArm
 constexpr int kTelescopicArmMoteur = -1;
 
-// PCM IDs
-// Ballshifter IDs
-// constexpr int kDrivetrainBallshifterA = 2;
-// constexpr int kDrivetrainBallshifterB = 3;
-
-// Intake IDs
-constexpr int kIntakeA = 2;
-constexpr int kIntakeB = 1;
-
-// ControlPanelManipulator IDs
-// constexpr int kControlPanelManipulatorA = 4;
-// constexpr int kControlPanelManipulatorB = 5;
-
-// Speed Constants
-// Intake Speeds
-constexpr double kIntakeMoteurSpeed = 0.7;
-
-// Feeder Speeds
-constexpr double kFeederMoteurSpeed = 0.60;
-constexpr double kConveyorMoteurSpeed = 0.25;
-
-// Turret Speeds
-constexpr double kTurretMoteurSpeed = 0.1;
-
-// ControlPanelManipulator Speeds
-constexpr double kControlPanelManipulatorSpeed = 0.0;
-
-// Winch Speeds
-constexpr double kWinchSpeed = 0.0;
-
-// TelescopicArm Speeds
-constexpr double kTelescopicArmSpeed = 0.0;
-
-// Encodeurs IDs
-// Drivetrain IDs
+// ############### Encoders IDs ###############
+// Drivetrain
 constexpr int kDrivetrainRightEncodeurA = 0;
 constexpr int kDrivetrainRightEncodeurB = 1;
 constexpr int kDrivetrainLeftEncodeurA = 2;
 constexpr int kDrivetrainLeftEncodeurB = 3;
 
-// Climber IDs
-constexpr int kClimberEncodeurA = 4;
-constexpr int kClimberEncodeurB = 5;
-
-// TelescopicArm IDs
+// TelescopicArm
 constexpr int kTelescopicArmEncodeurA = 4;
 constexpr int kTelescopicArmEncodeurB = 5;
 
-// AdjustableHood IDs
+// AdjustableHood
 constexpr int kAdjustableHoodEncodeurA = 8;
 constexpr int kAdjustableHoodEncodeurB = 9;
+
+// ############### PCM IDs ###############
+// Intake
+constexpr int kIntakeA = 2;
+constexpr int kIntakeB = 1;
+
+// ############### Motion Constants ###############
+// Intake
+constexpr double kIntakeMoteurSpeed = 0.7;
+
+// Feeder
+constexpr double kFeederMoteurSpeed = 0.60;
+constexpr double kConveyorMoteurSpeed = 0.25;
+
+// Turret
+constexpr double kTurretMoteurSpeed = 0.2;
+
+// ControlPanelManipulator
+constexpr double kControlPanelManipulatorSpeed = 0.0;
+
+// Winch
+constexpr double kWinchPositionConversionFactor = 1.0;
+constexpr double kWinchSpeed = 0.2;
+constexpr double kWinchPGain = 0.1;
+constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
+constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
+constexpr units::meter_t kWinchLiftHeight = 1.0_m;
+
+// TelescopicArm
+constexpr double kTelescopicArmSpeed = 0.0;

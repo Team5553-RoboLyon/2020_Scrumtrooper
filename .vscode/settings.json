@@ -96,6 +96,7 @@
     "string_view": "cpp",
     "future": "cpp",
     "iomanip": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "*.inc": "cpp"
   }
 }

@@ -7,10 +7,28 @@
 
 #include "subsystems/Winch.h"
 
-Winch::Winch() {}
+using State = frc::TrapezoidProfile<units::meters>::State;
 
-void Winch::Up() { m_moteur.Set(kWinchSpeed); }
+Winch::Winch()
+    : frc2::ProfiledPIDSubsystem<units::meters>(frc::ProfiledPIDController<units::meters>(
+          kWinchPGain, 0.0, 0.0, {kWinchMaxVelocity, kWinchMaxAcceleration})) {
+  m_encodeur.SetPosition(0.0);
+  m_encodeur.SetPositionConversionFactor(kWinchPositionConversionFactor);
+  SetGoal(State{0_m, 0_mps});
+}
 
-void Winch::Down() { m_moteur.Set(-kWinchSpeed); }
+void Winch::UseOutput(double output, State setpoint) { m_moteur.SetVoltage(units::volt_t(output)); }
 
-void Winch::Stop() { m_moteur.StopMotor(); }
+units::meter_t Winch::GetMeasurement() { return units::meter_t(m_encodeur.GetPosition()); }
+
+void Winch::Up() {
+  if (!IsEnabled()) m_moteur.Set(kWinchSpeed);
+}
+
+void Winch::Down() {
+  if (!IsEnabled()) m_moteur.Set(-kWinchSpeed);
+}
+
+void Winch::Stop() {
+  if (!IsEnabled()) m_moteur.StopMotor();
+}
