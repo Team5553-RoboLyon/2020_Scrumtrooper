@@ -14,6 +14,8 @@
 #include <frc/Encoder.h>
 
 #include "lib/CSVLogFile.h"
+#include "commands/scoring/AdjustHood.h"
+#include "subsystems/AdjustableHood.h"
 
 #include "Constants.h"
 
@@ -28,8 +30,14 @@ class Drivetrain : public frc2::SubsystemBase {
 
   void SetIdleMode(rev::CANSparkMax::IdleMode mode);
   void ResetEncodeurs();
+  void AutomatedShoot();
+  void DisableRamp();
+  void EnableRamp();
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
+
+  double encoderValue;
+  double nbrTickAutomatedShoot = 30;
 
  private:
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
@@ -63,4 +71,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   CSVLogFile* m_logFile;
   bool m_isLogFileEnabled;
+  double actualSpeed;
+  double m_integral = 0.0;
+  double m_prev_error = 0.0;
 };
