@@ -67,7 +67,8 @@ constexpr int kIntakeB = 1;
 
 // ############### Motion Constants ###############
 // Intake
-constexpr double kIntakeMoteurSpeed = 0.7;
+constexpr double kIntakeMoteurSpeedOpened = 0.7;
+constexpr double kIntakeMoteurSpeedClosed = -0.2;
 
 // Feeder
 constexpr double kFeederMoteurSpeed = 0.60;
@@ -80,9 +81,9 @@ constexpr double kTurretMoteurSpeed = 0.2;
 constexpr double kControlPanelManipulatorSpeed = 0.0;
 
 // Winch
-constexpr double kWinchPositionConversionFactor = 1 / 311;
+constexpr double kWinchPositionConversionFactor = 1.0 / 311.0;
 constexpr double kWinchSpeed = 0.2;
-constexpr double kWinchPGain = 0.1;
+constexpr double kWinchPGain = 30.0;
 constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
 constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
 constexpr units::meter_t kWinchLiftHeight = 1.0_m;
