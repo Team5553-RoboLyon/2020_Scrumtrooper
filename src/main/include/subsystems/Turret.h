@@ -1,23 +1,26 @@
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
+#include <frc2/command/ProfiledPIDSubsystem.h>
 #include <frc/VictorSP.h>
+#include <frc/Encoder.h>
+#include <units/units.h>
 
 #include "Constants.h"
 
-class Turret : public frc2::SubsystemBase {
+class Turret : public frc2::ProfiledPIDSubsystem<units::degrees> {
+  using State = frc::TrapezoidProfile<units::degrees>::State;
+
  public:
   Turret();
 
-  void Periodic() override;
-  void Activate();
-  void Stop();
+  void UseOutput(double output, State setpoint) override;
+  units::degree_t GetMeasurement() override;
 
-  // TEST COMMANDS !!
+  void Stop();
   void Left();
   void Right();
 
  private:
-  bool m_turretActivated;
   frc::VictorSP m_moteur{kTurretMoteur};
+  frc::Encoder m_encodeur{4, 5};
 };
