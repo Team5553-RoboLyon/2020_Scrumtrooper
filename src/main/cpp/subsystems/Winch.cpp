@@ -15,7 +15,9 @@ Winch::Winch()
   m_moteur.SetInverted(true);
   m_encodeur.SetPosition(0.0);
   m_encodeur.SetPositionConversionFactor(kWinchPositionConversionFactor);
+  GetController().SetTolerance(0.1_m);
   SetGoal(0_m);
+  Disable();
 }
 
 void Winch::UseOutput(double output, State setpoint) { m_moteur.SetVoltage(units::volt_t(output)); }

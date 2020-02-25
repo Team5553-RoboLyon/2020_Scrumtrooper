@@ -9,10 +9,16 @@
 
 MoveTurretLeft::MoveTurretLeft(Turret* turret) : m_turret(turret) { AddRequirements(m_turret); }
 
-void MoveTurretLeft::Initialize() {}
+void MoveTurretLeft::Initialize() {
+  m_turret->Enable();
+  m_turret->SetGoal(m_turret->GetController().GetGoal().position - 5.0_deg);
+}
 
-void MoveTurretLeft::Execute() { m_turret->Left(); }
+void MoveTurretLeft::Execute() {}
 
-void MoveTurretLeft::End(bool interrLeftted) { m_turret->Stop(); }
+void MoveTurretLeft::End(bool interrupted) {
+  m_turret->Disable();
+  m_turret->Stop();
+}
 
-bool MoveTurretLeft::IsFinished() { return true; }
+bool MoveTurretLeft::IsFinished() { return m_turret->GetController().AtGoal(); }

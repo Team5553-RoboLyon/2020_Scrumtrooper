@@ -7,20 +7,33 @@
 
 #include "subsystems/Turret.h"
 
-Turret::Turret() {
-  // m_moteur.SetInverted(true);
-  m_turretActivated = false;
+using State = frc::TrapezoidProfile<units::degrees>::State;
+
+Turret::Turret()
+    : frc2::ProfiledPIDSubsystem<units::degrees>(frc::ProfiledPIDController<units::degrees>(
+          kTurretPGain, 0.0, 0.0, {kTurretMaxVelocity, kTurretMaxAcceleration})) {
+  m_encodeur.SetDistancePerPulse(kTurretPositionConversionFactor);
+  m_encodeur.Reset();
+  m_moteur.SetInverted(true);
+  GetController().SetTolerance(1.0_deg);
+  SetGoal(0_deg);
+  Disable();
 }
 
-void Turret::Periodic() {}
+void Turret::UseOutput(double output, State setpoint) {
+  m_moteur.SetVoltage(units::volt_t(output));
+}
 
-void Turret::Activate() { m_turretActivated = true; }
+units::degree_t Turret::GetMeasurement() { return units::degree_t(m_encodeur.GetDistance()); }
 
 void Turret::Stop() {
-  m_moteur.StopMotor();
-  m_turretActivated = false;
+  if (!IsEnabled()) m_moteur.StopMotor();
 }
 
-void Turret::Left() { m_moteur.Set(kTurretMoteurSpeed); }
+void Turret::Left() {
+  if (!IsEnabled()) m_moteur.Set(-kTurretSpeed);
+}
 
-void Turret::Right() { m_moteur.Set(-kTurretMoteurSpeed); }
+void Turret::Right() {
+  if (!IsEnabled()) m_moteur.Set(kTurretSpeed);
+}
