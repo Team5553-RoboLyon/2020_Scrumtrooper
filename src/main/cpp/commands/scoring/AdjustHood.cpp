@@ -19,6 +19,8 @@ void AdjustHood::Execute() {
     m_adjustablehood->Monter();
   else if (m_angle == -1)
     m_adjustablehood->Descendre();
+  else if (m_angle == -2)
+    m_adjustablehood->Unblock();
   // m_adjustablehood->SetAngle(m_angle);
   // m_adjustablehood->
 }

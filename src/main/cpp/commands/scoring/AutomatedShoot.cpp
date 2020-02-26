@@ -21,6 +21,6 @@ void AutomatedShoot::Execute() { m_drivetrain->AutomatedShoot(); }
 void AutomatedShoot::End(bool interrupted) { m_drivetrain->EnableRamp(); }
 
 bool AutomatedShoot::IsFinished() {
-  return (m_drivetrain->encoderValue > m_drivetrain->nbrTickAutomatedShoot - 3 &&
-          m_drivetrain->encoderValue < m_drivetrain->nbrTickAutomatedShoot + 3);
+  return (m_drivetrain->m_encoderValue > m_drivetrain->m_nbrTickAutomatedShoot - 3 &&
+          m_drivetrain->m_encoderValue < m_drivetrain->m_nbrTickAutomatedShoot + 3);
 }

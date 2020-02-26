@@ -47,6 +47,30 @@ void Drivetrain::Periodic() {
                    m_encodeurGauche1.GetPosition(), m_encodeurGauche2.GetPosition(),
                    m_encoderExterneDroite.Get(), m_encoderExterneGauche.Get());
   }
+
+  if (m_isUltraSonicSensorActivated) {
+    uint8_t sendBuffer = 0;
+    uint16_t receiveBuffer[DRIVETRAIN_ULTRASONICSIZE];
+    if (m_arduino.Transaction(&sendBuffer, 1, (uint8_t*)receiveBuffer, 10)) {
+      std::cout << "Transfer Aborted..." << std::endl;
+    } else {
+      for (int i = 0; i < DRIVETRAIN_ULTRASONICSIZE; i++) {
+        m_receiveBufferDouble[i] = ((double)receiveBuffer[i] * 500.0f) / 65535.0f;
+        frc::SmartDashboard::PutNumber("Ultrason n°" + std::to_string((i + 1)),
+                                       m_receiveBufferDouble[i]);
+        std::cout << m_receiveBufferDouble[i] << "    ";
+      }
+      std::cout << std::endl;
+    }
+
+    m_warningLevel = 0;
+    for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+      if (m_receiveBufferDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
+        m_warningLevel++;
+      }
+    }
+    frc::SmartDashboard::PutNumber("Warning Level", m_warningLevel);
+  }
 }
 
 void Drivetrain::EnableLogFile(bool enable) {
@@ -65,22 +89,32 @@ void Drivetrain::Stop() {
 }
 
 void Drivetrain::Drive(double gauche, double droite) {
+  if (m_warningLevel == 3) {
+    droite = 0;
+    gauche = 0;
+  } else {
+    droite /= (m_warningLevel + 1);
+    gauche /= (m_warningLevel + 1);
+  }
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 
-  actualSpeed = (droite + gauche) / 2;
+  m_actualSpeed = (droite + gauche) / 2;
 }
 
 void Drivetrain::AutomatedShoot() {
-  encoderValue = (m_encoderExterneDroite.GetDistance() + m_encoderExterneGauche.GetDistance()) / 2;
+  m_encoderValue =
+      (m_encoderExterneDroite.GetDistance() + m_encoderExterneGauche.GetDistance()) / 2;
 
-  double error = nbrTickAutomatedShoot - encoderValue;
+  double error = m_nbrTickAutomatedShoot - m_encoderValue;
   m_integral += (error * .02);
   double derivative = (error - m_prev_error) / .02;
   double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
   // Precédement I = 0.00021
 
   m_prev_error = error;
+  m_moteurDroite.Set(rcw);
+  m_moteurGauche.Set(rcw);
 }
 
 void Drivetrain::ResetEncodeurs() {

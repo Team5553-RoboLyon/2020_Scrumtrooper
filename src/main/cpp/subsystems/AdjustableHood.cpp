@@ -27,6 +27,10 @@ void AdjustableHood::Descendre() {
   m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
 }
 
+void AdjustableHood::Unblock() {
+  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.5);
+}
+
 void AdjustableHood::SetAngle(double angle) {
   /*if (!m_isActivated) return;
   double error = angle - m_encodeur.Get();

@@ -22,6 +22,7 @@
 #include "commands/scoring/PrepShoot.h"
 #include "commands/scoring/Shoot.h"
 #include "commands/scoring/Feed.h"
+#include "commands/scoring/FeederUnblock.h"
 #include "commands/intake/ChangeIntakePosition.h"
 #include "commands/intake/TakeCell.h"
 #include "commands/intake/EmergencyIntake.h"
@@ -65,4 +66,6 @@ void RobotContainer::ConfigureControls() {
 
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
+  p_yellowButton.WhileActiveOnce(FeederUnblock(&m_feeder).WithTimeout(0.5_s));
+  p_whiteButton.WhileActiveOnce(AdjustHood(&m_adjustableHood, -2).WithTimeout(0.5_s));
 }

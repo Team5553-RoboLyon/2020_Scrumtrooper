@@ -5,6 +5,8 @@
 
 #include "Constants.h"
 
+#define SHOOTER_OPENLOOP_RAMP 3
+
 class Shooter : public frc2::SubsystemBase {
  public:
   Shooter();

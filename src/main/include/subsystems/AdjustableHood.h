@@ -15,6 +15,7 @@ class AdjustableHood : public frc2::SubsystemBase {
   void Close();
   void Monter();
   void Descendre();
+  void Unblock();
   void SetAngle(double angle);
   void Periodic() override;
   void Stop();
