@@ -12,6 +12,7 @@ class Turret : public frc2::PIDSubsystem {
 
   void UseOutput(double output, double setpoint) override;
   double GetMeasurement() override;
+  void SetClampedSetpoint(double setpoint);
 
   void Stop();
   void Left();

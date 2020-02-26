@@ -9,12 +9,13 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Turret.h"
 
-class MoveTurretRight : public frc2::CommandHelper<frc2::CommandBase, MoveTurretRight> {
+class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
  public:
-  MoveTurretRight(Turret* turret);
+  MoveTurret(Turret* turret);
 
   void Initialize() override;
 
@@ -26,4 +27,9 @@ class MoveTurretRight : public frc2::CommandHelper<frc2::CommandBase, MoveTurret
 
  private:
   Turret* m_turret;
+  nt::NetworkTableEntry m_chameleonYawEntry;
+  nt::NetworkTableEntry m_chameleonIsValidEntry;
+  double m_buffer[15] = {0};
+  double m_bufferSorted[15] = {0};
+  unsigned int m_bufferCount;
 };
