@@ -15,6 +15,6 @@ ShootGroup::ShootGroup(Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain,
       frc2::ParallelCommandGroup(PrepShoot(puissance, shooter, feeder, drivetrain, intake,
                                            controlPanelManipulator, adjustableHood),
                                  MoveTurret(turret))
-          .WithTimeout(2_s),
+          .WithTimeout(3_s),
       frc2::ParallelCommandGroup(Shoot(puissance, shooter), Feed(feeder), MoveTurret(turret)));
 }

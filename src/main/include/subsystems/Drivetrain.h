@@ -12,12 +12,16 @@
 #include <units/units.h>
 #include <wpi/math>
 #include <frc/Encoder.h>
+#include <frc/I2C.h>
 
 #include "lib/CSVLogFile.h"
 #include "commands/scoring/AdjustHood.h"
 #include "subsystems/AdjustableHood.h"
 
 #include "Constants.h"
+
+#define DRIVETRAIN_ULTRASONICSIZE 5
+#define DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD 25
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -36,8 +40,8 @@ class Drivetrain : public frc2::SubsystemBase {
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
 
-  double encoderValue;
-  double nbrTickAutomatedShoot = 30;
+  double m_encoderValue;
+  double m_nbrTickAutomatedShoot = 180;
 
  private:
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
@@ -56,22 +60,28 @@ class Drivetrain : public frc2::SubsystemBase {
 
   const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kBrake;
   const rev::CANSparkMax::IdleMode kDisabledMode = rev::CANSparkMax::IdleMode::kCoast;
-  const double kOpenLoopRampeRate = 0.72;
 
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kGearRatio = 1 / 10.6;
+  const double kOpenLoopRampeRate = 0.72;
+  double m_actualSpeed;
+  double m_integral = 0.0;
+  double m_prev_error = 0.0;
+  const double kPositionConversionFactor = 42;
+
   // const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() *
   // kLowGearRatio; const double kHighGearPositionConversionFactor =
   // kWheelCircumference.to<double>()
   // * kHighGearRatio;
-  const double kPositionConversionFactor = 42;
 
   frc::Encoder m_encoderExterneDroite{kDrivetrainRightEncodeurA, kDrivetrainRightEncodeurB};
   frc::Encoder m_encoderExterneGauche{kDrivetrainLeftEncodeurA, kDrivetrainLeftEncodeurB};
 
   CSVLogFile* m_logFile;
   bool m_isLogFileEnabled;
-  double actualSpeed;
-  double m_integral = 0.0;
-  double m_prev_error = 0.0;
+  bool m_isUltraSonicSensorActivated = true;
+
+  frc::I2C m_arduino{frc::I2C::Port::kOnboard, 3};
+  double m_receiveBufferDouble[DRIVETRAIN_ULTRASONICSIZE];
+  int m_warningLevel = 0;
 };

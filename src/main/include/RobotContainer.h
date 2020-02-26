@@ -11,6 +11,7 @@
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/POVButton.h>
 #include <frc/Joystick.h>
+#include <frc2/command/ParallelRaceGroup.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"

@@ -5,18 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/Shooter.h"
+#include "commands/scoring/FeederUnblock.h"
 
-Shooter::Shooter() {
-  m_moteur2.Follow(m_moteur1);
-  m_moteur1.SetInverted(true);
-  m_moteur2.SetInverted(true);
-  m_moteur1.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
-  m_moteur2.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
-}
+FeederUnblock::FeederUnblock(Feeder* feeder) : m_feeder(feeder) { AddRequirements(m_feeder); }
 
-void Shooter::Shoot(double puissance) {
-  m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
-}
+void FeederUnblock::Initialize() {}
 
-void Shooter::Periodic() {}
+void FeederUnblock::Execute() { m_feeder->UnBlock(); }
+
+void FeederUnblock::End(bool interrupted) { m_feeder->Stop(); }
+
+bool FeederUnblock::IsFinished() { return false; }
