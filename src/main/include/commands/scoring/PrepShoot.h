@@ -15,13 +15,12 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Intake.h"
 #include "subsystems/ControlPanelManipulator.h"
-#include "subsystems/Turret.h"
 #include "subsystems/AdjustableHood.h"
 
 class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
   PrepShoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain,
-            Intake* intake, ControlPanelManipulator* controlPanelManipulator, Turret* turret,
+            Intake* intake, ControlPanelManipulator* controlPanelManipulator,
             AdjustableHood* adjustableHood);
 
   void Initialize() override;
@@ -39,6 +38,5 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   Drivetrain* m_drivetrain;
   Intake* m_intake;
   ControlPanelManipulator* m_controlpanelmanipulator;
-  Turret* m_turret;
   AdjustableHood* m_adjustablehood;
 };

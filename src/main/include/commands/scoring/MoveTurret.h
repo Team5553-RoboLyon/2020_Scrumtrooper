@@ -29,7 +29,9 @@ class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
   Turret* m_turret;
   nt::NetworkTableEntry m_chameleonYawEntry;
   nt::NetworkTableEntry m_chameleonIsValidEntry;
-  double m_buffer[15] = {0};
-  double m_bufferSorted[15] = {0};
+  double m_bufferYaw[15] = {0};
+  double m_bufferYawSorted[15] = {0};
+  bool m_bufferIsValid[15] = {1};
+  bool m_bufferIsValidSorted[15] = {1};
   unsigned int m_bufferCount;
 };

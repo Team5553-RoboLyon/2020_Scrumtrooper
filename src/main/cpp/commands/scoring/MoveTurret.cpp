@@ -24,15 +24,25 @@ MoveTurret::MoveTurret(Turret* turret) : m_turret(turret) {
 void MoveTurret::Initialize() { m_turret->Enable(); }
 
 void MoveTurret::Execute() {
-  if (m_chameleonIsValidEntry.GetBoolean(false)) {
-    m_buffer[m_bufferCount] = m_chameleonYawEntry.GetDouble(0);
+  m_bufferIsValid[m_bufferCount] = m_chameleonIsValidEntry.GetBoolean(false);
+  std::partial_sort_copy(&m_bufferIsValid[0], &m_bufferIsValid[14], &m_bufferIsValidSorted[0],
+                         &m_bufferIsValidSorted[14]);
+
+  if (m_bufferIsValid[m_bufferCount]) {
+    m_bufferYaw[m_bufferCount] = m_chameleonYawEntry.GetDouble(0);
   } else {
-    m_buffer[m_bufferCount] = 0;
+    m_bufferYaw[m_bufferCount] = 0;
   }
+
   m_bufferCount = (m_bufferCount + 1) % 15;
-  std::partial_sort_copy(&m_buffer[0], &m_buffer[14], &m_bufferSorted[0], &m_bufferSorted[14]);
-  std::cout << m_buffer[7] << std::endl;
-  m_turret->SetClampedSetpoint(m_turret->GetMeasurement() + m_buffer[3]);
+  std::partial_sort_copy(&m_bufferYaw[0], &m_bufferYaw[14], &m_bufferYawSorted[0],
+                         &m_bufferYawSorted[14]);
+
+  if (m_bufferIsValidSorted[7]) {
+    m_turret->SetClampedSetpoint(m_turret->GetMeasurement() + m_bufferYawSorted[7]);
+  } else {
+    m_turret->SetClampedSetpoint(0.0);
+  }
 }
 
 void MoveTurret::End(bool interrupted) {

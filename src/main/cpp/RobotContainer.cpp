@@ -17,8 +17,6 @@
 #include "commands/endgame/LiftRobot.h"
 #include "commands/endgame/RaiseHook.h"
 #include "commands/scoring/AdjustHood.h"
-#include "commands/scoring/MoveTurretLeft.h"
-#include "commands/scoring/MoveTurretRight.h"
 #include "commands/scoring/PrepShoot.h"
 #include "commands/scoring/Shoot.h"
 #include "commands/scoring/Feed.h"
@@ -51,10 +49,6 @@ void RobotContainer::ConfigureControls() {
   // AdjustableHood buttons
   j_POV0Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, 1));
   j_POV180Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, -1));
-
-  // Turret Buttons
-  j_POV90Deg.WhenPressed(MoveTurretRight(&m_turret));
-  j_POV270Deg.WhenPressed(MoveTurretLeft(&m_turret));
 
   // Winch Buttons
   j_yButton.WhenPressed(LiftRobot(&m_winch));

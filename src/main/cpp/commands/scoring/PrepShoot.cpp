@@ -9,20 +9,18 @@
 
 PrepShoot::PrepShoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain,
                      Intake* intake, ControlPanelManipulator* controlPanelManipulator,
-                     Turret* turret, AdjustableHood* adjustableHood)
+                     AdjustableHood* adjustableHood)
     : m_puissance(puissance),
       m_shooter(shooter),
       m_feeder(feeder),
       m_drivetrain(drivetrain),
       m_intake(intake),
       m_controlpanelmanipulator(controlPanelManipulator),
-      m_turret(turret),
       m_adjustablehood(adjustableHood) {
   AddRequirements(m_shooter);
   AddRequirements(m_drivetrain);
   AddRequirements(m_intake);
   AddRequirements(m_controlpanelmanipulator);
-  AddRequirements(m_turret);
   AddRequirements(m_adjustablehood);
 }
 

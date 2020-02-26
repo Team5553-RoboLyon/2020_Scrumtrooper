@@ -6,12 +6,15 @@
 #include "commands/scoring/PrepShoot.h"
 #include "commands/scoring/Feed.h"
 #include "commands/scoring/Shoot.h"
+#include "commands/scoring/MoveTurret.h"
 
 ShootGroup::ShootGroup(Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain, Intake* intake,
                        ControlPanelManipulator* controlPanelManipulator, Turret* turret,
                        AdjustableHood* adjustableHood, double puissance) {
-  AddCommands(PrepShoot(puissance, shooter, feeder, drivetrain, intake, controlPanelManipulator,
-                        turret, adjustableHood)
-                  .WithTimeout(2_s),
-              frc2::ParallelCommandGroup(Shoot(puissance, shooter), Feed(feeder)));
+  AddCommands(
+      frc2::ParallelCommandGroup(PrepShoot(puissance, shooter, feeder, drivetrain, intake,
+                                           controlPanelManipulator, adjustableHood),
+                                 MoveTurret(turret))
+          .WithTimeout(2_s),
+      frc2::ParallelCommandGroup(Shoot(puissance, shooter), Feed(feeder), MoveTurret(turret)));
 }
