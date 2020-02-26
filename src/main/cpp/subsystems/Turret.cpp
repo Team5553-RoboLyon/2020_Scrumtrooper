@@ -24,6 +24,10 @@ void Turret::UseOutput(double output, double setpoint) {
 
 double Turret::GetMeasurement() { return m_encodeur.GetDistance(); }
 
+void Turret::SetClampedSetpoint(double setpoint) {
+  SetSetpoint(std::clamp(setpoint, -kTurretMaxPosition, kTurretMaxPosition));
+}
+
 void Turret::Stop() {
   if (!IsEnabled()) m_moteur.StopMotor();
 }
