@@ -16,8 +16,8 @@ void RaiseHook::Initialize() {
   m_telescopicarm->Up();
 }
 
-void RaiseHook::Execute() {}
+void RaiseHook::Execute() { m_telescopicarm->Up(); }
 
 void RaiseHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 
-bool RaiseHook::IsFinished() { return true; }
+bool RaiseHook::IsFinished() { return false; }

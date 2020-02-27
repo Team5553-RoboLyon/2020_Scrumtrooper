@@ -90,14 +90,15 @@ constexpr double kControlPanelManipulatorSpeed = 0.0;
 
 // Winch
 constexpr double kWinchPositionConversionFactor = 1.0 / 311.0;
-constexpr double kWinchSpeed = 0.25;
+constexpr double kWinchSpeed = 0.9;
 constexpr double kWinchPGain = 40.0;
 constexpr units::meters_per_second_t kWinchMaxVelocity = 2.0_mps;
 constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
 constexpr units::meter_t kWinchLiftHeight = 1.0_m;
 
 // TelescopicArm
-constexpr double kTelescopicArmSpeed = 0.2;
+constexpr double kTelescopicArmSpeedUp = 0.25;
+constexpr double kTelescopicArmSpeedDown = 0.1;
 constexpr double kTelescopicArmPGain = 0.022;
 constexpr double kTelescopicArmIGain = 0;
 constexpr double kTelescopicArmDGain = 0;
