@@ -37,6 +37,7 @@ Drivetrain::Drivetrain() {
 }
 
 void Drivetrain::Periodic() {
+  m_warningLevel = 0;
   frc::SmartDashboard::PutNumber("Droite1", m_encodeurDroite1.GetPosition());
   frc::SmartDashboard::PutNumber("Droite2", m_encodeurDroite2.GetPosition());
   frc::SmartDashboard::PutNumber("Gauche1", m_encodeurGauche1.GetPosition());
@@ -49,24 +50,40 @@ void Drivetrain::Periodic() {
   }
 
   if (m_isUltraSonicSensorActivated) {
-    uint8_t sendBuffer = 0;
-    uint16_t receiveBuffer[DRIVETRAIN_ULTRASONICSIZE];
-    if (m_arduino.Transaction(&sendBuffer, 1, (uint8_t*)receiveBuffer, 10)) {
-      std::cout << "Transfer Aborted..." << std::endl;
+    //############ Arduino Droit #############
+    uint8_t sendBufferDroit = 0;
+    uint16_t receiveBufferDroit[DRIVETRAIN_ULTRASONICSIZE];
+    if (m_arduinoDroit.Transaction(&sendBufferDroit, 1, (uint8_t*)receiveBufferDroit, 10)) {
+      std::cout << "AD : Transfer Aborted..." << std::endl;
     } else {
-      for (int i = 0; i < DRIVETRAIN_ULTRASONICSIZE; i++) {
-        m_receiveBufferDouble[i] = ((double)receiveBuffer[i] * 500.0f) / 65535.0f;
-        frc::SmartDashboard::PutNumber("Ultrason n°" + std::to_string((i + 1)),
-                                       m_receiveBufferDouble[i]);
-        std::cout << m_receiveBufferDouble[i] << "    ";
+      std::cout << "AD : ";
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        m_receiveBufferDroitDouble[i] = ((double)receiveBufferDroit[i] * 500.0f) / 65535.0f;
+        std::cout << m_receiveBufferDroitDouble[i] << "    ";
       }
       std::cout << std::endl;
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        if (m_receiveBufferDroitDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
+          m_warningLevel++;
+        }
+      }
     }
-
-    m_warningLevel = 0;
-    for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
-      if (m_receiveBufferDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
-        m_warningLevel++;
+    //############ Arduino Gauche #############
+    uint8_t sendBufferGauche = 0;
+    uint16_t receiveBufferGauche[DRIVETRAIN_ULTRASONICSIZE];
+    if (m_arduinoGauche.Transaction(&sendBufferGauche, 1, (uint8_t*)receiveBufferGauche, 10)) {
+      std::cout << "AG : Transfer Aborted..." << std::endl;
+    } else {
+      std::cout << "AG : ";
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        m_receiveBufferGaucheDouble[i] = ((double)receiveBufferGauche[i] * 500.0f) / 65535.0f;
+        std::cout << m_receiveBufferGaucheDouble[i] << "    ";
+      }
+      std::cout << std::endl;
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        if (m_receiveBufferGaucheDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
+          m_warningLevel++;
+        }
       }
     }
     frc::SmartDashboard::PutNumber("Warning Level", m_warningLevel);
@@ -89,13 +106,8 @@ void Drivetrain::Stop() {
 }
 
 void Drivetrain::Drive(double gauche, double droite) {
-  if (m_warningLevel == 3) {
-    droite = 0;
-    gauche = 0;
-  } else {
-    droite /= (m_warningLevel + 1);
-    gauche /= (m_warningLevel + 1);
-  }
+  droite /= (m_warningLevel + 1);
+  gauche /= (m_warningLevel + 1);
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 

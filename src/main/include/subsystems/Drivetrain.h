@@ -81,7 +81,10 @@ class Drivetrain : public frc2::SubsystemBase {
   bool m_isLogFileEnabled;
   bool m_isUltraSonicSensorActivated = true;
 
-  frc::I2C m_arduino{frc::I2C::Port::kOnboard, 3};
-  double m_receiveBufferDouble[DRIVETRAIN_ULTRASONICSIZE];
+  frc::I2C m_arduinoDroit{frc::I2C::Port::kOnboard, 3};
+  frc::I2C m_arduinoGauche{frc::I2C::Port::kOnboard, 4};
+
+  double m_receiveBufferDroitDouble[DRIVETRAIN_ULTRASONICSIZE];
+  double m_receiveBufferGaucheDouble[DRIVETRAIN_ULTRASONICSIZE];
   int m_warningLevel = 0;
 };
