@@ -27,4 +27,4 @@ void AdjustHood::Execute() {
 
 void AdjustHood::End(bool interrupted) { m_adjustablehood->Stop(); }
 
-bool AdjustHood::IsFinished() { return true; }
+bool AdjustHood::IsFinished() { return false; }
