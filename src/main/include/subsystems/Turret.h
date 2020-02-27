@@ -3,6 +3,7 @@
 #include <frc2/command/PIDSubsystem.h>
 #include <frc/VictorSP.h>
 #include <frc/Encoder.h>
+#include <frc/DigitalOutput.h>
 
 #include "Constants.h"
 
@@ -18,7 +19,11 @@ class Turret : public frc2::PIDSubsystem {
   void Left();
   void Right();
 
+  void StartLedRing();
+  void StopLedRing();
+
  private:
   frc::VictorSP m_moteur{kTurretMoteur};
   frc::Encoder m_encodeur{kTurretEncodeurA, kTurretEncodeurB};
+  frc::DigitalOutput m_ledRing{kTurretRelay};
 };

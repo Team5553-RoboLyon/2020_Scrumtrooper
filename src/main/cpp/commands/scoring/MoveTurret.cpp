@@ -21,7 +21,10 @@ MoveTurret::MoveTurret(Turret* turret) : m_turret(turret) {
   m_bufferCount = 0;
 }
 
-void MoveTurret::Initialize() { m_turret->Enable(); }
+void MoveTurret::Initialize() {
+  m_turret->Enable();
+  m_turret->StartLedRing();
+}
 
 void MoveTurret::Execute() {
   m_bufferIsValid[m_bufferCount] = m_chameleonIsValidEntry.GetBoolean(false);
@@ -46,8 +49,11 @@ void MoveTurret::Execute() {
 }
 
 void MoveTurret::End(bool interrupted) {
-  m_turret->Disable();
-  m_turret->Stop();
+  if (!interrupted) {
+    m_turret->Disable();
+    m_turret->Stop();
+    m_turret->StopLedRing();
+  }
 }
 
 bool MoveTurret::IsFinished() { return false; }

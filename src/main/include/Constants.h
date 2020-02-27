@@ -62,6 +62,8 @@ constexpr int kAdjustableHoodEncodeur = 7;
 // TelescopicArm
 constexpr int kTelescopicArmEncodeur = 8;
 
+constexpr int kTurretRelay = 9;
+
 // ############### PCM IDs ###############
 // Intake
 constexpr int kIntakeA = 0;

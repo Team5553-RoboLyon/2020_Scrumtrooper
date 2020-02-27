@@ -12,6 +12,7 @@ Turret::Turret()
   m_encodeur.SetDistancePerPulse(kTurretPositionConversionFactor);
   m_encodeur.Reset();
   m_moteur.SetInverted(true);
+  StopLedRing();
   SetSetpoint(0);
   Disable();
 }
@@ -39,3 +40,7 @@ void Turret::Left() {
 void Turret::Right() {
   if (!IsEnabled()) m_moteur.Set(kTurretSpeed);
 }
+
+void Turret::StartLedRing() { m_ledRing.Set(true); }
+
+void Turret::StopLedRing() { m_ledRing.Set(false); }
