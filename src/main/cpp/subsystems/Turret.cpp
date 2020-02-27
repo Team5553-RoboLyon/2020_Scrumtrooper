@@ -8,7 +8,7 @@
 #include "subsystems/Turret.h"
 
 Turret::Turret()
-    : frc2::PIDSubsystem(frc2::PIDController(kTurretPGain, kTurretDGain, kTurretIGain)) {
+    : frc2::PIDSubsystem(frc2::PIDController(kTurretPGain, kTurretIGain, kTurretDGain)) {
   m_encodeur.SetDistancePerPulse(kTurretPositionConversionFactor);
   m_encodeur.Reset();
   m_moteur.SetInverted(true);

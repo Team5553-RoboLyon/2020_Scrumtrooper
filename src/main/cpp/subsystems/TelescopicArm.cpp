@@ -7,7 +7,15 @@
 
 #include "subsystems/TelescopicArm.h"
 
-TelescopicArm::TelescopicArm() {}
+TelescopicArm::TelescopicArm()
+    : PIDSubsystem(
+          frc2::PIDController(kTelescopicArmPGain, kTelescopicArmIGain, kTelescopicArmDGain)) {}
+
+void TelescopicArm::UseOutput(double output, double setpoint) {
+  m_moteur.Set(kTelescopicArmGravityGain + output);
+}
+
+double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
 
 void TelescopicArm::Up() { m_moteur.Set(kTelescopicArmSpeed); }
 

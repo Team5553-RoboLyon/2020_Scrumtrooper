@@ -11,9 +11,12 @@ RaiseHook::RaiseHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicA
   AddRequirements(m_telescopicarm);
 }
 
-void RaiseHook::Initialize() {}
+void RaiseHook::Initialize() {
+  m_telescopicarm->Disable();
+  m_telescopicarm->Up();
+}
 
-void RaiseHook::Execute() { m_telescopicarm->Up(); }
+void RaiseHook::Execute() {}
 
 void RaiseHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 

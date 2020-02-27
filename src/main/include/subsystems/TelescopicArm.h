@@ -1,14 +1,17 @@
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
+#include <frc2/command/PIDSubsystem.h>
 #include <frc/VictorSP.h>
 #include <frc/DutyCycleEncoder.h>
 
 #include "Constants.h"
 
-class TelescopicArm : public frc2::SubsystemBase {
+class TelescopicArm : public frc2::PIDSubsystem {
  public:
   TelescopicArm();
+
+  void UseOutput(double output, double setpoint) override;
+  double GetMeasurement() override;
 
   void Up();
   void Down();

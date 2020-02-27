@@ -34,16 +34,16 @@ constexpr int kAdjustableHoodMoteur = 6;
 
 // ############### PWM IDs ###############
 // Feeder
-constexpr int kFeederMoteur = 1;
+constexpr int kFeederMoteur = 3;
 
 // Turret
-constexpr int kTurretMoteur = 3;
+constexpr int kTurretMoteur = 2;
 
 // ControlPanelManipulator
-constexpr int kControlPanelManipulatorMoteur = -1;
+constexpr int kControlPanelManipulatorMoteur = 4;
 
 // TelescopicArm
-constexpr int kTelescopicArmMoteur = -1;
+constexpr int kTelescopicArmMoteur = 0;
 
 // ############### Encoders IDs ###############
 // Drivetrain
@@ -64,7 +64,7 @@ constexpr int kTelescopicArmEncodeur = 8;
 
 // ############### PCM IDs ###############
 // Intake
-constexpr int kIntakeA = 2;
+constexpr int kIntakeA = 0;
 constexpr int kIntakeB = 1;
 
 // ############### Motion Constants ###############
@@ -82,8 +82,8 @@ constexpr double kTurretSpeed = 0.2;
 constexpr double kTurretMaxPosition = 45.0;
 constexpr double kTurretMaxSpeed = 0.4;
 constexpr double kTurretPGain = 0.022;
-constexpr double kTurretDGain = 0;
 constexpr double kTurretIGain = 0;
+constexpr double kTurretDGain = 0;
 
 // ControlPanelManipulator
 constexpr double kControlPanelManipulatorSpeed = 0.0;
@@ -97,4 +97,8 @@ constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
 constexpr units::meter_t kWinchLiftHeight = 1.0_m;
 
 // TelescopicArm
-constexpr double kTelescopicArmSpeed = 0.0;
+constexpr double kTelescopicArmSpeed = 0.2;
+constexpr double kTelescopicArmPGain = 0.022;
+constexpr double kTelescopicArmIGain = 0;
+constexpr double kTelescopicArmDGain = 0;
+constexpr double kTelescopicArmGravityGain = 0;

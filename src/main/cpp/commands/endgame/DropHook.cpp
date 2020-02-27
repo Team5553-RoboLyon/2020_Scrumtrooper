@@ -11,9 +11,12 @@ DropHook::DropHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicArm
   AddRequirements(m_telescopicarm);
 }
 
-void DropHook::Initialize() {}
+void DropHook::Initialize() {
+  m_telescopicarm->Disable();
+  m_telescopicarm->Down();
+}
 
-void DropHook::Execute() { m_telescopicarm->Down(); }
+void DropHook::Execute() {}
 
 void DropHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 

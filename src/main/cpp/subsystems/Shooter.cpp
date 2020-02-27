@@ -9,7 +9,6 @@
 
 Shooter::Shooter() {
   m_moteur2.Follow(m_moteur1);
-  m_moteur1.SetInverted(true);
   m_moteur2.SetInverted(true);
   m_moteur1.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
   m_moteur2.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
