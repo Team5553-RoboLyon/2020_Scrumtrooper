@@ -18,19 +18,9 @@ PrepShoot::PrepShoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetr
       m_controlpanelmanipulator(controlPanelManipulator),
       m_adjustablehood(adjustableHood) {
   AddRequirements(m_shooter);
-  AddRequirements(m_drivetrain);
-  AddRequirements(m_intake);
-  AddRequirements(m_controlpanelmanipulator);
-  AddRequirements(m_adjustablehood);
 }
 
-void PrepShoot::Initialize() {
-  m_drivetrain->Stop();
-  m_intake->Close();
-  m_controlpanelmanipulator->Close();
-  m_adjustablehood->SetAngle(415.0);
-  m_shooter->Shoot(m_puissance);
-}
+void PrepShoot::Initialize() { m_shooter->Shoot(m_puissance); }
 
 void PrepShoot::Execute() {}
 

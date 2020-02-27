@@ -21,7 +21,7 @@
 #include "Constants.h"
 
 #define DRIVETRAIN_ULTRASONICSIZE 5
-#define DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD 25
+#define DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD 60
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -29,6 +29,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   void Periodic();
   void EnableLogFile(bool enable);
+  double CalculateTurn(double forward, double turn);
   void Drive(double gauche, double droite);
   void Stop();
 

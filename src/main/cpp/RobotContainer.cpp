@@ -26,6 +26,7 @@
 #include "commands/intake/EmergencyIntake.h"
 #include "commands/scoring/ShootGroup.h"
 #include "commands/scoring/AutomatedShoot.h"
+#include "commands/scoring/MoveTurret.h"
 
 RobotContainer::RobotContainer() {
   m_drivetrain.SetDefaultCommand(
@@ -43,9 +44,15 @@ void RobotContainer::ConfigureControls() {
   j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Shooter buttons
-  j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
-                                                     &m_intake, &m_controlPanelManipulator,
-                                                     &m_turret, &m_adjustableHood, 1));
+  // j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
+  //                                                   &m_intake, &m_controlPanelManipulator,
+  //                                                   &m_turret, &m_adjustableHood, 1));
+  j_axisRightTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(Feed(&m_feeder)));
+
+  j_bumperRightButton.ToggleWhenActive(
+      frc2::ParallelCommandGroup(PrepShoot(1.0, &m_shooter, &m_feeder, &m_drivetrain, &m_intake,
+                                           &m_controlPanelManipulator, &m_adjustableHood),
+                                 MoveTurret(&m_turret)));
 
   // AdjustableHood buttons
   j_POV0Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, 1));
@@ -60,10 +67,10 @@ void RobotContainer::ConfigureControls() {
   // j_bButton.WhileHeld(RaiseHook(&m_telescopicArm));
 
   // AutomatedShoot Buttons
-  // j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
+  j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
 
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
-  p_yellowButton.WhileActiveOnce(FeederUnblock(&m_feeder).WithTimeout(0.5_s));
-  p_whiteButton.WhileActiveOnce(AdjustHood(&m_adjustableHood, -2).WithTimeout(0.5_s));
+  p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
+  p_whiteButton.WhileActiveOnce(AdjustHood(&m_adjustableHood, -2).WithTimeout(0.3_s));
 }

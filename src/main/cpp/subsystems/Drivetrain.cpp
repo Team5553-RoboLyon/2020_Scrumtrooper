@@ -9,6 +9,26 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+double find_radius(double d0, double d1, double d2, double h) {
+  double a0 = (d1 - d0) / h;
+  double a1 = (d2 - d0) / (2 * h);
+  double a2 = (d2 - d1) / h;
+
+  double a = (a0 + a1 + a2) / 3;
+
+  double angle = atan(a);
+
+  double corde = d0 / a;
+
+  double radius = corde / (2 * sin(angle));
+
+  frc::SmartDashboard::PutNumber("Angle", angle);
+  frc::SmartDashboard::PutNumber("Corde", corde);
+  frc::SmartDashboard::PutNumber("Radius", radius);
+
+  return radius;
+}
+
 Drivetrain::Drivetrain() {
   m_moteurDroite.RestoreFactoryDefaults();
   m_moteurGauche.RestoreFactoryDefaults();
@@ -63,11 +83,13 @@ void Drivetrain::Periodic() {
       }
       std::cout << std::endl;
       for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
-        if (m_receiveBufferDroitDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
-          m_warningLevel++;
+        if ((m_receiveBufferDroitDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) &&
+            (m_receiveBufferDroitDouble[i] != 0.0)) {
+          // m_warningLevel++;
         }
       }
     }
+
     //############ Arduino Gauche #############
     uint8_t sendBufferGauche = 0;
     uint16_t receiveBufferGauche[DRIVETRAIN_ULTRASONICSIZE];
@@ -81,7 +103,8 @@ void Drivetrain::Periodic() {
       }
       std::cout << std::endl;
       for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
-        if (m_receiveBufferGaucheDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
+        if ((m_receiveBufferGaucheDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) &&
+            (m_receiveBufferDroitDouble[i] != 0.0)) {
           m_warningLevel++;
         }
       }
@@ -105,9 +128,30 @@ void Drivetrain::Stop() {
   m_moteurGauche.StopMotor();
 }
 
+double Drivetrain::CalculateTurn(double forward, double turn) {
+  /*if (m_warningLevel == 3) {
+    frc::SmartDashboard::PutNumber("Turn AvC", turn);
+    double radius_crashed =
+        find_radius(m_receiveBufferGaucheDouble[2], m_receiveBufferGaucheDouble[1],
+                    m_receiveBufferGaucheDouble[0], 30.5);
+
+    double radius = forward / (turn + 0.0000000000000000000000000000000000000001);
+
+    if (abs(radius) > abs(radius_crashed)) {
+      if (radius > 0) {
+        radius += (radius_crashed - radius) / 2;
+      } else {
+        radius -= (radius_crashed + radius) / 2;
+      }
+
+      turn = forward * radius;
+    }
+    frc::SmartDashboard::PutNumber("Turn ApC", turn);
+  }*/
+  return turn;
+}
+
 void Drivetrain::Drive(double gauche, double droite) {
-  droite /= (m_warningLevel + 1);
-  gauche /= (m_warningLevel + 1);
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 
