@@ -9,6 +9,26 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+double find_radius(double d0, double d1, double d2, double h) {
+  double a0 = (d1 - d0) / h;
+  double a1 = (d2 - d0) / (2 * h);
+  double a2 = (d2 - d1) / h;
+
+  double a = (a0 + a1 + a2) / 3;
+
+  double angle = atan(a);
+
+  double corde = d0 / a;
+
+  double radius = corde / (2 * sin(angle));
+
+  frc::SmartDashboard::PutNumber("Angle", angle);
+  frc::SmartDashboard::PutNumber("Corde", corde);
+  frc::SmartDashboard::PutNumber("Radius", radius);
+
+  return radius;
+}
+
 Drivetrain::Drivetrain() {
   m_moteurDroite.RestoreFactoryDefaults();
   m_moteurGauche.RestoreFactoryDefaults();
@@ -37,6 +57,7 @@ Drivetrain::Drivetrain() {
 }
 
 void Drivetrain::Periodic() {
+  m_warningLevel = 0;
   frc::SmartDashboard::PutNumber("Droite1", m_encodeurDroite1.GetPosition());
   frc::SmartDashboard::PutNumber("Droite2", m_encodeurDroite2.GetPosition());
   frc::SmartDashboard::PutNumber("Gauche1", m_encodeurGauche1.GetPosition());
@@ -49,24 +70,43 @@ void Drivetrain::Periodic() {
   }
 
   if (m_isUltraSonicSensorActivated) {
-    uint8_t sendBuffer = 0;
-    uint16_t receiveBuffer[DRIVETRAIN_ULTRASONICSIZE];
-    if (m_arduino.Transaction(&sendBuffer, 1, (uint8_t*)receiveBuffer, 10)) {
-      std::cout << "Transfer Aborted..." << std::endl;
+    //############ Arduino Droit #############
+    uint8_t sendBufferDroit = 0;
+    uint16_t receiveBufferDroit[DRIVETRAIN_ULTRASONICSIZE];
+    if (m_arduinoDroit.Transaction(&sendBufferDroit, 1, (uint8_t*)receiveBufferDroit, 10)) {
+      std::cout << "AD : Transfer Aborted..." << std::endl;
     } else {
-      for (int i = 0; i < DRIVETRAIN_ULTRASONICSIZE; i++) {
-        m_receiveBufferDouble[i] = ((double)receiveBuffer[i] * 500.0f) / 65535.0f;
-        frc::SmartDashboard::PutNumber("Ultrason n°" + std::to_string((i + 1)),
-                                       m_receiveBufferDouble[i]);
-        std::cout << m_receiveBufferDouble[i] << "    ";
+      std::cout << "AD : ";
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        m_receiveBufferDroitDouble[i] = ((double)receiveBufferDroit[i] * 500.0f) / 65535.0f;
+        std::cout << m_receiveBufferDroitDouble[i] << "    ";
       }
       std::cout << std::endl;
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        if ((m_receiveBufferDroitDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) &&
+            (m_receiveBufferDroitDouble[i] != 0.0)) {
+          // m_warningLevel++;
+        }
+      }
     }
 
-    m_warningLevel = 0;
-    for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
-      if (m_receiveBufferDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) {
-        m_warningLevel++;
+    //############ Arduino Gauche #############
+    uint8_t sendBufferGauche = 0;
+    uint16_t receiveBufferGauche[DRIVETRAIN_ULTRASONICSIZE];
+    if (m_arduinoGauche.Transaction(&sendBufferGauche, 1, (uint8_t*)receiveBufferGauche, 10)) {
+      std::cout << "AG : Transfer Aborted..." << std::endl;
+    } else {
+      std::cout << "AG : ";
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        m_receiveBufferGaucheDouble[i] = ((double)receiveBufferGauche[i] * 500.0f) / 65535.0f;
+        std::cout << m_receiveBufferGaucheDouble[i] << "    ";
+      }
+      std::cout << std::endl;
+      for (int i = 0; i < (DRIVETRAIN_ULTRASONICSIZE - 2); i++) {
+        if ((m_receiveBufferGaucheDouble[i] < DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD) &&
+            (m_receiveBufferDroitDouble[i] != 0.0)) {
+          m_warningLevel++;
+        }
       }
     }
     frc::SmartDashboard::PutNumber("Warning Level", m_warningLevel);
@@ -88,14 +128,30 @@ void Drivetrain::Stop() {
   m_moteurGauche.StopMotor();
 }
 
+double Drivetrain::CalculateTurn(double forward, double turn) {
+  /*if (m_warningLevel == 3) {
+    frc::SmartDashboard::PutNumber("Turn AvC", turn);
+    double radius_crashed =
+        find_radius(m_receiveBufferGaucheDouble[2], m_receiveBufferGaucheDouble[1],
+                    m_receiveBufferGaucheDouble[0], 30.5);
+
+    double radius = forward / (turn + 0.0000000000000000000000000000000000000001);
+
+    if (abs(radius) > abs(radius_crashed)) {
+      if (radius > 0) {
+        radius += (radius_crashed - radius) / 2;
+      } else {
+        radius -= (radius_crashed + radius) / 2;
+      }
+
+      turn = forward * radius;
+    }
+    frc::SmartDashboard::PutNumber("Turn ApC", turn);
+  }*/
+  return turn;
+}
+
 void Drivetrain::Drive(double gauche, double droite) {
-  if (m_warningLevel == 3) {
-    droite = 0;
-    gauche = 0;
-  } else {
-    droite /= (m_warningLevel + 1);
-    gauche /= (m_warningLevel + 1);
-  }
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 

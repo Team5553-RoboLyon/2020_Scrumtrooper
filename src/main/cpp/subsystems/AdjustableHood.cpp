@@ -13,10 +13,7 @@ AdjustableHood::AdjustableHood() {
   m_prev_error = 0.0;
 }
 
-void AdjustableHood::Close() {
-  SetAngle(0.0);
-  m_isOpened = false;
-}
+void AdjustableHood::Close() { m_isOpened = false; }
 
 void AdjustableHood::Monter() {
   m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
@@ -44,6 +41,11 @@ void AdjustableHood::SetAngle(double angle) {
   m_isOpened = true;*/
 }
 
+void AdjustableHood::Stop() {
+  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+}
+
 void AdjustableHood::Periodic() {
   // m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.05);
+  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

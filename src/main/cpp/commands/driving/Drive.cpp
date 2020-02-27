@@ -41,8 +41,11 @@ void Drive::Execute() {
     m_drivetrain->Drive(forward, forward * ((1 - c) / (c + 1)));
   }*/
 
+  
   double v = forward * VMAX;
   double w = turn * WMAX;
+
+  w = m_drivetrain->CalculateTurn(forward, w);
 
   double lwheel = v + (w * HALF_TRACKWIDTH);
   double rwheel = v - (w * HALF_TRACKWIDTH);
