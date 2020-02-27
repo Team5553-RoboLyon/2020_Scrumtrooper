@@ -17,8 +17,8 @@ void TelescopicArm::UseOutput(double output, double setpoint) {
 
 double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
 
-void TelescopicArm::Up() { m_moteur.Set(kTelescopicArmSpeed); }
+void TelescopicArm::Up() { m_moteur.Set(kTelescopicArmSpeedUp); }
 
-void TelescopicArm::Down() { m_moteur.Set(-kTelescopicArmSpeed); }
+void TelescopicArm::Down() { m_moteur.Set(-kTelescopicArmSpeedDown); }
 
 void TelescopicArm::Stop() { m_moteur.StopMotor(); }

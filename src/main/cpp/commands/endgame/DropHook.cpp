@@ -16,8 +16,8 @@ void DropHook::Initialize() {
   m_telescopicarm->Down();
 }
 
-void DropHook::Execute() {}
+void DropHook::Execute() { m_telescopicarm->Down(); }
 
 void DropHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 
-bool DropHook::IsFinished() { return true; }
+bool DropHook::IsFinished() { return false; }

@@ -52,11 +52,15 @@ void RobotContainer::ConfigureControls() {
   j_POV180Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, -1));
 
   // Winch Buttons
-  j_yButton.WhenPressed(LiftRobot(&m_winch));
-  j_xButton.WhileHeld(DropRobot(&m_winch));
+  // j_yButton.WhenPressed(LiftRobot(&m_winch));
+  // j_xButton.WhileHeld(DropRobot(&m_winch));
+
+  // TelescopicArm Buttons
+  // j_aButton.WhileHeld(DropHook(&m_telescopicArm));
+  // j_bButton.WhileHeld(RaiseHook(&m_telescopicArm));
 
   // AutomatedShoot Buttons
-  j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
+  // j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
 
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
