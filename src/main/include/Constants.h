@@ -70,6 +70,13 @@ constexpr int kIntakeA = 0;
 constexpr int kIntakeB = 1;
 
 // ############### Motion Constants ###############
+// AdjustableHood
+constexpr double kAdjustableHoodPositionConversionFactor = 360 * 18 / 34;
+constexpr double kAdjustableHoodPGain = 0.012;
+constexpr double kAdjustableHoodIGain = 0.001;
+constexpr double kAdjustableHoodDGain = 0.0001;
+constexpr double kAdjustableHoodGravityGain = 0.05;
+
 // Intake
 constexpr double kIntakeMoteurSpeedOpened = 0.6;
 constexpr double kIntakeMoteurSpeedClosed = -0.2;

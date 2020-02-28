@@ -12,9 +12,9 @@
 
 #include "subsystems/AdjustableHood.h"
 
-class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
+class RetractHood : public frc2::CommandHelper<frc2::CommandBase, RetractHood> {
  public:
-  AdjustHood(AdjustableHood* adjustableHood);
+  RetractHood(AdjustableHood* adjustableHood, double angle);
 
   void Initialize() override;
 
@@ -26,4 +26,5 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
 
  private:
   AdjustableHood* m_adjustablehood;
+  double m_angle;
 };

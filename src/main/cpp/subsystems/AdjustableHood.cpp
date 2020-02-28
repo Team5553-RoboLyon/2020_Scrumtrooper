@@ -7,45 +7,39 @@
 
 #include "subsystems/AdjustableHood.h"
 
-AdjustableHood::AdjustableHood() {
-  m_actualAngle = 0.0;
-  m_integral = 0.0;
-  m_prev_error = 0.0;
+AdjustableHood::AdjustableHood()
+    : PIDSubsystem(
+          frc2::PIDController(kAdjustableHoodPGain, kAdjustableHoodIGain, kAdjustableHoodDGain)) {
+  m_encodeur.SetDistancePerRotation(kAdjustableHoodPositionConversionFactor);
+  m_encodeur.Reset();
+  Disable();
 }
 
-void AdjustableHood::Close() { m_isOpened = false; }
+void AdjustableHood::UseOutput(double output, double setpoint) {
+  if (GetController().GetSetpoint() < 1) {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
+  } else {
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
+                 kAdjustableHoodGravityGain + output);
+  }
+}
+
+double AdjustableHood::GetMeasurement() { return m_encodeur.GetDistance(); }
+
+void AdjustableHood::ResetEncoder() { m_encodeur.Reset(); }
 
 void AdjustableHood::Monter() {
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
+  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
 }
 
 void AdjustableHood::Descendre() {
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
+  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
 }
 
 void AdjustableHood::Unblock() {
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.5);
-}
-
-void AdjustableHood::SetAngle(double angle) {
-  /*if (!m_isActivated) return;
-  double error = angle - m_encodeur.Get();
-  m_integral += (error * .02);
-  double derivative = (error - m_prev_error) / .02;
-  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
-  // Precédement I = 0.00021
-
-  m_actualAngle = 0.0;
-
-  m_prev_error = error;
-  m_isOpened = true;*/
+  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.5);
 }
 
 void AdjustableHood::Stop() {
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
-}
-
-void AdjustableHood::Periodic() {
-  // m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.05);
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

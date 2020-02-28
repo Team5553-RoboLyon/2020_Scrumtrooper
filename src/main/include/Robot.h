@@ -27,8 +27,5 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
 
  private:
-  float m_speed;
-  float m_speed1;
-  float m_speed2;
   RobotContainer m_container;
 };

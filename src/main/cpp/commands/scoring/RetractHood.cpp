@@ -5,25 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/scoring/RetractHood.h"
 
-#include <frc2/command/CommandBase.h>
-#include <frc2/command/CommandHelper.h>
+RetractHood::RetractHood(AdjustableHood* adjustableHood, double angle)
+    : m_adjustablehood(adjustableHood), m_angle(angle) {
+  AddRequirements(m_adjustablehood);
+}
 
-#include "subsystems/AdjustableHood.h"
+void RetractHood::Initialize() {
+  m_adjustablehood->Enable();
+  m_adjustablehood->SetSetpoint(m_angle);
+}
 
-class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
- public:
-  AdjustHood(AdjustableHood* adjustableHood);
+void RetractHood::Execute() {}
 
-  void Initialize() override;
+void RetractHood::End(bool interrupted) {}
 
-  void Execute() override;
-
-  void End(bool interrupted) override;
-
-  bool IsFinished() override;
-
- private:
-  AdjustableHood* m_adjustablehood;
-};
+bool RetractHood::IsFinished() { return false; }

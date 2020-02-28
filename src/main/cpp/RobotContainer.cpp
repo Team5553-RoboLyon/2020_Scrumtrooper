@@ -16,7 +16,7 @@
 #include "commands/endgame/DropRobot.h"
 #include "commands/endgame/LiftRobot.h"
 #include "commands/endgame/RaiseHook.h"
-#include "commands/scoring/AdjustHood.h"
+#include "commands/scoring/RetractHood.h"
 #include "commands/scoring/PrepShoot.h"
 #include "commands/scoring/Shoot.h"
 #include "commands/scoring/Feed.h"
@@ -55,8 +55,9 @@ void RobotContainer::ConfigureControls() {
                                  MoveTurret(&m_turret)));
 
   // AdjustableHood buttons
-  j_POV0Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, 1));
-  j_POV180Deg.WhileActiveContinous(AdjustHood(&m_adjustableHood, -1));
+  j_POV0Deg.WhenPressed(RetractHood(&m_adjustableHood, 44));
+  j_POV90Deg.WhenPressed(RetractHood(&m_adjustableHood, 22));
+  j_POV180Deg.WhenPressed(RetractHood(&m_adjustableHood, 0));
 
   // Winch Buttons
   // j_yButton.WhenPressed(LiftRobot(&m_winch));
@@ -72,5 +73,4 @@ void RobotContainer::ConfigureControls() {
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
   p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
-  p_whiteButton.WhileActiveOnce(AdjustHood(&m_adjustableHood, -2).WithTimeout(0.3_s));
 }

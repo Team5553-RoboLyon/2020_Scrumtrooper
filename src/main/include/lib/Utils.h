@@ -3,7 +3,7 @@
 #include <cmath>
 
 namespace utils {
-double Deadband(double value, double deadband = 0.1) {
+double Deadband(double value, double deadband = 0.15) {
   if (std::abs(value) < deadband) {
     return 0;
   }

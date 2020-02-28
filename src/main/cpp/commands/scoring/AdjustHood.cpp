@@ -7,24 +7,17 @@
 
 #include "commands/scoring/AdjustHood.h"
 
-AdjustHood::AdjustHood(AdjustableHood* adjustableHood, double angle)
-    : m_adjustablehood(adjustableHood), m_angle(angle) {
+AdjustHood::AdjustHood(AdjustableHood* adjustableHood) : m_adjustablehood(adjustableHood) {
   AddRequirements(m_adjustablehood);
 }
 
-void AdjustHood::Initialize() {}
+void AdjustHood::Initialize() { m_adjustablehood->Enable(); }
 
-void AdjustHood::Execute() {
-  if (m_angle == 1)
-    m_adjustablehood->Monter();
-  else if (m_angle == -1)
-    m_adjustablehood->Descendre();
-  else if (m_angle == -2)
-    m_adjustablehood->Unblock();
-  // m_adjustablehood->SetAngle(m_angle);
-  // m_adjustablehood->
+void AdjustHood::Execute() {}
+
+void AdjustHood::End(bool interrupted) {
+  m_adjustablehood->Disable();
+  m_adjustablehood->Stop();
 }
-
-void AdjustHood::End(bool interrupted) { m_adjustablehood->Stop(); }
 
 bool AdjustHood::IsFinished() { return false; }
