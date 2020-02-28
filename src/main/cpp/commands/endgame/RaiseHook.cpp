@@ -7,11 +7,14 @@
 
 #include "commands/endgame/RaiseHook.h"
 
-RaiseHook::RaiseHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicArm) {
+RaiseHook::RaiseHook(TelescopicArm* telescopicArm, Intake* intake)
+    : m_telescopicarm(telescopicArm), m_intake(intake) {
   AddRequirements(m_telescopicarm);
+  AddRequirements(m_intake);
 }
 
 void RaiseHook::Initialize() {
+  m_intake->Open();
   m_telescopicarm->Disable();
   m_telescopicarm->Up();
 }

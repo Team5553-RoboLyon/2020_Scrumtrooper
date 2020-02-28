@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Intake.h"
+#include "subsystems/Drivetrain.h"
 
 Intake::Intake() { Close(); }
 

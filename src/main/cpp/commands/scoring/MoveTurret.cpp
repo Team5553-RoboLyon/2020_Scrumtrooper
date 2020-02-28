@@ -46,6 +46,9 @@ void MoveTurret::Execute() {
   } else {
     m_turret->SetClampedSetpoint(0.0);
   }
+  std::cout << m_chameleonIsValidEntry.GetBoolean(false) << "  " << m_bufferIsValidSorted[7] << "  "
+            << m_chameleonYawEntry.GetDouble(0) << "  " << m_bufferYawSorted[7] << "  "
+            << m_turret->GetMeasurement() + m_bufferYawSorted[7] << std::endl;
 }
 
 void MoveTurret::End(bool interrupted) {

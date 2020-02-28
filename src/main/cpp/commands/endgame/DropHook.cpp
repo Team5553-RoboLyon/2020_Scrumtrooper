@@ -7,11 +7,14 @@
 
 #include "commands/endgame/DropHook.h"
 
-DropHook::DropHook(TelescopicArm* telescopicArm) : m_telescopicarm(telescopicArm) {
+DropHook::DropHook(TelescopicArm* telescopicArm, Intake* intake)
+    : m_telescopicarm(telescopicArm), m_intake(intake) {
   AddRequirements(m_telescopicarm);
+  AddRequirements(m_intake);
 }
 
 void DropHook::Initialize() {
+  m_intake->Open();
   m_telescopicarm->Disable();
   m_telescopicarm->Down();
 }

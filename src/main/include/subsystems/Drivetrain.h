@@ -43,6 +43,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   double m_encoderValue;
   double m_nbrTickAutomatedShoot = 180;
+  double m_actualSpeed;
 
  private:
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
@@ -65,7 +66,6 @@ class Drivetrain : public frc2::SubsystemBase {
   const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
   const double kGearRatio = 1 / 10.6;
   const double kOpenLoopRampeRate = 0.72;
-  double m_actualSpeed;
   double m_integral = 0.0;
   double m_prev_error = 0.0;
   const double kPositionConversionFactor = 42;

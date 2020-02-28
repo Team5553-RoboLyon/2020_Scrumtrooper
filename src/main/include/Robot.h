@@ -28,4 +28,5 @@ class Robot : public frc::TimedRobot {
 
  private:
   RobotContainer m_container;
+  cs::UsbCamera camera;
 };

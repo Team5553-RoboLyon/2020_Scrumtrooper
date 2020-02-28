@@ -90,7 +90,7 @@ constexpr double kTurretPositionConversionFactor = -360.0 * ((16.0 / 132.0) / 20
 constexpr double kTurretSpeed = 0.2;
 constexpr double kTurretMaxPosition = 45.0;
 constexpr double kTurretMaxSpeed = 0.4;
-constexpr double kTurretPGain = 0.022;
+constexpr double kTurretPGain = 0.02;
 constexpr double kTurretIGain = 0;
 constexpr double kTurretDGain = 0;
 

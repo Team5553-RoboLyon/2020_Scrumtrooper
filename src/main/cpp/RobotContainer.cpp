@@ -40,16 +40,16 @@ RobotContainer::RobotContainer() {
 void RobotContainer::ConfigureControls() {
   //########## Xbox Controller ##########
   // Intake buttons
-  j_bumperLeftButton.WhenPressed(ChangeIntakePosition(&m_intake));
-  j_axisLeftTrigger.WhileActiveContinous(TakeCell(&m_intake));
+  j_bumperRightButton.WhenPressed(ChangeIntakePosition(&m_intake));
+  j_axisRightTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Shooter buttons
   // j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
   //                                                   &m_intake, &m_controlPanelManipulator,
   //                                                   &m_turret, &m_adjustableHood, 1));
-  j_axisRightTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(Feed(&m_feeder)));
+  j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(Feed(&m_feeder)));
 
-  j_bumperRightButton.ToggleWhenActive(
+  j_bumperLeftButton.ToggleWhenActive(
       frc2::ParallelCommandGroup(PrepShoot(1.0, &m_shooter, &m_feeder, &m_drivetrain, &m_intake,
                                            &m_controlPanelManipulator, &m_adjustableHood),
                                  MoveTurret(&m_turret)));
@@ -64,11 +64,11 @@ void RobotContainer::ConfigureControls() {
   // j_xButton.WhileHeld(DropRobot(&m_winch));
 
   // TelescopicArm Buttons
-  // j_aButton.WhileHeld(DropHook(&m_telescopicArm));
-  // j_bButton.WhileHeld(RaiseHook(&m_telescopicArm));
+  // j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake));
+  // j_bButton.WhileHeld(RaiseHook(&m_telescopicArm, &m_intake));
 
   // AutomatedShoot Buttons
-  j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
+  // j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
 
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake), false);
