@@ -38,10 +38,10 @@ void MoveTurret::Execute() {
   }
 
   m_bufferCount = (m_bufferCount + 1) % 15;
-  std::partial_sort_copy(&m_bufferYaw[0], &m_bufferYaw[14], &m_bufferYawSorted[0],
-                         &m_bufferYawSorted[14]);
 
   if (m_bufferIsValidSorted[7]) {
+    std::partial_sort_copy(&m_bufferYaw[0], &m_bufferYaw[14], &m_bufferYawSorted[0],
+                           &m_bufferYawSorted[14]);
     m_turret->SetClampedSetpoint(m_turret->GetMeasurement() + m_bufferYawSorted[7]);
   } else {
     m_turret->SetClampedSetpoint(0.0);

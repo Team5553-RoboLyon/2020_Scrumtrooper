@@ -7,6 +7,8 @@
 
 #include "commands/intake/EmergencyIntake.h"
 
-EmergencyIntake::EmergencyIntake(Intake* intake) : m_intake(intake) { AddRequirements(m_intake); }
+EmergencyIntake::EmergencyIntake(Intake* intake, Drivetrain* drivetrain) : m_intake(intake), m_drivetrain(drivetrain) { AddRequirements(m_intake); }
 
-void EmergencyIntake::Initialize() { m_intake->Close(); }
+void EmergencyIntake::Initialize() { 
+    m_intake->Close();
+    m_drivetrain->ChangeSpeed(); }

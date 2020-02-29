@@ -72,14 +72,14 @@ constexpr int kIntakeB = 1;
 // ############### Motion Constants ###############
 // AdjustableHood
 constexpr double kAdjustableHoodPositionConversionFactor = 360 * 18 / 34;
-constexpr double kAdjustableHoodPGain = 0.012;
-constexpr double kAdjustableHoodIGain = 0.001;
-constexpr double kAdjustableHoodDGain = 0.0001;
+constexpr double kAdjustableHoodPGain = 0.013;
+constexpr double kAdjustableHoodIGain = 0.00075;  // 0.00175;//0.002;//0.0015;//0.001;
+constexpr double kAdjustableHoodDGain = 0.00025;
 constexpr double kAdjustableHoodGravityGain = 0.05;
 
 // Intake
-constexpr double kIntakeMoteurSpeedOpened = 0.6;
-constexpr double kIntakeMoteurSpeedClosed = -0.2;
+constexpr double kIntakeMoteurSpeedOpened = 0.75;
+constexpr double kIntakeMoteurSpeedClosed = 0.2;
 
 // Feeder
 constexpr double kFeederMoteurSpeed = 0.60;
@@ -107,7 +107,7 @@ constexpr units::meter_t kWinchLiftHeight = 1.0_m;
 
 // TelescopicArm
 constexpr double kTelescopicArmSpeedUp = 0.25;
-constexpr double kTelescopicArmSpeedDown = 0.1;
+constexpr double kTelescopicArmSpeedDown = 0.25;
 constexpr double kTelescopicArmPGain = 0.022;
 constexpr double kTelescopicArmIGain = 0;
 constexpr double kTelescopicArmDGain = 0;

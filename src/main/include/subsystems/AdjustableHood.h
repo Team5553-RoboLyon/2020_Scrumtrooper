@@ -24,4 +24,6 @@ class AdjustableHood : public frc2::PIDSubsystem {
  private:
   VictorSPX m_moteur{kAdjustableHoodMoteur};
   frc::DutyCycleEncoder m_encodeur{kAdjustableHoodEncodeur};
+  int m_lockedCount = 0;
+  double m_prevVelocityError;
 };

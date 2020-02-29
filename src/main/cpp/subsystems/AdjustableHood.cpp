@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/AdjustableHood.h"
 
 AdjustableHood::AdjustableHood()
@@ -12,16 +13,44 @@ AdjustableHood::AdjustableHood()
           frc2::PIDController(kAdjustableHoodPGain, kAdjustableHoodIGain, kAdjustableHoodDGain)) {
   m_encodeur.SetDistancePerRotation(kAdjustableHoodPositionConversionFactor);
   m_encodeur.Reset();
+  GetController().SetTolerance(1);
+  GetController().SetIntegratorRange(-0.03,0.03);
   Disable();
+  m_lockedCount= 0;
 }
 
-void AdjustableHood::UseOutput(double output, double setpoint) {
-  if (GetController().GetSetpoint() < 1) {
-    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
+void AdjustableHood::UseOutput(double output, double setpoint)
+ {
+   frc::SmartDashboard::PutNumber("volet encodeur Dist:",m_encodeur.GetDistance() );
+    frc::SmartDashboard::PutNumber("volet setpoint:",setpoint );
+    frc::SmartDashboard::PutNumber("volet output:",output );
+    frc::SmartDashboard::PutNumber("Velocity error : ", GetController().GetVelocityError());
+    frc::SmartDashboard::PutNumber("Distance restante :", abs(setpoint - m_encodeur.GetDistance()));
+
+
+  /*if((abs(setpoint - m_encodeur.GetDistance()) > 1) && (abs(GetController().GetVelocityError()) < 1 ) && (output > 0.12))
+  {
+    //SetSetpoint(m_encodeur.GetDistance());
+    frc::SmartDashboard::PutNumber("Hood security :", 1);
   } else {
-    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
-                 kAdjustableHoodGravityGain + output);
+    frc::SmartDashboard::PutNumber("Hood security :", 0);
+  }*/
+
+  if((abs(setpoint - m_encodeur.GetDistance()) > 1) && (abs(GetController().GetVelocityError()) < 1 ) && (abs(output) > 0.05)) 
+  {
+    m_lockedCount++;
+    if(m_lockedCount > 8) {
+      SetSetpoint(m_encodeur.GetDistance());
+      GetController().Reset();
+      m_lockedCount = 0;
+    }
+  } else {
+    m_lockedCount = 0;
   }
+  frc::SmartDashboard::PutNumber("Niveau de blocage :", m_lockedCount);
+  m_prevVelocityError = GetController().GetVelocityError();
+
+    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
 }
 
 double AdjustableHood::GetMeasurement() { return m_encodeur.GetDistance(); }

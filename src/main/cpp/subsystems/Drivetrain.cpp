@@ -128,6 +128,24 @@ void Drivetrain::Stop() {
   m_moteurGauche.StopMotor();
 }
 
+void Drivetrain::ChangeSpeed() {
+  if(Drivetrain::SpeedMode::quick) { 
+    SlowSpeed(); 
+  } else if (Drivetrain::SpeedMode::slow){
+    QuickSpeed();
+  }
+
+}
+
+void Drivetrain::SlowSpeed()
+{
+  m_speedMode = Drivetrain::SpeedMode::slow;
+}
+
+void Drivetrain::QuickSpeed() {
+ m_speedMode = Drivetrain::SpeedMode::quick;
+}
+
 double Drivetrain::CalculateTurn(double forward, double turn) {
   /*if (m_warningLevel == 3) {
     frc::SmartDashboard::PutNumber("Turn AvC", turn);
@@ -152,6 +170,10 @@ double Drivetrain::CalculateTurn(double forward, double turn) {
 }
 
 void Drivetrain::Drive(double gauche, double droite) {
+  if(m_speedMode == 1){
+    droite *= 0.5;
+    gauche *= 0.5;
+  } 
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 

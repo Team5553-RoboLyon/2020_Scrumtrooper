@@ -7,12 +7,21 @@
 
 #include "commands/scoring/Feed.h"
 
-Feed::Feed(Feeder* feeder) : m_feeder(feeder) { AddRequirements(m_feeder); }
+Feed::Feed(Feeder* feeder, Intake* intake) : m_feeder(feeder), m_intake(intake) {
+  AddRequirements(m_feeder);
+  AddRequirements(m_intake);
+}
 
 void Feed::Initialize() {}
 
-void Feed::Execute() { m_feeder->Activate(); }
+void Feed::Execute() {
+  m_feeder->Activate();
+  m_intake->Activate();
+}
 
-void Feed::End(bool interrupted) { m_feeder->Stop(); }
+void Feed::End(bool interrupted) {
+  m_feeder->Stop();
+  m_intake->Stop();
+}
 
 bool Feed::IsFinished() { return false; }

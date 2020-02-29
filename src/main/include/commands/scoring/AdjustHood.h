@@ -9,7 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
+#include <networktables/NetworkTableEntry.h>
 #include "subsystems/AdjustableHood.h"
 
 class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
@@ -26,4 +26,9 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
 
  private:
   AdjustableHood* m_adjustablehood;
+
+  nt::NetworkTableEntry m_chameleonPitchEntry;
+  nt::NetworkTableEntry m_chameleonIsValidEntry;
+
+
 };

@@ -21,6 +21,8 @@ void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 void Robot::DisabledInit() {
   m_container.m_drivetrain.EnableLogFile(false);
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  //Remet à zéro le controlleur le PID ( dont le setpoint ) du volet
+  m_container.m_adjustableHood.Disable();
 }
 
 void Robot::DisabledPeriodic() {}

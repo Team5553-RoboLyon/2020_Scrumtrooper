@@ -38,6 +38,9 @@ class Drivetrain : public frc2::SubsystemBase {
   void AutomatedShoot();
   void DisableRamp();
   void EnableRamp();
+  void ChangeSpeed();
+  void SlowSpeed();
+  void QuickSpeed();
   units::meter_t GetEncodeurDroit();
   units::meter_t GetEncodeurGauche();
 
@@ -46,6 +49,10 @@ class Drivetrain : public frc2::SubsystemBase {
   double m_actualSpeed;
 
  private:
+  enum SpeedMode {
+    quick,
+    slow
+  };
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
                                   rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_moteurDroiteFollower{kDrivetrainMoteurDroite2,
@@ -88,4 +95,5 @@ class Drivetrain : public frc2::SubsystemBase {
   double m_receiveBufferDroitDouble[DRIVETRAIN_ULTRASONICSIZE];
   double m_receiveBufferGaucheDouble[DRIVETRAIN_ULTRASONICSIZE];
   int m_warningLevel = 0;
+  Drivetrain::SpeedMode m_speedMode = Drivetrain::SpeedMode::quick;
 };

@@ -6,10 +6,11 @@
 #include "Constants.h"
 
 #include "subsystems/Feeder.h"
+#include "subsystems/Intake.h"
 
 class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
  public:
-  Feed(Feeder* feeder);
+  Feed(Feeder* feeder, Intake* intake);
 
   void Initialize() override;
 
@@ -21,4 +22,5 @@ class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
 
  private:
   Feeder* m_feeder;
+  Intake* m_intake;
 };
