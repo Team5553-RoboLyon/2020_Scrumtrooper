@@ -5,13 +5,12 @@
 
 #include "Constants.h"
 
-#define SHOOTER_OPENLOOP_RAMP 0.8
-
 class Shooter : public frc2::SubsystemBase {
  public:
   Shooter();
 
   void Shoot(double puissance);
+  void SetRamp(double secondsFromNeutralToFull);
   void Periodic();
 
  private:

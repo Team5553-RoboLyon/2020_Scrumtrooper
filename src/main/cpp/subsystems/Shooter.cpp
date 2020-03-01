@@ -11,8 +11,6 @@
 Shooter::Shooter() {
   m_moteur2.Follow(m_moteur1);
   m_moteur2.SetInverted(true);
-  m_moteur1.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
-  m_moteur2.ConfigOpenloopRamp(SHOOTER_OPENLOOP_RAMP);
 }
 
 void Shooter::Shoot(double puissance) {
@@ -20,4 +18,9 @@ void Shooter::Shoot(double puissance) {
   m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
 }
 
-void Shooter::Periodic(){} 
+void Shooter::SetRamp(double secondsFromNeutralToFull) {
+  m_moteur1.ConfigOpenloopRamp(secondsFromNeutralToFull);
+  m_moteur2.ConfigOpenloopRamp(secondsFromNeutralToFull);
+}
+
+void Shooter::Periodic() {}

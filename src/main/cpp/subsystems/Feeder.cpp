@@ -10,12 +10,14 @@
 Feeder::Feeder() {
   m_moteurConveyor.SetInverted(true);
   m_moteurFeeder.SetInverted(true);
+  m_count = 0;
 }
 
 void Feeder::Activate() {
   m_moteurFeeder.Set(kFeederMoteurSpeed);
   m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
-                       kConveyorMoteurSpeed);
+                       kConveyorMoteurSpeed * std::abs(std::sin(m_count)));
+  m_count += 0.01 * 3.14;
 }
 
 void Feeder::UnBlock() {

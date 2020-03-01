@@ -19,7 +19,7 @@ Shoot::Shoot(Shooter* shooter) : m_shooter(shooter) {
   AddRequirements(m_shooter);
 }
 
-void Shoot::Initialize() {}
+void Shoot::Initialize() { m_shooter->SetRamp(0); }
 
 void Shoot::Execute() {
   double m_pitch = m_chameleonPitchEntry.GetDouble(0.0);

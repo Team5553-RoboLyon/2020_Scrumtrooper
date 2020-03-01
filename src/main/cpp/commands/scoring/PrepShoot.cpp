@@ -10,7 +10,7 @@
 
 PrepShoot::PrepShoot(Shooter* Shooter) : m_shooter(Shooter) { AddRequirements(m_shooter); }
 
-void PrepShoot::Initialize() {}
+void PrepShoot::Initialize() { m_shooter->SetRamp(kShooterPrepShootRamp); }
 
 void PrepShoot::Execute() { m_shooter->Shoot(kShooterPrepShootSpeed); }
 

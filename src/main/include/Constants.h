@@ -83,7 +83,7 @@ constexpr double kIntakeMoteurSpeedClosed = 0.2;
 
 // Feeder
 constexpr double kFeederMoteurSpeed = 0.9;
-constexpr double kConveyorMoteurSpeed = 0.25;
+constexpr double kConveyorMoteurSpeed = 1;
 
 // Turret
 constexpr double kTurretPositionConversionFactor = -360.0 * ((16.0 / 132.0) / 2048.0);
@@ -94,8 +94,9 @@ constexpr double kTurretPGain = 0.0503;
 constexpr double kTurretIGain = 0.004;
 constexpr double kTurretDGain = 0.002;
 
-// Shooter
-constexpr double kShooterPrepShootSpeed = 0.6;
+// ShooterS
+constexpr double kShooterPrepShootSpeed = 0.8;
+constexpr double kShooterPrepShootRamp = 0.7;
 
 // ControlPanelManipulator
 constexpr double kControlPanelManipulatorSpeed = 0.0;

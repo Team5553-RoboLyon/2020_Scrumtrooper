@@ -49,12 +49,12 @@ void RobotContainer::ConfigureControls() {
   j_bumperLeftButton.ToggleWhenActive(
       frc2::ParallelCommandGroup(PrepShoot(&m_shooter), MoveTurret(&m_turret)));
   j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(
-      MoveTurret(&m_turret), RetractHood(&m_adjustableHood, 45), Shoot(&m_shooter),
-      frc2::SequentialCommandGroup(frc2::WaitCommand(0.5_s), Feed(&m_feeder, &m_intake))));
+      RetractHood(&m_adjustableHood, 46), Shoot(&m_shooter),
+      frc2::SequentialCommandGroup(frc2::WaitCommand(0.8_s), Feed(&m_feeder, &m_intake))));
 
   // AdjustableHood buttons
   // ------  desactiver pour maintenance Volet
-  j_POV0Deg.WhenPressed(RetractHood(&m_adjustableHood, 45));
+  j_POV0Deg.WhenPressed(RetractHood(&m_adjustableHood, 46));
   j_POV90Deg.WhenPressed(RetractHood(&m_adjustableHood, 22));
   j_POV180Deg.WhenPressed(RetractHood(&m_adjustableHood, 0));
   // ------  desactiver pour maintenance Volet
@@ -71,8 +71,8 @@ void RobotContainer::ConfigureControls() {
   // j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
 
   //########## Panel ##########
-  // p_redButton.WhileHeld(EmergencyIntake(&m_intake, &m_drivetrain), false);
-  // p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
+  p_redButton.WhileHeld(EmergencyIntake(&m_intake, &m_drivetrain), false);
+  p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
 
   /*p_redButton.WhileHeld([this] {
     if (m_adjustableHoodAngle < 45) {
