@@ -16,6 +16,7 @@ class TelescopicArm : public frc2::PIDSubsystem {
   void Up();
   void Down();
   void Stop();
+  void ResistGravity();
 
  private:
   frc::VictorSP m_moteur{kTelescopicArmMoteur};

@@ -10,9 +10,11 @@
 Intake::Intake() { Close(); }
 
 void Intake::Open() {
+  Stop();
   m_solenoid.Set(frc::DoubleSolenoid::Value::kForward);
   m_position = IntakePosition::kOpened;
 }
+
 void Intake::Close() {
   Stop();
   m_solenoid.Set(frc::DoubleSolenoid::Value::kReverse);

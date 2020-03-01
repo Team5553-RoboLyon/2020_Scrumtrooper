@@ -52,11 +52,9 @@ void MoveTurret::Execute() {
 }
 
 void MoveTurret::End(bool interrupted) {
-  if (!interrupted) {
-    m_turret->Disable();
-    m_turret->Stop();
-    m_turret->StopLedRing();
-  }
+  m_turret->Disable();
+  m_turret->Stop();
+  m_turret->StopLedRing();
 }
 
 bool MoveTurret::IsFinished() { return false; }

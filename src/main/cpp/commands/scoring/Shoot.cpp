@@ -7,13 +7,26 @@
 
 #include "commands/scoring/Shoot.h"
 
-Shoot::Shoot(double puissance, Shooter* Shooter) : m_puissance(puissance), m_shooter(Shooter) {
+#include "networktables/NetworkTableInstance.h"
+
+Shoot::Shoot(Shooter* shooter) : m_shooter(shooter) {
+  m_chameleonPitchEntry = nt::NetworkTableInstance::GetDefault()
+                              .GetTable("chameleon-vision")
+                              ->GetEntry("turret/targetPitch");
+  m_chameleonIsValidEntry = nt::NetworkTableInstance::GetDefault()
+                                .GetTable("chameleon-vision")
+                                ->GetEntry("turret/isValid");
   AddRequirements(m_shooter);
 }
 
 void Shoot::Initialize() {}
 
-void Shoot::Execute() { m_shooter->Shoot(m_puissance); }
+void Shoot::Execute() {
+  double m_pitch = m_chameleonPitchEntry.GetDouble(0.0);
+  double puissance = m_pitch * m_pitch * 0.0252 + m_pitch * 0.215 + 1.27;
+
+  m_shooter->Shoot(puissance);
+}
 
 void Shoot::End(bool interrupted) { m_shooter->Shoot(0.0); }
 

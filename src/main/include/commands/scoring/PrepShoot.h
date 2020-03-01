@@ -9,20 +9,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Shooter.h"
-#include "subsystems/Feeder.h"
-#include "subsystems/Drivetrain.h"
-#include "subsystems/Intake.h"
-#include "subsystems/ControlPanelManipulator.h"
-#include "subsystems/AdjustableHood.h"
 
 class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
-  PrepShoot(double puissance, Shooter* shooter, Feeder* feeder, Drivetrain* drivetrain,
-            Intake* intake, ControlPanelManipulator* controlPanelManipulator,
-            AdjustableHood* adjustableHood);
+  PrepShoot(Shooter* shooter);
 
   void Initialize() override;
 
@@ -33,14 +25,5 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   bool IsFinished() override;
 
  private:
-  double m_puissance;
   Shooter* m_shooter;
-  Feeder* m_feeder;
-  Drivetrain* m_drivetrain;
-  Intake* m_intake;
-  ControlPanelManipulator* m_controlpanelmanipulator;
-  AdjustableHood* m_adjustablehood;
-
-  nt::NetworkTableEntry m_chameleonPitchEntry;
-  nt::NetworkTableEntry m_chameleonIsValidEntry;
 };

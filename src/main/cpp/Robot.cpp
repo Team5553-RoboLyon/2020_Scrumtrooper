@@ -23,7 +23,6 @@ void Robot::RobotPeriodic() {
 }
 
 void Robot::DisabledInit() {
-  m_container.m_drivetrain.EnableLogFile(false);
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
   // Remet à zéro le controlleur le PID ( dont le setpoint ) du volet
   m_container.m_adjustableHood.Disable();
@@ -31,12 +30,15 @@ void Robot::DisabledInit() {
 
 void Robot::DisabledPeriodic() {}
 
-void Robot::AutonomousInit() { m_container.m_adjustableHood.ResetEncoder(); }
+void Robot::AutonomousInit() {
+  m_container.m_intake.Close();
+  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  m_container.m_adjustableHood.ResetEncoder();
+}
 
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {
-  m_container.m_drivetrain.EnableLogFile(false);
   m_container.m_intake.Close();
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
   m_container.m_adjustableHood.ResetEncoder();

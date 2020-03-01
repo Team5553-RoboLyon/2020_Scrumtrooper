@@ -8,6 +8,9 @@
 #include "RobotContainer.h"
 
 #include <frc2/command/CommandScheduler.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
 
 #include "commands/driving/Drive.h"
 #include "commands/controlpanel/PositionControl.h"
@@ -24,7 +27,6 @@
 #include "commands/intake/ChangeIntakePosition.h"
 #include "commands/intake/TakeCell.h"
 #include "commands/intake/EmergencyIntake.h"
-#include "commands/scoring/ShootGroup.h"
 #include "commands/scoring/AutomatedShoot.h"
 #include "commands/scoring/MoveTurret.h"
 
@@ -43,16 +45,11 @@ void RobotContainer::ConfigureControls() {
   j_bumperRightButton.WhenPressed(ChangeIntakePosition(&m_intake, &m_drivetrain));
   j_axisRightTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
-  // Shooter buttons
-  // j_axisRightTrigger.WhileActiveContinous(ShootGroup(&m_shooter, &m_feeder, &m_drivetrain,
-  //                                                   &m_intake, &m_controlPanelManipulator,
-  //                                                   &m_turret, &m_adjustableHood, 1));
-  j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(Feed(&m_feeder, &m_intake)));
-
-  j_bumperLeftButton.ToggleWhenActive(
-      frc2::ParallelCommandGroup(PrepShoot(1, &m_shooter, &m_feeder, &m_drivetrain, &m_intake,
-                                           &m_controlPanelManipulator, &m_adjustableHood),
-                                 MoveTurret(&m_turret)));
+  // Shoot buttons
+  j_bumperLeftButton.ToggleWhenActive(PrepShoot(&m_shooter));
+  j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(
+      MoveTurret(&m_turret), RetractHood(&m_adjustableHood, 40), Shoot(&m_shooter),
+      frc2::SequentialCommandGroup(frc2::WaitCommand(0.5_s), Feed(&m_feeder, &m_intake))));
 
   // AdjustableHood buttons
   // ------  desactiver pour maintenance Volet
@@ -62,7 +59,7 @@ void RobotContainer::ConfigureControls() {
   // ------  desactiver pour maintenance Volet
 
   // Winch Buttons
-  j_yButton.WhenPressed(LiftRobot(&m_winch));
+  j_yButton.WhileHeld(LiftRobot(&m_winch));
   j_xButton.WhileHeld(DropRobot(&m_winch));
 
   // TelescopicArm Buttons
@@ -99,3 +96,5 @@ void RobotContainer::ConfigureControls() {
 
   (p_whiteButton && p_redButton).WhenActive([this] { m_adjustableHoodAngle = 0.0; });
 }
+
+void RobotContainer::ConfigureTestControls() {}

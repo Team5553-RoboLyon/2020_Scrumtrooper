@@ -19,8 +19,6 @@ double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
 
 void TelescopicArm::Up() {
   if (!IsEnabled()) m_moteur.Set(kTelescopicArmSpeedUp);
-
-  std::cout << "TelescopicArm::Up" ;
 }
 
 void TelescopicArm::Down() {
@@ -28,7 +26,9 @@ void TelescopicArm::Down() {
 }
 
 void TelescopicArm::Stop() {
-  //if (!IsEnabled()) m_moteur.StopMotor();
-    if (!IsEnabled()) m_moteur.Set(0.05);
+  if (!IsEnabled()) m_moteur.StopMotor();
+}
 
+void TelescopicArm::ResistGravity() {
+  if (!IsEnabled()) m_moteur.Set(0.05);
 }

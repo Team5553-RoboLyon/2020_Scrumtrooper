@@ -21,6 +21,6 @@ void RaiseHook::Initialize() {
 
 void RaiseHook::Execute() { m_telescopicarm->Up(); }
 
-void RaiseHook::End(bool interrupted) { m_telescopicarm->Stop(); }
+void RaiseHook::End(bool interrupted) { m_telescopicarm->ResistGravity(); }
 
 bool RaiseHook::IsFinished() { return false; }

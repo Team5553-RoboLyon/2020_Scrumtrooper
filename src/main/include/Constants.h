@@ -94,6 +94,9 @@ constexpr double kTurretPGain = 0.025;
 constexpr double kTurretIGain = 0;
 constexpr double kTurretDGain = 0;
 
+// Shooter
+constexpr double kShooterPrepShootSpeed = 0.6;
+
 // ControlPanelManipulator
 constexpr double kControlPanelManipulatorSpeed = 0.0;
 

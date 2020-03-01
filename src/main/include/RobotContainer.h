@@ -11,8 +11,7 @@
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/POVButton.h>
 #include <frc/Joystick.h>
-#include <frc2/command/ParallelCommandGroup.h>
-#include <frc2/command/ParallelRaceGroup.h>
+#include <frc/DriverStation.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -70,9 +69,9 @@ class RobotContainer {
   frc2::POVButton j_POV180Deg{&m_driverController, 180};
   frc2::POVButton j_POV270Deg{&m_driverController, 270};
 
-  /*frc2::Trigger j_endgameTrigger{[this] {
-    return ;
-  }};*/
+  frc2::Trigger m_endgameTrigger{
+      [this] { return frc::DriverStation::GetInstance().GetMatchTime() < 40; }};
 
   void ConfigureControls();
+  void ConfigureTestControls();
 };

@@ -9,12 +9,13 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Shooter.h"
 
 class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  public:
-  Shoot(double puissance, Shooter* shooter);
+  Shoot(Shooter* shooter);
 
   void Initialize() override;
 
@@ -25,6 +26,8 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   bool IsFinished() override;
 
  private:
-  double m_puissance;
   Shooter* m_shooter;
+
+  nt::NetworkTableEntry m_chameleonPitchEntry;
+  nt::NetworkTableEntry m_chameleonIsValidEntry;
 };
