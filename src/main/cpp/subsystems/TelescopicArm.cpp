@@ -9,9 +9,7 @@
 
 TelescopicArm::TelescopicArm()
     : PIDSubsystem(
-          frc2::PIDController(kTelescopicArmPGain, kTelescopicArmIGain, kTelescopicArmDGain)) {
-  m_moteur.SetInverted(true);
-}
+          frc2::PIDController(kTelescopicArmPGain, kTelescopicArmIGain, kTelescopicArmDGain)) {}
 
 void TelescopicArm::UseOutput(double output, double setpoint) {
   m_moteur.Set(kTelescopicArmGravityGain + output);
