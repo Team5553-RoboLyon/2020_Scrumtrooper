@@ -19,6 +19,6 @@ void RetractHood::Initialize() {
 
 void RetractHood::Execute() {}
 
-void RetractHood::End(bool interrupted) {}
+void RetractHood::End(bool interrupted) { m_adjustablehood->SetSetpoint(0.0); }
 
 bool RetractHood::IsFinished() { return false; }

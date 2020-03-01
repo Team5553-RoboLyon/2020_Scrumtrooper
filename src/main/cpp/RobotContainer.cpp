@@ -48,13 +48,13 @@ void RobotContainer::ConfigureControls() {
   // Shoot buttons
   j_bumperLeftButton.ToggleWhenActive(PrepShoot(&m_shooter));
   j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(
-      MoveTurret(&m_turret), RetractHood(&m_adjustableHood, 40), Shoot(&m_shooter),
+      MoveTurret(&m_turret), RetractHood(&m_adjustableHood, 45), Shoot(&m_shooter),
       frc2::SequentialCommandGroup(frc2::WaitCommand(0.5_s), Feed(&m_feeder, &m_intake))));
 
   // AdjustableHood buttons
   // ------  desactiver pour maintenance Volet
-  j_POV0Deg.WhenPressed(RetractHood(&m_adjustableHood, 40));
-  j_POV90Deg.WhenPressed(RetractHood(&m_adjustableHood, 30));
+  j_POV0Deg.WhenPressed(RetractHood(&m_adjustableHood, 45));
+  j_POV90Deg.WhenPressed(RetractHood(&m_adjustableHood, 22));
   j_POV180Deg.WhenPressed(RetractHood(&m_adjustableHood, 0));
   // ------  desactiver pour maintenance Volet
 
@@ -73,7 +73,7 @@ void RobotContainer::ConfigureControls() {
   // p_redButton.WhileHeld(EmergencyIntake(&m_intake, &m_drivetrain), false);
   // p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
 
-  p_redButton.WhileHeld([this] {
+  /*p_redButton.WhileHeld([this] {
     if (m_adjustableHoodAngle < 45) {
       m_adjustableHoodAngle += 0.5;
     } else {
@@ -94,7 +94,7 @@ void RobotContainer::ConfigureControls() {
       },
       {&m_adjustableHood});
 
-  (p_whiteButton && p_redButton).WhenActive([this] { m_adjustableHoodAngle = 0.0; });
+  (p_whiteButton && p_redButton).WhenActive([this] { m_adjustableHoodAngle = 0.0; });*/
 }
 
 void RobotContainer::ConfigureTestControls() {}

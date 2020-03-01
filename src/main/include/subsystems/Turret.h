@@ -4,6 +4,7 @@
 #include <frc/VictorSP.h>
 #include <frc/Encoder.h>
 #include <frc/DigitalOutput.h>
+#include <frc/smartdashboard/SendableBase.h>
 
 #include "Constants.h"
 
@@ -26,4 +27,5 @@ class Turret : public frc2::PIDSubsystem {
   frc::VictorSP m_moteur{kTurretMoteur};
   frc::Encoder m_encodeur{kTurretEncodeurA, kTurretEncodeurB};
   frc::DigitalOutput m_ledRing{kTurretRelay};
+  frc::SendableHelper test{};
 };

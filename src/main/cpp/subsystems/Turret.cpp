@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Turret.h"
+#include "frc/smartdashboard/Sendable.h"
 
 Turret::Turret()
     : frc2::PIDSubsystem(frc2::PIDController(kTurretPGain, kTurretIGain, kTurretDGain)) {
@@ -14,6 +15,7 @@ Turret::Turret()
   m_moteur.SetInverted(true);
   StopLedRing();
   SetSetpoint(0);
+  
   Disable();
 }
 
