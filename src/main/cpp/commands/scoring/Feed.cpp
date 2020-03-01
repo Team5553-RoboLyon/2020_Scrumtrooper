@@ -7,7 +7,8 @@
 
 #include "commands/scoring/Feed.h"
 
-Feed::Feed(Feeder* feeder, Intake* intake) : m_feeder(feeder), m_intake(intake) {
+Feed::Feed(Feeder* feeder, Intake* intake, Shooter* shooter)
+    : m_feeder(feeder), m_intake(intake), m_shooter(shooter) {
   AddRequirements(m_feeder);
   AddRequirements(m_intake);
 }
@@ -15,7 +16,9 @@ Feed::Feed(Feeder* feeder, Intake* intake) : m_feeder(feeder), m_intake(intake) 
 void Feed::Initialize() {}
 
 void Feed::Execute() {
-  m_feeder->Activate();
+  if ((TOTAL_CHARGE_TIME - m_shooter->GetTimer()) < 0) {
+    m_feeder->Activate();
+  }
   m_intake->Activate();
 }
 

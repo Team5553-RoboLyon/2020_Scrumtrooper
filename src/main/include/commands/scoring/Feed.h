@@ -7,10 +7,11 @@
 
 #include "subsystems/Feeder.h"
 #include "subsystems/Intake.h"
+#include "subsystems/Shooter.h"
 
 class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
  public:
-  Feed(Feeder* feeder, Intake* intake);
+  Feed(Feeder* feeder, Intake* intake, Shooter* shooter);
 
   void Initialize() override;
 
@@ -23,4 +24,5 @@ class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
  private:
   Feeder* m_feeder;
   Intake* m_intake;
+  Shooter* m_shooter;
 };

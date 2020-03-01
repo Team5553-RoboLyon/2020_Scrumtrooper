@@ -2,8 +2,11 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
+#include <frc/Timer.h>
 
 #include "Constants.h"
+
+#define TOTAL_CHARGE_TIME 3.25
 
 class Shooter : public frc2::SubsystemBase {
  public:
@@ -13,7 +16,11 @@ class Shooter : public frc2::SubsystemBase {
   void SetRamp(double secondsFromNeutralToFull);
   void Periodic();
 
+  double GetTimer();
+  void ResetTimer();
+
  private:
   VictorSPX m_moteur1{kShooterMoteurDroite};
   VictorSPX m_moteur2{kShooterMoteurGauche};
+  frc::Timer m_timer;
 };

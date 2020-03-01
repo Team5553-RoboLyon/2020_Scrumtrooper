@@ -17,7 +17,7 @@ void Feeder::Activate() {
   m_moteurFeeder.Set(kFeederMoteurSpeed);
   m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
                        kConveyorMoteurSpeed * std::abs(std::sin(m_count)));
-  m_count += 0.01 * 3.14;
+  m_count += 0.02 * 3.14;
 }
 
 void Feeder::UnBlock() {

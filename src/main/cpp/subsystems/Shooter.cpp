@@ -23,4 +23,11 @@ void Shooter::SetRamp(double secondsFromNeutralToFull) {
   m_moteur2.ConfigOpenloopRamp(secondsFromNeutralToFull);
 }
 
+double Shooter::GetTimer() { return m_timer.Get(); }
+
+void Shooter::ResetTimer() {
+  m_timer.Reset();
+  m_timer.Start();
+}
+
 void Shooter::Periodic() {}

@@ -48,9 +48,9 @@ void RobotContainer::ConfigureControls() {
   // Shoot buttons
   j_bumperLeftButton.ToggleWhenActive(
       frc2::ParallelCommandGroup(PrepShoot(&m_shooter), MoveTurret(&m_turret)));
-  j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(
-      RetractHood(&m_adjustableHood, 46), Shoot(&m_shooter),
-      frc2::SequentialCommandGroup(frc2::WaitCommand(0.8_s), Feed(&m_feeder, &m_intake))));
+  j_axisLeftTrigger.WhileActiveContinous(
+      frc2::ParallelCommandGroup(RetractHood(&m_adjustableHood, 46), Shoot(&m_shooter),
+                                 Feed(&m_feeder, &m_intake, &m_shooter)));
 
   // AdjustableHood buttons
   // ------  desactiver pour maintenance Volet
