@@ -9,15 +9,12 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Turret.h"
 
-#define BUFFER_SIZE 3
-
 class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
  public:
-  MoveTurret(Turret* turret);
+  MoveTurret(Turret* turret, double angle);
 
   void Initialize() override;
 
@@ -29,9 +26,5 @@ class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
 
  private:
   Turret* m_turret;
-  nt::NetworkTableEntry m_chameleonYawEntry;
-  nt::NetworkTableEntry m_chameleonIsValidEntry;
-  double m_bufferYaw[BUFFER_SIZE] = {0};
-  double m_bufferYawSorted[BUFFER_SIZE] = {0};
-  unsigned int m_bufferCount;
+  double m_angle;
 };

@@ -12,6 +12,7 @@
 #include <frc2/command/button/POVButton.h>
 #include <frc/Joystick.h>
 #include <frc/DriverStation.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 #include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
@@ -27,6 +28,8 @@ class RobotContainer {
  public:
   RobotContainer();
 
+  frc2::Command* GetAutonomousCommand();
+
   ControlPanelManipulator m_controlPanelManipulator;
   Drivetrain m_drivetrain;
   Feeder m_feeder;
@@ -36,8 +39,6 @@ class RobotContainer {
   TelescopicArm m_telescopicArm;
   Turret m_turret;
   Winch m_winch;
-  // TEST VALUES
-  double m_adjustableHoodAngle = 0.0;
 
  private:
   frc::XboxController m_driverController{0};
@@ -71,6 +72,8 @@ class RobotContainer {
 
   frc2::Trigger m_endgameTrigger{
       [this] { return frc::DriverStation::GetInstance().GetMatchTime() < 40; }};
+
+  frc::SendableChooser<frc2::Command*> m_autoChooser;
 
   void ConfigureControls();
   void ConfigureTestControls();

@@ -10,8 +10,9 @@ class AdjustableHood : public frc2::PIDSubsystem {
  public:
   AdjustableHood();
 
-    void UseOutput(double output, double setpoint) override;
+  void UseOutput(double output, double setpoint) override;
   double GetMeasurement() override;
+  void SetClampedSetpoint(double setpoint);
 
   void ResetEncoder();
 

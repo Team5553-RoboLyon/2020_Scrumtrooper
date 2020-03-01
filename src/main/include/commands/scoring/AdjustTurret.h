@@ -9,12 +9,15 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <networktables/NetworkTableEntry.h>
 
-#include "subsystems/AdjustableHood.h"
+#include "subsystems/Turret.h"
 
-class RetractHood : public frc2::CommandHelper<frc2::CommandBase, RetractHood> {
+#define BUFFER_SIZE 3
+
+class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret> {
  public:
-  RetractHood(AdjustableHood* adjustableHood, double angle);
+  AdjustTurret(Turret* turret);
 
   void Initialize() override;
 
@@ -25,6 +28,10 @@ class RetractHood : public frc2::CommandHelper<frc2::CommandBase, RetractHood> {
   bool IsFinished() override;
 
  private:
-  AdjustableHood* m_adjustablehood;
-  double m_angle;
+  Turret* m_turret;
+  nt::NetworkTableEntry m_chameleonYawEntry;
+  nt::NetworkTableEntry m_chameleonIsValidEntry;
+  double m_bufferYaw[BUFFER_SIZE] = {0};
+  double m_bufferYawSorted[BUFFER_SIZE] = {0};
+  unsigned int m_bufferCount;
 };

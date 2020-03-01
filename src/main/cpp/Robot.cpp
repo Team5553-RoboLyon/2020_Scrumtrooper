@@ -17,10 +17,7 @@ void Robot::RobotInit() {
   camera.SetFPS(30);
 }
 
-void Robot::RobotPeriodic() {
-  frc2::CommandScheduler::GetInstance().Run();
-  frc::SmartDashboard::PutNumber("Angle Hood :", m_container.m_adjustableHoodAngle);
-}
+void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
 void Robot::DisabledInit() {
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
@@ -34,6 +31,11 @@ void Robot::AutonomousInit() {
   m_container.m_intake.Close();
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
   m_container.m_adjustableHood.ResetEncoder();
+  m_autonomousCommand = m_container.GetAutonomousCommand();
+
+  if (m_autonomousCommand != nullptr) {
+    m_autonomousCommand->Schedule();
+  }
 }
 
 void Robot::AutonomousPeriodic() {}
@@ -42,6 +44,10 @@ void Robot::TeleopInit() {
   m_container.m_intake.Close();
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
   m_container.m_adjustableHood.ResetEncoder();
+  if (m_autonomousCommand != nullptr) {
+    m_autonomousCommand->Cancel();
+    m_autonomousCommand = nullptr;
+  }
 }
 
 void Robot::TeleopPeriodic() {}

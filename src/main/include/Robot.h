@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
+#include <frc2/command/Command.h>
 #include <opencv2/opencv.hpp>
 #include <cscore.h>
 #include <cameraserver/CameraServer.h>
@@ -29,4 +30,5 @@ class Robot : public frc::TimedRobot {
  private:
   RobotContainer m_container;
   cs::UsbCamera camera;
+  frc2::Command* m_autonomousCommand = nullptr;
 };

@@ -12,6 +12,8 @@
 #include <networktables/NetworkTableEntry.h>
 #include "subsystems/AdjustableHood.h"
 
+#define HOOD_BUFFER_SIZE 3
+
 class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
  public:
   AdjustHood(AdjustableHood* adjustableHood);
@@ -29,5 +31,7 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
 
   nt::NetworkTableEntry m_chameleonPitchEntry;
   nt::NetworkTableEntry m_chameleonIsValidEntry;
-
+  double m_bufferPitch[HOOD_BUFFER_SIZE] = {0};
+  double m_bufferPitchSorted[HOOD_BUFFER_SIZE] = {0};
+  unsigned int m_bufferCount;
 };
