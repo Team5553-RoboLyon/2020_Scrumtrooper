@@ -13,12 +13,13 @@ Feed::Feed(Feeder* feeder, Intake* intake, Shooter* shooter)
   AddRequirements(m_intake);
 }
 
-void Feed::Initialize() {}
+void Feed::Initialize() { m_timeout = std::max(TOTAL_CHARGE_TIME, m_shooter->GetTimer()) + 1.25; }
 
 void Feed::Execute() {
-  if ((TOTAL_CHARGE_TIME - m_shooter->GetTimer()) < 0) {
+  if (m_shooter->GetTimer() >= m_timeout) {
     m_feeder->Activate();
   }
+
   m_intake->Activate();
 }
 

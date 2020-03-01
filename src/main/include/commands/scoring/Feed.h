@@ -25,4 +25,5 @@ class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
   Feeder* m_feeder;
   Intake* m_intake;
   Shooter* m_shooter;
+  double m_timeout;
 };

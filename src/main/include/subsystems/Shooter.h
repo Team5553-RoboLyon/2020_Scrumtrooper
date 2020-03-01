@@ -6,7 +6,7 @@
 
 #include "Constants.h"
 
-#define TOTAL_CHARGE_TIME 3.25
+#define TOTAL_CHARGE_TIME 2.5
 
 class Shooter : public frc2::SubsystemBase {
  public:
@@ -18,6 +18,7 @@ class Shooter : public frc2::SubsystemBase {
 
   double GetTimer();
   void ResetTimer();
+  void StopTimer();
 
  private:
   VictorSPX m_moteur1{kShooterMoteurDroite};

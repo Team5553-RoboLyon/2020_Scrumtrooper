@@ -30,4 +30,6 @@ void Shooter::ResetTimer() {
   m_timer.Start();
 }
 
+void Shooter::StopTimer() { m_timer.Stop(); }
+
 void Shooter::Periodic() {}
