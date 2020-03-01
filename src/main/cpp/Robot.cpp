@@ -9,6 +9,7 @@
 
 #include <frc2/command/CommandScheduler.h>
 #include "cameraserver/CameraServer.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 void Robot::RobotInit() {
   camera = frc::CameraServer::GetInstance()->StartAutomaticCapture();
@@ -16,12 +17,15 @@ void Robot::RobotInit() {
   camera.SetFPS(30);
 }
 
-void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+void Robot::RobotPeriodic() {
+  frc2::CommandScheduler::GetInstance().Run();
+  frc::SmartDashboard::PutNumber("Angle Hood :", m_container.m_adjustableHoodAngle);
+}
 
 void Robot::DisabledInit() {
   m_container.m_drivetrain.EnableLogFile(false);
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
-  //Remet à zéro le controlleur le PID ( dont le setpoint ) du volet
+  // Remet à zéro le controlleur le PID ( dont le setpoint ) du volet
   m_container.m_adjustableHood.Disable();
 }
 

@@ -30,5 +30,4 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
   nt::NetworkTableEntry m_chameleonPitchEntry;
   nt::NetworkTableEntry m_chameleonIsValidEntry;
 
-
 };

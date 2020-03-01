@@ -37,6 +37,8 @@ class RobotContainer {
   TelescopicArm m_telescopicArm;
   Turret m_turret;
   Winch m_winch;
+  // TEST VALUES
+  double m_adjustableHoodAngle = 0.0;
 
  private:
   frc::XboxController m_driverController{0};
@@ -67,6 +69,10 @@ class RobotContainer {
   frc2::POVButton j_POV90Deg{&m_driverController, 90};
   frc2::POVButton j_POV180Deg{&m_driverController, 180};
   frc2::POVButton j_POV270Deg{&m_driverController, 270};
+
+  /*frc2::Trigger j_endgameTrigger{[this] {
+    return ;
+  }};*/
 
   void ConfigureControls();
 };

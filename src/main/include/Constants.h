@@ -82,7 +82,7 @@ constexpr double kIntakeMoteurSpeedOpened = 0.75;
 constexpr double kIntakeMoteurSpeedClosed = 0.2;
 
 // Feeder
-constexpr double kFeederMoteurSpeed = 0.60;
+constexpr double kFeederMoteurSpeed = 0.9;
 constexpr double kConveyorMoteurSpeed = 0.25;
 
 // Turret
@@ -90,7 +90,7 @@ constexpr double kTurretPositionConversionFactor = -360.0 * ((16.0 / 132.0) / 20
 constexpr double kTurretSpeed = 0.2;
 constexpr double kTurretMaxPosition = 45.0;
 constexpr double kTurretMaxSpeed = 0.4;
-constexpr double kTurretPGain = 0.02;
+constexpr double kTurretPGain = 0.025;
 constexpr double kTurretIGain = 0;
 constexpr double kTurretDGain = 0;
 
@@ -106,7 +106,7 @@ constexpr units::meters_per_second_squared_t kWinchMaxAcceleration = 1.0_mps_sq;
 constexpr units::meter_t kWinchLiftHeight = 1.0_m;
 
 // TelescopicArm
-constexpr double kTelescopicArmSpeedUp = 0.25;
+constexpr double kTelescopicArmSpeedUp = 0.35;
 constexpr double kTelescopicArmSpeedDown = 0.25;
 constexpr double kTelescopicArmPGain = 0.022;
 constexpr double kTelescopicArmIGain = 0;

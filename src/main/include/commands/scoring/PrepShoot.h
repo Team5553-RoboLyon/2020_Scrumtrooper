@@ -9,6 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Shooter.h"
 #include "subsystems/Feeder.h"
@@ -39,4 +40,7 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   Intake* m_intake;
   ControlPanelManipulator* m_controlpanelmanipulator;
   AdjustableHood* m_adjustablehood;
+
+  nt::NetworkTableEntry m_chameleonPitchEntry;
+  nt::NetworkTableEntry m_chameleonIsValidEntry;
 };

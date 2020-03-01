@@ -72,3 +72,5 @@ void AdjustableHood::Unblock() {
 void AdjustableHood::Stop() {
   if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }
+
+
