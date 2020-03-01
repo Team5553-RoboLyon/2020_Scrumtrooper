@@ -46,7 +46,8 @@ void RobotContainer::ConfigureControls() {
   j_axisRightTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Shoot buttons
-  j_bumperLeftButton.ToggleWhenActive(PrepShoot(&m_shooter));
+  j_bumperLeftButton.ToggleWhenActive(
+      frc2::ParallelCommandGroup(PrepShoot(&m_shooter), MoveTurret(&m_turret)));
   j_axisLeftTrigger.WhileActiveContinous(frc2::ParallelCommandGroup(
       MoveTurret(&m_turret), RetractHood(&m_adjustableHood, 45), Shoot(&m_shooter),
       frc2::SequentialCommandGroup(frc2::WaitCommand(0.5_s), Feed(&m_feeder, &m_intake))));
