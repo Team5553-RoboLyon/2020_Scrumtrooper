@@ -12,10 +12,11 @@
 
 #include "subsystems/TelescopicArm.h"
 #include "subsystems/Intake.h"
+#include "subsystems/Drivetrain.h"
 
 class DropHook : public frc2::CommandHelper<frc2::CommandBase, DropHook> {
  public:
-  DropHook(TelescopicArm* telescopicArm, Intake* m_intake);
+  DropHook(TelescopicArm* telescopicArm, Intake* m_intake, Drivetrain* drivetrain);
 
   void Initialize() override;
 
@@ -28,4 +29,5 @@ class DropHook : public frc2::CommandHelper<frc2::CommandBase, DropHook> {
  private:
   TelescopicArm* m_telescopicarm;
   Intake* m_intake;
+  Drivetrain* m_drivetrain;
 };

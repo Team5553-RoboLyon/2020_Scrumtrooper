@@ -16,7 +16,6 @@ MoveTurret::MoveTurret(Turret* turret, double angle) : m_turret(turret), m_angle
 void MoveTurret::Initialize() {
   m_turret->Enable();
   m_turret->SetSetpoint(m_angle);
-  std::cout << "################################## INIT" << std::endl;
 }
 
 void MoveTurret::Execute() {}

@@ -69,7 +69,7 @@ void Drivetrain::Periodic() {
                    m_encoderExterneDroite.Get(), m_encoderExterneGauche.Get());
   }
 
-  if (m_isUltraSonicSensorActivated) {
+  /*if (m_isUltraSonicSensorActivated) {
     //############ Arduino Droit #############
     uint8_t sendBufferDroit = 0;
     uint16_t receiveBufferDroit[DRIVETRAIN_ULTRASONICSIZE];
@@ -108,9 +108,11 @@ void Drivetrain::Periodic() {
           m_warningLevel++;
         }
       }
-    }
-    frc::SmartDashboard::PutNumber("Warning Level", m_warningLevel);
-  }
+
+}
+frc::SmartDashboard::PutNumber("Warning Level", m_warningLevel);
+}
+*/
 }
 
 void Drivetrain::EnableLogFile(bool enable) {
@@ -129,22 +131,16 @@ void Drivetrain::Stop() {
 }
 
 void Drivetrain::ChangeSpeed() {
-  if(Drivetrain::SpeedMode::quick) { 
-    SlowSpeed(); 
-  } else if (Drivetrain::SpeedMode::slow){
+  if (m_speedMode == Drivetrain::SpeedMode::quick) {
+    SlowSpeed();
+  } else if (m_speedMode == Drivetrain::SpeedMode::slow) {
     QuickSpeed();
   }
-
 }
 
-void Drivetrain::SlowSpeed()
-{
-  m_speedMode = Drivetrain::SpeedMode::slow;
-}
+void Drivetrain::SlowSpeed() { m_speedMode = Drivetrain::SpeedMode::slow; }
 
-void Drivetrain::QuickSpeed() {
- m_speedMode = Drivetrain::SpeedMode::quick;
-}
+void Drivetrain::QuickSpeed() { m_speedMode = Drivetrain::SpeedMode::quick; }
 
 double Drivetrain::CalculateTurn(double forward, double turn) {
   /*if (m_warningLevel == 3) {
@@ -170,10 +166,10 @@ double Drivetrain::CalculateTurn(double forward, double turn) {
 }
 
 void Drivetrain::Drive(double gauche, double droite) {
-  if(m_speedMode == 1){
-    droite *= 0.5;
-    gauche *= 0.5;
-  } 
+  if (m_speedMode == Drivetrain::SpeedMode::slow) {
+    droite *= 0.25;
+    gauche *= 0.25;
+  }
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
 

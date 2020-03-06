@@ -31,6 +31,7 @@ void Robot::AutonomousInit() {
   m_container.m_intake.Close();
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
   m_container.m_adjustableHood.ResetEncoder();
+  m_container.m_telescopicArm.ResetEncoder();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand != nullptr) {
@@ -44,6 +45,7 @@ void Robot::TeleopInit() {
   m_container.m_intake.Close();
   m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
   m_container.m_adjustableHood.ResetEncoder();
+  m_container.m_telescopicArm.ResetEncoder();
   if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;

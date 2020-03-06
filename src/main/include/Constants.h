@@ -66,8 +66,8 @@ constexpr int kTurretRelay = 9;
 
 // ############### PCM IDs ###############
 // Intake
-constexpr int kIntakeA = 0;
-constexpr int kIntakeB = 1;
+constexpr int kIntakeA = 4;
+constexpr int kIntakeB = 5;
 
 // ############### Motion Constants ###############
 // AdjustableHood
@@ -82,7 +82,7 @@ constexpr double kIntakeMoteurSpeedOpened = 0.75;
 constexpr double kIntakeMoteurSpeedClosed = 0.2;
 
 // Feeder
-constexpr double kFeederMoteurSpeed = 0.9;
+constexpr double kFeederMoteurSpeed = 0.6;
 constexpr double kConveyorMoteurSpeed = 0.5;
 
 // Turret

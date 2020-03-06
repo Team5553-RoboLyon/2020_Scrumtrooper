@@ -13,7 +13,7 @@ Feed::Feed(Feeder* feeder, Intake* intake, Shooter* shooter)
   AddRequirements(m_intake);
 }
 
-void Feed::Initialize() { m_timeout = std::max(TOTAL_CHARGE_TIME, m_shooter->GetTimer()) + 1.25; }
+void Feed::Initialize() { m_timeout = std::max(TOTAL_CHARGE_TIME, m_shooter->GetTimer()) + 1.5; }
 
 void Feed::Execute() {
   if (m_shooter->GetTimer() >= m_timeout) {

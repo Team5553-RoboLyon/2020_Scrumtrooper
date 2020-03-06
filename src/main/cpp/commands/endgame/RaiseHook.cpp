@@ -7,8 +7,8 @@
 
 #include "commands/endgame/RaiseHook.h"
 
-RaiseHook::RaiseHook(TelescopicArm* telescopicArm, Intake* intake)
-    : m_telescopicarm(telescopicArm), m_intake(intake) {
+RaiseHook::RaiseHook(TelescopicArm* telescopicArm, Intake* intake, Drivetrain* drivetrain)
+    : m_telescopicarm(telescopicArm), m_intake(intake), m_drivetrain(drivetrain) {
   AddRequirements(m_telescopicarm);
   AddRequirements(m_intake);
 }
@@ -19,7 +19,12 @@ void RaiseHook::Initialize() {
   m_telescopicarm->Up();
 }
 
-void RaiseHook::Execute() { m_telescopicarm->Up(); }
+void RaiseHook::Execute() {
+  m_telescopicarm->Up();
+  if (m_telescopicarm->GetEncodeur() > 50) {
+    m_drivetrain->SlowSpeed();
+  }
+}
 
 void RaiseHook::End(bool interrupted) { m_telescopicarm->ResistGravity(); }
 

@@ -17,12 +17,28 @@ void TelescopicArm::UseOutput(double output, double setpoint) {
 
 double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
 
+void TelescopicArm::ResetEncoder() { m_encodeur.Reset(); }
+
+double TelescopicArm::GetEncodeur() { m_encodeur.Get().to<double>(); }
+
 void TelescopicArm::Up() {
-  if (!IsEnabled()) m_moteur.Set(kTelescopicArmSpeedUp);
+  if (!IsEnabled()) {
+    if (m_encodeur.Get().to<double>() < 113.0) {
+      m_moteur.Set(kTelescopicArmSpeedUp);
+    } else {
+      ResistGravity();
+    }
+  }
 }
 
 void TelescopicArm::Down() {
-  if (!IsEnabled()) m_moteur.Set(-kTelescopicArmSpeedDown);
+  if (!IsEnabled()) {
+    if (m_encodeur.Get().to<double>() > 0) {
+      m_moteur.Set(-kTelescopicArmSpeedDown);
+    } else {
+      Stop();
+    }
+  }
 }
 
 void TelescopicArm::Stop() {

@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Shooter.h"
-#include "frc/smartdashboard/SmartDashboard.h"
 
 Shooter::Shooter() {
   m_moteur2.Follow(m_moteur1);
@@ -14,7 +13,6 @@ Shooter::Shooter() {
 }
 
 void Shooter::Shoot(double puissance) {
-  frc::SmartDashboard::PutNumber("Puissance shooter ", puissance);
   m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
 }
 
@@ -30,6 +28,9 @@ void Shooter::ResetTimer() {
   m_timer.Start();
 }
 
-void Shooter::StopTimer() { m_timer.Stop(); }
+void Shooter::StopTimer() {
+  m_timer.Stop();
+  m_timer.Reset();
+}
 
 void Shooter::Periodic() {}

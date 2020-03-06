@@ -7,8 +7,8 @@
 
 #include "commands/endgame/DropHook.h"
 
-DropHook::DropHook(TelescopicArm* telescopicArm, Intake* intake)
-    : m_telescopicarm(telescopicArm), m_intake(intake) {
+DropHook::DropHook(TelescopicArm* telescopicArm, Intake* intake, Drivetrain* drivetrain)
+    : m_telescopicarm(telescopicArm), m_intake(intake), m_drivetrain(drivetrain) {
   AddRequirements(m_telescopicarm);
   AddRequirements(m_intake);
 }
@@ -19,7 +19,12 @@ void DropHook::Initialize() {
   m_telescopicarm->Down();
 }
 
-void DropHook::Execute() { m_telescopicarm->Down(); }
+void DropHook::Execute() {
+  m_telescopicarm->Down();
+  if (m_telescopicarm->GetEncodeur() < 50) {
+    m_drivetrain->QuickSpeed();
+  }
+}
 
 void DropHook::End(bool interrupted) { m_telescopicarm->Stop(); }
 

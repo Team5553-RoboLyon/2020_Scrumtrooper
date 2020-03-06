@@ -12,7 +12,4 @@ EmergencyIntake::EmergencyIntake(Intake* intake, Drivetrain* drivetrain)
   AddRequirements(m_intake);
 }
 
-void EmergencyIntake::Initialize() {
-  m_intake->Close();
-  m_drivetrain->QuickSpeed();
-}
+void EmergencyIntake::Initialize() { m_intake->Close(); }

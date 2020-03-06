@@ -7,7 +7,7 @@
 
 #include "commands/scoring/AdjustHood.h"
 #include <networktables/NetworkTableInstance.h>
-#include <iostream>
+#include "frc/smartdashboard/SmartDashboard.h"
 
 AdjustHood::AdjustHood(AdjustableHood* adjustableHood) : m_adjustablehood(adjustableHood) {
   AddRequirements(m_adjustablehood);
@@ -34,7 +34,7 @@ void AdjustHood::Execute() {
   if (m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < 0) {
     m_adjustablehood->SetClampedSetpoint(46);
   } else {
-    double angle = 46 * std::exp(-m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] / 72);
+    double angle = 47.4 * std::exp(-m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] / 51.1);
     m_adjustablehood->SetClampedSetpoint(angle);
   }
 }

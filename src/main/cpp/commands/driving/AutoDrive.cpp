@@ -5,22 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/scoring/AutomatedShoot.h"
+#include "commands/driving/AutoDrive.h"
 
-AutomatedShoot::AutomatedShoot(Drivetrain* Drivetrain) : m_drivetrain(Drivetrain) {
+AutoDrive::AutoDrive(Drivetrain* drivetrain, double distance)
+    : m_drivetrain(drivetrain), m_distance(distance) {
   AddRequirements(m_drivetrain);
 }
 
-void AutomatedShoot::Initialize() {
+void AutoDrive::Initialize() {
   m_drivetrain->ResetEncodeurs();
   m_drivetrain->DisableRamp();
 }
 
-void AutomatedShoot::Execute() { m_drivetrain->AutomatedShoot(); }
+void AutoDrive::End(bool interrupted) { m_drivetrain->EnableRamp(); }
 
-void AutomatedShoot::End(bool interrupted) { m_drivetrain->EnableRamp(); }
-
-bool AutomatedShoot::IsFinished() {
+bool AutoDrive::IsFinished() {
   return (m_drivetrain->m_encoderValue > m_drivetrain->m_nbrTickAutomatedShoot - 3 &&
           m_drivetrain->m_encoderValue < m_drivetrain->m_nbrTickAutomatedShoot + 3);
 }

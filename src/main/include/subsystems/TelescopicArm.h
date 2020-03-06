@@ -13,6 +13,9 @@ class TelescopicArm : public frc2::PIDSubsystem {
   void UseOutput(double output, double setpoint) override;
   double GetMeasurement() override;
 
+  void ResetEncoder();
+  double GetEncodeur();
+
   void Up();
   void Down();
   void Stop();

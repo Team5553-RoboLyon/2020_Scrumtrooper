@@ -12,9 +12,9 @@
 
 #include "subsystems/Drivetrain.h"
 
-class AutomatedShoot : public frc2::CommandHelper<frc2::CommandBase, AutomatedShoot> {
+class AutoDrive : public frc2::CommandHelper<frc2::CommandBase, AutoDrive> {
  public:
-  AutomatedShoot(Drivetrain* drivetrain);
+  AutoDrive(Drivetrain* drivetrain, double distance);
 
   void Initialize() override;
 
@@ -26,4 +26,5 @@ class AutomatedShoot : public frc2::CommandHelper<frc2::CommandBase, AutomatedSh
 
  private:
   Drivetrain* m_drivetrain;
+  double m_distance;
 };

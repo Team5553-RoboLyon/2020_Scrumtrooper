@@ -23,7 +23,7 @@ void Shoot::Initialize() { m_shooter->SetRamp(0); }
 
 void Shoot::Execute() {
   double m_pitch = m_chameleonPitchEntry.GetDouble(0.0);
-  double puissance = m_pitch * m_pitch * 0.0252 + m_pitch * 0.215 + 1.27;
+  double puissance = m_pitch * m_pitch * 0.00329 + m_pitch * 0.0358 + 0.949;
 
   m_shooter->Shoot(puissance);
 }

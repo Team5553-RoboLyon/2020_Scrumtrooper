@@ -9,7 +9,7 @@
 
 Feeder::Feeder() {
   m_moteurConveyor.SetInverted(true);
-  m_moteurFeeder.SetInverted(true);
+  m_moteurFeeder.SetInverted(false);
   m_count = 0;
 }
 

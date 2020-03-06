@@ -10,6 +10,7 @@
 #include <frc2/command/CommandScheduler.h>
 #include <frc2/command/ParallelCommandGroup.h>
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/ParallelRaceGroup.h>
 #include <frc2/command/WaitCommand.h>
 #include <frc/shuffleboard/Shuffleboard.h>
 
@@ -34,7 +35,11 @@
 #include "commands/scoring/MoveTurret.h"
 
 RobotContainer::RobotContainer() {
-  m_autoChooser.AddOption("Simple Auto", new PrepShoot(&m_shooter));
+  m_autoChooser.AddOption(
+      "On tire comme des bourrins",
+      new frc2::SequentialCommandGroup(frc2::ParallelCommandGroup(
+          PrepShoot(&m_shooter).WithTimeout(3_s), Shoot(&m_shooter).WithTimeout(5_s))));
+
   m_autoChooser.AddOption("Complex Auto", new TakeCell(&m_intake));
 
   frc::Shuffleboard::GetTab("Autonomous").Add(m_autoChooser);
@@ -70,13 +75,9 @@ void RobotContainer::ConfigureControls() {
   j_xButton.WhileHeld(DropRobot(&m_winch));
 
   // TelescopicArm Buttons
-  j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake));
-  j_bButton.WhileHeld(RaiseHook(&m_telescopicArm, &m_intake));
-
-  j_startButton.WhenPressed(MoveTurret(&m_turret, 35));
-
-  // AutomatedShoot Buttons
-  // j_aButton.WhileActiveOnce(AutomatedShoot(&m_drivetrain));
+  j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake, &m_drivetrain));
+  j_bButton.WhenPressed(MoveTurret(&m_turret, 35))
+      .WhileHeld(RaiseHook(&m_telescopicArm, &m_intake, &m_drivetrain));
 
   //########## Panel ##########
   p_redButton.WhileHeld(EmergencyIntake(&m_intake, &m_drivetrain), false);

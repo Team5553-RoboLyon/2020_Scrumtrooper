@@ -7,7 +7,10 @@
 
 #include "subsystems/Intake.h"
 
-Intake::Intake() { Close(); }
+Intake::Intake() {
+  m_moteur.SetInverted(true);
+  Close();
+}
 
 void Intake::Open() {
   Stop();

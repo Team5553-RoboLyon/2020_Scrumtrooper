@@ -34,6 +34,7 @@ void AdjustableHood::UseOutput(double output, double setpoint) {
   m_prevVelocityError = GetController().GetVelocityError();
 
   m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
+  frc::SmartDashboard::PutNumber("output Hood", output);
 }
 
 void AdjustableHood::SetClampedSetpoint(double setpoint) {
