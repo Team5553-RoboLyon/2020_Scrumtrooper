@@ -35,19 +35,31 @@
 #include "commands/scoring/MoveTurret.h"
 
 RobotContainer::RobotContainer() {
-  m_autoChooser.AddOption("Shoot + Reculer",
-                          new frc2::SequentialCommandGroup(PrepShoot(&m_shooter).WithTimeout(3_s),
-                                                           Shoot(&m_shooter).WithTimeout(5_s),
-                                                           AutoDrive(&m_drivetrain, 300)));
+  m_autoChooser.AddOption(
+      "Shoot + Reculer",
+      new frc2::SequentialCommandGroup(
+          frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret))
+              .WithTimeout(3_s),
+          frc2::ParallelCommandGroup(AdjustHood(&m_adjustableHood), Shoot(&m_shooter),
+                                     Feed(&m_feeder, &m_intake, &m_shooter).WithTimeout(5_s),
+                                     AutoDrive(&m_drivetrain, 300))));
 
   m_autoChooser.AddOption(
       "Shoot + TakeCells + Shoot",
       new frc2::SequentialCommandGroup(
-          PrepShoot(&m_shooter).WithTimeout(3_s), Shoot(&m_shooter).WithTimeout(5_s),
-          frc2::ParallelRaceGroup(AutoDrive(&m_drivetrain, 2000),
-                                  TakeCell(&m_intake).WithTimeout(5_s)),
-          AutoDrive(&m_drivetrain, -1000), PrepShoot(&m_shooter).WithTimeout(3_s),
-          Shoot(&m_shooter).WithTimeout(15_s)));
+          frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret))
+              .WithTimeout(3_s),
+          frc2::ParallelCommandGroup(
+              AdjustHood(&m_adjustableHood), Shoot(&m_shooter),
+              Feed(&m_feeder, &m_intake, &m_shooter).WithTimeout(5_s),
+              frc2::ParallelRaceGroup(AutoDrive(&m_drivetrain, 2000),
+                                      TakeCell(&m_intake).WithTimeout(5_s)),
+              AutoDrive(&m_drivetrain, -1000),
+              frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret))
+                  .WithTimeout(3_s),
+              frc2::ParallelCommandGroup(
+                  AdjustHood(&m_adjustableHood), Shoot(&m_shooter),
+                  Feed(&m_feeder, &m_intake, &m_shooter).WithTimeout(15_s)))));
 
   frc::Shuffleboard::GetTab("Autonomous").Add(m_autoChooser);
 
