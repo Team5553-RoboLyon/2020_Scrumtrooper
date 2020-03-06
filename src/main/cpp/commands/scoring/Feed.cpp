@@ -16,11 +16,13 @@ Feed::Feed(Feeder* feeder, Intake* intake, Shooter* shooter)
 void Feed::Initialize() { m_timeout = std::max(TOTAL_CHARGE_TIME, m_shooter->GetTimer()) + 1.5; }
 
 void Feed::Execute() {
+  std::cout << " ############################################ 5 " << std::endl;
   if (m_shooter->GetTimer() >= m_timeout) {
     m_feeder->Activate();
   }
 
   m_intake->Activate();
+  std::cout << " ############################################ 6 " << std::endl;
 }
 
 void Feed::End(bool interrupted) {

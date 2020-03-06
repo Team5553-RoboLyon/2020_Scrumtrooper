@@ -38,6 +38,7 @@ Drivetrain::Drivetrain() {
   m_moteurGaucheFollower.Follow(m_moteurGauche);
 
   m_moteurGauche.SetInverted(true);
+  m_encoderExterneGauche.SetDistancePerPulse(-1);
 
   m_encodeurDroite1.SetPositionConversionFactor(kPositionConversionFactor);
   m_encodeurDroite2.SetPositionConversionFactor(kPositionConversionFactor);

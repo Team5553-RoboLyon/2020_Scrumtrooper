@@ -54,9 +54,9 @@ class RobotContainer {
   frc2::JoystickButton j_stickRightButton{&m_driverController, 10};
 
   frc::Joystick m_driverPanel{1};
-  frc2::JoystickButton p_yellowButton{&m_driverPanel, 3};
+  frc2::JoystickButton p_yellowButton{&m_driverPanel, 2};
   frc2::JoystickButton p_redButton{&m_driverPanel, 1};
-  frc2::JoystickButton p_whiteButton{&m_driverPanel, 2};
+  frc2::JoystickButton p_whiteButton{&m_driverPanel, 3};
 
   frc2::Trigger j_axisLeftTrigger{[this] {
     return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2;
