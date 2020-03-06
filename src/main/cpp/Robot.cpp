@@ -13,7 +13,7 @@
 void Robot::RobotInit() {
   camera = frc::CameraServer::GetInstance()->StartAutomaticCapture();
   camera.SetResolution(320, 240);
-  camera.SetFPS(30);
+  camera.SetFPS(12);
 }
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
