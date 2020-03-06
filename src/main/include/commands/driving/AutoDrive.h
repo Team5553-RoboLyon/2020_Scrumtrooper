@@ -26,5 +26,5 @@ class AutoDrive : public frc2::CommandHelper<frc2::CommandBase, AutoDrive> {
 
  private:
   Drivetrain* m_drivetrain;
-  double m_distance;
+  double m_distance, m_integral, m_prev_error;
 };

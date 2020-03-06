@@ -7,7 +7,6 @@
 
 #include "commands/scoring/AdjustHood.h"
 #include <networktables/NetworkTableInstance.h>
-#include "frc/smartdashboard/SmartDashboard.h"
 
 AdjustHood::AdjustHood(AdjustableHood* adjustableHood) : m_adjustablehood(adjustableHood) {
   AddRequirements(m_adjustablehood);

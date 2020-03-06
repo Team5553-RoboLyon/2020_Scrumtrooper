@@ -35,4 +35,4 @@ void Feeder::Periodic() {
                          kConveyorMoteurSpeed * std::abs(std::sin(m_count)));
     m_count += 0.02 * 3.14;
   }
-};
+}

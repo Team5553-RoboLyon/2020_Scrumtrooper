@@ -19,7 +19,7 @@ double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
 
 void TelescopicArm::ResetEncoder() { m_encodeur.Reset(); }
 
-double TelescopicArm::GetEncodeur() { m_encodeur.Get().to<double>(); }
+double TelescopicArm::GetEncodeur() { return m_encodeur.Get().to<double>(); }
 
 void TelescopicArm::Up() {
   if (!IsEnabled()) {

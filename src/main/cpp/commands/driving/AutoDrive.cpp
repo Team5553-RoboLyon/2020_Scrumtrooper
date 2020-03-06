@@ -8,18 +8,33 @@
 #include "commands/driving/AutoDrive.h"
 
 AutoDrive::AutoDrive(Drivetrain* drivetrain, double distance)
-    : m_drivetrain(drivetrain), m_distance(distance) {
+    : m_drivetrain(drivetrain), m_distance(distance), m_integral(0), m_prev_error(distance) {
   AddRequirements(m_drivetrain);
 }
 
 void AutoDrive::Initialize() {
   m_drivetrain->ResetEncodeurs();
-  m_drivetrain->DisableRamp();
+  // m_drivetrain->DisableRamp();
 }
 
-void AutoDrive::End(bool interrupted) { m_drivetrain->EnableRamp(); }
+void AutoDrive::Execute() {
+  double encoderValue = (m_drivetrain->GetEncodeurDroit() + m_drivetrain->GetEncodeurGauche()) / 2;
+
+  double error = m_distance - encoderValue;
+  m_integral += (error * .02);
+  double derivative = (error - m_prev_error) / .02;
+  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
+
+  m_prev_error = error;
+  m_drivetrain->Drive(rcw, rcw);
+}
+
+void AutoDrive::End(bool interrupted) {
+  m_drivetrain->EnableRamp();
+  m_drivetrain->Stop();
+}
 
 bool AutoDrive::IsFinished() {
-  return (m_drivetrain->m_encoderValue > m_drivetrain->m_nbrTickAutomatedShoot - 3 &&
-          m_drivetrain->m_encoderValue < m_drivetrain->m_nbrTickAutomatedShoot + 3);
+  return std::abs(m_distance -
+                  (m_drivetrain->GetEncodeurDroit() + m_drivetrain->GetEncodeurGauche()) / 2) < 3;
 }

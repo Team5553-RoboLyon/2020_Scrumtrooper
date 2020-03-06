@@ -7,8 +7,6 @@
 
 #include "subsystems/Drivetrain.h"
 
-#include <frc/smartdashboard/SmartDashboard.h>
-
 double find_radius(double d0, double d1, double d2, double h) {
   double a0 = (d1 - d0) / h;
   double a1 = (d2 - d0) / (2 * h);
@@ -21,10 +19,6 @@ double find_radius(double d0, double d1, double d2, double h) {
   double corde = d0 / a;
 
   double radius = corde / (2 * sin(angle));
-
-  frc::SmartDashboard::PutNumber("Angle", angle);
-  frc::SmartDashboard::PutNumber("Corde", corde);
-  frc::SmartDashboard::PutNumber("Radius", radius);
 
   return radius;
 }
@@ -58,10 +52,6 @@ Drivetrain::Drivetrain() {
 
 void Drivetrain::Periodic() {
   m_warningLevel = 0;
-  frc::SmartDashboard::PutNumber("Droite1", m_encodeurDroite1.GetPosition());
-  frc::SmartDashboard::PutNumber("Droite2", m_encodeurDroite2.GetPosition());
-  frc::SmartDashboard::PutNumber("Gauche1", m_encodeurGauche1.GetPosition());
-  frc::SmartDashboard::PutNumber("Gauche2", m_encodeurGauche2.GetPosition());
 
   if (m_isLogFileEnabled) {
     m_logFile->Log(m_encodeurDroite1.GetPosition(), m_encodeurDroite2.GetPosition(),
@@ -172,23 +162,6 @@ void Drivetrain::Drive(double gauche, double droite) {
   }
   m_moteurDroite.Set(droite);
   m_moteurGauche.Set(gauche);
-
-  m_actualSpeed = (droite + gauche) / 2;
-}
-
-void Drivetrain::AutomatedShoot() {
-  m_encoderValue =
-      (m_encoderExterneDroite.GetDistance() + m_encoderExterneGauche.GetDistance()) / 2;
-
-  double error = m_nbrTickAutomatedShoot - m_encoderValue;
-  m_integral += (error * .02);
-  double derivative = (error - m_prev_error) / .02;
-  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
-  // Precédement I = 0.00021
-
-  m_prev_error = error;
-  m_moteurDroite.Set(rcw);
-  m_moteurGauche.Set(rcw);
 }
 
 void Drivetrain::ResetEncodeurs() {
@@ -221,10 +194,6 @@ void Drivetrain::EnableRamp() {
   m_moteurGaucheFollower.SetOpenLoopRampRate(kOpenLoopRampeRate);
 }
 
-units::meter_t Drivetrain::GetEncodeurDroit() {
-  return units::meter_t((m_encodeurDroite1.GetPosition() + m_encodeurDroite2.GetPosition()) / 2.0);
-}
+int Drivetrain::GetEncodeurDroit() { return m_encoderExterneDroite.Get(); }
 
-units::meter_t Drivetrain::GetEncodeurGauche() {
-  return units::meter_t((m_encodeurGauche1.GetPosition() + m_encodeurGauche2.GetPosition()) / 2.0);
-}
+int Drivetrain::GetEncodeurGauche() { return m_encoderExterneGauche.Get(); }

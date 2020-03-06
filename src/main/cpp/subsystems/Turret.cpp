@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Turret.h"
-#include "frc/smartdashboard/Sendable.h"
 
 Turret::Turret()
     : frc2::PIDSubsystem(frc2::PIDController(kTurretPGain, kTurretIGain, kTurretDGain)) {

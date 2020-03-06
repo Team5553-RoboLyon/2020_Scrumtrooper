@@ -35,24 +35,16 @@ class Drivetrain : public frc2::SubsystemBase {
 
   void SetIdleMode(rev::CANSparkMax::IdleMode mode);
   void ResetEncodeurs();
-  void AutomatedShoot();
   void DisableRamp();
   void EnableRamp();
   void ChangeSpeed();
   void SlowSpeed();
   void QuickSpeed();
-  units::meter_t GetEncodeurDroit();
-  units::meter_t GetEncodeurGauche();
-
-  double m_encoderValue;
-  double m_nbrTickAutomatedShoot = 180;
-  double m_actualSpeed;
+  int GetEncodeurDroit();
+  int GetEncodeurGauche();
 
  private:
-  enum SpeedMode {
-    quick,
-    slow
-  };
+  enum SpeedMode { quick, slow };
   rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
                                   rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax m_moteurDroiteFollower{kDrivetrainMoteurDroite2,
