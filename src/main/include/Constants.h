@@ -78,12 +78,12 @@ constexpr double kAdjustableHoodDGain = 0.00025;
 constexpr double kAdjustableHoodGravityGain = 0.05;
 
 // Intake
-constexpr double kIntakeMoteurSpeedOpened = 0.75;
+constexpr double kIntakeMoteurSpeedOpened = 0.6;
 constexpr double kIntakeMoteurSpeedClosed = 0.2;
 
 // Feeder
 constexpr double kFeederMoteurSpeed = 0.6;
-constexpr double kConveyorMoteurSpeed = 0.5;
+constexpr double kConveyorMoteurSpeed = 0.65;
 
 // Turret
 constexpr double kTurretPositionConversionFactor = -360.0 * ((16.0 / 132.0) / 2048.0);

@@ -27,11 +27,13 @@
 #include <commands/scoring/Shoot.h>
 #include <commands/scoring/Feed.h>
 #include <commands/driving/AutoDrive.h>
+#include <commands/intake/ChangeIntakePosition.h>
+#include <commands/intake/TakeCell.h>
 
-class Auto : public frc2::CommandHelper<frc2::CommandBase, Auto> {
+class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
  public:
-  Auto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood, Feeder* feeder,
-       Intake* intake, Drivetrain* drivetrain);
+  ComplexAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood, Feeder* feeder,
+              Intake* intake, Drivetrain* drivetrain);
 
   void Initialize() override;
 
@@ -42,8 +44,9 @@ class Auto : public frc2::CommandHelper<frc2::CommandBase, Auto> {
   bool IsFinished() override;
 
  private:
-  frc2::ParallelCommandGroup *m_1, *m_2;
-  AutoDrive* m_3;
+  frc2::ParallelCommandGroup *m_1, *m_2, *m_4, *m_7, *m_8;
+  ChangeIntakePosition *m_3, *m_5;
+  AutoDrive* m_6;
   frc::Timer m_timer;
   int state;
 };

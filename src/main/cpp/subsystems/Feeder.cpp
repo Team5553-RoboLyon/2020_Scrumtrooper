@@ -32,7 +32,7 @@ void Feeder::Periodic() {
   if (m_activated) {
     m_moteurFeeder.Set(kFeederMoteurSpeed);
     m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
-                         kConveyorMoteurSpeed * std::abs(std::sin(m_count)));
+                         kConveyorMoteurSpeed * (std::abs(std::sin(m_count)) + 1) / 2);
     m_count += 0.02 * 3.14;
   }
 }

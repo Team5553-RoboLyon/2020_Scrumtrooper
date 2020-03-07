@@ -26,8 +26,10 @@ void AutoDrive::Execute() {
   double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
 
   m_prev_error = error;
-  if (rcw > 0.3) {
-    rcw = 0.3;
+  if (rcw > 0.5) {
+    rcw = 0.5;
+  } else if (rcw < -0.5) {
+    rcw = -0.5;
   }
   m_drivetrain->Drive(rcw, rcw);
 }

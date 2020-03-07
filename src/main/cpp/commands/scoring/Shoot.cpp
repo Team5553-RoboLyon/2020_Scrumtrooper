@@ -22,12 +22,11 @@ Shoot::Shoot(Shooter* shooter) : m_shooter(shooter) {
 void Shoot::Initialize() { m_shooter->SetRamp(0); }
 
 void Shoot::Execute() {
-  std::cout << " ############################################ 3 " << std::endl;
   double m_pitch = m_chameleonPitchEntry.GetDouble(0.0);
-  double puissance = m_pitch * m_pitch * 0.00329 + m_pitch * 0.0358 + 0.949;
+  double puissance = (m_pitch * m_pitch * 0.00329 + m_pitch * 0.0358 + 0.949) *
+                     0.95;  // 0.95 = pour les balles neuves
 
   m_shooter->Shoot(puissance);
-  std::cout << " ############################################ 4 " << std::endl;
 }
 
 void Shoot::End(bool interrupted) { m_shooter->Shoot(0.0); }

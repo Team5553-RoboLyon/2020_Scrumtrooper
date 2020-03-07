@@ -34,35 +34,17 @@
 #include "commands/scoring/MoveHood.h"
 #include "commands/scoring/MoveTurret.h"
 
-#include "commands/auto/Auto.h"
+#include "commands/auto/SimpleAuto.h"
+#include "commands/auto/ComplexAuto.h"
 
 RobotContainer::RobotContainer() {
   m_autoChooser.AddOption("Shoot + Reculer",
-                          new Auto(&m_shooter, &m_turret, &m_adjustableHood, &m_feeder, &m_intake,
-                                   &m_drivetrain)); /*frc2::SequentialCommandGroup(
-frc2::ParallelCommandGroup(PrepShoot(&m_shooter),
-AdjustTurret(&m_turret)) .WithTimeout(3_s),
-frc2::ParallelCommandGroup(AdjustHood(&m_adjustableHood),
-Shoot(&m_shooter), Feed(&m_feeder, &m_intake,
-&m_shooter)) .WithTimeout(5_s),
-AutoDrive(&m_drivetrain, 3000)));*/
+                          new SimpleAuto(&m_shooter, &m_turret, &m_adjustableHood, &m_feeder,
+                                         &m_intake, &m_drivetrain));
 
-  m_autoChooser.AddOption(
-      "Shoot + TakeCells + Shoot",
-      new frc2::SequentialCommandGroup(
-          frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret))
-              .WithTimeout(3_s),
-          frc2::ParallelCommandGroup(AdjustHood(&m_adjustableHood), Shoot(&m_shooter),
-                                     Feed(&m_feeder, &m_intake, &m_shooter))
-              .WithTimeout(5_s),
-          ChangeIntakePosition(&m_intake, &m_drivetrain),
-          frc2::ParallelRaceGroup(AutoDrive(&m_drivetrain, 17000),
-                                  TakeCell(&m_intake).WithTimeout(5_s)),
-          AutoDrive(&m_drivetrain, -10000),
-          frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret))
-              .WithTimeout(3_s),
-          frc2::ParallelCommandGroup(AdjustHood(&m_adjustableHood), Shoot(&m_shooter),
-                                     Feed(&m_feeder, &m_intake, &m_shooter).WithTimeout(15_s))));
+  m_autoChooser.AddOption("Shoot + TakeCells + Shoot",
+                          new ComplexAuto(&m_shooter, &m_turret, &m_adjustableHood, &m_feeder,
+                                          &m_intake, &m_drivetrain));
 
   frc::Shuffleboard::GetTab("Autonomous").Add(m_autoChooser);
 
@@ -98,7 +80,7 @@ void RobotContainer::ConfigureControls() {
 
   // TelescopicArm Buttons
   j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake, &m_drivetrain));
-  j_bButton.WhenPressed(MoveTurret(&m_turret, 35))
+  j_bButton.WhenPressed(MoveTurret(&m_turret, 0))
       .WhileHeld(RaiseHook(&m_telescopicArm, &m_intake, &m_drivetrain));
 
   //########## Panel ##########
