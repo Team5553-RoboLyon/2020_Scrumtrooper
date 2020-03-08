@@ -8,9 +8,10 @@
 #include "subsystems/Feeder.h"
 
 Feeder::Feeder() {
-  m_moteurConveyor.SetInverted(true);
+  m_moteurConveyor.SetInverted(false);
   m_moteurFeeder.SetInverted(false);
   m_count = 0;
+  m_activated = false;
 }
 
 void Feeder::Activate() { m_activated = true; }

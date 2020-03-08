@@ -76,7 +76,7 @@ void RobotContainer::ConfigureControls() {
 
   // Winch Buttons
   j_yButton.WhileHeld(LiftRobot(&m_winch));
-  j_xButton.WhileHeld(DropRobot(&m_winch));
+  // j_xButton.WhileHeld(DropRobot(&m_winch));
 
   // TelescopicArm Buttons
   j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake, &m_drivetrain));

@@ -22,10 +22,16 @@ Shoot::Shoot(Shooter* shooter) : m_shooter(shooter) {
 void Shoot::Initialize() { m_shooter->SetRamp(0); }
 
 void Shoot::Execute() {
+  double puissance = 1;
   double m_pitch = m_chameleonPitchEntry.GetDouble(0.0);
-  double puissance = (m_pitch * m_pitch * 0.00329 + m_pitch * 0.0358 + 0.949) *
-                     0.95;  // 0.95 = pour les balles neuves
-
+  if (m_pitch < 2 && m_pitch > -2) {
+    puissance = 0.96;
+  } else {
+    puissance = 1;
+    // puissance = m_pitch * m_pitch * 0.0033 + m_pitch * 0.0358 + 0.96;
+    // m_pitch * m_pitch * 0.00329 + m_pitch * 0.0358 + 0.949;
+    // m_pitch * m_pitch * 0.00215 + m_pitch * 0.0247 + 0.907
+  }
   m_shooter->Shoot(puissance);
 }
 

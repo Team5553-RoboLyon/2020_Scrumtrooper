@@ -45,6 +45,9 @@ class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
 
  private:
   frc2::ParallelCommandGroup *m_1, *m_2, *m_4, *m_7, *m_8;
+  AdjustHood* m_2_hood;
+  Shoot* m_2_shoot;
+  Feed* m_2_feed;
   ChangeIntakePosition *m_3, *m_5;
   AutoDrive* m_6;
   frc::Timer m_timer;
