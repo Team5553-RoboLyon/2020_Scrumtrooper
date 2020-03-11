@@ -22,6 +22,7 @@ ComplexAuto::ComplexAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjus
   m_7 = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
   m_8 = new frc2::ParallelCommandGroup(AdjustHood(adjustableHood), Shoot(shooter),
                                        Feed(feeder, intake, shooter));
+  m_moveHoodZero = new MoveHood(adjustableHood, 0);
 }
 
 void ComplexAuto::Initialize() {
@@ -82,13 +83,15 @@ void ComplexAuto::Execute() {
         m_2_feed->Cancel();
         m_2_shoot->Cancel();
         m_3->Cancel();
-        m_4->Schedule();  // Reculer
+        m_4->Schedule();             // Reculer
+        m_moveHoodZero->Schedule();  // Rétracter hood
       }
       break;
     case 2:
       if (m_timer.Get() > 10.5) {
         state++;
         m_4->Cancel();
+        m_moveHoodZero->Cancel();
         m_5->Schedule();  // Change Intake
         m_6->Schedule();  // Avancer
         m_7->Schedule();  // PrepShoot
@@ -123,6 +126,7 @@ void ComplexAuto::End(bool interrupted) {
   m_6->Cancel();
   m_7->Cancel();
   m_8->Cancel();
+  m_moveHoodZero->Cancel();
 }
 
 bool ComplexAuto::IsFinished() { return m_timer.Get() > 15; }

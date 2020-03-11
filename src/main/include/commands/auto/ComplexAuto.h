@@ -26,6 +26,7 @@
 #include <commands/scoring/AdjustTurret.h>
 #include <commands/scoring/Shoot.h>
 #include <commands/scoring/Feed.h>
+#include <commands/scoring/MoveHood.h>
 #include <commands/driving/AutoDrive.h>
 #include <commands/intake/ChangeIntakePosition.h>
 #include <commands/intake/TakeCell.h>
@@ -50,6 +51,7 @@ class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
   Feed* m_2_feed;
   ChangeIntakePosition *m_3, *m_5;
   AutoDrive* m_6;
+  MoveHood* m_moveHoodZero;
   frc::Timer m_timer;
   int state;
 };

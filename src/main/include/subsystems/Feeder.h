@@ -17,7 +17,7 @@ class Feeder : public frc2::SubsystemBase {
   void Periodic() override;
 
  private:
-  frc::VictorSP m_moteurFeeder{kFeederMoteur};
+  VictorSPX m_moteurFeeder{kFeederMoteur};
   VictorSPX m_moteurConveyor{kConveyorMoteur};
   double m_count;
   bool m_activated;

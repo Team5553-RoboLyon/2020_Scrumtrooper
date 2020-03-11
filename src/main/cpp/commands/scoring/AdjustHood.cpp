@@ -29,8 +29,11 @@ void AdjustHood::Execute() {
 
   std::partial_sort_copy(&m_bufferPitch[0], &m_bufferPitch[HOOD_BUFFER_SIZE - 1],
                          &m_bufferPitchSorted[0], &m_bufferPitchSorted[HOOD_BUFFER_SIZE - 1]);
-
-  if (m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < 0) {
+  if (std::abs(m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)]) < 2) {
+    m_adjustablehood->SetClampedSetpoint(42);
+  } else if (m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < -4) {
+    m_adjustablehood->SetClampedSetpoint(45);
+  } else if (m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < 0) {
     m_adjustablehood->SetClampedSetpoint(46);
   } else {
     double angle = 47.4 * std::exp(-m_bufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] / 51.1);

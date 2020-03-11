@@ -6,7 +6,7 @@
 
 #include "Constants.h"
 
-#define TOTAL_CHARGE_TIME 2.5
+#define TOTAL_CHARGE_TIME 1.5
 
 class Shooter : public frc2::SubsystemBase {
  public:

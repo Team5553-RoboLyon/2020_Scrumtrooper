@@ -23,8 +23,8 @@ constexpr int kWinchMoteur = 5;
 constexpr int kShooterMoteurGauche = 10;
 constexpr int kShooterMoteurDroite = 9;
 
-// Intake
-constexpr int kIntakeMoteur = 7;
+// Feeder
+constexpr int kFeederMoteur = 7;
 
 // Conveyor
 constexpr int kConveyorMoteur = 8;
@@ -33,11 +33,11 @@ constexpr int kConveyorMoteur = 8;
 constexpr int kAdjustableHoodMoteur = 6;
 
 // ############### PWM IDs ###############
-// Feeder
-constexpr int kFeederMoteur = 3;
+// Intake
+constexpr int kIntakeMoteur = 2;
 
 // Turret
-constexpr int kTurretMoteur = 2;
+constexpr int kTurretMoteur = 3;
 
 // ControlPanelManipulator
 constexpr int kControlPanelManipulatorMoteur = 4;

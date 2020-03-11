@@ -34,10 +34,10 @@ void Intake::ChangePosition() {
 
 void Intake::Activate() {
   if (m_position == IntakePosition::kOpened) {
-    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeedOpened);
+    m_moteur.Set(kIntakeMoteurSpeedOpened);
   } else {
-    m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kIntakeMoteurSpeedClosed);
+    m_moteur.Set(kIntakeMoteurSpeedClosed);
   }
 }
 
-void Intake::Stop() { m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0); }
+void Intake::Stop() { m_moteur.Set(0.0); }

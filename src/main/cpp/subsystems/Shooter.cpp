@@ -10,8 +10,8 @@
 Shooter::Shooter() {
   m_moteur2.Follow(m_moteur1);
   m_moteur2.SetInverted(true);
-  m_moteur1.ConfigVoltageCompSaturation(12);
-  m_moteur2.ConfigVoltageCompSaturation(12);
+  m_moteur1.ConfigVoltageCompSaturation(12.5);
+  m_moteur2.ConfigVoltageCompSaturation(12.5);
   m_moteur1.EnableVoltageCompensation(true);
   m_moteur2.EnableVoltageCompensation(true);
   m_timer.Reset();

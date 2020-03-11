@@ -21,5 +21,5 @@ class Intake : public frc2::SubsystemBase {
  private:
   IntakePosition m_position;
   frc::DoubleSolenoid m_solenoid{kIntakeA, kIntakeB};
-  VictorSPX m_moteur{kIntakeMoteur};
+  frc::VictorSP m_moteur{kIntakeMoteur};
 };
