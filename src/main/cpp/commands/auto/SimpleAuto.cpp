@@ -11,36 +11,52 @@
 
 SimpleAuto::SimpleAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood,
                        Feeder* feeder, Intake* intake, Drivetrain* drivetrain) {
-  m_1 = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
-  m_2 = new frc2::ParallelCommandGroup(AdjustHood(adjustableHood), Shoot(shooter),
-                                       Feed(feeder, intake, shooter));
-  m_3 = new AutoDrive(drivetrain, 1500);
+  m_prepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
+  m_shootGroup = new frc2::ParallelCommandGroup(AdjustHood(adjustableHood), Shoot(shooter),
+                                                Feed(feeder, intake, shooter));
+  m_reculer = new AutoDrive(drivetrain, 1500);
 }
 
 void SimpleAuto::Initialize() {
   state = 0;
-  m_1->Schedule();
+  m_prepShootGroup->Schedule();
   m_timer.Reset();
   m_timer.Start();
 }
 
 void SimpleAuto::Execute() {
-  if (m_timer.Get() > 3 && state == 0) {
-    state = 1;
-    m_1->Cancel();
-    m_2->Schedule();
-  } else if (m_timer.Get() > 12 && state == 1) {
-    m_2->Cancel();
-    m_3->Schedule();
+  switch (state) {
+    case 0:
+      if (m_timer.Get() > 3) {
+        state++;
+        m_prepShootGroup->Cancel();
+        m_shootGroup->Schedule();
+      }
+      break;
+    case 1:
+      if (m_timer.Get() > 12) {
+        state++;
+        m_shootGroup->Cancel();
+        m_reculer->Schedule();
+      }
+      break;
+    case 2:
+      if (m_timer.Get() > 12.6) {
+        m_reculer->Cancel();
+      }
+      break;
+    default:
+      break;
   }
 }
 
 void SimpleAuto::End(bool interrupted) {
   m_timer.Reset();
   m_timer.Stop();
-  m_1->Cancel();
-  m_2->Cancel();
-  m_3->Cancel();
+
+  m_prepShootGroup->Cancel();
+  m_shootGroup->Cancel();
+  m_reculer->Cancel();
 }
 
-bool SimpleAuto::IsFinished() { return m_timer.Get() > 12.6; }
+bool SimpleAuto::IsFinished() { return m_timer.Get() > 15; }

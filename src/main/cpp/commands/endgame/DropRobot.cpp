@@ -9,10 +9,7 @@
 
 DropRobot::DropRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
 
-void DropRobot::Initialize() {
-  m_winch->Disable();
-  m_winch->Down();
-}
+void DropRobot::Initialize() { m_winch->Down(); }
 
 void DropRobot::Execute() {}
 

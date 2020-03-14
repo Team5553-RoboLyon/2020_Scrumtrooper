@@ -12,7 +12,6 @@ AdjustableHood::AdjustableHood()
           frc2::PIDController(kAdjustableHoodPGain, kAdjustableHoodIGain, kAdjustableHoodDGain)) {
   m_encodeur.SetDistancePerRotation(kAdjustableHoodPositionConversionFactor);
   m_encodeur.Reset();
-  GetController().SetTolerance(1);
   GetController().SetIntegratorRange(-0.03, 0.03);
   Disable();
   m_lockedCount = 0;

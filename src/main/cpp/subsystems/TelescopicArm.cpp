@@ -7,44 +7,28 @@
 
 #include "subsystems/TelescopicArm.h"
 
-TelescopicArm::TelescopicArm()
-    : PIDSubsystem(
-          frc2::PIDController(kTelescopicArmPGain, kTelescopicArmIGain, kTelescopicArmDGain)) {}
-
-void TelescopicArm::UseOutput(double output, double setpoint) {
-  m_moteur.Set(kTelescopicArmGravityGain + output);
-}
-
-double TelescopicArm::GetMeasurement() { return m_encodeur.GetDistance(); }
+TelescopicArm::TelescopicArm() {}
 
 void TelescopicArm::ResetEncoder() { m_encodeur.Reset(); }
 
 double TelescopicArm::GetEncodeur() { return m_encodeur.Get().to<double>(); }
 
 void TelescopicArm::Up() {
-  if (!IsEnabled()) {
-    if (m_encodeur.Get().to<double>() < 113.0) {
-      m_moteur.Set(kTelescopicArmSpeedUp);
-    } else {
-      ResistGravity();
-    }
+  if (m_encodeur.Get().to<double>() < 113.0) {
+    m_moteur.Set(kTelescopicArmSpeedUp);
+  } else {
+    ResistGravity();
   }
 }
 
 void TelescopicArm::Down() {
-  if (!IsEnabled()) {
-    if (m_encodeur.Get().to<double>() > 0) {
-      m_moteur.Set(-kTelescopicArmSpeedDown);
-    } else {
-      Stop();
-    }
+  if (m_encodeur.Get().to<double>() > 0) {
+    m_moteur.Set(-kTelescopicArmSpeedDown);
+  } else {
+    Stop();
   }
 }
 
-void TelescopicArm::Stop() {
-  if (!IsEnabled()) m_moteur.StopMotor();
-}
+void TelescopicArm::Stop() { m_moteur.StopMotor(); }
 
-void TelescopicArm::ResistGravity() {
-  if (!IsEnabled()) m_moteur.Set(0.05);
-}
+void TelescopicArm::ResistGravity() { m_moteur.Set(0.05); }

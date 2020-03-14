@@ -12,17 +12,12 @@ Turret::Turret()
   m_encodeur.SetDistancePerPulse(kTurretPositionConversionFactor);
   m_encodeur.Reset();
   m_moteur.SetInverted(true);
-  GetController().SetTolerance(1);
-  StopLedRing();
   SetSetpoint(0);
-
   Disable();
 }
 
 void Turret::UseOutput(double output, double setpoint) {
-  if (output < -kTurretMaxSpeed) output = -kTurretMaxSpeed;
-  if (output > kTurretMaxSpeed) output = kTurretMaxSpeed;
-  m_moteur.Set(output);
+  m_moteur.Set(std::clamp(output, -kTurretMaxSpeed, kTurretMaxSpeed));
 }
 
 double Turret::GetMeasurement() { return m_encodeur.GetDistance(); }
@@ -42,7 +37,3 @@ void Turret::Left() {
 void Turret::Right() {
   if (!IsEnabled()) m_moteur.Set(kTurretSpeed);
 }
-
-void Turret::StartLedRing() { m_ledRing.Set(true); }
-
-void Turret::StopLedRing() { m_ledRing.Set(false); }

@@ -15,7 +15,6 @@ DropHook::DropHook(TelescopicArm* telescopicArm, Intake* intake, Drivetrain* dri
 
 void DropHook::Initialize() {
   m_intake->Open();
-  m_telescopicarm->Disable();
   m_telescopicarm->Down();
 }
 

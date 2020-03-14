@@ -12,15 +12,12 @@
 
 #include <frc/Timer.h>
 
-#include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Feeder.h"
 #include "subsystems/AdjustableHood.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
-#include "subsystems/TelescopicArm.h"
 #include "subsystems/Turret.h"
-#include "subsystems/Winch.h"
 
 #include <commands/scoring/PrepShoot.h>
 #include <commands/scoring/AdjustTurret.h>
@@ -42,8 +39,8 @@ class SimpleAuto : public frc2::CommandHelper<frc2::CommandBase, SimpleAuto> {
   bool IsFinished() override;
 
  private:
-  frc2::ParallelCommandGroup *m_1, *m_2;
-  AutoDrive* m_3;
+  frc2::ParallelCommandGroup *m_prepShootGroup, *m_shootGroup;
+  AutoDrive* m_reculer;
   frc::Timer m_timer;
   int state;
 };

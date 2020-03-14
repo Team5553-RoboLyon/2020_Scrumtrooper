@@ -12,15 +12,12 @@
 
 #include <frc/Timer.h>
 
-#include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Feeder.h"
 #include "subsystems/AdjustableHood.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
-#include "subsystems/TelescopicArm.h"
 #include "subsystems/Turret.h"
-#include "subsystems/Winch.h"
 
 #include <commands/scoring/PrepShoot.h>
 #include <commands/scoring/AdjustTurret.h>
@@ -45,12 +42,12 @@ class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
   bool IsFinished() override;
 
  private:
-  frc2::ParallelCommandGroup *m_1, *m_2, *m_4, *m_7, *m_8;
-  AdjustHood* m_2_hood;
-  Shoot* m_2_shoot;
-  Feed* m_2_feed;
-  ChangeIntakePosition *m_3, *m_5;
-  AutoDrive* m_6;
+  frc2::ParallelCommandGroup *m_prepShootGroup, *m_shootGroup, *m_reculer;
+  AdjustHood* m_adjustHood;
+  Shoot* m_shoot;
+  Feed* m_feed;
+  ChangeIntakePosition* m_changeIntakePosition;
+  AutoDrive* m_avancer;
   MoveHood* m_moveHoodZero;
   frc::Timer m_timer;
   int state;

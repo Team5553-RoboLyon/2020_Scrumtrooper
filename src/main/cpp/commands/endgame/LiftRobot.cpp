@@ -9,16 +9,10 @@
 
 LiftRobot::LiftRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
 
-void LiftRobot::Initialize() {
-  m_winch->Disable();
-  m_winch->Up();
-}
+void LiftRobot::Initialize() { m_winch->Up(); }
 
 void LiftRobot::Execute() {}
 
-void LiftRobot::End(bool interrStretchted) {
-  m_winch->Disable();
-  m_winch->Stop();
-}
+void LiftRobot::End(bool interrupted) { m_winch->Stop(); }
 
 bool LiftRobot::IsFinished() { return false; }

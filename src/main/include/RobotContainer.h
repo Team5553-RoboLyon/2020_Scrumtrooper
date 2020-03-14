@@ -14,7 +14,6 @@
 #include <frc/DriverStation.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
-#include "subsystems/ControlPanelManipulator.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Feeder.h"
 #include "subsystems/AdjustableHood.h"
@@ -30,7 +29,6 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
 
-  ControlPanelManipulator m_controlPanelManipulator;
   Drivetrain m_drivetrain;
   Feeder m_feeder;
   AdjustableHood m_adjustableHood;

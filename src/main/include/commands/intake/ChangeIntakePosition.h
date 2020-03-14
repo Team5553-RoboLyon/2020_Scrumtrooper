@@ -11,16 +11,14 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Intake.h"
-#include "subsystems/Drivetrain.h"
 
 class ChangeIntakePosition
     : public frc2::CommandHelper<frc2::InstantCommand, ChangeIntakePosition> {
  public:
-  ChangeIntakePosition(Intake* intake, Drivetrain* drivetrain);
+  ChangeIntakePosition(Intake* intake);
 
   void Initialize() override;
 
  private:
   Intake* m_intake;
-  Drivetrain* m_drivetrain;
 };

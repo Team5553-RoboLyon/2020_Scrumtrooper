@@ -15,7 +15,6 @@ RaiseHook::RaiseHook(TelescopicArm* telescopicArm, Intake* intake, Drivetrain* d
 
 void RaiseHook::Initialize() {
   m_intake->Open();
-  m_telescopicarm->Disable();
   m_telescopicarm->Up();
 }
 

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <frc/VictorSP.h>
-#include <ctre/Phoenix.h>
+
+#include <ctre/phoenix/motorcontrol/can/VictorSPX.h>
 
 #include "Constants.h"
 
@@ -14,11 +14,7 @@ class Feeder : public frc2::SubsystemBase {
   void UnBlock();
   void Stop();
 
-  void Periodic() override;
-
  private:
-  VictorSPX m_moteurFeeder{kFeederMoteur};
-  VictorSPX m_moteurConveyor{kConveyorMoteur};
-  double m_count;
-  bool m_activated;
+  ctre::phoenix::motorcontrol::can::VictorSPX m_moteurFeeder{kFeederMoteur};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_moteurConveyor{kConveyorMoteur};
 };

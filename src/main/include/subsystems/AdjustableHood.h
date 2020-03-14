@@ -2,7 +2,8 @@
 
 #include <frc2/command/PIDSubsystem.h>
 #include <frc/DutyCycleEncoder.h>
-#include <ctre/Phoenix.h>
+
+#include <ctre/phoenix/motorcontrol/can/VictorSPX.h>
 
 #include "Constants.h"
 
@@ -23,7 +24,7 @@ class AdjustableHood : public frc2::PIDSubsystem {
   void Stop();
 
  private:
-  VictorSPX m_moteur{kAdjustableHoodMoteur};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur{kAdjustableHoodMoteur};
   frc::DutyCycleEncoder m_encodeur{kAdjustableHoodEncodeur};
   int m_lockedCount = 0;
   double m_prevVelocityError;

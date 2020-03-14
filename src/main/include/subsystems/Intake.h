@@ -3,7 +3,6 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/VictorSP.h>
-#include <ctre/Phoenix.h>
 
 #include "Constants.h"
 

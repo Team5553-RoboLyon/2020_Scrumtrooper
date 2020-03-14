@@ -16,8 +16,6 @@
 
 #include "commands/driving/Drive.h"
 #include "commands/driving/AutoDrive.h"
-#include "commands/controlpanel/PositionControl.h"
-#include "commands/controlpanel/RotationControl.h"
 #include "commands/endgame/DropHook.h"
 #include "commands/endgame/DropRobot.h"
 #include "commands/endgame/LiftRobot.h"
@@ -61,7 +59,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() { return m_autoChooser.Get
 void RobotContainer::ConfigureControls() {
   //########## Xbox Controller ##########
   // Intake buttons
-  j_bumperRightButton.WhenPressed(ChangeIntakePosition(&m_intake, &m_drivetrain));
+  j_bumperRightButton.WhenPressed(ChangeIntakePosition(&m_intake));
   j_axisRightTrigger.WhileActiveContinous(TakeCell(&m_intake));
 
   // Shoot buttons

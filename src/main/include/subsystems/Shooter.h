@@ -1,8 +1,9 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <ctre/Phoenix.h>
 #include <frc/Timer.h>
+
+#include <ctre/phoenix/motorcontrol/can/VictorSPX.h>
 
 #include "Constants.h"
 
@@ -21,7 +22,7 @@ class Shooter : public frc2::SubsystemBase {
   void StopTimer();
 
  private:
-  VictorSPX m_moteur1{kShooterMoteurDroite};
-  VictorSPX m_moteur2{kShooterMoteurGauche};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur1{kShooterMoteurDroite};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur2{kShooterMoteurGauche};
   frc::Timer m_timer;
 };

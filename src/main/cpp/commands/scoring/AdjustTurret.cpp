@@ -20,10 +20,7 @@ AdjustTurret::AdjustTurret(Turret* turret) : m_turret(turret) {
   m_bufferCount = 0;
 }
 
-void AdjustTurret::Initialize() {
-  m_turret->Enable();
-  m_turret->StartLedRing();
-}
+void AdjustTurret::Initialize() { m_turret->Enable(); }
 
 void AdjustTurret::Execute() {
   if (m_chameleonIsValidEntry.GetBoolean(false)) {

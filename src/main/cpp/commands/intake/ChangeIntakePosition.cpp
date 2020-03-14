@@ -7,8 +7,7 @@
 
 #include "commands/intake/ChangeIntakePosition.h"
 
-ChangeIntakePosition::ChangeIntakePosition(Intake* intake, Drivetrain* drivetrain)
-    : m_intake(intake), m_drivetrain(drivetrain) {
+ChangeIntakePosition::ChangeIntakePosition(Intake* intake) : m_intake(intake) {
   AddRequirements(m_intake);
 }
 
