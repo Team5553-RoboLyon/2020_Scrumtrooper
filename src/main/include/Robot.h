@@ -9,9 +9,10 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/Command.h>
-#include <opencv2/opencv.hpp>
-#include <cscore.h>
+
 #include <cameraserver/CameraServer.h>
+#include <cscore.h>
+#include <opencv2/opencv.hpp>
 
 #include "RobotContainer.h"
 

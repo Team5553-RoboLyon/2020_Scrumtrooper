@@ -7,7 +7,7 @@
 
 #include "commands/scoring/Shoot.h"
 
-#include "networktables/NetworkTableInstance.h"
+#include <networktables/NetworkTableInstance.h>
 
 Shoot::Shoot(Shooter* shooter) : m_shooter(shooter) {
   m_chameleonPitchEntry = nt::NetworkTableInstance::GetDefault()

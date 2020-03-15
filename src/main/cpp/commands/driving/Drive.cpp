@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/driving/Drive.h"
+
 #include "lib/Utils.h"
 
 #define TRACKWIDTH 0.61f
@@ -33,7 +34,7 @@ void Drive::Execute() {
   double turn = utils::Deadband(m_turn());
 
   /*
-  double c = 0.35 * (turn * 5.0 * (abs(turn) + 1) / (abs(forward) + 1));
+  double c = 0.35 * (turn * 5.0 * (std::abs(turn) + 1) / (std::abs(forward) + 1));
   if (turn < 0.0) {
     m_drivetrain->Drive(forward * ((c + 1) / (1 - c)), forward);
 

@@ -7,23 +7,21 @@
 
 #pragma once
 
+#include <commands/driving/AutoDrive.h>
+#include <commands/scoring/AdjustTurret.h>
+#include <commands/scoring/Feed.h>
+#include <commands/scoring/PrepShoot.h>
+#include <commands/scoring/Shoot.h>
+#include <frc/Timer.h>
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include <frc/Timer.h>
-
+#include "subsystems/AdjustableHood.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Feeder.h"
-#include "subsystems/AdjustableHood.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Turret.h"
-
-#include <commands/scoring/PrepShoot.h>
-#include <commands/scoring/AdjustTurret.h>
-#include <commands/scoring/Shoot.h>
-#include <commands/scoring/Feed.h>
-#include <commands/driving/AutoDrive.h>
 
 class SimpleAuto : public frc2::CommandHelper<frc2::CommandBase, SimpleAuto> {
  public:

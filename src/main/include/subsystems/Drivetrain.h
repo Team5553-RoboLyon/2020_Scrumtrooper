@@ -7,18 +7,18 @@
 
 #pragma once
 
-#include <frc2/command/SubsystemBase.h>
-#include <rev/CANSparkMax.h>
-#include <units/units.h>
-#include <wpi/math>
 #include <frc/Encoder.h>
 #include <frc/I2C.h>
+#include <frc2/command/SubsystemBase.h>
+#include <rev/CANSparkMax.h>
 
-#include "lib/CSVLogFile.h"
-#include "commands/scoring/AdjustHood.h"
-#include "subsystems/AdjustableHood.h"
+#include <units/units.h>
+#include <wpi/math>
 
 #include "Constants.h"
+#include "commands/scoring/AdjustHood.h"
+#include "lib/CSVLogFile.h"
+#include "subsystems/AdjustableHood.h"
 
 #define DRIVETRAIN_ULTRASONICSIZE 5
 #define DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD 60

@@ -7,15 +7,15 @@
 
 #pragma once
 
-#include <frc2/command/InstantCommand.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc2/command/InstantCommand.h>
 
 #include "subsystems/Intake.h"
 
 class ChangeIntakePosition
     : public frc2::CommandHelper<frc2::InstantCommand, ChangeIntakePosition> {
  public:
-  ChangeIntakePosition(Intake* intake);
+  explicit ChangeIntakePosition(Intake* intake);
 
   void Initialize() override;
 

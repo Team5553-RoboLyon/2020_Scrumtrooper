@@ -18,8 +18,8 @@ AdjustableHood::AdjustableHood()
 }
 
 void AdjustableHood::UseOutput(double output, double setpoint) {
-  if ((abs(setpoint - m_encodeur.GetDistance()) > 1) &&
-      (abs(GetController().GetVelocityError()) < 1) && (abs(output) > 0.05)) {
+  if ((std::abs(setpoint - m_encodeur.GetDistance()) > 1) &&
+      (std::abs(GetController().GetVelocityError()) < 1) && (std::abs(output) > 0.05)) {
     m_lockedCount++;
     if (m_lockedCount > 8) {
       SetSetpoint(m_encodeur.GetDistance());

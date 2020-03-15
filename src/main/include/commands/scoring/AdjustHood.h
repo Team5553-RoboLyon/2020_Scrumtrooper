@@ -9,14 +9,16 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <networktables/NetworkTableEntry.h>
+
 #include "subsystems/AdjustableHood.h"
 
 #define HOOD_BUFFER_SIZE 3
 
 class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
  public:
-  AdjustHood(AdjustableHood* adjustableHood);
+  explicit AdjustHood(AdjustableHood* adjustableHood);
 
   void Initialize() override;
 

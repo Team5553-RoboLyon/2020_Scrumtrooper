@@ -9,6 +9,7 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Turret.h"
@@ -17,7 +18,7 @@
 
 class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret> {
  public:
-  AdjustTurret(Turret* turret);
+  explicit AdjustTurret(Turret* turret);
 
   void Initialize() override;
 

@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/scoring/PrepShoot.h"
+
 #include "Constants.h"
 
 PrepShoot::PrepShoot(Shooter* Shooter) : m_shooter(Shooter) { AddRequirements(m_shooter); }

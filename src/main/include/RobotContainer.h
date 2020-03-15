@@ -7,16 +7,16 @@
 
 #pragma once
 
+#include <frc/DriverStation.h>
+#include <frc/Joystick.h>
 #include <frc/XboxController.h>
+#include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc2/command/button/POVButton.h>
-#include <frc/Joystick.h>
-#include <frc/DriverStation.h>
-#include <frc/smartdashboard/SendableChooser.h>
 
+#include "subsystems/AdjustableHood.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Feeder.h"
-#include "subsystems/AdjustableHood.h"
 #include "subsystems/Intake.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/TelescopicArm.h"

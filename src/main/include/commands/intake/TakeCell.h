@@ -14,7 +14,7 @@
 
 class TakeCell : public frc2::CommandHelper<frc2::CommandBase, TakeCell> {
  public:
-  TakeCell(Intake* intake);
+  explicit TakeCell(Intake* intake);
 
   void Initialize() override;
 

@@ -8,7 +8,8 @@
 #include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
-#include "cameraserver/CameraServer.h"
+
+#include <cameraserver/CameraServer.h>
 
 void Robot::RobotInit() {
   camera = frc::CameraServer::GetInstance()->StartAutomaticCapture();

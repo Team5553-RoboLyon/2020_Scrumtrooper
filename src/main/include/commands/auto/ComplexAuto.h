@@ -7,26 +7,24 @@
 
 #pragma once
 
-#include <frc2/command/CommandBase.h>
-#include <frc2/command/CommandHelper.h>
-
-#include <frc/Timer.h>
-
-#include "subsystems/Drivetrain.h"
-#include "subsystems/Feeder.h"
-#include "subsystems/AdjustableHood.h"
-#include "subsystems/Intake.h"
-#include "subsystems/Shooter.h"
-#include "subsystems/Turret.h"
-
-#include <commands/scoring/PrepShoot.h>
-#include <commands/scoring/AdjustTurret.h>
-#include <commands/scoring/Shoot.h>
-#include <commands/scoring/Feed.h>
-#include <commands/scoring/MoveHood.h>
 #include <commands/driving/AutoDrive.h>
 #include <commands/intake/ChangeIntakePosition.h>
 #include <commands/intake/TakeCell.h>
+#include <commands/scoring/AdjustTurret.h>
+#include <commands/scoring/Feed.h>
+#include <commands/scoring/MoveHood.h>
+#include <commands/scoring/PrepShoot.h>
+#include <commands/scoring/Shoot.h>
+#include <frc/Timer.h>
+#include <frc2/command/CommandBase.h>
+#include <frc2/command/CommandHelper.h>
+
+#include "subsystems/AdjustableHood.h"
+#include "subsystems/Drivetrain.h"
+#include "subsystems/Feeder.h"
+#include "subsystems/Intake.h"
+#include "subsystems/Shooter.h"
+#include "subsystems/Turret.h"
 
 class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
  public:

@@ -14,11 +14,11 @@ double find_radius(double d0, double d1, double d2, double h) {
 
   double a = (a0 + a1 + a2) / 3;
 
-  double angle = atan(a);
+  double angle = std::atan(a);
 
   double corde = d0 / a;
 
-  double radius = corde / (2 * sin(angle));
+  double radius = corde / (2 * std::sin(angle));
 
   return radius;
 }
@@ -142,7 +142,7 @@ double Drivetrain::CalculateTurn(double forward, double turn) {
 
     double radius = forward / (turn + 0.0000000000000000000000000000000000000001);
 
-    if (abs(radius) > abs(radius_crashed)) {
+    if (std::abs(radius) > std::abs(radius_crashed)) {
       if (radius > 0) {
         radius += (radius_crashed - radius) / 2;
       } else {

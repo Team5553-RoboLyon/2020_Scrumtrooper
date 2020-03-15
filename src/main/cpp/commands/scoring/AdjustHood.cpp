@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/scoring/AdjustHood.h"
+
 #include <networktables/NetworkTableInstance.h>
 
 AdjustHood::AdjustHood(AdjustableHood* adjustableHood) : m_adjustablehood(adjustableHood) {

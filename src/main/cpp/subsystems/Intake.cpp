@@ -29,7 +29,7 @@ void Intake::ChangePosition() {
     Close();
   } else {
     Open();
-  };
+  }
 }
 
 void Intake::Activate() {

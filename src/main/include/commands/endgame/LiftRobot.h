@@ -14,7 +14,7 @@
 
 class LiftRobot : public frc2::CommandHelper<frc2::CommandBase, LiftRobot> {
  public:
-  LiftRobot(Winch* winch);
+  explicit LiftRobot(Winch* winch);
 
   void Initialize() override;
 

@@ -14,7 +14,7 @@
 
 class DropRobot : public frc2::CommandHelper<frc2::CommandBase, DropRobot> {
  public:
-  DropRobot(Winch* winch);
+  explicit DropRobot(Winch* winch);
 
   void Initialize() override;
 

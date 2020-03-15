@@ -7,33 +7,32 @@
 
 #include "RobotContainer.h"
 
+#include <frc/shuffleboard/Shuffleboard.h>
 #include <frc2/command/CommandScheduler.h>
 #include <frc2/command/ParallelCommandGroup.h>
-#include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/ParallelRaceGroup.h>
+#include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/WaitCommand.h>
-#include <frc/shuffleboard/Shuffleboard.h>
 
-#include "commands/driving/Drive.h"
+#include "commands/auto/ComplexAuto.h"
+#include "commands/auto/SimpleAuto.h"
 #include "commands/driving/AutoDrive.h"
+#include "commands/driving/Drive.h"
 #include "commands/endgame/DropHook.h"
 #include "commands/endgame/DropRobot.h"
 #include "commands/endgame/LiftRobot.h"
 #include "commands/endgame/RaiseHook.h"
+#include "commands/intake/ChangeIntakePosition.h"
+#include "commands/intake/EmergencyIntake.h"
+#include "commands/intake/TakeCell.h"
 #include "commands/scoring/AdjustHood.h"
-#include "commands/scoring/PrepShoot.h"
-#include "commands/scoring/Shoot.h"
+#include "commands/scoring/AdjustTurret.h"
 #include "commands/scoring/Feed.h"
 #include "commands/scoring/FeederUnblock.h"
-#include "commands/intake/ChangeIntakePosition.h"
-#include "commands/intake/TakeCell.h"
-#include "commands/intake/EmergencyIntake.h"
-#include "commands/scoring/AdjustTurret.h"
 #include "commands/scoring/MoveHood.h"
 #include "commands/scoring/MoveTurret.h"
-
-#include "commands/auto/SimpleAuto.h"
-#include "commands/auto/ComplexAuto.h"
+#include "commands/scoring/PrepShoot.h"
+#include "commands/scoring/Shoot.h"
 
 RobotContainer::RobotContainer() {
   m_autoChooser.AddOption("Shoot + Reculer",

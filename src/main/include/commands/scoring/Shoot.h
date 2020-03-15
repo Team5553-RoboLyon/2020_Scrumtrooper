@@ -9,13 +9,14 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+
 #include <networktables/NetworkTableEntry.h>
 
 #include "subsystems/Shooter.h"
 
 class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  public:
-  Shoot(Shooter* shooter);
+  explicit Shoot(Shooter* shooter);
 
   void Initialize() override;
 

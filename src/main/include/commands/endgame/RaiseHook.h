@@ -10,9 +10,9 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/TelescopicArm.h"
-#include "subsystems/Intake.h"
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Intake.h"
+#include "subsystems/TelescopicArm.h"
 
 class RaiseHook : public frc2::CommandHelper<frc2::CommandBase, RaiseHook> {
  public:

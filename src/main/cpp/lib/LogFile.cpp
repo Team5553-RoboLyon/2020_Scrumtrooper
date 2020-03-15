@@ -20,8 +20,7 @@ LogFile::LogFile(wpi::StringRef filePrefix, wpi::StringRef fileExtension)
   m_file.open(filename);
 
   if (m_file.fail()) {
-    wpi::outs() << "Could not open file `" << filename << "` for writing."
-                << '\n';
+    wpi::outs() << "Could not open file `" << filename << "` for writing." << '\n';
     return;
   }
 }
@@ -30,9 +29,7 @@ void LogFile::Log(const wpi::StringRef& text) { *this << text; }
 
 void LogFile::Logln(const wpi::StringRef& text) { *this << text << '\n'; }
 
-const std::string LogFile::GetFileName() const {
-  return CreateFilename(m_time);
-}
+const std::string LogFile::GetFileName() const { return CreateFilename(m_time); }
 
 void LogFile::SetTimeIntervalBeforeRenaming(units::second_t duration) {
   m_timeIntervalBeforeRenaming = duration;
@@ -41,8 +38,7 @@ void LogFile::SetTimeIntervalBeforeRenaming(units::second_t duration) {
 void LogFile::UpdateFilename() {
   std::time_t newTime = std::time(0);
   // If the difference between the two timestamps is too long
-  if (units::second_t{std::difftime(newTime, m_time)} >
-      m_timeIntervalBeforeRenaming) {
+  if (units::second_t{std::difftime(newTime, m_time)} > m_timeIntervalBeforeRenaming) {
     std::string newName = CreateFilename(newTime);
     m_file.close();
     std::rename(CreateFilename(m_time).c_str(), newName.c_str());
