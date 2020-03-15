@@ -1,4 +1,4 @@
-# 2020 Robot
+# 2020 Scrumtrooper
 
 Team 5553's robot code for 2020 FRC game : Infinite Recharge.
 
