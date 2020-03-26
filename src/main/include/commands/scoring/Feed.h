@@ -17,7 +17,7 @@
 
 class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
  public:
-  Feed(Feeder* feeder, Intake* intake, Shooter* shooter);
+  Feed(Feeder* feeder, Intake* intake, Shooter* shooter, bool enableIntake = true);
 
   void Initialize() override;
 
@@ -32,4 +32,5 @@ class Feed : public frc2::CommandHelper<frc2::CommandBase, Feed> {
   Intake* m_intake;
   Shooter* m_shooter;
   double m_timeout;
+  bool m_isIntakeEnabled;
 };

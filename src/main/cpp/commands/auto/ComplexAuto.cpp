@@ -14,7 +14,7 @@ ComplexAuto::ComplexAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjus
   m_prepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
   m_adjustHood = new AdjustHood(adjustableHood);
   m_shoot = new Shoot(shooter);
-  m_feed = new Feed(feeder, intake, shooter);
+  m_feed = new Feed(feeder, intake, shooter, false);
   m_changeIntakePosition = new ChangeIntakePosition(intake);
   m_reculer = new frc2::ParallelCommandGroup(AutoDrive(drivetrain, 17000), TakeCell(intake));
   m_avancer = new AutoDrive(drivetrain, -10000);
