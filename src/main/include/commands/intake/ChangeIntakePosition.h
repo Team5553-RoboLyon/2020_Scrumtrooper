@@ -15,10 +15,10 @@
 class ChangeIntakePosition
     : public frc2::CommandHelper<frc2::InstantCommand, ChangeIntakePosition> {
  public:
-  explicit ChangeIntakePosition(Intake* intake);
+  explicit ChangeIntakePosition(Intake* pintake);
 
   void Initialize() override;
 
  private:
-  Intake* m_intake;
+  Intake* m_pIntake;
 };

@@ -14,7 +14,7 @@
 
 class AutoDrive : public frc2::CommandHelper<frc2::CommandBase, AutoDrive> {
  public:
-  AutoDrive(Drivetrain* drivetrain, double distance);
+  AutoDrive(Drivetrain* pdrivetrain, double distance);
 
   void Initialize() override;
 
@@ -25,6 +25,6 @@ class AutoDrive : public frc2::CommandHelper<frc2::CommandBase, AutoDrive> {
   bool IsFinished() override;
 
  private:
-  Drivetrain* m_drivetrain;
-  double m_distance, m_integral, m_prev_error;
+  Drivetrain* m_pDrivetrain;
+  double m_Distance, m_Integral, m_PrevError;
 };

@@ -19,8 +19,8 @@ class Shooter : public frc2::SubsystemBase {
  public:
   Shooter();
 
-  void Shoot(double puissance);
-  void SetRamp(double secondsFromNeutralToFull);
+  void Shoot(double power);
+  void SetRamp(double seconds_from_neutral_to_full);
   void Periodic();
 
   double GetTimer();
@@ -28,7 +28,7 @@ class Shooter : public frc2::SubsystemBase {
   void StopTimer();
 
  private:
-  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur1{kShooterMoteurDroite};
-  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur2{kShooterMoteurGauche};
-  frc::Timer m_timer;
+  ctre::phoenix::motorcontrol::can::VictorSPX m_RightMotor{SHOOTER_RIGHT_MOTOR};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_LeftMotor{SHOOTER_LEFT_MOTOR};
+  frc::Timer m_Timer;
 };

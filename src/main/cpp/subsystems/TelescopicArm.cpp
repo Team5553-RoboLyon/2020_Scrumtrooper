@@ -9,26 +9,26 @@
 
 TelescopicArm::TelescopicArm() {}
 
-void TelescopicArm::ResetEncoder() { m_encodeur.Reset(); }
+void TelescopicArm::ResetEncoder() { m_Encoder.Reset(); }
 
-double TelescopicArm::GetEncodeur() { return m_encodeur.Get().to<double>(); }
+double TelescopicArm::GetEncodeur() { return m_Encoder.Get().to<double>(); }
 
-void TelescopicArm::Up() {
-  if (m_encodeur.Get().to<double>() < 113.0) {
-    m_moteur.Set(kTelescopicArmSpeedUp);
+void TelescopicArm::GoUp() {
+  if (m_Encoder.Get().to<double>() < 113.0) {
+    m_Motor.Set(TELESCOPIC_ARM_UP_SPEED);
   } else {
     ResistGravity();
   }
 }
 
-void TelescopicArm::Down() {
-  if (m_encodeur.Get().to<double>() > 0) {
-    m_moteur.Set(-kTelescopicArmSpeedDown);
+void TelescopicArm::GoDown() {
+  if (m_Encoder.Get().to<double>() > 0) {
+    m_Motor.Set(-TELESCOPIC_ARM_DOWN_SPEED);
   } else {
     Stop();
   }
 }
 
-void TelescopicArm::Stop() { m_moteur.StopMotor(); }
+void TelescopicArm::Stop() { m_Motor.StopMotor(); }
 
-void TelescopicArm::ResistGravity() { m_moteur.Set(0.05); }
+void TelescopicArm::ResistGravity() { m_Motor.Set(0.05); }

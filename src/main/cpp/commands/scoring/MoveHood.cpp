@@ -7,21 +7,21 @@
 
 #include "commands/scoring/MoveHood.h"
 
-MoveHood::MoveHood(AdjustableHood* adjustableHood, double angle)
-    : m_adjustablehood(adjustableHood), m_angle(angle) {
-  AddRequirements(m_adjustablehood);
+MoveHood::MoveHood(AdjustableHood* padjustable_hood, double angle)
+    : m_pAdjustableHood(padjustable_hood), m_Angle(angle) {
+  AddRequirements(m_pAdjustableHood);
 }
 
 void MoveHood::Initialize() {
-  m_adjustablehood->Enable();
-  m_adjustablehood->SetSetpoint(m_angle);
+  m_pAdjustableHood->Enable();
+  m_pAdjustableHood->SetSetpoint(m_Angle);
 }
 
 void MoveHood::Execute() {}
 
 void MoveHood::End(bool interrupted) {
-  m_adjustablehood->Disable();
-  m_adjustablehood->Stop();
+  m_pAdjustableHood->Disable();
+  m_pAdjustableHood->Stop();
 }
 
-bool MoveHood::IsFinished() { return std::abs(m_angle - m_adjustablehood->GetMeasurement()) < 1; }
+bool MoveHood::IsFinished() { return std::abs(m_Angle - m_pAdjustableHood->GetMeasurement()) < 1; }

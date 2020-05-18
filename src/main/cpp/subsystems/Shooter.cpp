@@ -8,35 +8,35 @@
 #include "subsystems/Shooter.h"
 
 Shooter::Shooter() {
-  m_moteur2.Follow(m_moteur1);
-  m_moteur2.SetInverted(true);
-  m_moteur1.ConfigVoltageCompSaturation(12.5);
-  m_moteur2.ConfigVoltageCompSaturation(12.5);
-  m_moteur1.EnableVoltageCompensation(true);
-  m_moteur2.EnableVoltageCompensation(true);
-  m_timer.Reset();
-  m_timer.Stop();
+  m_LeftMotor.Follow(m_RightMotor);
+  m_LeftMotor.SetInverted(true);
+  m_RightMotor.ConfigVoltageCompSaturation(12.5);
+  m_LeftMotor.ConfigVoltageCompSaturation(12.5);
+  m_RightMotor.EnableVoltageCompensation(true);
+  m_LeftMotor.EnableVoltageCompensation(true);
+  m_Timer.Reset();
+  m_Timer.Stop();
 }
 
-void Shooter::Shoot(double puissance) {
-  m_moteur1.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, puissance);
+void Shooter::Shoot(double power) {
+  m_RightMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, power);
 }
 
-void Shooter::SetRamp(double secondsFromNeutralToFull) {
-  m_moteur1.ConfigOpenloopRamp(secondsFromNeutralToFull);
-  m_moteur2.ConfigOpenloopRamp(secondsFromNeutralToFull);
+void Shooter::SetRamp(double seconds_from_neutral_to_full) {
+  m_RightMotor.ConfigOpenloopRamp(seconds_from_neutral_to_full);
+  m_LeftMotor.ConfigOpenloopRamp(seconds_from_neutral_to_full);
 }
 
-double Shooter::GetTimer() { return m_timer.Get(); }
+double Shooter::GetTimer() { return m_Timer.Get(); }
 
 void Shooter::ResetTimer() {
-  m_timer.Reset();
-  m_timer.Start();
+  m_Timer.Reset();
+  m_Timer.Start();
 }
 
 void Shooter::StopTimer() {
-  m_timer.Reset();
-  m_timer.Stop();
+  m_Timer.Reset();
+  m_Timer.Stop();
 }
 
 void Shooter::Periodic() {}

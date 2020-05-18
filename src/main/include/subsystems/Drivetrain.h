@@ -12,16 +12,10 @@
 #include <frc2/command/SubsystemBase.h>
 #include <rev/CANSparkMax.h>
 
-#include <units/units.h>
 #include <wpi/math>
 
 #include "Constants.h"
-#include "commands/scoring/AdjustHood.h"
 #include "lib/CSVLogFile.h"
-#include "subsystems/AdjustableHood.h"
-
-#define DRIVETRAIN_ULTRASONICSIZE 5
-#define DRIVETRAIN_ULTRASONIC_WARNING_THRESHOLD 60
 
 class Drivetrain : public frc2::SubsystemBase {
  public:
@@ -40,52 +34,38 @@ class Drivetrain : public frc2::SubsystemBase {
   void ChangeSpeed();
   void SlowSpeed();
   void QuickSpeed();
-  int GetEncodeurDroit();
-  int GetEncodeurGauche();
+  int GetRightEncoder();
+  int GetLeftEncoder();
 
  private:
   enum SpeedMode { quick, slow };
-  rev::CANSparkMax m_moteurDroite{kDrivetrainMoteurDroite1,
-                                  rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax m_moteurDroiteFollower{kDrivetrainMoteurDroite2,
-                                          rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax m_moteurGauche{kDrivetrainMoteurGauche1,
-                                  rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax m_moteurGaucheFollower{kDrivetrainMoteurGauche2,
-                                          rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_RightMotor{DRIVETRAIN_RIGHT_MOTOR_1, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_RightMotorFollower{DRIVETRAIN_RIGHT_MOTOR_2,
+                                        rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_LeftMotor{DRIVETRAIN_LEFT_MOTOR_1, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax m_LeftMotorFollower{DRIVETRAIN_LEFT_MOTOR_2,
+                                       rev::CANSparkMax::MotorType::kBrushless};
 
-  rev::CANEncoder m_encodeurDroite1{m_moteurDroite};
-  rev::CANEncoder m_encodeurDroite2{m_moteurDroiteFollower};
-  rev::CANEncoder m_encodeurGauche1{m_moteurGauche};
-  rev::CANEncoder m_encodeurGauche2{m_moteurGaucheFollower};
+  rev::CANEncoder m_RightEncoder1{m_RightMotor};
+  rev::CANEncoder m_RightEncoder2{m_RightMotorFollower};
+  rev::CANEncoder m_LeftEncoder1{m_LeftMotor};
+  rev::CANEncoder m_LeftEncoder2{m_LeftMotorFollower};
 
-  const rev::CANSparkMax::IdleMode kIdleMode = rev::CANSparkMax::IdleMode::kBrake;
-  const rev::CANSparkMax::IdleMode kDisabledMode = rev::CANSparkMax::IdleMode::kCoast;
+  double m_Integral = 0.0;
+  double m_PrevError = 0.0;
 
-  const units::meter_t kWheelCircumference{wpi::math::pi * 6 * 0.0254};
-  const double kGearRatio = 1 / 10.6;
-  const double kOpenLoopRampeRate = 0.72;
-  double m_integral = 0.0;
-  double m_prev_error = 0.0;
-  const double kPositionConversionFactor = 42;
+  frc::Encoder m_RightExternalEncoder{DRIVETRAIN_RIGHT_ENCODER_A, DRIVETRAIN_RIGHT_ENCODER_B};
+  frc::Encoder m_LeftExternalEncoder{DRIVETRAIN_LEFT_ENCODER_A, DRIVETRAIN_LEFT_ENCODER_B};
 
-  // const double kLowGearPositionConversionFactor = kWheelCircumference.to<double>() *
-  // kLowGearRatio; const double kHighGearPositionConversionFactor =
-  // kWheelCircumference.to<double>()
-  // * kHighGearRatio;
+  CSVLogFile* m_LogFile;
+  bool m_IsLogFileEnabled;
+  bool m_IsUltraSonicSensorActivated = true;
 
-  frc::Encoder m_encoderExterneDroite{kDrivetrainRightEncodeurA, kDrivetrainRightEncodeurB};
-  frc::Encoder m_encoderExterneGauche{kDrivetrainLeftEncodeurA, kDrivetrainLeftEncodeurB};
+  frc::I2C m_RightArduino{frc::I2C::Port::kOnboard, 3};
+  frc::I2C m_LeftArduino{frc::I2C::Port::kOnboard, 4};
 
-  CSVLogFile* m_logFile;
-  bool m_isLogFileEnabled;
-  bool m_isUltraSonicSensorActivated = true;
-
-  frc::I2C m_arduinoDroit{frc::I2C::Port::kOnboard, 3};
-  frc::I2C m_arduinoGauche{frc::I2C::Port::kOnboard, 4};
-
-  double m_receiveBufferDroitDouble[DRIVETRAIN_ULTRASONICSIZE];
-  double m_receiveBufferGaucheDouble[DRIVETRAIN_ULTRASONICSIZE];
-  int m_warningLevel = 0;
-  Drivetrain::SpeedMode m_speedMode = Drivetrain::SpeedMode::quick;
+  double m_DoubleReceiveBufferRight[DRIVETRAIN_ULTRASONIC_SIZE];
+  double m_DoubleReceiveBufferLeft[DRIVETRAIN_ULTRASONIC_SIZE];
+  int m_WarningLevel = 0;
+  Drivetrain::SpeedMode m_SpeedMode = Drivetrain::SpeedMode::quick;
 };

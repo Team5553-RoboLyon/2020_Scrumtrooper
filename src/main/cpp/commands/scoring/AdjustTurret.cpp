@@ -9,29 +9,29 @@
 
 #include <networktables/NetworkTableInstance.h>
 
-AdjustTurret::AdjustTurret(Turret* turret) : m_turret(turret) {
-  AddRequirements(m_turret);
-  m_chameleonYawEntry = nt::NetworkTableInstance::GetDefault()
+AdjustTurret::AdjustTurret(Turret* pturret) : m_pTurret(pturret) {
+  AddRequirements(m_pTurret);
+  m_ChameleonYawEntry = nt::NetworkTableInstance::GetDefault()
                             .GetTable("chameleon-vision")
                             ->GetEntry("turret/targetYaw");
-  m_chameleonIsValidEntry = nt::NetworkTableInstance::GetDefault()
+  m_ChameleonIsValidEntry = nt::NetworkTableInstance::GetDefault()
                                 .GetTable("chameleon-vision")
                                 ->GetEntry("turret/isValid");
-  m_bufferCount = 0;
+  m_BufferCount = 0;
 }
 
-void AdjustTurret::Initialize() { m_turret->Enable(); }
+void AdjustTurret::Initialize() { m_pTurret->Enable(); }
 
 void AdjustTurret::Execute() {
-  if (m_chameleonIsValidEntry.GetBoolean(false)) {
-    m_bufferYaw[m_bufferCount] = m_chameleonYawEntry.GetDouble(0);
+  if (m_ChameleonIsValidEntry.GetBoolean(false)) {
+    m_BufferYaw[m_BufferCount] = m_ChameleonYawEntry.GetDouble(0);
   }
-  m_bufferCount = (m_bufferCount + 1) % BUFFER_SIZE;
+  m_BufferCount = (m_BufferCount + 1) % BUFFER_SIZE;
 
-  std::partial_sort_copy(&m_bufferYaw[0], &m_bufferYaw[BUFFER_SIZE - 1], &m_bufferYawSorted[0],
-                         &m_bufferYawSorted[BUFFER_SIZE - 1]);
-  m_turret->SetClampedSetpoint(m_turret->GetMeasurement() +
-                               m_bufferYawSorted[(int)(BUFFER_SIZE / 2)]);
+  std::partial_sort_copy(&m_BufferYaw[0], &m_BufferYaw[BUFFER_SIZE - 1], &m_BufferYawSorted[0],
+                         &m_BufferYawSorted[BUFFER_SIZE - 1]);
+  m_pTurret->SetClampedSetpoint(m_pTurret->GetMeasurement() +
+                                m_BufferYawSorted[(int)(BUFFER_SIZE / 2)]);
 }
 
 void AdjustTurret::End(bool interrupted) {}

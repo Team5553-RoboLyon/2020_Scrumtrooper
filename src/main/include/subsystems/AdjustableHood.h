@@ -24,14 +24,14 @@ class AdjustableHood : public frc2::PIDSubsystem {
   void ResetEncoder();
 
   void Close();
-  void Monter();
-  void Descendre();
+  void GoUp();
+  void GoDown();
   void Unblock();
   void Stop();
 
  private:
-  ctre::phoenix::motorcontrol::can::VictorSPX m_moteur{kAdjustableHoodMoteur};
-  frc::DutyCycleEncoder m_encodeur{kAdjustableHoodEncodeur};
-  int m_lockedCount = 0;
-  double m_prevVelocityError;
+  ctre::phoenix::motorcontrol::can::VictorSPX m_Motor{ADJUSTABLE_HOOD_MOTOR};
+  frc::DutyCycleEncoder m_Encoder{ADJUSTABLE_HOOD_ENCODER};
+  int m_LockedCount = 0;
+  double m_PrevVelocityError;
 };

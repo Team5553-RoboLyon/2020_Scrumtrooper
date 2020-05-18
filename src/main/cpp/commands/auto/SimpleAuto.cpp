@@ -9,40 +9,42 @@
 
 #include <frc2/command/ParallelCommandGroup.h>
 
-SimpleAuto::SimpleAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood,
-                       Feeder* feeder, Intake* intake, Drivetrain* drivetrain) {
-  m_prepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
-  m_shootGroup = new frc2::ParallelCommandGroup(AdjustHood(adjustableHood), Shoot(shooter),
-                                                Feed(feeder, intake, shooter));
-  m_reculer = new AutoDrive(drivetrain, 1500);
+#include "commands/scoring/AdjustHood.h"
+
+SimpleAuto::SimpleAuto(Shooter* pshooter, Turret* pturret, AdjustableHood* padjustable_hood,
+                       Feeder* pfeeder, Intake* pintake, Drivetrain* pdrivetrain) {
+  m_pPrepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(pshooter), AdjustTurret(pturret));
+  m_pShootGroup = new frc2::ParallelCommandGroup(AdjustHood(padjustable_hood), Shoot(pshooter),
+                                                 Feed(pfeeder, pintake, pshooter));
+  m_pGoReverse = new AutoDrive(pdrivetrain, 1500);
 }
 
 void SimpleAuto::Initialize() {
-  state = 0;
-  m_prepShootGroup->Schedule();
-  m_timer.Reset();
-  m_timer.Start();
+  m_State = 0;
+  m_pPrepShootGroup->Schedule();
+  m_Timer.Reset();
+  m_Timer.Start();
 }
 
 void SimpleAuto::Execute() {
-  switch (state) {
+  switch (m_State) {
     case 0:
-      if (m_timer.Get() > 3) {
-        state++;
-        m_prepShootGroup->Cancel();
-        m_shootGroup->Schedule();
+      if (m_Timer.Get() > 3) {
+        m_State++;
+        m_pPrepShootGroup->Cancel();
+        m_pShootGroup->Schedule();
       }
       break;
     case 1:
-      if (m_timer.Get() > 12) {
-        state++;
-        m_shootGroup->Cancel();
-        m_reculer->Schedule();
+      if (m_Timer.Get() > 12) {
+        m_State++;
+        m_pShootGroup->Cancel();
+        m_pGoReverse->Schedule();
       }
       break;
     case 2:
-      if (m_timer.Get() > 12.6) {
-        m_reculer->Cancel();
+      if (m_Timer.Get() > 12.6) {
+        m_pGoReverse->Cancel();
       }
       break;
     default:
@@ -51,12 +53,12 @@ void SimpleAuto::Execute() {
 }
 
 void SimpleAuto::End(bool interrupted) {
-  m_timer.Reset();
-  m_timer.Stop();
+  m_Timer.Reset();
+  m_Timer.Stop();
 
-  m_prepShootGroup->Cancel();
-  m_shootGroup->Cancel();
-  m_reculer->Cancel();
+  m_pPrepShootGroup->Cancel();
+  m_pShootGroup->Cancel();
+  m_pGoReverse->Cancel();
 }
 
-bool SimpleAuto::IsFinished() { return m_timer.Get() > 15; }
+bool SimpleAuto::IsFinished() { return m_Timer.Get() > 15; }

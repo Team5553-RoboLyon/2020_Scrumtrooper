@@ -20,12 +20,12 @@ class TelescopicArm : public frc2::SubsystemBase {
   void ResetEncoder();
   double GetEncodeur();
 
-  void Up();
-  void Down();
+  void GoUp();
+  void GoDown();
   void Stop();
   void ResistGravity();
 
  private:
-  frc::VictorSP m_moteur{kTelescopicArmMoteur};
-  frc::DutyCycleEncoder m_encodeur{kTelescopicArmEncodeur};
+  frc::VictorSP m_Motor{TELESCOPIC_ARM_MOTOR};
+  frc::DutyCycleEncoder m_Encoder{TELESCOPIC_ARM_ENCODER};
 };

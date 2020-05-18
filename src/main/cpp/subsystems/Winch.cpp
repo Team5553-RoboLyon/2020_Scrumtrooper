@@ -8,14 +8,14 @@
 #include "subsystems/Winch.h"
 
 Winch::Winch() {
-  m_moteur.SetOpenLoopRampRate(0.5);
-  m_moteur.SetInverted(true);
-  m_encodeur.SetPosition(0.0);
-  m_encodeur.SetPositionConversionFactor(kWinchPositionConversionFactor);
+  m_Motor.SetOpenLoopRampRate(0.5);
+  m_Motor.SetInverted(true);
+  m_Encoder.SetPosition(0.0);
+  m_Encoder.SetPositionConversionFactor(WINCH_POSITION_CONVERSION_FACTOR);
 }
 
-void Winch::Up() { m_moteur.Set(kWinchSpeed); }
+void Winch::GoUp() { m_Motor.Set(WINCH_SPEED); }
 
-void Winch::Down() { m_moteur.Set(-kWinchSpeed); }
+void Winch::GoDown() { m_Motor.Set(-WINCH_SPEED); }
 
-void Winch::Stop() { m_moteur.StopMotor(); }
+void Winch::Stop() { m_Motor.StopMotor(); }

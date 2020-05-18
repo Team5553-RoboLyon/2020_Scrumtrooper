@@ -9,67 +9,67 @@
 
 #include <frc2/command/ParallelCommandGroup.h>
 
-ComplexAuto::ComplexAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood,
-                         Feeder* feeder, Intake* intake, Drivetrain* drivetrain) {
-  m_prepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(shooter), AdjustTurret(turret));
-  m_adjustHood = new AdjustHood(adjustableHood);
-  m_shoot = new Shoot(shooter);
-  m_feed = new Feed(feeder, intake, shooter, false);
-  m_changeIntakePosition = new ChangeIntakePosition(intake);
-  m_reculer = new frc2::ParallelCommandGroup(AutoDrive(drivetrain, 17000), TakeCell(intake));
-  m_avancer = new AutoDrive(drivetrain, -10000);
-  m_shootGroup = new frc2::ParallelCommandGroup(AdjustHood(adjustableHood), Shoot(shooter),
-                                                Feed(feeder, intake, shooter));
-  m_moveHoodZero = new MoveHood(adjustableHood, 0);
+ComplexAuto::ComplexAuto(Shooter* pshooter, Turret* pturret, AdjustableHood* padjustable_hood,
+                         Feeder* pfeeder, Intake* pintake, Drivetrain* pdrivetrain) {
+  m_pPrepShootGroup = new frc2::ParallelCommandGroup(PrepShoot(pshooter), AdjustTurret(pturret));
+  m_pAdjustHood = new AdjustHood(padjustable_hood);
+  m_pShoot = new Shoot(pshooter);
+  m_pFeed = new Feed(pfeeder, pintake, pshooter, false);
+  m_pChangeIntakePosition = new ChangeIntakePosition(pintake);
+  m_pGoReverse = new frc2::ParallelCommandGroup(AutoDrive(pdrivetrain, 17000), TakeCell(pintake));
+  m_pGoForward = new AutoDrive(pdrivetrain, -10000);
+  m_pShootGroup = new frc2::ParallelCommandGroup(AdjustHood(padjustable_hood), Shoot(pshooter),
+                                                 Feed(pfeeder, pintake, pshooter));
+  m_pMoveHoodZero = new MoveHood(padjustable_hood, 0);
 }
 
 void ComplexAuto::Initialize() {
-  state = 0;
-  m_prepShootGroup->Schedule();
-  m_timer.Reset();
-  m_timer.Start();
+  m_State = 0;
+  m_pPrepShootGroup->Schedule();
+  m_Timer.Reset();
+  m_Timer.Start();
 }
 
 void ComplexAuto::Execute() {
-  switch (state) {
+  switch (m_State) {
     case 0:
-      if (m_timer.Get() > 3) {
-        state++;
-        m_prepShootGroup->Cancel();
-        m_adjustHood->Schedule();
-        m_feed->Schedule();
-        m_shoot->Schedule();
-        m_changeIntakePosition->Schedule();
+      if (m_Timer.Get() > 3) {
+        m_State++;
+        m_pPrepShootGroup->Cancel();
+        m_pAdjustHood->Schedule();
+        m_pFeed->Schedule();
+        m_pShoot->Schedule();
+        m_pChangeIntakePosition->Schedule();
       }
       break;
     case 1:
-      if (m_timer.Get() > 8) {
-        state++;
-        m_adjustHood->Cancel();
-        m_feed->Cancel();
-        m_shoot->Cancel();
-        m_changeIntakePosition->Cancel();
-        m_reculer->Schedule();
-        m_moveHoodZero->Schedule();
+      if (m_Timer.Get() > 8) {
+        m_State++;
+        m_pAdjustHood->Cancel();
+        m_pFeed->Cancel();
+        m_pShoot->Cancel();
+        m_pChangeIntakePosition->Cancel();
+        m_pGoReverse->Schedule();
+        m_pMoveHoodZero->Schedule();
       }
       break;
     case 2:
-      if (m_timer.Get() > 10.5) {
-        state++;
-        m_reculer->Cancel();
-        m_moveHoodZero->Cancel();
-        m_changeIntakePosition->Schedule();
-        m_avancer->Schedule();
-        m_prepShootGroup->Schedule();
+      if (m_Timer.Get() > 10.5) {
+        m_State++;
+        m_pGoReverse->Cancel();
+        m_pMoveHoodZero->Cancel();
+        m_pChangeIntakePosition->Schedule();
+        m_pGoForward->Schedule();
+        m_pPrepShootGroup->Schedule();
       }
       break;
     case 3:
-      if (m_timer.Get() > 11.5) {
-        state++;
-        m_changeIntakePosition->Cancel();
-        m_avancer->Cancel();
-        m_prepShootGroup->Cancel();
-        m_shootGroup->Schedule();
+      if (m_Timer.Get() > 11.5) {
+        m_State++;
+        m_pChangeIntakePosition->Cancel();
+        m_pGoForward->Cancel();
+        m_pPrepShootGroup->Cancel();
+        m_pShootGroup->Schedule();
       }
       break;
 
@@ -79,18 +79,18 @@ void ComplexAuto::Execute() {
 }
 
 void ComplexAuto::End(bool interrupted) {
-  m_timer.Reset();
-  m_timer.Stop();
+  m_Timer.Reset();
+  m_Timer.Stop();
 
-  m_prepShootGroup->Cancel();
-  m_shootGroup->Cancel();
-  m_adjustHood->Cancel();
-  m_feed->Cancel();
-  m_shoot->Cancel();
-  m_changeIntakePosition->Cancel();
-  m_reculer->Cancel();
-  m_avancer->Cancel();
-  m_moveHoodZero->Cancel();
+  m_pPrepShootGroup->Cancel();
+  m_pShootGroup->Cancel();
+  m_pAdjustHood->Cancel();
+  m_pFeed->Cancel();
+  m_pShoot->Cancel();
+  m_pChangeIntakePosition->Cancel();
+  m_pGoReverse->Cancel();
+  m_pGoForward->Cancel();
+  m_pMoveHoodZero->Cancel();
 }
 
-bool ComplexAuto::IsFinished() { return m_timer.Get() > 15; }
+bool ComplexAuto::IsFinished() { return m_Timer.Get() > 15; }

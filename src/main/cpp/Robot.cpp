@@ -12,43 +12,43 @@
 #include <cameraserver/CameraServer.h>
 
 void Robot::RobotInit() {
-  camera = frc::CameraServer::GetInstance()->StartAutomaticCapture();
-  camera.SetResolution(320, 240);
-  camera.SetFPS(12);
+  m_Camera = frc::CameraServer::GetInstance()->StartAutomaticCapture();
+  m_Camera.SetResolution(320, 240);
+  m_Camera.SetFPS(12);
 }
 
 void Robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
 
 void Robot::DisabledInit() {
-  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_Container.m_Drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
   // Remet à zéro le controlleur le PID ( dont le setpoint ) du volet
-  m_container.m_adjustableHood.Disable();
+  m_Container.m_AdjustableHood.Disable();
 }
 
 void Robot::DisabledPeriodic() {}
 
 void Robot::AutonomousInit() {
-  m_container.m_intake.Close();
-  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_container.m_adjustableHood.ResetEncoder();
-  m_container.m_telescopicArm.ResetEncoder();
-  m_autonomousCommand = m_container.GetAutonomousCommand();
+  m_Container.m_Intake.Close();
+  m_Container.m_Drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  m_Container.m_AdjustableHood.ResetEncoder();
+  m_Container.m_TelescopicArm.ResetEncoder();
+  m_pAutonomousCommand = m_Container.GetAutonomousCommand();
 
-  if (m_autonomousCommand != nullptr) {
-    m_autonomousCommand->Schedule();
+  if (m_pAutonomousCommand != nullptr) {
+    m_pAutonomousCommand->Schedule();
   }
 }
 
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() {
-  /*m_container.m_intake.Close();
-  m_container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
-  m_container.m_adjustableHood.ResetEncoder();
-  m_container.m_telescopicArm.ResetEncoder();*/
-  if (m_autonomousCommand != nullptr) {
-    m_autonomousCommand->Cancel();
-    m_autonomousCommand = nullptr;
+  /*m_Container.m_intake.Close();
+  m_Container.m_drivetrain.SetIdleMode(rev::CANSparkMax::IdleMode::kBrake);
+  m_Container.m_adjustableHood.ResetEncoder();
+  m_Container.m_telescopicArm.ResetEncoder();*/
+  if (m_pAutonomousCommand != nullptr) {
+    m_pAutonomousCommand->Cancel();
+    m_pAutonomousCommand = nullptr;
   }
 }
 

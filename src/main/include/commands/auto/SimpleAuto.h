@@ -7,14 +7,9 @@
 
 #pragma once
 
-#include <commands/driving/AutoDrive.h>
-#include <commands/scoring/AdjustTurret.h>
-#include <commands/scoring/Feed.h>
-#include <commands/scoring/PrepShoot.h>
-#include <commands/scoring/Shoot.h>
-#include <frc/Timer.h>
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/Timer.h>
 
 #include "subsystems/AdjustableHood.h"
 #include "subsystems/Drivetrain.h"
@@ -23,10 +18,16 @@
 #include "subsystems/Shooter.h"
 #include "subsystems/Turret.h"
 
+#include "commands/driving/AutoDrive.h"
+#include "commands/scoring/AdjustTurret.h"
+#include "commands/scoring/Feed.h"
+#include "commands/scoring/PrepShoot.h"
+#include "commands/scoring/Shoot.h"
+
 class SimpleAuto : public frc2::CommandHelper<frc2::CommandBase, SimpleAuto> {
  public:
-  SimpleAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood, Feeder* feeder,
-             Intake* intake, Drivetrain* drivetrain);
+  SimpleAuto(Shooter* pshooter, Turret* pturret, AdjustableHood* padjustable_hood, Feeder* pfeeder,
+             Intake* pintake, Drivetrain* pdrivetrain);
 
   void Initialize() override;
 
@@ -37,8 +38,8 @@ class SimpleAuto : public frc2::CommandHelper<frc2::CommandBase, SimpleAuto> {
   bool IsFinished() override;
 
  private:
-  frc2::ParallelCommandGroup *m_prepShootGroup, *m_shootGroup;
-  AutoDrive* m_reculer;
-  frc::Timer m_timer;
-  int state;
+  frc2::ParallelCommandGroup *m_pPrepShootGroup, *m_pShootGroup;
+  AutoDrive* m_pGoReverse;
+  frc::Timer m_Timer;
+  int m_State;
 };

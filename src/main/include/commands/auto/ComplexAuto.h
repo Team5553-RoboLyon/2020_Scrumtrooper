@@ -7,17 +7,9 @@
 
 #pragma once
 
-#include <commands/driving/AutoDrive.h>
-#include <commands/intake/ChangeIntakePosition.h>
-#include <commands/intake/TakeCell.h>
-#include <commands/scoring/AdjustTurret.h>
-#include <commands/scoring/Feed.h>
-#include <commands/scoring/MoveHood.h>
-#include <commands/scoring/PrepShoot.h>
-#include <commands/scoring/Shoot.h>
-#include <frc/Timer.h>
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc/Timer.h>
 
 #include "subsystems/AdjustableHood.h"
 #include "subsystems/Drivetrain.h"
@@ -26,10 +18,20 @@
 #include "subsystems/Shooter.h"
 #include "subsystems/Turret.h"
 
+#include "commands/driving/AutoDrive.h"
+#include "commands/intake/ChangeIntakePosition.h"
+#include "commands/intake/TakeCell.h"
+#include "commands/scoring/AdjustTurret.h"
+#include "commands/scoring/AdjustHood.h"
+#include "commands/scoring/Feed.h"
+#include "commands/scoring/MoveHood.h"
+#include "commands/scoring/PrepShoot.h"
+#include "commands/scoring/Shoot.h"
+
 class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
  public:
-  ComplexAuto(Shooter* shooter, Turret* turret, AdjustableHood* adjustableHood, Feeder* feeder,
-              Intake* intake, Drivetrain* drivetrain);
+  ComplexAuto(Shooter* pshooter, Turret* pturret, AdjustableHood* padjustable_hood, Feeder* pfeeder,
+              Intake* pintake, Drivetrain* pdrivetrain);
 
   void Initialize() override;
 
@@ -40,13 +42,13 @@ class ComplexAuto : public frc2::CommandHelper<frc2::CommandBase, ComplexAuto> {
   bool IsFinished() override;
 
  private:
-  frc2::ParallelCommandGroup *m_prepShootGroup, *m_shootGroup, *m_reculer;
-  AdjustHood* m_adjustHood;
-  Shoot* m_shoot;
-  Feed* m_feed;
-  ChangeIntakePosition* m_changeIntakePosition;
-  AutoDrive* m_avancer;
-  MoveHood* m_moveHoodZero;
-  frc::Timer m_timer;
-  int state;
+  frc2::ParallelCommandGroup *m_pPrepShootGroup, *m_pShootGroup, *m_pGoReverse;
+  AdjustHood* m_pAdjustHood;
+  Shoot* m_pShoot;
+  Feed* m_pFeed;
+  ChangeIntakePosition* m_pChangeIntakePosition;
+  AutoDrive* m_pGoForward;
+  MoveHood* m_pMoveHoodZero;
+  frc::Timer m_Timer;
+  int m_State;
 };

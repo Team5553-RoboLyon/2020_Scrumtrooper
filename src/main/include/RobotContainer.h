@@ -29,49 +29,49 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
 
-  Drivetrain m_drivetrain;
-  Feeder m_feeder;
-  AdjustableHood m_adjustableHood;
-  Intake m_intake;
-  Shooter m_shooter;
-  TelescopicArm m_telescopicArm;
-  Turret m_turret;
-  Winch m_winch;
+  Drivetrain m_Drivetrain;
+  Feeder m_Feeder;
+  AdjustableHood m_AdjustableHood;
+  Intake m_Intake;
+  Shooter m_Shooter;
+  TelescopicArm m_TelescopicArm;
+  Turret m_Turret;
+  Winch m_Winch;
 
  private:
-  frc::XboxController m_driverController{0};
-  frc2::JoystickButton j_aButton{&m_driverController, 1};
-  frc2::JoystickButton j_bButton{&m_driverController, 2};
-  frc2::JoystickButton j_xButton{&m_driverController, 3};
-  frc2::JoystickButton j_yButton{&m_driverController, 4};
-  frc2::JoystickButton j_bumperLeftButton{&m_driverController, 5};
-  frc2::JoystickButton j_bumperRightButton{&m_driverController, 6};
-  frc2::JoystickButton j_backButton{&m_driverController, 7};
-  frc2::JoystickButton j_startButton{&m_driverController, 8};
-  frc2::JoystickButton j_stickLeftButton{&m_driverController, 9};
-  frc2::JoystickButton j_stickRightButton{&m_driverController, 10};
+  frc::XboxController m_DriverController{0};
+  frc2::JoystickButton m_AButton{&m_DriverController, 1};
+  frc2::JoystickButton m_BButton{&m_DriverController, 2};
+  frc2::JoystickButton m_XButton{&m_DriverController, 3};
+  frc2::JoystickButton m_YButton{&m_DriverController, 4};
+  frc2::JoystickButton m_BumperLeftButton{&m_DriverController, 5};
+  frc2::JoystickButton m_BumperRightButton{&m_DriverController, 6};
+  frc2::JoystickButton m_BackButton{&m_DriverController, 7};
+  frc2::JoystickButton m_StartButton{&m_DriverController, 8};
+  frc2::JoystickButton m_StickLeftButton{&m_DriverController, 9};
+  frc2::JoystickButton m_StickRightButton{&m_DriverController, 10};
 
-  frc::Joystick m_driverPanel{1};
-  frc2::JoystickButton p_yellowButton{&m_driverPanel, 2};
-  frc2::JoystickButton p_redButton{&m_driverPanel, 1};
-  frc2::JoystickButton p_whiteButton{&m_driverPanel, 3};
+  frc::Joystick m_DriverPanel{1};
+  frc2::JoystickButton m_YellowButton{&m_DriverPanel, 2};
+  frc2::JoystickButton m_RedButton{&m_DriverPanel, 1};
+  frc2::JoystickButton m_WhiteButton{&m_DriverPanel, 3};
 
-  frc2::Trigger j_axisLeftTrigger{[this] {
-    return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2;
+  frc2::Trigger m_AxisLeftTrigger{[this] {
+    return m_DriverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kLeftHand) > 0.2;
   }};
-  frc2::Trigger j_axisRightTrigger{[this] {
-    return m_driverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2;
+  frc2::Trigger m_AxisRightTrigger{[this] {
+    return m_DriverController.GetTriggerAxis(frc::GenericHID::JoystickHand::kRightHand) > 0.2;
   }};
 
-  frc2::POVButton j_POV0Deg{&m_driverController, 0};
-  frc2::POVButton j_POV90Deg{&m_driverController, 90};
-  frc2::POVButton j_POV180Deg{&m_driverController, 180};
-  frc2::POVButton j_POV270Deg{&m_driverController, 270};
+  frc2::POVButton m_Pov0Deg{&m_DriverController, 0};
+  frc2::POVButton m_Pov90Deg{&m_DriverController, 90};
+  frc2::POVButton m_Pov180Deg{&m_DriverController, 180};
+  frc2::POVButton m_Pov270Deg{&m_DriverController, 270};
 
-  frc2::Trigger m_endgameTrigger{
+  frc2::Trigger m_EndgameTrigger{
       [this] { return frc::DriverStation::GetInstance().GetMatchTime() < 40; }};
 
-  frc::SendableChooser<frc2::Command*> m_autoChooser;
+  frc::SendableChooser<frc2::Command*> m_AutoChooser;
 
   void ConfigureControls();
   void ConfigureTestControls();

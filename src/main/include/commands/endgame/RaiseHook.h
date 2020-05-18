@@ -16,7 +16,7 @@
 
 class RaiseHook : public frc2::CommandHelper<frc2::CommandBase, RaiseHook> {
  public:
-  RaiseHook(TelescopicArm* telescopicArm, Intake* intake, Drivetrain* drivetrain);
+  RaiseHook(TelescopicArm* ptelescopic_arm, Intake* pintake, Drivetrain* pdrivetrain);
 
   void Initialize() override;
 
@@ -27,7 +27,7 @@ class RaiseHook : public frc2::CommandHelper<frc2::CommandBase, RaiseHook> {
   bool IsFinished() override;
 
  private:
-  TelescopicArm* m_telescopicarm;
-  Intake* m_intake;
-  Drivetrain* m_drivetrain;
+  TelescopicArm* m_pTelescopicArm;
+  Intake* m_pIntake;
+  Drivetrain* m_pDrivetrain;
 };

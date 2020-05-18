@@ -8,32 +8,32 @@
 #include "subsystems/Turret.h"
 
 Turret::Turret()
-    : frc2::PIDSubsystem(frc2::PIDController(kTurretPGain, kTurretIGain, kTurretDGain)) {
-  m_encodeur.SetDistancePerPulse(kTurretPositionConversionFactor);
-  m_encodeur.Reset();
-  m_moteur.SetInverted(true);
+    : frc2::PIDSubsystem(frc2::PIDController(TURRET_P_GAIN, TURRET_I_GAIN, TURRET_D_GAIN)) {
+  m_Encoder.SetDistancePerPulse(TURRET_POSITION_CONVERSION_FACTOR);
+  m_Encoder.Reset();
+  m_Motor.SetInverted(true);
   SetSetpoint(0);
   Disable();
 }
 
 void Turret::UseOutput(double output, double setpoint) {
-  m_moteur.Set(std::clamp(output, -kTurretMaxSpeed, kTurretMaxSpeed));
+  m_Motor.Set(std::clamp(output, -TURRET_MAX_SPEED, TURRET_MAX_SPEED));
 }
 
-double Turret::GetMeasurement() { return m_encodeur.GetDistance(); }
+double Turret::GetMeasurement() { return m_Encoder.GetDistance(); }
 
 void Turret::SetClampedSetpoint(double setpoint) {
-  SetSetpoint(std::clamp(setpoint, -kTurretMaxPosition, kTurretMaxPosition));
+  SetSetpoint(std::clamp(setpoint, -TURRET_MAX_POSITION, TURRET_MAX_POSITION));
 }
 
 void Turret::Stop() {
-  if (!IsEnabled()) m_moteur.StopMotor();
+  if (!IsEnabled()) m_Motor.StopMotor();
 }
 
-void Turret::Left() {
-  if (!IsEnabled()) m_moteur.Set(-kTurretSpeed);
+void Turret::TurnLeft() {
+  if (!IsEnabled()) m_Motor.Set(-TURRET_SPEED);
 }
 
-void Turret::Right() {
-  if (!IsEnabled()) m_moteur.Set(kTurretSpeed);
+void Turret::TurnRight() {
+  if (!IsEnabled()) m_Motor.Set(TURRET_SPEED);
 }

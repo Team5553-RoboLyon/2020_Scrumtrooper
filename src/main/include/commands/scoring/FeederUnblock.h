@@ -15,7 +15,7 @@
 
 class FeederUnblock : public frc2::CommandHelper<frc2::CommandBase, FeederUnblock> {
  public:
-  explicit FeederUnblock(Feeder* feeder);
+  explicit FeederUnblock(Feeder* pfeeder);
 
   void Initialize() override;
 
@@ -26,5 +26,5 @@ class FeederUnblock : public frc2::CommandHelper<frc2::CommandBase, FeederUnbloc
   bool IsFinished() override;
 
  private:
-  Feeder* m_feeder;
+  Feeder* m_pFeeder;
 };

@@ -7,39 +7,39 @@
 
 #include "commands/driving/AutoDrive.h"
 
-AutoDrive::AutoDrive(Drivetrain* drivetrain, double distance)
-    : m_drivetrain(drivetrain), m_distance(distance), m_integral(0), m_prev_error(distance) {
-  AddRequirements(m_drivetrain);
+AutoDrive::AutoDrive(Drivetrain* pdrivetrain, double distance)
+    : m_pDrivetrain(pdrivetrain), m_Distance(distance), m_Integral(0), m_PrevError(distance) {
+  AddRequirements(m_pDrivetrain);
 }
 
 void AutoDrive::Initialize() {
-  m_drivetrain->ResetEncodeurs();
-  // m_drivetrain->DisableRamp();
+  m_pDrivetrain->ResetEncodeurs();
+  // m_pDrivetrain->DisableRamp();
 }
 
 void AutoDrive::Execute() {
-  double encoderValue = (m_drivetrain->GetEncodeurDroit() + m_drivetrain->GetEncodeurGauche()) / 2;
+  double encoderValue = (m_pDrivetrain->GetRightEncoder() + m_pDrivetrain->GetLeftEncoder()) / 2;
 
-  double error = m_distance - encoderValue;
-  m_integral += (error * .02);
-  double derivative = (error - m_prev_error) / .02;
-  double rcw = 0.0025 * error + 0.00023 * m_integral + 0.0003 * derivative;
+  double error = m_Distance - encoderValue;
+  m_Integral += (error * .02);
+  double derivative = (error - m_PrevError) / .02;
+  double power = 0.0025 * error + 0.00023 * m_Integral + 0.0003 * derivative;
 
-  m_prev_error = error;
-  if (rcw > 0.5) {
-    rcw = 0.5;
-  } else if (rcw < -0.5) {
-    rcw = -0.5;
+  m_PrevError = error;
+  if (power > 0.5) {
+    power = 0.5;
+  } else if (power < -0.5) {
+    power = -0.5;
   }
-  m_drivetrain->Drive(rcw, rcw);
+  m_pDrivetrain->Drive(power, power);
 }
 
 void AutoDrive::End(bool interrupted) {
-  m_drivetrain->EnableRamp();
-  m_drivetrain->Stop();
+  m_pDrivetrain->EnableRamp();
+  m_pDrivetrain->Stop();
 }
 
 bool AutoDrive::IsFinished() {
-  return std::abs(m_distance -
-                  (m_drivetrain->GetEncodeurDroit() + m_drivetrain->GetEncodeurGauche()) / 2) < 3;
+  return std::abs(m_Distance -
+                  (m_pDrivetrain->GetRightEncoder() + m_pDrivetrain->GetLeftEncoder()) / 2) < 3;
 }

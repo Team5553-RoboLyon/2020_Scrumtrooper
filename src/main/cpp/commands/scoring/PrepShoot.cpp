@@ -9,15 +9,15 @@
 
 #include "Constants.h"
 
-PrepShoot::PrepShoot(Shooter* Shooter) : m_shooter(Shooter) { AddRequirements(m_shooter); }
+PrepShoot::PrepShoot(Shooter* pshooter) : m_pShooter(pshooter) { AddRequirements(m_pShooter); }
 
 void PrepShoot::Initialize() {
-  m_shooter->SetRamp(kShooterPrepShootRamp);
-  m_shooter->ResetTimer();
+  m_pShooter->SetRamp(SHOOTER_PREP_SHOOT_RAMP);
+  m_pShooter->ResetTimer();
 }
 
-void PrepShoot::Execute() { m_shooter->Shoot(kShooterPrepShootSpeed); }
+void PrepShoot::Execute() { m_pShooter->Shoot(SHOOTER_PREP_SHOOT_SPEED); }
 
-void PrepShoot::End(bool interrupted) { m_shooter->Shoot(0.0); }
+void PrepShoot::End(bool interrupted) { m_pShooter->Shoot(0.0); }
 
 bool PrepShoot::IsFinished() { return false; }

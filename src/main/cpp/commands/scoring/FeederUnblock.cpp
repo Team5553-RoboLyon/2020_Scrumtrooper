@@ -7,12 +7,12 @@
 
 #include "commands/scoring/FeederUnblock.h"
 
-FeederUnblock::FeederUnblock(Feeder* feeder) : m_feeder(feeder) { AddRequirements(m_feeder); }
+FeederUnblock::FeederUnblock(Feeder* pfeeder) : m_pFeeder(pfeeder) { AddRequirements(m_pFeeder); }
 
 void FeederUnblock::Initialize() {}
 
-void FeederUnblock::Execute() { m_feeder->UnBlock(); }
+void FeederUnblock::Execute() { m_pFeeder->UnBlock(); }
 
-void FeederUnblock::End(bool interrupted) { m_feeder->Stop(); }
+void FeederUnblock::End(bool interrupted) { m_pFeeder->Stop(); }
 
 bool FeederUnblock::IsFinished() { return false; }

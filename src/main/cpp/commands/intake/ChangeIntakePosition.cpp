@@ -7,8 +7,8 @@
 
 #include "commands/intake/ChangeIntakePosition.h"
 
-ChangeIntakePosition::ChangeIntakePosition(Intake* intake) : m_intake(intake) {
-  AddRequirements(m_intake);
+ChangeIntakePosition::ChangeIntakePosition(Intake* pintake) : m_pIntake(pintake) {
+  AddRequirements(m_pIntake);
 }
 
-void ChangeIntakePosition::Initialize() { m_intake->ChangePosition(); }
+void ChangeIntakePosition::Initialize() { m_pIntake->ChangePosition(); }

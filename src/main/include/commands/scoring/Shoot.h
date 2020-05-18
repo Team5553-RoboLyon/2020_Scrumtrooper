@@ -16,7 +16,7 @@
 
 class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
  public:
-  explicit Shoot(Shooter* shooter);
+  explicit Shoot(Shooter* pshooter);
 
   void Initialize() override;
 
@@ -27,8 +27,8 @@ class Shoot : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   bool IsFinished() override;
 
  private:
-  Shooter* m_shooter;
+  Shooter* m_pShooter;
 
-  nt::NetworkTableEntry m_chameleonPitchEntry;
-  nt::NetworkTableEntry m_chameleonIsValidEntry;
+  nt::NetworkTableEntry m_ChameleonPitchEntry;
+  nt::NetworkTableEntry m_ChameleonIsValidEntry;
 };

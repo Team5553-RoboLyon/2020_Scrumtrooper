@@ -7,12 +7,12 @@
 
 #include "commands/intake/TakeCell.h"
 
-TakeCell::TakeCell(Intake* intake) : m_intake(intake) { AddRequirements(m_intake); }
+TakeCell::TakeCell(Intake* pintake) : m_pIntake(pintake) { AddRequirements(m_pIntake); }
 
-void TakeCell::Initialize() { m_intake->Activate(); }
+void TakeCell::Initialize() { m_pIntake->Activate(); }
 
 void TakeCell::Execute() {}
 
-void TakeCell::End(bool interrupted) { m_intake->Stop(); }
+void TakeCell::End(bool interrupted) { m_pIntake->Stop(); }
 
 bool TakeCell::IsFinished() { return false; }

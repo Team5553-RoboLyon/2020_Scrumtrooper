@@ -18,7 +18,7 @@
 
 class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret> {
  public:
-  explicit AdjustTurret(Turret* turret);
+  explicit AdjustTurret(Turret* pturret);
 
   void Initialize() override;
 
@@ -29,10 +29,10 @@ class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret>
   bool IsFinished() override;
 
  private:
-  Turret* m_turret;
-  nt::NetworkTableEntry m_chameleonYawEntry;
-  nt::NetworkTableEntry m_chameleonIsValidEntry;
-  double m_bufferYaw[BUFFER_SIZE] = {0};
-  double m_bufferYawSorted[BUFFER_SIZE] = {0};
-  unsigned int m_bufferCount;
+  Turret* m_pTurret;
+  nt::NetworkTableEntry m_ChameleonYawEntry;
+  nt::NetworkTableEntry m_ChameleonIsValidEntry;
+  double m_BufferYaw[BUFFER_SIZE] = {0};
+  double m_BufferYawSorted[BUFFER_SIZE] = {0};
+  unsigned int m_BufferCount;
 };

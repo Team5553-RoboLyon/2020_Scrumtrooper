@@ -35,54 +35,54 @@
 #include "commands/scoring/Shoot.h"
 
 RobotContainer::RobotContainer() {
-  m_autoChooser.AddOption("Shoot + Reculer",
-                          new SimpleAuto(&m_shooter, &m_turret, &m_adjustableHood, &m_feeder,
-                                         &m_intake, &m_drivetrain));
+  m_AutoChooser.AddOption("Shoot + Reculer",
+                          new SimpleAuto(&m_Shooter, &m_Turret, &m_AdjustableHood, &m_Feeder,
+                                         &m_Intake, &m_Drivetrain));
 
-  m_autoChooser.AddOption("Shoot + TakeCells + Shoot",
-                          new ComplexAuto(&m_shooter, &m_turret, &m_adjustableHood, &m_feeder,
-                                          &m_intake, &m_drivetrain));
+  m_AutoChooser.AddOption("Shoot + TakeCells + Shoot",
+                          new ComplexAuto(&m_Shooter, &m_Turret, &m_AdjustableHood, &m_Feeder,
+                                          &m_Intake, &m_Drivetrain));
 
-  frc::Shuffleboard::GetTab("Autonomous").Add(m_autoChooser);
+  frc::Shuffleboard::GetTab("Autonomous").Add(m_AutoChooser);
 
-  m_drivetrain.SetDefaultCommand(
-      Drive([this] { return -m_driverController.GetY(frc::GenericHID::JoystickHand::kLeftHand); },
-            [this] { return m_driverController.GetX(frc::GenericHID::JoystickHand::kRightHand); },
-            &m_drivetrain));
+  m_Drivetrain.SetDefaultCommand(
+      Drive([this] { return -m_DriverController.GetY(frc::GenericHID::JoystickHand::kLeftHand); },
+            [this] { return m_DriverController.GetX(frc::GenericHID::JoystickHand::kRightHand); },
+            &m_Drivetrain));
 
   ConfigureControls();
 }
 
-frc2::Command* RobotContainer::GetAutonomousCommand() { return m_autoChooser.GetSelected(); }
+frc2::Command* RobotContainer::GetAutonomousCommand() { return m_AutoChooser.GetSelected(); }
 
 void RobotContainer::ConfigureControls() {
   //########## Xbox Controller ##########
   // Intake buttons
-  j_bumperRightButton.WhenPressed(ChangeIntakePosition(&m_intake));
-  j_axisRightTrigger.WhileActiveContinous(TakeCell(&m_intake));
+  m_BumperRightButton.WhenPressed(ChangeIntakePosition(&m_Intake));
+  m_AxisRightTrigger.WhileActiveContinous(TakeCell(&m_Intake));
 
   // Shoot buttons
-  j_bumperLeftButton.ToggleWhenActive(
-      frc2::ParallelCommandGroup(PrepShoot(&m_shooter), AdjustTurret(&m_turret)));
-  j_axisLeftTrigger
+  m_BumperLeftButton.ToggleWhenActive(
+      frc2::ParallelCommandGroup(PrepShoot(&m_Shooter), AdjustTurret(&m_Turret)));
+  m_AxisLeftTrigger
       .WhileActiveContinous(frc2::ParallelCommandGroup(
-          AdjustHood(&m_adjustableHood), Shoot(&m_shooter), Feed(&m_feeder, &m_intake, &m_shooter)))
+          AdjustHood(&m_AdjustableHood), Shoot(&m_Shooter), Feed(&m_Feeder, &m_Intake, &m_Shooter)))
       .WhenInactive(frc2::ParallelCommandGroup(
-          MoveHood(&m_adjustableHood, 0),
-          frc2::SequentialCommandGroup(frc2::WaitCommand(4_s), MoveTurret(&m_turret, 0))));
+          MoveHood(&m_AdjustableHood, 0),
+          frc2::SequentialCommandGroup(frc2::WaitCommand(4_s), MoveTurret(&m_Turret, 0))));
 
   // Winch Buttons
-  j_yButton.WhileHeld(LiftRobot(&m_winch));
-  // j_xButton.WhileHeld(DropRobot(&m_winch));
+  m_YButton.WhileHeld(LiftRobot(&m_Winch));
+  // m_xButton.WhileHeld(DropRobot(&m_winch));
 
   // TelescopicArm Buttons
-  j_aButton.WhileHeld(DropHook(&m_telescopicArm, &m_intake, &m_drivetrain));
-  j_bButton.WhenPressed(MoveTurret(&m_turret, 0))
-      .WhileHeld(RaiseHook(&m_telescopicArm, &m_intake, &m_drivetrain));
+  m_AButton.WhileHeld(DropHook(&m_TelescopicArm, &m_Intake, &m_Drivetrain));
+  m_BButton.WhenPressed(MoveTurret(&m_Turret, 0))
+      .WhileHeld(RaiseHook(&m_TelescopicArm, &m_Intake, &m_Drivetrain));
 
   //########## Panel ##########
-  p_redButton.WhileHeld(EmergencyIntake(&m_intake, &m_drivetrain), false);
-  p_yellowButton.WhileHeld(FeederUnblock(&m_feeder));
+  m_RedButton.WhileHeld(EmergencyIntake(&m_Intake), false);
+  m_YellowButton.WhileHeld(FeederUnblock(&m_Feeder));
 }
 
 void RobotContainer::ConfigureTestControls() {}

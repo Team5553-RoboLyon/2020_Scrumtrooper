@@ -22,41 +22,41 @@
 #define NMAX(a, b) (((a) > (b)) ? (a) : (b))  // Max
 #define NMIN(a, b) (((a) < (b)) ? (a) : (b))  // Min
 
-Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* drivetrain)
-    : m_forward(forward), m_turn(turn), m_drivetrain(drivetrain) {
-  AddRequirements(m_drivetrain);
+Drive::Drive(std::function<double()> forward, std::function<double()> turn, Drivetrain* pdrivetrain)
+    : m_Forward(forward), m_Turn(turn), m_pDrivetrain(pdrivetrain) {
+  AddRequirements(m_pDrivetrain);
 }
 
 void Drive::Initialize() {}
 
 void Drive::Execute() {
-  double forward = utils::Deadband(m_forward());
-  double turn = utils::Deadband(m_turn());
+  double forward = utils::Deadband(m_Forward());
+  double turn = utils::Deadband(m_Turn());
 
   /*
   double c = 0.35 * (turn * 5.0 * (std::abs(turn) + 1) / (std::abs(forward) + 1));
   if (turn < 0.0) {
-    m_drivetrain->Drive(forward * ((c + 1) / (1 - c)), forward);
+    m_pDrivetrain->Drive(forward * ((c + 1) / (1 - c)), forward);
 
   } else {
-    m_drivetrain->Drive(forward, forward * ((1 - c) / (c + 1)));
+    m_pDrivetrain->Drive(forward, forward * ((1 - c) / (c + 1)));
   }*/
 
   double v = forward * VMAX;
   double w = turn * WMAX;
 
-  // w = m_drivetrain->CalculateTurn(forward, w);
+  // w = m_pDrivetrain->CalculateTurn(forward, w);
 
-  double lwheel = v + (w * HALF_TRACKWIDTH);
-  double rwheel = v - (w * HALF_TRACKWIDTH);
+  double left_wheel = v + (w * HALF_TRACKWIDTH);
+  double right_wheel = v - (w * HALF_TRACKWIDTH);
 
   double k;
-  k = 1.0 / (NMAX(VMAX, NMAX(NABS(lwheel), NABS(rwheel))));
-  lwheel *= k;
-  rwheel *= k;
+  k = 1.0 / (NMAX(VMAX, NMAX(NABS(left_wheel), NABS(right_wheel))));
+  left_wheel *= k;
+  right_wheel *= k;
 
-  m_drivetrain->Drive(lwheel, rwheel);
-  // m_drivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
+  m_pDrivetrain->Drive(left_wheel, right_wheel);
+  // m_pDrivetrain->Drive(forward + 0.5 * turn, forward - 0.5 * turn);
 }
 
 void Drive::End(bool interrupted) {}

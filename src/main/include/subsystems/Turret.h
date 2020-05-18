@@ -22,10 +22,10 @@ class Turret : public frc2::PIDSubsystem {
   void SetClampedSetpoint(double setpoint);
 
   void Stop();
-  void Left();
-  void Right();
+  void TurnLeft();
+  void TurnRight();
 
  private:
-  frc::VictorSP m_moteur{kTurretMoteur};
-  frc::Encoder m_encodeur{kTurretEncodeurA, kTurretEncodeurB};
+  frc::VictorSP m_Motor{TURRET_MOTOR};
+  frc::Encoder m_Encoder{TURRET_ENCODER_A, TURRET_ENCODER_B};
 };

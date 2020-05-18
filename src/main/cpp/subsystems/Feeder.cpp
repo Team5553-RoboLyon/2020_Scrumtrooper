@@ -8,27 +8,25 @@
 #include "subsystems/Feeder.h"
 
 Feeder::Feeder() {
-  m_moteurConveyor.SetInverted(false);
-  m_moteurFeeder.SetInverted(false);
-  m_moteurConveyor.ConfigVoltageCompSaturation(10);
-  m_moteurFeeder.ConfigVoltageCompSaturation(10);
-  m_moteurConveyor.EnableVoltageCompensation(true);
-  m_moteurFeeder.EnableVoltageCompensation(true);
+  m_ConveyorMotor.SetInverted(false);
+  m_FeederMotor.SetInverted(false);
+  m_ConveyorMotor.ConfigVoltageCompSaturation(10);
+  m_FeederMotor.ConfigVoltageCompSaturation(10);
+  m_ConveyorMotor.EnableVoltageCompensation(true);
+  m_FeederMotor.EnableVoltageCompensation(true);
 }
 
 void Feeder::Activate() {
-  m_moteurFeeder.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, kFeederMoteurSpeed);
-  m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
-                       kConveyorMoteurSpeed);
+  m_FeederMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, FEEDER_SPEED);
+  m_ConveyorMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, CONVEYOR_SPEED);
 }
 
 void Feeder::UnBlock() {
-  m_moteurFeeder.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -kFeederMoteurSpeed);
-  m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,
-                       -kConveyorMoteurSpeed);
+  m_FeederMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -FEEDER_SPEED);
+  m_ConveyorMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -CONVEYOR_SPEED);
 }
 
 void Feeder::Stop() {
-  m_moteurFeeder.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
-  m_moteurConveyor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+  m_FeederMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+  m_ConveyorMotor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

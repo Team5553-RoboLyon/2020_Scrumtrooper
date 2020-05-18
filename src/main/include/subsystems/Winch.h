@@ -16,11 +16,11 @@ class Winch : public frc2::SubsystemBase {
  public:
   Winch();
 
-  void Up();
-  void Down();
+  void GoUp();
+  void GoDown();
   void Stop();
 
  private:
-  rev::CANSparkMax m_moteur{kWinchMoteur, rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANEncoder m_encodeur{m_moteur};
+  rev::CANSparkMax m_Motor{WINCH_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANEncoder m_Encoder{m_Motor};
 };

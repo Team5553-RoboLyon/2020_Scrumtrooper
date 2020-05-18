@@ -18,7 +18,7 @@
 
 class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
  public:
-  explicit AdjustHood(AdjustableHood* adjustableHood);
+  explicit AdjustHood(AdjustableHood* padjustable_hood);
 
   void Initialize() override;
 
@@ -29,11 +29,11 @@ class AdjustHood : public frc2::CommandHelper<frc2::CommandBase, AdjustHood> {
   bool IsFinished() override;
 
  private:
-  AdjustableHood* m_adjustablehood;
+  AdjustableHood* m_pAdjustableHood;
 
-  nt::NetworkTableEntry m_chameleonPitchEntry;
-  nt::NetworkTableEntry m_chameleonIsValidEntry;
-  double m_bufferPitch[HOOD_BUFFER_SIZE] = {0};
-  double m_bufferPitchSorted[HOOD_BUFFER_SIZE] = {0};
-  unsigned int m_bufferCount;
+  nt::NetworkTableEntry m_ChameleonPitchEntry;
+  nt::NetworkTableEntry m_ChameleonIsValidEntry;
+  double m_BufferPitch[HOOD_BUFFER_SIZE] = {0};
+  double m_BufferPitchSorted[HOOD_BUFFER_SIZE] = {0};
+  unsigned int m_BufferCount;
 };

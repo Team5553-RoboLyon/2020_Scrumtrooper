@@ -21,6 +21,6 @@ class Feeder : public frc2::SubsystemBase {
   void Stop();
 
  private:
-  ctre::phoenix::motorcontrol::can::VictorSPX m_moteurFeeder{kFeederMoteur};
-  ctre::phoenix::motorcontrol::can::VictorSPX m_moteurConveyor{kConveyorMoteur};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_FeederMotor{FEEDER_MOTOR};
+  ctre::phoenix::motorcontrol::can::VictorSPX m_ConveyorMotor{CONVEYOR_MOTOR};
 };

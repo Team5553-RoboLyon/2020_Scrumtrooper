@@ -14,7 +14,7 @@
 
 class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
  public:
-  MoveTurret(Turret* turret, double angle);
+  MoveTurret(Turret* pturret, double angle);
 
   void Initialize() override;
 
@@ -25,6 +25,6 @@ class MoveTurret : public frc2::CommandHelper<frc2::CommandBase, MoveTurret> {
   bool IsFinished() override;
 
  private:
-  Turret* m_turret;
-  double m_angle;
+  Turret* m_pTurret;
+  double m_Angle;
 };

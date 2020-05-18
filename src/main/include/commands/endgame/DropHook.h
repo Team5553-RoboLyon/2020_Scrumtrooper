@@ -16,7 +16,7 @@
 
 class DropHook : public frc2::CommandHelper<frc2::CommandBase, DropHook> {
  public:
-  DropHook(TelescopicArm* telescopicArm, Intake* m_intake, Drivetrain* drivetrain);
+  DropHook(TelescopicArm* ptelescopic_arm, Intake* pintake, Drivetrain* pdrivetrain);
 
   void Initialize() override;
 
@@ -27,7 +27,7 @@ class DropHook : public frc2::CommandHelper<frc2::CommandBase, DropHook> {
   bool IsFinished() override;
 
  private:
-  TelescopicArm* m_telescopicarm;
-  Intake* m_intake;
-  Drivetrain* m_drivetrain;
+  TelescopicArm* m_pTelescopicArm;
+  Intake* m_pIntake;
+  Drivetrain* m_pDrivetrain;
 };

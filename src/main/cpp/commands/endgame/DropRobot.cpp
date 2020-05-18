@@ -7,12 +7,12 @@
 
 #include "commands/endgame/DropRobot.h"
 
-DropRobot::DropRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
+DropRobot::DropRobot(Winch* pwinch) : m_pWinch(pwinch) { AddRequirements(m_pWinch); }
 
-void DropRobot::Initialize() { m_winch->Down(); }
+void DropRobot::Initialize() { m_pWinch->GoDown(); }
 
 void DropRobot::Execute() {}
 
-void DropRobot::End(bool interrupted) { m_winch->Stop(); }
+void DropRobot::End(bool interrupted) { m_pWinch->Stop(); }
 
 bool DropRobot::IsFinished() { return false; }

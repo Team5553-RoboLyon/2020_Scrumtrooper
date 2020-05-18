@@ -8,52 +8,52 @@
 #include "subsystems/AdjustableHood.h"
 
 AdjustableHood::AdjustableHood()
-    : PIDSubsystem(
-          frc2::PIDController(kAdjustableHoodPGain, kAdjustableHoodIGain, kAdjustableHoodDGain)) {
-  m_encodeur.SetDistancePerRotation(kAdjustableHoodPositionConversionFactor);
-  m_encodeur.Reset();
+    : PIDSubsystem(frc2::PIDController(ADJUSTABLE_HOOD_P_GAIN, ADJUSTABLE_HOOD_I_GAIN,
+                                       ADJUSTABLE_HOOD_D_GAIN)) {
+  m_Encoder.SetDistancePerRotation(ADJUSTABLE_HOOD_POSITION_CONVERSION_FACTOR);
+  m_Encoder.Reset();
   GetController().SetIntegratorRange(-0.03, 0.03);
   Disable();
-  m_lockedCount = 0;
+  m_LockedCount = 0;
 }
 
 void AdjustableHood::UseOutput(double output, double setpoint) {
-  if ((std::abs(setpoint - m_encodeur.GetDistance()) > 1) &&
+  if ((std::abs(setpoint - m_Encoder.GetDistance()) > 1) &&
       (std::abs(GetController().GetVelocityError()) < 1) && (std::abs(output) > 0.05)) {
-    m_lockedCount++;
-    if (m_lockedCount > 8) {
-      SetSetpoint(m_encodeur.GetDistance());
+    m_LockedCount++;
+    if (m_LockedCount > 8) {
+      SetSetpoint(m_Encoder.GetDistance());
       GetController().Reset();
-      m_lockedCount = 0;
+      m_LockedCount = 0;
     }
   } else {
-    m_lockedCount = 0;
+    m_LockedCount = 0;
   }
-  m_prevVelocityError = GetController().GetVelocityError();
+  m_PrevVelocityError = GetController().GetVelocityError();
 
-  m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
+  m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, output);
 }
 
 void AdjustableHood::SetClampedSetpoint(double setpoint) {
   SetSetpoint(std::clamp(setpoint, 0.0, 46.0));
 }
 
-double AdjustableHood::GetMeasurement() { return m_encodeur.GetDistance(); }
+double AdjustableHood::GetMeasurement() { return m_Encoder.GetDistance(); }
 
-void AdjustableHood::ResetEncoder() { m_encodeur.Reset(); }
+void AdjustableHood::ResetEncoder() { m_Encoder.Reset(); }
 
-void AdjustableHood::Monter() {
-  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
+void AdjustableHood::GoUp() {
+  if (!IsEnabled()) m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.25);
 }
 
-void AdjustableHood::Descendre() {
-  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
+void AdjustableHood::GoDown() {
+  if (!IsEnabled()) m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -0.25);
 }
 
 void AdjustableHood::Unblock() {
-  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.5);
+  if (!IsEnabled()) m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.5);
 }
 
 void AdjustableHood::Stop() {
-  if (!IsEnabled()) m_moteur.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+  if (!IsEnabled()) m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
 }

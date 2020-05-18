@@ -14,7 +14,7 @@
 
 class MoveHood : public frc2::CommandHelper<frc2::CommandBase, MoveHood> {
  public:
-  MoveHood(AdjustableHood* adjustableHood, double angle);
+  MoveHood(AdjustableHood* padjustable_hood, double angle);
 
   void Initialize() override;
 
@@ -25,6 +25,6 @@ class MoveHood : public frc2::CommandHelper<frc2::CommandBase, MoveHood> {
   bool IsFinished() override;
 
  private:
-  AdjustableHood* m_adjustablehood;
-  double m_angle;
+  AdjustableHood* m_pAdjustableHood;
+  double m_Angle;
 };

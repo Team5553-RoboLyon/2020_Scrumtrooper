@@ -9,20 +9,20 @@
 
 #include <iostream>
 
-MoveTurret::MoveTurret(Turret* turret, double angle) : m_turret(turret), m_angle(angle) {
-  AddRequirements(m_turret);
+MoveTurret::MoveTurret(Turret* pturret, double angle) : m_pTurret(pturret), m_Angle(angle) {
+  AddRequirements(m_pTurret);
 }
 
 void MoveTurret::Initialize() {
-  m_turret->Enable();
-  m_turret->SetSetpoint(m_angle);
+  m_pTurret->Enable();
+  m_pTurret->SetSetpoint(m_Angle);
 }
 
 void MoveTurret::Execute() {}
 
 void MoveTurret::End(bool interrupted) {
-  m_turret->Disable();
-  m_turret->Stop();
+  m_pTurret->Disable();
+  m_pTurret->Stop();
 }
 
-bool MoveTurret::IsFinished() { return std::abs(m_angle - m_turret->GetMeasurement()) < 1; }
+bool MoveTurret::IsFinished() { return std::abs(m_Angle - m_pTurret->GetMeasurement()) < 1; }

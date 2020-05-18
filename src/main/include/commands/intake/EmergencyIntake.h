@@ -10,16 +10,14 @@
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/InstantCommand.h>
 
-#include "subsystems/Drivetrain.h"
 #include "subsystems/Intake.h"
 
 class EmergencyIntake : public frc2::CommandHelper<frc2::InstantCommand, EmergencyIntake> {
  public:
-  EmergencyIntake(Intake* intake, Drivetrain* drivetrain);
+  EmergencyIntake(Intake* pintake);
 
   void Initialize() override;
 
  private:
-  Intake* m_intake;
-  Drivetrain* m_drivetrain;
+  Intake* m_pIntake;
 };

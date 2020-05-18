@@ -7,12 +7,12 @@
 
 #include "commands/endgame/LiftRobot.h"
 
-LiftRobot::LiftRobot(Winch* winch) : m_winch(winch) { AddRequirements(m_winch); }
+LiftRobot::LiftRobot(Winch* pwinch) : m_pWinch(pwinch) { AddRequirements(m_pWinch); }
 
-void LiftRobot::Initialize() { m_winch->Up(); }
+void LiftRobot::Initialize() { m_pWinch->GoUp(); }
 
 void LiftRobot::Execute() {}
 
-void LiftRobot::End(bool interrupted) { m_winch->Stop(); }
+void LiftRobot::End(bool interrupted) { m_pWinch->Stop(); }
 
 bool LiftRobot::IsFinished() { return false; }

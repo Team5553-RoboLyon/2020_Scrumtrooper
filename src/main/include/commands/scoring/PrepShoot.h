@@ -14,7 +14,7 @@
 
 class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
  public:
-  explicit PrepShoot(Shooter* shooter);
+  explicit PrepShoot(Shooter* pshooter);
 
   void Initialize() override;
 
@@ -25,5 +25,5 @@ class PrepShoot : public frc2::CommandHelper<frc2::CommandBase, PrepShoot> {
   bool IsFinished() override;
 
  private:
-  Shooter* m_shooter;
+  Shooter* m_pShooter;
 };
