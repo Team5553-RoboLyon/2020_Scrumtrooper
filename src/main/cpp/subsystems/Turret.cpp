@@ -14,13 +14,6 @@ Turret::Turret()
   m_Motor.SetInverted(true);
   SetSetpoint(0);
   Disable();
-  m_ChameleonYawEntry = nt::NetworkTableInstance::GetDefault()
-                            .GetTable("chameleon-vision")
-                            ->GetEntry("turret/targetYaw");
-  m_ChameleonIsValidEntry = nt::NetworkTableInstance::GetDefault()
-                                .GetTable("chameleon-vision")
-                                ->GetEntry("turret/isValid");
-  m_BufferCount = 0;
 }
 
 void Turret::UseOutput(double output, double setpoint) {
@@ -43,15 +36,4 @@ void Turret::TurnLeft() {
 
 void Turret::TurnRight() {
   if (!IsEnabled()) m_Motor.Set(TURRET_SPEED);
-}
-
-void Turret::Adjust() {
-  if (m_ChameleonIsValidEntry.GetBoolean(false)) {
-    m_BufferYaw[m_BufferCount] = m_ChameleonYawEntry.GetDouble(0);
-  }
-  m_BufferCount = (m_BufferCount + 1) % BUFFER_SIZE;
-
-  std::partial_sort_copy(&m_BufferYaw[0], &m_BufferYaw[BUFFER_SIZE - 1], &m_BufferYawSorted[0],
-                         &m_BufferYawSorted[BUFFER_SIZE - 1]);
-  SetClampedSetpoint(GetMeasurement() + m_BufferYawSorted[(int)(BUFFER_SIZE / 2)]);
 }

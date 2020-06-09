@@ -10,7 +10,11 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+#include <networktables/NetworkTableEntry.h>
+
 #include "subsystems/Turret.h"
+
+#define BUFFER_SIZE 3
 
 class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret> {
  public:
@@ -26,4 +30,9 @@ class AdjustTurret : public frc2::CommandHelper<frc2::CommandBase, AdjustTurret>
 
  private:
   Turret* m_pTurret;
+  nt::NetworkTableEntry m_ChameleonYawEntry;
+  nt::NetworkTableEntry m_ChameleonIsValidEntry;
+  double m_BufferYaw[BUFFER_SIZE] = {0};
+  double m_BufferYawSorted[BUFFER_SIZE] = {0};
+  unsigned int m_BufferCount;
 };
