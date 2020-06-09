@@ -15,6 +15,13 @@ AdjustableHood::AdjustableHood()
   GetController().SetIntegratorRange(-0.03, 0.03);
   Disable();
   m_LockedCount = 0;
+
+  m_ChameleonPitchEntry = nt::NetworkTableInstance::GetDefault()
+                              .GetTable("chameleon-vision")
+                              ->GetEntry("turret/targetPitch");
+  m_ChameleonIsValidEntry = nt::NetworkTableInstance::GetDefault()
+                                .GetTable("chameleon-vision")
+                                ->GetEntry("turret/isValid");
 }
 
 void AdjustableHood::UseOutput(double output, double setpoint) {
@@ -56,4 +63,24 @@ void AdjustableHood::Unblock() {
 
 void AdjustableHood::Stop() {
   if (!IsEnabled()) m_Motor.Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0.0);
+}
+
+void AdjustableHood::Adjust() {
+  if (m_ChameleonIsValidEntry.GetBoolean(false)) {
+    m_BufferPitch[m_BufferCount] = m_ChameleonPitchEntry.GetDouble(0);
+  }
+  m_BufferCount = (m_BufferCount + 1) % HOOD_BUFFER_SIZE;
+
+  std::partial_sort_copy(&m_BufferPitch[0], &m_BufferPitch[HOOD_BUFFER_SIZE - 1],
+                         &m_BufferPitchSorted[0], &m_BufferPitchSorted[HOOD_BUFFER_SIZE - 1]);
+  if (std::abs(m_BufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)]) < 2) {
+    SetClampedSetpoint(42);
+  } else if (m_BufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < -4) {
+    SetClampedSetpoint(45);
+  } else if (m_BufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] < 0) {
+    SetClampedSetpoint(46);
+  } else {
+    double angle = 47.4 * std::exp(-m_BufferPitchSorted[(int)(HOOD_BUFFER_SIZE / 2)] / 51.1);
+    SetClampedSetpoint(angle);
+  }
 }
